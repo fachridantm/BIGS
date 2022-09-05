@@ -41,7 +41,7 @@ dependencies {
 
     // Core
     implementation 'androidx.core:core-ktx:1.8.0'
-    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'androidx.appcompat:appcomp at:1.4.2'
 
     // UI Material
     implementation 'com.google.android.material:material:1.6.1'
@@ -50,7 +50,7 @@ dependencies {
 
     // Android KTX
     implementation "androidx.activity:activity-ktx:1.5.1"
-    implementation "androidx.fragment:fragment-ktx:1.5.1"
+    implementation "androidx.fragment:fragment-ktx:1.5.2"
     implementation "com.github.kirich1409:viewbindingpropertydelegate:1.5.3"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
@@ -70,7 +70,7 @@ dependencies {
     def retrofit_version = "2.9.0"
     implementation "com.squareup.retrofit2:retrofit:${retrofit_version}"
     implementation "com.squareup.retrofit2:converter-gson:${retrofit_version}"
-    implementation "com.squareup.okhttp3:logging-interceptor:4.9.3"
+    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.6"
 
     // Room
     def room_version = "2.4.3"
@@ -86,8 +86,8 @@ dependencies {
     implementation "androidx.datastore:datastore-preferences-rxjava3:${ds_version}"
 
     // Google Maps & Firebase
-    implementation 'com.google.firebase:firebase-auth-ktx:21.0.7'
-    implementation 'com.google.android.gms:play-services-auth:20.2.0'
+    implementation 'com.google.firebase:firebase-auth-ktx:21.0.8'
+    implementation 'com.google.android.gms:play-services-auth:20.3.0'
     implementation 'com.google.android.libraries.places:places:2.6.0'
 
     // Paging
