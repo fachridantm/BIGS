@@ -1,4 +1,4 @@
-package id.belitong.bigs
+package id.belitong.bigs.core
 
 import org.junit.Test
 
