@@ -17,7 +17,7 @@
         android:theme="@style/Theme.BIGS"
         tools:targetApi="33" >
         <activity
-            android:name=".splash.SplashActivity"
+            android:name=".splash.ScreenActivity"
             android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
