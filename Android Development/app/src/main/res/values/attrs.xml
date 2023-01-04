@@ -1,0 +1,23 @@
+
+<resources>
+    <attr name="colorQuaternary" format="color" />
+    <attr name="colorOnQuaternary" format="color" />
+    <attr name="colorQuaternaryContainer" format="color" />
+    <attr name="colorOnQuaternaryContainer" format="color" />
+    <attr name="harmonizeQuaternary" format="boolean" />
+    <attr name="colorQuinary" format="color" />
+    <attr name="colorOnQuinary" format="color" />
+    <attr name="colorQuinaryContainer" format="color" />
+    <attr name="colorOnQuinaryContainer" format="color" />
+    <attr name="harmonizeQuinary" format="boolean" />
+    <attr name="colorSenary" format="color" />
+    <attr name="colorOnSenary" format="color" />
+    <attr name="colorSenaryContainer" format="color" />
+    <attr name="colorOnSenaryContainer" format="color" />
+    <attr name="harmonizeSenary" format="boolean" />
+    <attr name="colorSeptenary" format="color" />
+    <attr name="colorOnSeptenary" format="color" />
+    <attr name="colorSeptenaryContainer" format="color" />
+    <attr name="colorOnSeptenaryContainer" format="color" />
+    <attr name="harmonizeSeptenary" format="boolean" />
+</resources>
