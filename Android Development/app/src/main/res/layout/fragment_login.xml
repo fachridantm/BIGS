@@ -88,7 +88,7 @@
             android:focusable="true"
             android:gravity="end"
             android:text="@string/forgot_password"
-            android:textColor="@color/black"
+            android:textColor="@android:color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/til_password_login" />
 
@@ -98,7 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:backgroundTint="@color/secondary"
+            android:backgroundTint="@color/md_theme_light_secondary"
             android:text="@string/login"
             android:textAllCaps="false"
             app:layout_constraintEnd_toEndOf="parent"
@@ -121,7 +121,7 @@
                 android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:alpha="0.4"
-                app:dividerColor="@color/black" />
+                app:dividerColor="@android:color/black" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/Text.Medium.Subheader"
@@ -131,14 +131,14 @@
                 android:layout_marginHorizontal="8dp"
                 android:gravity="center"
                 android:text="@string/or"
-                android:textColor="@color/black" />
+                android:textColor="@android:color/black" />
 
             <com.google.android.material.divider.MaterialDivider
                 android:layout_width="160dp"
                 android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:alpha="0.4"
-                app:dividerColor="@color/black" />
+                app:dividerColor="@android:color/black" />
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -152,7 +152,7 @@
             android:paddingHorizontal="32dp"
             android:text="@string/login_with_google"
             android:textAllCaps="false"
-            android:textColor="@color/black"
+            android:textColor="@android:color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.515"
             app:layout_constraintStart_toStartOf="parent"
@@ -182,7 +182,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:text="@string/sign_up"
-                android:textColor="@color/orange" />
+                android:textColor="@color/md_theme_light_tertiary" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

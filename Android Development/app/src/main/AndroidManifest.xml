@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_bigs_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.BIGS"
+        android:theme="@style/AppTheme"
         tools:targetApi="33">
         <activity
             android:name=".auth.AuthActivity"

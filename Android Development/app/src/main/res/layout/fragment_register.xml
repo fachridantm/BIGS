@@ -134,7 +134,7 @@
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="36dp"
             android:text="@string/sign_up"
-            android:backgroundTint="@color/secondary"
+            android:backgroundTint="@color/md_theme_light_secondary"
             android:textAllCaps="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -164,7 +164,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:text="@string/login"
-                android:textColor="@color/orange" />
+                android:textColor="@color/md_theme_light_tertiary" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
