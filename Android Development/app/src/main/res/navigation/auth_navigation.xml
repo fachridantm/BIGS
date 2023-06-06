@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="id.belitong.bigs.auth.login.LoginFragment"
+        android:name="id.belitong.bigs.ui.auth.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="id.belitong.bigs.auth.register.RegisterFragment"
+        android:name="id.belitong.bigs.ui.auth.register.RegisterFragment"
         android:label="fragment_registration"
         tools:layout="@layout/fragment_register" >
         <action
