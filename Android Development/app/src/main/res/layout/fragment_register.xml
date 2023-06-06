@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:fillViewport="true"
     android:orientation="vertical"
-    tools:context=".auth.register.RegisterFragment">
+    tools:context=".ui.auth.register.RegisterFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -134,7 +134,7 @@
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="36dp"
             android:text="@string/sign_up"
-            android:backgroundTint="@color/md_theme_light_secondary"
+            android:backgroundTint="@color/seed"
             android:textAllCaps="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -164,7 +164,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:text="@string/login"
-                android:textColor="@color/md_theme_light_tertiary" />
+                android:textColor="@color/md_theme_dark_secondary" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
