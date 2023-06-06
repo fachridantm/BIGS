@@ -14,4 +14,7 @@
     <string name="dont_have_an_account">Don’t have an account?</string>
     <string name="or">OR</string>
     <string name="login_with_google">Sign In with Google</string>
+    <string name="home">Home</string>
+    <string name="maps">Maps</string>
+    <string name="add"><![CDATA[Scan & Add]]></string>
 </resources>
