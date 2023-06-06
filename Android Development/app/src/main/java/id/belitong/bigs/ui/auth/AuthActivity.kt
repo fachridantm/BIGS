@@ -1,4 +1,4 @@
-package id.belitong.bigs.main
+package id.belitong.bigs.ui.auth
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,9 +6,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import id.belitong.bigs.R
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class AuthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_auth)
     }
 }
