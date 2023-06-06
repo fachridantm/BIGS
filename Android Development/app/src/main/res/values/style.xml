@@ -23,7 +23,7 @@
     </style>
 
     <style name="Text.Bold.H1">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">24sp</item>
     </style>
 
     <style name="Text.Bold.H2">
