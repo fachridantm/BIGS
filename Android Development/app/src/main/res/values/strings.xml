@@ -17,4 +17,17 @@
     <string name="home">Home</string>
     <string name="maps">Maps</string>
     <string name="add"><![CDATA[Scan & Add]]></string>
+    <string name="hello_user">Hello, %s!</string>
+    <string name="welcome">Welcome to</string>
+    <string name="geopark_belitong">Geopark Belitong</string>
+    <string name="profile">Profile</string>
+    <string name="search">Search</string>
+    <string name="geosites">Geosites</string>
+    <string name="geoprogramme">Geo-Programme</string>
+    <string name="facilities">Facilities</string>
+    <string name="explore_geopark">Explore Geopark Belitong</string>
+    <string name="see_all">See All</string>
+    <string name="animals">Animals</string>
+    <string name="plants">Plants</string>
+    <string name="all">All</string>
 </resources>
