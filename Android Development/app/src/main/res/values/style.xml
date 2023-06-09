@@ -22,39 +22,39 @@
         <item name="android:fontFamily">@font/poppins_regular</item>
     </style>
 
-    <style name="Text.Bold.H1">
+    <style name="Text.SemiBold.H1">
         <item name="android:textSize">24sp</item>
     </style>
 
     <style name="Text.Bold.H2">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">22sp</item>
     </style>
 
-    <style name="Text.Bold.H3">
-        <item name="android:textSize">16sp</item>
+    <style name="Text.SemiBold.H3">
+        <item name="android:textSize">20sp</item>
     </style>
 
     <style name="Text.Medium.Subheader">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="Text.Regular.Subheader">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="Text.SemiBold.Title">
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="Text.Regular.Title">
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="Text.Regular.Subtitle">
-        <item name="android:textSize">10sp</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="Text.Bold.H1.Center">
+    <style name="Text.SemiBold.H1.Center">
         <item name="android:gravity">center</item>
     </style>
 
@@ -87,6 +87,21 @@
 
     <style name="Button.RoundedSmall.Medium">
         <item name="android:textAppearance">@style/Text.Medium.Subheader</item>
+    </style>
+
+    <style name="Chip">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="chipBackgroundColor">@color/chip_background</item>
+        <item name="chipStrokeColor">@color/seed</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipCornerRadius">30dp</item>
+        <item name="android:textColor">@color/chip_text</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="Chip.Subtitle">
+        <item name="android:textAppearance">@style/Text.Regular.Subtitle</item>
     </style>
 
 </resources>
