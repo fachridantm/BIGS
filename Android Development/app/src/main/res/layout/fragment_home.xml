@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    tools:context=".ui.home.HomeFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:liftOnScroll="true">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar_home"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.8"
+                android:background="@android:color/white"
+                app:menu="@menu/menu_home"
+                app:title="@string/hello_user"
+                app:titleCentered="true"
+                app:titleTextAppearance="@style/Text.SemiBold.H3"
+                app:titleTextColor="@android:color/black" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view1"
+            style="@style/Text.SemiBold.H3"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="@string/welcome"
+            android:textColor="@color/md_theme_dark_secondary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appbar_home" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view2"
+            style="@style/Text.SemiBold.H1"
+            android:layout_width="wrap_content"
+            android:alpha="0.8"
+            android:text="@string/geopark_belitong"
+            android:textColor="@android:color/black"
+            app:layout_constraintStart_toStartOf="@id/text_view1"
+            app:layout_constraintTop_toBottomOf="@id/text_view1" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
+            android:layout_width="281dp"
+            android:layout_height="176.05dp"
+            android:layout_marginVertical="18dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toTopOf="@id/tab_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view2" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@id/view_pager"
+            app:layout_constraintStart_toStartOf="@id/view_pager"
+            app:layout_constraintTop_toBottomOf="@id/view_pager" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_geosites"
+            android:layout_width="120dp"
+            android:layout_height="135dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="18dp"
+            android:alpha="0.7"
+            android:background="@drawable/bg_btn_tertiary"
+            android:drawableTop="@drawable/ic_search"
+            android:elevation="4dp"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="36dp"
+            android:text="@string/geosites"
+            android:textAllCaps="false"
+            android:textAppearance="@style/Text.Regular.Title"
+            app:layout_constraintEnd_toStartOf="@id/btn_geoprogramme"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tab_layout" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_geoprogramme"
+            android:layout_width="120dp"
+            android:layout_height="135dp"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="18dp"
+            android:alpha="0.7"
+            android:background="@drawable/bg_btn_quaternary"
+            android:drawableTop="@drawable/ic_search"
+            android:elevation="4dp"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="36dp"
+            android:text="@string/geoprogramme"
+            android:textAllCaps="false"
+            android:textAppearance="@style/Text.Regular.Title"
+            app:layout_constraintEnd_toStartOf="@id/btn_facilities"
+            app:layout_constraintStart_toEndOf="@id/btn_geosites"
+            app:layout_constraintTop_toBottomOf="@id/tab_layout" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_facilities"
+            android:layout_width="120dp"
+            android:layout_height="135dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="20dp"
+            android:alpha="0.7"
+            android:background="@drawable/bg_btn_secondary"
+            android:drawableTop="@drawable/ic_search"
+            android:elevation="4dp"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="36dp"
+            android:text="@string/facilities"
+            android:textAllCaps="false"
+            android:textAppearance="@style/Text.Regular.Title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_geoprogramme"
+            app:layout_constraintTop_toBottomOf="@id/tab_layout" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view3"
+            style="@style/Text.SemiBold.H3"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/explore_geopark"
+            android:textColor="@android:color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_geosites" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view4"
+            style="@style/Text.Regular.Subtitle"
+            android:layout_width="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:alpha="0.4"
+            android:gravity="center|end"
+            android:text="@string/see_all"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="@id/text_view3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/text_view3" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cg_geopark_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view3"
+            app:selectionRequired="true"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_all"
+                style="@style/Chip.Subtitle"
+                android:text="@string/all" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_geosites"
+                style="@style/Chip.Subtitle"
+                android:text="@string/geosites" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_plants"
+                style="@style/Chip.Subtitle"
+                android:text="@string/plants" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_animals"
+                style="@style/Chip.Subtitle"
+                android:text="@string/animals" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <HorizontalScrollView
+            android:id="@+id/sv_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:scrollbars="none"
+            app:layout_constraintTop_toBottomOf="@id/cg_geopark_filter"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <include layout="@layout/item_card_home" />
+
+                <include layout="@layout/item_card_home" />
+
+                <include layout="@layout/item_card_home" />
+
+            </LinearLayout>
+        </HorizontalScrollView>
+        
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
