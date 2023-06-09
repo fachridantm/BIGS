@@ -19,13 +19,12 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textView"
-        style="@style/Text.Bold.H1.Center"
+        style="@style/Text.SemiBold.H1.Center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:alpha="0.8"
         android:padding="24dp"
         android:text="@string/bigs_long_text"
-        android:textColor="@color/design_default_color_on_primary"
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="@id/imageView"
         app:layout_constraintStart_toStartOf="@id/imageView"
         app:layout_constraintTop_toBottomOf="@id/imageView" />
