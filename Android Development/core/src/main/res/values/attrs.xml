@@ -15,9 +15,9 @@
     <attr name="colorSenaryContainer" format="color" />
     <attr name="colorOnSenaryContainer" format="color" />
     <attr name="harmonizeSenary" format="boolean" />
-    <attr name="colorSeptenary" format="color" />
-    <attr name="colorOnSeptenary" format="color" />
-    <attr name="colorSeptenaryContainer" format="color" />
-    <attr name="colorOnSeptenaryContainer" format="color" />
-    <attr name="harmonizeSeptenary" format="boolean" />
+    <attr name="colorError" format="color" />
+    <attr name="colorOnError" format="color" />
+    <attr name="colorErrorContainer" format="color" />
+    <attr name="colorOnErrorContainer" format="color" />
+    <attr name="harmonizeError" format="boolean" />
 </resources>
