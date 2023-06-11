@@ -25,7 +25,6 @@
     <string name="geosites">Geosites</string>
     <string name="geoprogramme">Geo-Programme</string>
     <string name="explore_geopark">Explore Geopark Belitong</string>
-    <string name="see_all">See All</string>
     <string name="animals">Animals</string>
     <string name="plants">Plants</string>
     <string name="all">All</string>
@@ -36,4 +35,6 @@
     <string name="about">About Me</string>
     <string name="logout">Logout</string>
     <string name="dots_indicator">Dots Indicator</string>
+    <string name="alphabet">A - Z</string>
+    <string name="nearest">Nearest</string>
 </resources>
