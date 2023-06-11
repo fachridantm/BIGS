@@ -19,14 +19,14 @@
         android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_geosite"
+            android:id="@+id/item_img_geosite"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_geosite"
+            android:id="@+id/item_tv_geosite"
             style="@style/Text.Medium.Subheader"
             android:layout_width="wrap_content"
             android:textSize="14sp"
@@ -39,7 +39,7 @@
             android:paddingHorizontal="28dp"
             android:paddingVertical="4dp"
             android:textColor="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="@id/iv_geosite"
+            app:layout_constraintBottom_toBottomOf="@id/item_img_geosite"
             app:layout_constraintStart_toStartOf="parent"
             tools:text="Moss Hill" />
 
