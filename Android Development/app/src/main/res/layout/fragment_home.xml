@@ -26,11 +26,12 @@
                 android:layout_height="match_parent"
                 android:alpha="0.8"
                 android:background="@android:color/white"
-                app:menu="@menu/menu_home"
+                app:menu="@menu/menu_main"
                 app:title="@string/hello_user"
                 app:titleCentered="true"
                 app:titleTextAppearance="@style/Text.SemiBold.H3"
                 app:titleTextColor="@android:color/black" />
+
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
