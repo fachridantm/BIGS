@@ -30,4 +30,10 @@
     <string name="animals">Animals</string>
     <string name="plants">Plants</string>
     <string name="all">All</string>
+    <string name="account">Account</string>
+    <string name="my_order">My Order</string>
+    <string name="language">Language</string>
+    <string name="faq">FAQ</string>
+    <string name="about">About Me</string>
+    <string name="logout">Logout</string>
 </resources>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    tools:context=".ui.profile.ProfileActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:liftOnScroll="true">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar_profile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.8"
+                android:background="@android:color/white"
+                app:navigationIcon="@drawable/ic_back"
+                app:title="@string/profile"
+                app:titleCentered="true"
+                app:titleTextAppearance="@style/Text.SemiBold.H3"
+                app:titleTextColor="@android:color/black" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circleImageView"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="24dp"
+            android:elevation="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appbar_profile"
+            tools:src="@tools:sample/avatars" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_name"
+            style="@style/Text.Medium.Subheader"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="24dp"
+            android:alpha="0.8"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/circleImageView"
+            tools:text="John Doe" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_email"
+            style="@style/Text.Regular.Title"
+            android:layout_width="wrap_content"
+            android:alpha="0.4"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_name"
+            tools:text="johndoe@gmail.com" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_phone"
+            style="@style/Text.Regular.Title"
+            android:layout_width="wrap_content"
+            android:alpha="0.4"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_email"
+            tools:text="081318253665" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="64dp"
+            android:background="@drawable/bg_btn_transparent"
+            android:drawableStart="@drawable/ic_my_order"
+            android:drawableEnd="@drawable/ic_arrow_right"
+            android:drawablePadding="16dp"
+            android:gravity="start|center"
+            android:padding="12dp"
+            android:text="@string/my_order"
+            android:textAppearance="@style/Text.SemiBold.H3"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_phone" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_language"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/bg_btn_transparent"
+            android:drawableStart="@drawable/ic_language"
+            android:drawableEnd="@drawable/ic_arrow_right"
+            android:drawablePadding="16dp"
+            android:gravity="start|center"
+            android:padding="12dp"
+            android:text="@string/language"
+            android:textAppearance="@style/Text.SemiBold.H3"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_order" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_faq"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/bg_btn_transparent"
+            android:drawableStart="@drawable/ic_language"
+            android:drawableEnd="@drawable/ic_arrow_right"
+            android:drawablePadding="16dp"
+            android:gravity="start|center"
+            android:padding="12dp"
+            android:text="@string/faq"
+            android:textAppearance="@style/Text.SemiBold.H3"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_language" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/bg_btn_transparent"
+            android:drawableStart="@drawable/ic_language"
+            android:drawableEnd="@drawable/ic_arrow_right"
+            android:drawablePadding="16dp"
+            android:gravity="start|center"
+            android:padding="12dp"
+            android:text="@string/about"
+            android:textAppearance="@style/Text.SemiBold.H3"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_faq" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_logout"
+            style="@style/Text.SemiBold.H3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="148dp"
+            android:layout_marginBottom="105dp"
+            android:text="@string/logout"
+            app:cornerRadius="14dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_about" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
