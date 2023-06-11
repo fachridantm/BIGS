@@ -70,6 +70,7 @@
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/dots_indicator"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="@id/view_pager"
             app:layout_constraintStart_toStartOf="@id/view_pager"
@@ -83,7 +84,7 @@
             android:layout_marginTop="18dp"
             android:alpha="0.7"
             android:background="@drawable/bg_btn_tertiary"
-            android:drawableTop="@drawable/ic_search"
+            android:drawableTop="@drawable/ic_geosites"
             android:elevation="4dp"
             android:paddingHorizontal="24dp"
             android:paddingTop="36dp"
@@ -102,36 +103,35 @@
             android:layout_marginTop="18dp"
             android:alpha="0.7"
             android:background="@drawable/bg_btn_quaternary"
-            android:drawableTop="@drawable/ic_search"
+            android:drawableTop="@drawable/ic_geoprogramme"
             android:elevation="4dp"
             android:paddingHorizontal="24dp"
             android:paddingTop="36dp"
             android:text="@string/geoprogramme"
             android:textAllCaps="false"
             android:textAppearance="@style/Text.Regular.Title"
-            app:layout_constraintEnd_toStartOf="@id/btn_facilities"
+            app:layout_constraintEnd_toStartOf="@id/btn_maps"
             app:layout_constraintStart_toEndOf="@id/btn_geosites"
             app:layout_constraintTop_toBottomOf="@id/tab_layout" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_facilities"
+            android:id="@+id/btn_maps"
             android:layout_width="120dp"
             android:layout_height="135dp"
             android:layout_marginTop="18dp"
             android:layout_marginEnd="20dp"
             android:alpha="0.7"
             android:background="@drawable/bg_btn_secondary"
-            android:drawableTop="@drawable/ic_search"
+            android:drawableTop="@drawable/ic_maps"
             android:elevation="4dp"
             android:paddingHorizontal="24dp"
             android:paddingTop="36dp"
-            android:text="@string/facilities"
+            android:text="@string/maps"
             android:textAllCaps="false"
             android:textAppearance="@style/Text.Regular.Title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/btn_geoprogramme"
             app:layout_constraintTop_toBottomOf="@id/tab_layout" />
-
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text_view3"
@@ -204,15 +204,17 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <include layout="@layout/item_card_home" />
-
-                <include layout="@layout/item_card_home" />
-
-                <include layout="@layout/item_card_home" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_geosites"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_card_home" />
 
             </LinearLayout>
         </HorizontalScrollView>
-        
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
