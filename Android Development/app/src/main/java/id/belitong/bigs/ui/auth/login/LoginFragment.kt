@@ -35,4 +35,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         TODO("Not yet implemented")
     }
 
+    override fun setupMenu() {
+        TODO("Not yet implemented")
+    }
+
 }

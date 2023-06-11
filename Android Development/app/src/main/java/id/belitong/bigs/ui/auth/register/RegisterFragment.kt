@@ -35,4 +35,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
         TODO("Not yet implemented")
     }
 
+    override fun setupMenu() {
+        TODO("Not yet implemented")
+    }
+
 }
