@@ -71,8 +71,8 @@
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/dots_indicator"
             android:layout_marginTop="8dp"
+            android:contentDescription="@string/dots_indicator"
             app:layout_constraintEnd_toEndOf="@id/view_pager"
             app:layout_constraintStart_toStartOf="@id/view_pager"
             app:layout_constraintTop_toBottomOf="@id/view_pager" />
@@ -145,19 +145,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_geosites" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text_view4"
-            style="@style/Text.Regular.Subtitle"
-            android:layout_width="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:alpha="0.4"
-            android:gravity="center|end"
-            android:text="@string/see_all"
-            android:textColor="@android:color/black"
-            app:layout_constraintBottom_toBottomOf="@id/text_view3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/text_view3" />
-
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/cg_geopark_filter"
             android:layout_width="wrap_content"
@@ -191,30 +178,20 @@
 
         </com.google.android.material.chip.ChipGroup>
 
-        <HorizontalScrollView
-            android:id="@+id/sv_horizontal"
-            android:layout_width="match_parent"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_geosites"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
+            android:layout_marginHorizontal="18dp"
+            android:orientation="horizontal"
             android:scrollbars="none"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cg_geopark_filter"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_geosites"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_card_home" />
-
-            </LinearLayout>
-        </HorizontalScrollView>
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:itemCount="10"
+            tools:listitem="@layout/item_card_home" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
