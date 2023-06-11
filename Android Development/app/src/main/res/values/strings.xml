@@ -37,4 +37,5 @@
     <string name="dots_indicator">Dots Indicator</string>
     <string name="alphabet">A - Z</string>
     <string name="nearest">Nearest</string>
+    <string name="history">History</string>
 </resources>
