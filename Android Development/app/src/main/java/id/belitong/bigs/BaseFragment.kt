@@ -10,7 +10,7 @@ import androidx.viewbinding.ViewBinding
 abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
     private var _binding: VB? = null
-    private val binding get() = _binding
+    val binding get() = _binding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,7 +29,7 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
         initAction()
         initProcess()
         initObservers()
-        setupMenu()
+        initMenu()
     }
 
     override fun onDestroyView() {
@@ -53,6 +53,6 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
     abstract fun initObservers()
 
-    abstract fun setupMenu()
+    abstract fun initMenu()
 
 }
