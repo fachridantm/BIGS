@@ -3,6 +3,7 @@ package id.belitong.bigs.ui.auth.login
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import id.belitong.bigs.BaseFragment
 import id.belitong.bigs.databinding.FragmentLoginBinding
@@ -15,28 +16,24 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         savedInstanceState: Bundle?
     ): FragmentLoginBinding = FragmentLoginBinding.inflate(inflater, container, false)
 
-    override fun initIntent() {
-        TODO("Not yet implemented")
-    }
+    override fun initIntent() {}
 
-    override fun initView() {
-        TODO("Not yet implemented")
-    }
+    override fun initView() {}
 
     override fun initAction() {
-        TODO("Not yet implemented")
+        binding?.apply {
+            tvRegisterHere.setOnClickListener {
+                it.findNavController()
+                    .navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
+            }
+            btnLogin.setOnClickListener {}
+        }
     }
 
-    override fun initProcess() {
-        TODO("Not yet implemented")
-    }
+    override fun initProcess() {}
 
-    override fun initObservers() {
-        TODO("Not yet implemented")
-    }
+    override fun initObservers() {}
 
-    override fun setupMenu() {
-        TODO("Not yet implemented")
-    }
+    override fun initMenu() {}
 
 }
