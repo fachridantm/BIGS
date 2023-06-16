@@ -4,9 +4,15 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import id.belitong.bigs.core.BuildConfig
+import id.belitong.bigs.core.BuildConfig.DEBUG
+import id.belitong.bigs.core.BuildConfig.DICODING_BASE_URL
+import id.belitong.bigs.core.BuildConfig.MAIN_BASE_URL
+import id.belitong.bigs.core.data.source.remote.network.AuthApiService
+import id.belitong.bigs.core.data.source.remote.network.MainApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 @Module
@@ -17,32 +23,36 @@ class NetworkModule {
         return OkHttpClient.Builder()
             .addInterceptor(
                 HttpLoggingInterceptor().setLevel(
-                    if (BuildConfig.DEBUG) {
+                    if (DEBUG) {
                         HttpLoggingInterceptor.Level.BODY
                     } else {
                         HttpLoggingInterceptor.Level.NONE
                     }
                 )
             )
-//            .addInterceptor { chain ->
-//                chain.request().newBuilder()
-//                    .addHeader("Authorization","Bearer ${BuildConfig.ROKET_API_KEY}")
-//                    .build()
-//                    .let(chain::proceed)
-//            }
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
             .writeTimeout(120, TimeUnit.SECONDS)
             .build()
     }
 
-//    @Provides
-//    fun provideMainApiService(client: OkHttpClient): MainApiService {
-//        val retrofit = Retrofit.Builder()
-//            .baseUrl(BuildConfig.MAIN_BASE_URL) // TODO: BuildConfig.MAIN_BASE_URL -> Add MAIN_BASE_URL to local.properties
-//            .client(client)
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
-//        return retrofit.create(MainApiService::class.java)
-//    }
+    @Provides
+    fun provideMainApiService(client: OkHttpClient): MainApiService {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(MAIN_BASE_URL) // TODO 1: BuildConfig.MAIN_BASE_URL -> Add MAIN_BASE_URL to local.properties
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        return retrofit.create(MainApiService::class.java)
+    }
+
+    @Provides
+    fun provideAuthApiService(client: OkHttpClient): AuthApiService {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(DICODING_BASE_URL) // TODO 1: BuildConfig.DICODING_BASE_URL -> Add DICODING_BASE_URL to local.properties
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        return retrofit.create(AuthApiService::class.java)
+    }
 }

@@ -18,28 +18,18 @@ class UserPreferences @Inject constructor(private val dataStore: DataStore<Prefe
         preferences[AUTH_KEY] ?: ""
     }
 
-    fun getId(): Flow<Int> = dataStore.data.map { preferences ->
-        preferences[ID_KEY] ?: 0
+    fun getUserId(): Flow<String> = dataStore.data.map { preferences ->
+        preferences[ID_KEY] ?: ""
     }
 
     fun getName(): Flow<String> = dataStore.data.map { preferences ->
         preferences[NAME_KEY] ?: ""
     }
 
-    fun getEmail(): Flow<String> = dataStore.data.map { preferences ->
-        preferences[EMAIL_KEY] ?: ""
-    }
-
-    fun getPhoneNumber(): Flow<String> = dataStore.data.map { preferences ->
-        preferences[PHONE_NUMBER_KEY] ?: ""
-    }
-
     suspend fun saveSession(token: String, user: UserEntity) = dataStore.edit { preferences ->
         preferences[AUTH_KEY] = token
-        preferences[ID_KEY] = user.id
+        preferences[ID_KEY] = user.userId
         preferences[NAME_KEY] = user.name
-        preferences[EMAIL_KEY] = user.email
-        preferences[PHONE_NUMBER_KEY] = user.phoneNumber
     }
 
     suspend fun deleteSession() = dataStore.edit {
@@ -48,9 +38,7 @@ class UserPreferences @Inject constructor(private val dataStore: DataStore<Prefe
 
     companion object {
         private val AUTH_KEY = stringPreferencesKey("AUTH_KEY")
-        private val ID_KEY = intPreferencesKey("ID_KEY")
+        private val ID_KEY = stringPreferencesKey("ID_KEY")
         private val NAME_KEY = stringPreferencesKey("NAME_KEY")
-        private val EMAIL_KEY = stringPreferencesKey("EMAIL_KEY")
-        private val PHONE_NUMBER_KEY = stringPreferencesKey("PHONE_NUMBER_KEY")
     }
 }

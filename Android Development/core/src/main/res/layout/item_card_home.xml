@@ -27,12 +27,13 @@
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/item_tv_geosite_home"
+            android:id="@+id/item_tv_title_home"
             style="@style/Text.SemiBold.Title.Center"
             android:singleLine="true"
             android:includeFontPadding="false"
             android:textColor="@color/md_theme_dark_tertiary"
             android:textSize="12sp"
+            android:layout_marginHorizontal="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +50,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:includeFontPadding="false"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/item_tv_geosite_home"
+            app:layout_constraintTop_toBottomOf="@id/item_tv_title_home"
             tools:ignore="SmallSp"
             tools:text="Hill" />
 

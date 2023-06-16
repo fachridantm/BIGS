@@ -37,4 +37,12 @@
     <string name="nearest">Nearest</string>
     <string name="history">History</string>
     <string name="search_hint">Search geosites, plants, animals</string>
+    <string name="email_can_not_be_empty">Email can not be empty!</string>
+    <string name="invalid_email_format">Please input email correctly!</string>
+    <string name="password_can_not_be_empty">Password can not be empty!</string>
+    <string name="minimum_password_length">Password should be more than 8 character!</string>
+    <string name="login_result">Login %s</string>
+    <string name="name_can_not_be_empty">Name can not be empty!</string>
+    <string name="phone_can_not_be_empty">Phone number can not be empty\n</string>
+    <string name="invalid_phone_number">Please input phone number correctly!</string>
 </resources>

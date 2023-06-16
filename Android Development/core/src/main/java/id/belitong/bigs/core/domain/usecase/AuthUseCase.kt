@@ -8,21 +8,16 @@ import kotlinx.coroutines.flow.Flow
 
 interface AuthUseCase {
 
-    fun getToken(): Flow<String>
+    fun getAuthToken(): Flow<String>
 
-    fun getId(): Flow<Int>
+    fun getUserId(): Flow<String>
 
     fun getName(): Flow<String>
-
-    fun getEmail(): Flow<String>
-
-    fun getPhoneNumber(): Flow<String>
 
     fun registerUser(
         name: String,
         email: String,
         password: String,
-        phoneNumber: String,
     ): Flow<Resource<Register>>
 
     fun loginUser(email: String, password: String): Flow<Resource<Login>>

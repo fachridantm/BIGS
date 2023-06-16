@@ -93,11 +93,12 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="chipBackgroundColor">@color/chip_background</item>
+        <item name="checkedIconTint">@android:color/white</item>
         <item name="chipStrokeColor">@color/seed</item>
         <item name="chipStrokeWidth">1dp</item>
         <item name="chipCornerRadius">30dp</item>
         <item name="android:textColor">@color/chip_text</item>
-        <item name="android:gravity">center</item>
+        <item name="android:textAlignment">center</item>
     </style>
 
     <style name="Chip.Subtitle">

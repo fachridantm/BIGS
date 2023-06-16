@@ -7,8 +7,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".BaseApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_bigs"
         android:label="@string/app_name"
@@ -16,6 +18,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="33">
+        <activity
+            android:name=".ui.search.SearchResultsActivity"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.details.geosites.GeositesActivity"
             android:exported="false" />
@@ -45,7 +54,12 @@
         </activity>
         <activity
             android:name=".ui.main.MainActivity"
-            android:exported="false" />
+            android:label="@string/app_name"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
     </application>
 
 </manifest>

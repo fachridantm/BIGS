@@ -89,19 +89,27 @@
         <item name="android:textAppearance">@style/Text.Medium.Subheader</item>
     </style>
 
-    <style name="Chip">
+    <style name="Chip" parent="@style/Widget.Material3.Chip.Filter">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="chipBackgroundColor">@color/chip_background</item>
+        <item name="checkedIconTint">@android:color/white</item>
         <item name="chipStrokeColor">@color/seed</item>
         <item name="chipStrokeWidth">1dp</item>
         <item name="chipCornerRadius">30dp</item>
         <item name="android:textColor">@color/chip_text</item>
-        <item name="android:gravity">center</item>
+        <item name="android:textAlignment">center</item>
     </style>
 
     <style name="Chip.Subtitle">
         <item name="android:textAppearance">@style/Text.Regular.Subtitle</item>
     </style>
 
+    <style name="TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">5dp</item>
+        <item name="boxCornerRadiusTopEnd">5dp</item>
+        <item name="boxCornerRadiusBottomStart">5dp</item>
+        <item name="boxCornerRadiusBottomEnd">5dp</item>
+        <item name="hintTextAppearance">@style/Text.Medium.Subheader</item>
+    </style>
 </resources>

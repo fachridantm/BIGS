@@ -11,46 +11,86 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.core.view.children
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import id.belitong.bigs.BaseFragment
 import id.belitong.bigs.R
+import id.belitong.bigs.core.domain.model.Biodiversity
+import id.belitong.bigs.core.domain.model.Geosite
+import id.belitong.bigs.core.ui.CardHomeAdapter
+import id.belitong.bigs.core.ui.CarouselHomeAdapter
+import id.belitong.bigs.core.utils.DummyData
+import id.belitong.bigs.core.utils.getFirstName
 import id.belitong.bigs.databinding.FragmentHomeBinding
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
+
+    private val carouselHomeAdapter: CarouselHomeAdapter by lazy { CarouselHomeAdapter(::carouselItemClicked) }
+    private val cardHomeAdapter: CardHomeAdapter by lazy { CardHomeAdapter(::cardItemClicked) }
+
+    private val homeViewModel: HomeViewModel by viewModels()
+
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): FragmentHomeBinding {
-        TODO("Not yet implemented")
-    }
+    ): FragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false)
 
-    override fun initIntent() {
-        TODO("Not yet implemented")
+    override fun initData() {
+        homeViewModel.getName().observe(viewLifecycleOwner) {
+            val name = it.getFirstName()
+            binding?.textView2?.text = getString(R.string.geopark_belitong_user, name)
+        }
+
+        homeViewModel.getAllGeosites().observe(viewLifecycleOwner) {
+            carouselHomeAdapter.submitList(DummyData.getAllGeosites()) // TODO 2: Change to it.data
+        }
+
+        homeViewModel.getAllBiodiversity().observe(viewLifecycleOwner) {
+            cardHomeAdapter.submitList(DummyData.getAllBiodiversity()) // TODO 2: Change to it.data
+        }
     }
 
     override fun initView() {
-        TODO("Not yet implemented")
+        with(binding) {
+            this?.carouselPager?.apply {
+                adapter = carouselHomeAdapter
+                setHasFixedSize(true)
+            }
+            this?.rvGeosites?.apply {
+                adapter = cardHomeAdapter
+                setHasFixedSize(true)
+            }
+        }
     }
 
     override fun initAction() {
-        TODO("Not yet implemented")
+        val selectedChip = binding?.cgGeoparkFilter?.children
+            ?.filter { (it as Chip).isChecked }
+            ?.map { (it as Chip).text.toString() }
+            ?.firstOrNull()
     }
 
-    override fun initProcess() {
-        TODO("Not yet implemented")
-    }
-
-    override fun initObservers() {
-        TODO("Not yet implemented")
-    }
+    override fun initObservers() {}
 
     override fun initMenu() {
+
         (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
             override fun onPrepareMenu(menu: Menu) {
-                // Handle for example visibility of menu items
+                val searchView = menu.findItem(R.id.search_view).actionView as SearchView
+                searchView.apply {
+                    isIconified = false
+                    isFocusable = true
+                    setIconifiedByDefault(false)
+                    requestFocusFromTouch()
+                    onActionViewExpanded()
+                    clearFocus()
+                }
             }
 
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -60,15 +100,28 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                     SearchManager::class.java
                 ) as SearchManager
                 val searchView = menu.findItem(R.id.search_view).actionView as SearchView
-                searchView.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
-
+                searchView.apply {
+                    setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
+                }
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 // Validate and handle the selected menu item
+                when (menuItem.itemId) {
+                    R.id.btn_profile -> {
+                        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProfileActivity())
+                    }
+                }
                 return true
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+    }
+
+    private fun carouselItemClicked(geosite: Geosite) {
+    }
+
+    private fun cardItemClicked(biodiversity: Biodiversity) {
+
     }
 
 }

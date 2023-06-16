@@ -26,11 +26,14 @@
                 android:layout_height="match_parent"
                 android:alpha="0.8"
                 android:background="@android:color/white"
-                app:menu="@menu/menu_main"
-                app:title="@string/hello_user"
+                app:menu="@menu/menu_home"
                 app:titleCentered="true"
                 app:titleTextAppearance="@style/Text.SemiBold.H3"
                 app:titleTextColor="@android:color/black" />
+
+            <com.google.android.material.search.SearchView
+                android:layout_width="280dp"
+                android:layout_height="wrap_content" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -49,90 +52,85 @@
             style="@style/Text.SemiBold.H1"
             android:layout_width="wrap_content"
             android:alpha="0.8"
-            android:text="@string/geopark_belitong"
             android:textColor="@android:color/black"
             app:layout_constraintStart_toStartOf="@id/text_view1"
-            app:layout_constraintTop_toBottomOf="@id/text_view1" />
+            app:layout_constraintTop_toBottomOf="@id/text_view1"
+            tools:text="@string/geopark_belitong_user" />
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/view_pager"
-            android:layout_width="281dp"
-            android:layout_height="176.05dp"
-            android:layout_marginVertical="18dp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/carousel_pager"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:layout_marginVertical="12dp"
             android:clipChildren="false"
             android:clipToPadding="false"
-            android:overScrollMode="never"
-            app:layout_constraintBottom_toTopOf="@id/tab_layout"
+            app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/btn_geoprogramme"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_view2" />
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:contentDescription="@string/dots_indicator"
-            app:layout_constraintEnd_toEndOf="@id/view_pager"
-            app:layout_constraintStart_toStartOf="@id/view_pager"
-            app:layout_constraintTop_toBottomOf="@id/view_pager" />
+            app:layout_constraintTop_toBottomOf="@id/text_view2"
+            tools:listitem="@layout/item_carousel_home" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_geosites"
-            android:layout_width="120dp"
-            android:layout_height="135dp"
-            android:layout_marginStart="20dp"
+            android:layout_width="110dp"
+            android:layout_height="125dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="18dp"
             android:alpha="0.7"
             android:background="@drawable/bg_btn_tertiary"
             android:drawableTop="@drawable/ic_geosites"
             android:elevation="4dp"
-            android:paddingHorizontal="24dp"
+            android:foreground="?attr/selectableItemBackground"
+            android:paddingHorizontal="10dp"
             android:paddingTop="36dp"
             android:text="@string/geosites"
             android:textAllCaps="false"
             android:textAppearance="@style/Text.Regular.Title"
             app:layout_constraintEnd_toStartOf="@id/btn_geoprogramme"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tab_layout" />
+            app:layout_constraintTop_toBottomOf="@id/carousel_pager" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_geoprogramme"
-            android:layout_width="120dp"
-            android:layout_height="135dp"
-            android:layout_marginHorizontal="12dp"
+            android:layout_width="110dp"
+            android:layout_height="125dp"
+            android:layout_marginHorizontal="10dp"
             android:layout_marginTop="18dp"
             android:alpha="0.7"
             android:background="@drawable/bg_btn_quaternary"
             android:drawableTop="@drawable/ic_geoprogramme"
             android:elevation="4dp"
-            android:paddingHorizontal="24dp"
+            android:foreground="?attr/selectableItemBackground"
+            android:paddingHorizontal="10dp"
             android:paddingTop="36dp"
             android:text="@string/geoprogramme"
             android:textAllCaps="false"
             android:textAppearance="@style/Text.Regular.Title"
             app:layout_constraintEnd_toStartOf="@id/btn_maps"
             app:layout_constraintStart_toEndOf="@id/btn_geosites"
-            app:layout_constraintTop_toBottomOf="@id/tab_layout" />
+            app:layout_constraintTop_toBottomOf="@id/carousel_pager" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_maps"
-            android:layout_width="120dp"
-            android:layout_height="135dp"
+            android:layout_width="110dp"
+            android:layout_height="125dp"
             android:layout_marginTop="18dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="24dp"
             android:alpha="0.7"
             android:background="@drawable/bg_btn_secondary"
             android:drawableTop="@drawable/ic_maps"
             android:elevation="4dp"
-            android:paddingHorizontal="24dp"
+            android:foreground="?attr/selectableItemBackground"
+            android:paddingHorizontal="10dp"
             android:paddingTop="36dp"
             android:text="@string/maps"
             android:textAllCaps="false"
             android:textAppearance="@style/Text.Regular.Title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/btn_geoprogramme"
-            app:layout_constraintTop_toBottomOf="@id/tab_layout" />
+            app:layout_constraintTop_toBottomOf="@id/carousel_pager" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text_view3"
@@ -159,6 +157,7 @@
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_all"
                 style="@style/Chip.Subtitle"
+                android:checked="true"
                 android:text="@string/all" />
 
             <com.google.android.material.chip.Chip
@@ -186,10 +185,10 @@
             android:orientation="horizontal"
             android:scrollbars="none"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cg_geopark_filter"
-            app:layout_constraintBottom_toBottomOf="parent"
             tools:itemCount="10"
             tools:listitem="@layout/item_card_home" />
 

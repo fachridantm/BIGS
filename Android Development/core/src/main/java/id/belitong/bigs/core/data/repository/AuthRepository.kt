@@ -1,6 +1,5 @@
 package id.belitong.bigs.core.data.repository
 
-import androidx.datastore.preferences.core.Preferences
 import id.belitong.bigs.core.data.Resource
 import id.belitong.bigs.core.data.source.local.LocalDataSource
 import id.belitong.bigs.core.data.source.remote.RemoteDataSource
@@ -22,32 +21,29 @@ class AuthRepository @Inject constructor(
     private val remoteDataSource: RemoteDataSource
 ) : IAuthRepository {
 
-    override fun getToken(): Flow<String> = localDataSource.getToken()
+    override fun getAuthToken(): Flow<String> = localDataSource.getAuthToken()
 
-    override fun getId(): Flow<Int> = localDataSource.getId()
+    override fun getUserId(): Flow<String> = localDataSource.getUserId()
 
     override fun getName(): Flow<String> = localDataSource.getName()
-
-    override fun getEmail(): Flow<String> = localDataSource.getEmail()
-
-    override fun getPhoneNumber(): Flow<String> = localDataSource.getPhoneNumber()
 
     override fun registerUser(
         name: String,
         email: String,
         password: String,
-        phoneNumber: String,
     ): Flow<Resource<Register>> = flow {
         emit(Resource.Loading())
         when (val apiResponse =
-            remoteDataSource.registerUser(name, email, password, phoneNumber).first()) {
+            remoteDataSource.registerUser(name, email, password).first()) {
             is ApiResponse.Success -> {
                 val data = DataMapper.registerResponseToRegister(apiResponse.data)
                 emit(Resource.Success(data))
             }
+
             is ApiResponse.Error -> {
                 emit(Resource.Error(apiResponse.errorMessage))
             }
+
             is ApiResponse.Empty -> {}
         }
     }
@@ -59,9 +55,11 @@ class AuthRepository @Inject constructor(
                 val data = DataMapper.loginResponseToLogin(apiResponse.data)
                 emit(Resource.Success(data))
             }
+
             is ApiResponse.Error -> {
                 emit(Resource.Error(apiResponse.errorMessage))
             }
+
             is ApiResponse.Empty -> {}
         }
     }

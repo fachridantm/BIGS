@@ -2,7 +2,7 @@ package id.belitong.bigs.core.data.source.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class UserResponse(
+data class BiodiversityItem(
 
     @field:SerializedName("id")
     val id: Int,
@@ -10,12 +10,9 @@ data class UserResponse(
     @field:SerializedName("name")
     val name: String,
 
-    @field:SerializedName("email")
-    val email: String,
+    @field:SerializedName("type")
+    val type: String,
 
-    @field:SerializedName("password")
-    val password: String,
-
-    @field:SerializedName("phone_number")
-    val phoneNumber: String,
+    @field:SerializedName("img")
+    val img: String,
 )

@@ -12,5 +12,9 @@ import javax.inject.Singleton
 abstract class AppModule {
     @Binds
     @Singleton
-    abstract fun provideAuthUseCase(authUseCaseImpl: AuthUseCaseImpl): AuthUseCase
+    abstract fun provideAuthUseCase(authInteractor: AuthInteractor): AuthUseCase
+
+    @Binds
+    @Singleton
+    abstract fun provideMainUseCase(mainInteractor: MainInteractor): MainUseCase
 }

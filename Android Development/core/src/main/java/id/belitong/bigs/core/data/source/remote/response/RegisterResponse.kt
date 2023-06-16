@@ -7,5 +7,5 @@ data class RegisterResponse(
     val message: String,
 
     @field:SerializedName("errors")
-    val errors: List<ErrorResponse>? = null,
+    val error: Boolean
 )
