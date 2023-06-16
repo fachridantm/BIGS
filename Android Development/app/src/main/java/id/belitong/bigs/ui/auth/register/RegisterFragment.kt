@@ -141,7 +141,4 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
             }
         }
     }
-
-    override fun initMenu() {}
-
 }

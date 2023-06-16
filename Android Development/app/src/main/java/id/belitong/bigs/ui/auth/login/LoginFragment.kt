@@ -140,7 +140,4 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             }
         }
     }
-
-    override fun initMenu() {}
-
 }

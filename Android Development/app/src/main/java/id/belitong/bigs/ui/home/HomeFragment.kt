@@ -1,23 +1,10 @@
 package id.belitong.bigs.ui.home
 
-import android.app.SearchManager
-import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.ViewGroup
-import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.view.MenuHost
-import androidx.core.view.MenuProvider
 import androidx.core.view.children
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.navigation.fragment.findNavController
-import androidx.viewpager2.widget.CompositePageTransformer
-import androidx.viewpager2.widget.MarginPageTransformer
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import id.belitong.bigs.BaseFragment
@@ -30,7 +17,6 @@ import id.belitong.bigs.core.utils.DummyData
 import id.belitong.bigs.core.utils.ZoomOutPageTransformer
 import id.belitong.bigs.core.utils.getFirstName
 import id.belitong.bigs.databinding.FragmentHomeBinding
-import kotlin.math.abs
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
@@ -89,45 +75,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     override fun initObservers() {}
-
-    override fun initMenu() {
-
-        (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
-            override fun onPrepareMenu(menu: Menu) {
-                val searchView = menu.findItem(R.id.search_view).actionView as SearchView
-                searchView.apply {
-                    isIconified = false
-                    isFocusable = true
-                    setIconifiedByDefault(false)
-                    requestFocusFromTouch()
-                    onActionViewExpanded()
-                    clearFocus()
-                }
-            }
-
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.menu_home, menu)
-                val searchManager = getSystemService(
-                    requireContext(),
-                    SearchManager::class.java
-                ) as SearchManager
-                val searchView = menu.findItem(R.id.search_view).actionView as SearchView
-                searchView.apply {
-                    setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
-                }
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                // Validate and handle the selected menu item
-                when (menuItem.itemId) {
-                    R.id.btn_profile -> {
-                        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProfileActivity())
-                    }
-                }
-                return true
-            }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
-    }
 
     private fun carouselItemClicked(geosite: Geosite) {
     }

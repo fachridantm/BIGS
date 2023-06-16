@@ -28,7 +28,6 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
         initView()
         initAction()
         initObservers()
-        initMenu()
     }
 
     override fun onDestroyView() {
@@ -49,7 +48,5 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
     abstract fun initAction()
 
     abstract fun initObservers()
-
-    abstract fun initMenu()
 
 }
