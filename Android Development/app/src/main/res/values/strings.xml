@@ -36,7 +36,7 @@
     <string name="alphabet">A - Z</string>
     <string name="nearest">Nearest</string>
     <string name="history">History</string>
-    <string name="search_hint">Search geosites, plants, animals</string>
+    <string name="search_hint">Find Geosites, Plants, Animals</string>
     <string name="email_can_not_be_empty">Email can not be empty!</string>
     <string name="invalid_email_format">Please input email correctly!</string>
     <string name="password_can_not_be_empty">Password can not be empty!</string>
