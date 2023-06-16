@@ -5,13 +5,16 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
-import id.belitong.bigs.R
+import id.belitong.bigs.databinding.ActivitySearchResultsBinding
 
 @AndroidEntryPoint
 class SearchResultsActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivitySearchResultsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search_results)
+        binding = ActivitySearchResultsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         handleIntent(intent)
     }

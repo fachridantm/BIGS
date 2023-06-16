@@ -1,8 +1,12 @@
 package id.belitong.bigs.ui.home
 
+import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.SearchView
+import androidx.core.content.ContextCompat.getDrawable
 import androidx.core.view.children
 import androidx.fragment.app.viewModels
 import com.google.android.material.chip.Chip
@@ -17,6 +21,8 @@ import id.belitong.bigs.core.utils.DummyData
 import id.belitong.bigs.core.utils.ZoomOutPageTransformer
 import id.belitong.bigs.core.utils.getFirstName
 import id.belitong.bigs.databinding.FragmentHomeBinding
+import id.belitong.bigs.ui.profile.ProfileActivity
+import id.belitong.bigs.ui.search.SearchResultsActivity
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
@@ -51,7 +57,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         with(binding) {
             this?.carouselPager?.apply {
                 adapter = carouselHomeAdapter
-                offscreenPageLimit = 3
 
                 val zoomOutPageTransformer = ZoomOutPageTransformer()
                 setPageTransformer { page, position ->
@@ -64,6 +69,43 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 adapter = cardHomeAdapter
                 setHasFixedSize(true)
             }
+
+            this?.toolbarHome?.apply {
+                val searchView = menu.findItem(R.id.search_view).actionView as SearchView
+
+                searchView.apply {
+                    inputType = InputType.TYPE_NULL
+                    isIconifiedByDefault = false
+                    queryHint = getString(R.string.search_hint)
+                    background = getDrawable(requireContext(), R.drawable.bg_transparent)
+
+                    setOnQueryTextFocusChangeListener { _, hasFocus ->
+                        if (hasFocus) {
+                            startActivity(
+                                Intent(
+                                    requireContext(),
+                                    SearchResultsActivity::class.java
+                                )
+                            )
+                        }
+                    }
+
+                    setOnClickListener {
+                        startActivity(Intent(requireContext(), SearchResultsActivity::class.java))
+                    }
+
+                }
+                setOnMenuItemClickListener {
+                    when (it.itemId) {
+                        R.id.btn_profile -> {
+                            startActivity(Intent(requireContext(), ProfileActivity::class.java))
+                            true
+                        }
+
+                        else -> false
+                    }
+                }
+            }
         }
     }
 
@@ -72,9 +114,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             ?.filter { (it as Chip).isChecked }
             ?.map { (it as Chip).text.toString() }
             ?.firstOrNull()
+
+
     }
 
     override fun initObservers() {}
+
+    override fun onResume() {
+        super.onResume()
+        binding?.toolbarHome?.menu?.findItem(R.id.search_view)?.actionView?.clearFocus()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding?.toolbarHome?.menu?.findItem(R.id.search_view)?.actionView?.clearFocus()
+    }
 
     private fun carouselItemClicked(geosite: Geosite) {
     }
