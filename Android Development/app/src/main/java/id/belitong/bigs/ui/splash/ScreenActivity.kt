@@ -6,15 +6,19 @@ import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import android.view.WindowManager
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import id.belitong.bigs.databinding.ActivityScreenBinding
 import id.belitong.bigs.ui.auth.AuthActivity
+import id.belitong.bigs.ui.auth.login.LoginViewModel
+import id.belitong.bigs.ui.main.MainActivity
 
 @AndroidEntryPoint
 class ScreenActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityScreenBinding
+    private val loginViewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,8 +44,19 @@ class ScreenActivity : AppCompatActivity() {
 
     private fun initAction() {
         binding.btnExplore.setOnClickListener {
-            startActivity(Intent(this, AuthActivity::class.java))
-            finish()
+            isLoginCheck()
+        }
+    }
+
+    private fun isLoginCheck() {
+        loginViewModel.getToken().observe(this) { token ->
+            if (!token.isNullOrEmpty()) {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            } else {
+                startActivity(Intent(this, AuthActivity::class.java))
+                finish()
+            }
         }
     }
 }

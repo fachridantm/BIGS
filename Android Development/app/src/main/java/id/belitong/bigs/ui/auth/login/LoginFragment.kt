@@ -84,19 +84,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     }
 
     override fun initObservers() {
-        isLoginCheck()
         loginResult()
-    }
-
-    private fun isLoginCheck() {
-        loginViewModel.getToken().observe(viewLifecycleOwner) { token ->
-            if (!token.isNullOrEmpty()) {
-                binding?.root?.visibility = View.GONE
-                val intent = Intent(requireContext(), MainActivity::class.java)
-                startActivity(intent)
-                activity?.finish()
-            }
-        }
     }
 
     private fun loginResult() {
