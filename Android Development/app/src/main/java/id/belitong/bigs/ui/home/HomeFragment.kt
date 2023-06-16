@@ -1,6 +1,7 @@
 package id.belitong.bigs.ui.home
 
 import android.app.SearchManager
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -15,6 +16,8 @@ import androidx.core.view.children
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.CompositePageTransformer
+import androidx.viewpager2.widget.MarginPageTransformer
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import id.belitong.bigs.BaseFragment
@@ -24,8 +27,10 @@ import id.belitong.bigs.core.domain.model.Geosite
 import id.belitong.bigs.core.ui.CardHomeAdapter
 import id.belitong.bigs.core.ui.CarouselHomeAdapter
 import id.belitong.bigs.core.utils.DummyData
+import id.belitong.bigs.core.utils.ZoomOutPageTransformer
 import id.belitong.bigs.core.utils.getFirstName
 import id.belitong.bigs.databinding.FragmentHomeBinding
+import kotlin.math.abs
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
@@ -60,7 +65,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         with(binding) {
             this?.carouselPager?.apply {
                 adapter = carouselHomeAdapter
-                setHasFixedSize(true)
+                offscreenPageLimit = 3
+
+                val zoomOutPageTransformer = ZoomOutPageTransformer()
+                setPageTransformer { page, position ->
+                    zoomOutPageTransformer.transformPage(page, position)
+                }
+
+                dotsIndicator.attachTo(this)
             }
             this?.rvGeosites?.apply {
                 adapter = cardHomeAdapter

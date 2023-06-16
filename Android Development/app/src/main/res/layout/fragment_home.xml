@@ -26,14 +26,7 @@
                 android:layout_height="match_parent"
                 android:alpha="0.8"
                 android:background="@android:color/white"
-                app:menu="@menu/menu_home"
-                app:titleCentered="true"
-                app:titleTextAppearance="@style/Text.SemiBold.H3"
-                app:titleTextColor="@android:color/black" />
-
-            <com.google.android.material.search.SearchView
-                android:layout_width="280dp"
-                android:layout_height="wrap_content" />
+                app:menu="@menu/menu_home" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -57,20 +50,36 @@
             app:layout_constraintTop_toBottomOf="@id/text_view1"
             tools:text="@string/geopark_belitong_user" />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/carousel_pager"
             android:layout_width="match_parent"
             android:layout_height="220dp"
             android:layout_marginVertical="12dp"
             android:clipChildren="false"
             android:clipToPadding="false"
-            app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
-            app:layout_constraintBottom_toTopOf="@id/btn_geoprogramme"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toTopOf="@id/dots_indicator"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_view2"
             tools:listitem="@layout/item_carousel_home" />
+
+        <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+            android:id="@+id/dots_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            app:dotsColor="@android:color/darker_gray"
+            app:dotsCornerRadius="8dp"
+            app:dotsSize="12dp"
+            app:dotsSpacing="4dp"
+            app:dotsWidthFactor="2.5"
+            app:layout_constraintBottom_toTopOf="@id/btn_geosites"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/carousel_pager"
+            app:progressMode="false"
+            app:selectedDotColor="@color/seed" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_geosites"
@@ -90,7 +99,8 @@
             android:textAppearance="@style/Text.Regular.Title"
             app:layout_constraintEnd_toStartOf="@id/btn_geoprogramme"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/carousel_pager" />
+            app:layout_constraintTop_toBottomOf="@id/dots_indicator"
+            tools:targetApi="m" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_geoprogramme"
@@ -110,7 +120,7 @@
             android:textAppearance="@style/Text.Regular.Title"
             app:layout_constraintEnd_toStartOf="@id/btn_maps"
             app:layout_constraintStart_toEndOf="@id/btn_geosites"
-            app:layout_constraintTop_toBottomOf="@id/carousel_pager" />
+            app:layout_constraintTop_toBottomOf="@id/dots_indicator" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_maps"
@@ -130,7 +140,7 @@
             android:textAppearance="@style/Text.Regular.Title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/btn_geoprogramme"
-            app:layout_constraintTop_toBottomOf="@id/carousel_pager" />
+            app:layout_constraintTop_toBottomOf="@id/dots_indicator" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text_view3"

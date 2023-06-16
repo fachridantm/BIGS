@@ -38,7 +38,7 @@ class CarouselHomeAdapter(private val onItemClick: (Geosite) -> Unit) :
     }
 
     override fun getItemCount(): Int {
-        return currentList.size
+        return 6
     }
 
     companion object {
