@@ -89,7 +89,7 @@
         <item name="android:textAppearance">@style/Text.Medium.Subheader</item>
     </style>
 
-    <style name="Chip">
+    <style name="Chip" parent="@style/Widget.Material3.Chip.Filter">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="chipBackgroundColor">@color/chip_background</item>
@@ -105,4 +105,15 @@
         <item name="android:textAppearance">@style/Text.Regular.Subtitle</item>
     </style>
 
+    <style name="TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">5dp</item>
+        <item name="boxCornerRadiusTopEnd">5dp</item>
+        <item name="boxCornerRadiusBottomStart">5dp</item>
+        <item name="boxCornerRadiusBottomEnd">5dp</item>
+        <item name="hintTextAppearance">@style/Text.Medium.Subheader</item>
+    </style>
+
+    <style name="BottomNavigationView" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/md_theme_dark_primary</item>
+    </style>
 </resources>

@@ -112,4 +112,8 @@
         <item name="boxCornerRadiusBottomEnd">5dp</item>
         <item name="hintTextAppearance">@style/Text.Medium.Subheader</item>
     </style>
+
+    <style name="BottomNavigationView" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/md_theme_dark_primary</item>
+    </style>
 </resources>
