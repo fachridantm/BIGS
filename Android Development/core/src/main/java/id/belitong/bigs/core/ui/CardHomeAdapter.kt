@@ -11,9 +11,9 @@ import id.belitong.bigs.core.utils.getFirstTwoWords
 import id.belitong.bigs.core.utils.loadGeositeImage
 
 class CardHomeAdapter(private val onItemClick: (Biodiversity) -> Unit) :
-    ListAdapter<Biodiversity, CardHomeAdapter.CardViewHolder>(DIFF_CALLBACK) {
+    ListAdapter<Biodiversity, CardHomeAdapter.HomeViewHolder>(DIFF_CALLBACK) {
 
-    inner class CardViewHolder(private val binding: ItemCardHomeBinding) :
+    inner class HomeViewHolder(private val binding: ItemCardHomeBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(data: Biodiversity) {
@@ -26,13 +26,13 @@ class CardHomeAdapter(private val onItemClick: (Biodiversity) -> Unit) :
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val binding =
             ItemCardHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return CardViewHolder(binding)
+        return HomeViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         val biodiversity = getItem(position)
         if (biodiversity != null) {
             holder.bind(biodiversity)
