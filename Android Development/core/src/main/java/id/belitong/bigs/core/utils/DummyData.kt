@@ -252,7 +252,7 @@ object DummyData {
             bookingDate = "Sat, 8 June 2023 at 08.00 WIB",
             tourDate = "Sun, 12 June 2023 at 10.00 WIB",
             programName = "Research-Programme",
-            status = "Completed",
+            status = "Cancelled",
         ),
     )
 }
