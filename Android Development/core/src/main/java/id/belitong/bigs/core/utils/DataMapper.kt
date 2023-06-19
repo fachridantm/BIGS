@@ -4,19 +4,21 @@ import id.belitong.bigs.core.data.source.local.entity.UserEntity
 import id.belitong.bigs.core.data.source.remote.response.BiodiversityItem
 import id.belitong.bigs.core.data.source.remote.response.GeositeItem
 import id.belitong.bigs.core.data.source.remote.response.LoginResponse
+import id.belitong.bigs.core.data.source.remote.response.OrderItem
 import id.belitong.bigs.core.data.source.remote.response.RegisterResponse
 import id.belitong.bigs.core.domain.model.Biodiversity
 import id.belitong.bigs.core.domain.model.Geosite
 import id.belitong.bigs.core.domain.model.Login
+import id.belitong.bigs.core.domain.model.Order
 import id.belitong.bigs.core.domain.model.Register
 import id.belitong.bigs.core.domain.model.User
 
 object DataMapper {
     fun loginResponseToLogin(data: LoginResponse): Login = Login(
         loginResult = User(
-            data.loginResult.userId,
-            data.loginResult.name,
-            data.loginResult.token,
+            userId = data.loginResult.userId,
+            name = data.loginResult.name,
+            token = data.loginResult.token,
         ),
         message = data.message
     )
@@ -24,25 +26,37 @@ object DataMapper {
     fun registerResponseToRegister(data: RegisterResponse): Register = Register(data.message)
 
     fun userToUserEntity(data: User): UserEntity = UserEntity(
-        data.userId,
-        data.name,
-        data.token,
+        userId =  data.userId,
+        name = data.name,
+        token = data.token,
     )
 
     fun geositeResponseToGeosite(data: GeositeItem): Geosite = Geosite(
-        data.id,
-        data.name,
-        data.summary,
-        data.type,
-        data.desc,
-        data.distance,
-        data.img,
+        id = data.id,
+        name = data.name,
+        summary = data.summary,
+        type = data.type,
+        desc = data.desc,
+        distance = data.distance,
+        img = data.img,
     )
 
     fun biodiversityResponseToBiodiversity(data: BiodiversityItem): Biodiversity = Biodiversity(
-        data.id,
-        data.name,
-        data.type,
-        data.img,
+        id = data.id,
+        name = data.name,
+        type = data.type,
+        img = data.img,
+    )
+
+    fun orderResponseToOrder(data: OrderItem): Order = Order(
+        id = data.id,
+        geositeName = data.geositeName,
+        geositeImage = data.geositeImage,
+        tourGuideName = data.tourGuideName,
+        tourGuidePhone = data.tourGuidePhone,
+        bookingDate = data.bookingDate,
+        tourDate = data.tourDate,
+        programName = data.programName,
+        status = data.status,
     )
 }

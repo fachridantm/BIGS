@@ -7,6 +7,7 @@ import id.belitong.bigs.core.data.source.remote.network.MainApiService
 import id.belitong.bigs.core.data.source.remote.response.BiodiversityItem
 import id.belitong.bigs.core.data.source.remote.response.GeositeItem
 import id.belitong.bigs.core.data.source.remote.response.LoginResponse
+import id.belitong.bigs.core.data.source.remote.response.OrderItem
 import id.belitong.bigs.core.data.source.remote.response.RegisterResponse
 import id.belitong.bigs.core.utils.getErrorMessage
 import kotlinx.coroutines.Dispatchers
@@ -115,6 +116,36 @@ class RemoteDataSource @Inject constructor(
             val biodiversity = response.items
             if (biodiversity != null) {
                 emit(ApiResponse.Success(biodiversity))
+            } else {
+                emit(ApiResponse.Empty)
+            }
+        } catch (e: Exception) {
+            when (e) {
+                is HttpException -> {
+                    val message = when (e.code()) {
+                        401 -> "Unauthorized"
+                        403 -> "Forbidden"
+                        404 -> "Not Found"
+                        else -> e.getErrorMessage().toString()
+                    }
+                    emit(ApiResponse.Error(message))
+                }
+
+                is UnknownHostException -> {
+                    emit(ApiResponse.Error("No internet connection"))
+                }
+
+                else -> emit(ApiResponse.Error(e.message.toString()))
+            }
+        }
+    }.flowOn(Dispatchers.IO)
+
+    suspend fun getAllOrder(): Flow<ApiResponse<List<OrderItem>>> = flow {
+        try {
+            val response = mainApiService.getAllOrder()
+            val order = response.items
+            if (order != null) {
+                emit(ApiResponse.Success(order))
             } else {
                 emit(ApiResponse.Empty)
             }

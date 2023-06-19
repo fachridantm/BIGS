@@ -2,6 +2,7 @@ package id.belitong.bigs.core.utils
 
 import id.belitong.bigs.core.domain.model.Biodiversity
 import id.belitong.bigs.core.domain.model.Geosite
+import id.belitong.bigs.core.domain.model.Order
 
 object DummyData {
     fun getAllGeosites() = listOf(
@@ -216,6 +217,42 @@ object DummyData {
             name = "Peramun Hill Granite Forest",
             type = "Hill",
             img = "https://images.squarespace-cdn.com/content/v1/5cdcf79637f3770001708f38/1558975216815-9IOOH4H0AO2KKZ4PNGWQ/peramun4.jpg?format=1000w",
+        ),
+    )
+
+    fun getAllOrder() = listOf(
+        Order(
+            id = 1,
+            geositeName = "Moss Hill",
+            geositeImage = "https://images.squarespace-cdn.com/content/v1/5cdcf79637f3770001708f38/1560494357865-JI4N7MAOI1B2IVO99HLC/Martin-Gunung-Lumut-01.jpg?format=1500w",
+            tourGuideName = "Givan Massa Adrian",
+            tourGuidePhone = "08123456789",
+            bookingDate = "Sat, 5 June 2023 at 08.00 WIB",
+            tourDate = "Sun, 6 June 2023 at 10.00 WIB",
+            programName = "Geo-Education",
+            status = "Pending",
+        ),
+        Order(
+            id = 2,
+            geositeName = "Nam Salu Open Pit",
+            geositeImage = "https://images.squarespace-cdn.com/content/v1/5cdcf79637f3770001708f38/1558970893738-X3BO2VX1PBE34AHDRVV7/nam-salu-7.jpg?format=1000w",
+            tourGuideName = "Fachridan Tio",
+            tourGuidePhone = "08123456789",
+            bookingDate = "Sat, 8 June 2023 at 08.00 WIB",
+            tourDate = "Sun, 12 June 2023 at 10.00 WIB",
+            programName = "Research-Programme",
+            status = "Completed",
+        ),
+        Order(
+            id = 3,
+            geositeName = "Juru Seberang",
+            geositeImage = "https://images.squarespace-cdn.com/content/v1/5cdcf79637f3770001708f38/1558849946386-EYT83UVSON1V10TCFIEO/Juru-Seberang-7.jpg?format=500w",
+            tourGuideName = "Yolanda Putri",
+            tourGuidePhone = "08123456789",
+            bookingDate = "Sat, 8 June 2023 at 08.00 WIB",
+            tourDate = "Sun, 12 June 2023 at 10.00 WIB",
+            programName = "Research-Programme",
+            status = "Completed",
         ),
     )
 }

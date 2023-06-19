@@ -2,7 +2,9 @@ package id.belitong.bigs.core.utils
 
 import android.content.Context
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.textfield.TextInputLayout
@@ -70,3 +72,27 @@ fun Int.meterToKilometer(): String {
 fun String.getFirstName(): String = this.split(" ")[0]
 
 fun String.getFirstTwoWords(): String = this.split(" ")[0] + " " + this.split(" ")[1]
+
+fun TextView.statusBackgroundFilter(status: String) {
+    when (status) {
+        HistoryStatus.ACCEPTED.value, HistoryStatus.COMPLETED.value -> {
+            this.backgroundTintList = ContextCompat.getColorStateList(
+                this.context,
+                R.color.md_theme_light_primary
+            )
+            this.text = status
+        }
+
+        HistoryStatus.REJECTED.value, HistoryStatus.CANCELLED.value -> {
+            this.backgroundTintList = ContextCompat.getColorStateList(
+                this.context,
+                R.color.md_theme_light_error
+            )
+            this.text = status
+        }
+
+        else -> {
+            this.text = status
+        }
+    }
+}

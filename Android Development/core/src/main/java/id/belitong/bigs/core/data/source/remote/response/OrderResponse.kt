@@ -1,0 +1,12 @@
+package id.belitong.bigs.core.data.source.remote.response
+
+import com.google.gson.annotations.SerializedName
+
+data class OrderResponse(
+
+    @field:SerializedName("total_count")
+    val amount: Int? = 0,
+
+    @field:SerializedName("items")
+    val items: List<OrderItem>? = null
+)

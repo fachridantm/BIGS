@@ -48,4 +48,6 @@
     <string name="scan_camera">Scan from Camera</string>
     <string name="scan_gallery">Scan from Gallery</string>
     <string name="set_up_your_camera">Set Up Your Camera</string>
+    <string name="tab_my_order">My Order</string>
+    <string name="tab_my_report">My Report</string>
 </resources>
