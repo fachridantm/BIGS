@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import id.belitong.bigs.core.databinding.ItemCardOrderBinding
 import id.belitong.bigs.core.domain.model.Order
+import id.belitong.bigs.core.utils.HistoryStatus
 import id.belitong.bigs.core.utils.loadGeositeImage
 import id.belitong.bigs.core.utils.statusBackgroundFilter
 
@@ -29,7 +30,12 @@ class CardOrderAdapter(
                 tvProgramName.text = data.programName
                 tvStatus.statusBackgroundFilter(data.status)
 
-                btnCancel.setOnClickListener { cancelClicked(data) }
+                if (data.status == HistoryStatus.COMPLETED.value || data.status == HistoryStatus.CANCELLED.value) {
+                    btnCancel.visibility = ViewGroup.GONE
+                } else {
+                    btnCancel.visibility = ViewGroup.VISIBLE
+                    btnCancel.setOnClickListener { cancelClicked(data) }
+                }
             }
         }
     }
