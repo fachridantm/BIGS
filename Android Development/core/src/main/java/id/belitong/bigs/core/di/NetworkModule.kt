@@ -39,7 +39,7 @@ class NetworkModule {
     @Provides
     fun provideMainApiService(client: OkHttpClient): MainApiService {
         val retrofit = Retrofit.Builder()
-            .baseUrl(MAIN_BASE_URL) // TODO 1: BuildConfig.MAIN_BASE_URL -> Add MAIN_BASE_URL to local.properties
+            .baseUrl(MAIN_BASE_URL)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -49,7 +49,7 @@ class NetworkModule {
     @Provides
     fun provideAuthApiService(client: OkHttpClient): AuthApiService {
         val retrofit = Retrofit.Builder()
-            .baseUrl(DICODING_BASE_URL) // TODO 1: BuildConfig.DICODING_BASE_URL -> Add DICODING_BASE_URL to local.properties
+            .baseUrl(DICODING_BASE_URL)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
