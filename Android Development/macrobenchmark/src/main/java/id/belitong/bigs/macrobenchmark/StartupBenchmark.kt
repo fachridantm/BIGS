@@ -35,4 +35,26 @@ class StartupBenchmark {
         pressHome()
         startActivityAndWait()
     }
+
+    @Test
+    fun startupWarm() = benchmarkRule.measureRepeated(
+        packageName = "id.belitong.bigs",
+        metrics = listOf(StartupTimingMetric()),
+        iterations = 5,
+        startupMode = StartupMode.WARM
+    ) {
+        pressHome()
+        startActivityAndWait()
+    }
+
+    @Test
+    fun startupHot() = benchmarkRule.measureRepeated(
+        packageName = "id.belitong.bigs",
+        metrics = listOf(StartupTimingMetric()),
+        iterations = 5,
+        startupMode = StartupMode.HOT
+    ) {
+        pressHome()
+        startActivityAndWait()
+    }
 }
