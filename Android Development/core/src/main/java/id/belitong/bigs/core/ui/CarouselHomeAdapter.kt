@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import id.belitong.bigs.core.databinding.ItemCarouselHomeBinding
 import id.belitong.bigs.core.domain.model.Geosite
-import id.belitong.bigs.core.utils.loadGeositeImage
+import id.belitong.bigs.core.utils.loadGeoparkImage
 
 class CarouselHomeAdapter(private val onItemClick: (Geosite) -> Unit) :
     ListAdapter<Geosite, CarouselHomeAdapter.CarouselViewHolder>(DIFF_CALLBACK) {
@@ -18,7 +18,7 @@ class CarouselHomeAdapter(private val onItemClick: (Geosite) -> Unit) :
         fun bind(data: Geosite) {
             binding.apply {
                 itemTvGeosite.text = data.name
-                itemImgGeosite.loadGeositeImage(data.img)
+                itemImgGeosite.loadGeoparkImage(data.img)
                 root.setOnClickListener { onItemClick(data) }
             }
         }

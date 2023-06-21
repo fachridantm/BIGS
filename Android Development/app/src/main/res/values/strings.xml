@@ -26,11 +26,11 @@
     <string name="animals">Animals</string>
     <string name="plants">Plants</string>
     <string name="all">All</string>
-    <string name="my_order">My Order</string>
+    <string name="edit_profile">Edit Profile</string>
     <string name="language">Language</string>
-    <string name="faq">FAQ</string>
-    <string name="about">About Me</string>
-    <string name="logout">Logout</string>
+    <string name="help">Help</string>
+    <string name="about">About Us</string>
+    <string name="logout">Log out</string>
     <string name="dots_indicator">Dots Indicator</string>
     <string name="alphabet">A - Z</string>
     <string name="nearest">Nearest</string>
@@ -50,4 +50,7 @@
     <string name="set_up_your_camera">Set Up Your Camera</string>
     <string name="tab_my_order">My Order</string>
     <string name="tab_my_report">My Report</string>
+    <string name="logout_message">Ingin keluar dari akun ini?</string>
+    <string name="no">Tidak</string>
+    <string name="yes">Ya</string>
 </resources>

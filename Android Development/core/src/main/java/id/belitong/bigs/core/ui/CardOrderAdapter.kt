@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import id.belitong.bigs.core.databinding.ItemCardOrderBinding
 import id.belitong.bigs.core.domain.model.Order
 import id.belitong.bigs.core.utils.HistoryStatus
-import id.belitong.bigs.core.utils.loadGeositeImage
+import id.belitong.bigs.core.utils.loadGeoparkImage
 import id.belitong.bigs.core.utils.statusBackgroundFilter
 
 class CardOrderAdapter(
@@ -22,7 +22,7 @@ class CardOrderAdapter(
         fun bind(data: Order) {
             binding.apply {
                 tvTitleGeositeOrder.text = data.geositeName
-                ivOrderGeosite.loadGeositeImage(data.geositeImage)
+                ivOrderGeosite.loadGeoparkImage(data.geositeImage)
                 tvTourGuideName.text = data.tourGuideName
                 tvTourGuidePhone.text = data.tourGuidePhone
                 tvBookingDate.text = data.bookingDate

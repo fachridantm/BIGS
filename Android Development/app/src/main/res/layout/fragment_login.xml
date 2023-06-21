@@ -140,7 +140,6 @@
             android:layout_marginTop="28dp"
             android:background="@drawable/bg_btn_white"
             android:drawableStart="@drawable/ic_google"
-            android:elevation="8dp"
             android:paddingHorizontal="32dp"
             android:text="@string/login_with_google"
             android:textAllCaps="false"

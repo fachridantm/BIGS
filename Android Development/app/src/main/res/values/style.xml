@@ -116,4 +116,8 @@
     <style name="BottomNavigationView" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">@color/md_theme_dark_primary</item>
     </style>
+
+    <style name="AlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/bg_alert_dialog</item>
+    </style>
 </resources>

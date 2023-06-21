@@ -9,6 +9,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.textfield.TextInputLayout
 import id.belitong.bigs.core.R
+import id.belitong.bigs.core.di.GlideApp
+import id.belitong.bigs.core.di.GlideOptions
 import org.json.JSONObject
 import retrofit2.HttpException
 
@@ -40,21 +42,21 @@ fun HttpException.getErrorMessage(): String? {
     }
 }
 
-fun ImageView.loadGeositeImage(url: String) {
-    Glide.with(this.context)
+fun ImageView.loadGeoparkImage(url: String) {
+    GlideApp.with(this.context)
         .load(url)
         .apply(
-            RequestOptions().override(500, 500)
-//                .placeholder(R.drawable.ic_placeholder)
+            GlideOptions().override(500, 500)
+                .placeholder(R.drawable.ic_placeholder_geopark)
         )
         .into(this)
 }
 
 fun ImageView.loadUserImage(url: String) {
-    Glide.with(this.context)
+    GlideApp.with(this.context)
         .load(url)
         .apply(
-            RequestOptions().override(500, 500)
+            GlideOptions().override(500, 500)
                 .placeholder(R.drawable.ic_profile)
         )
         .into(this)

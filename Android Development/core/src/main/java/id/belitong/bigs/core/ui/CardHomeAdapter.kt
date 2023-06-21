@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import id.belitong.bigs.core.databinding.ItemCardHomeBinding
 import id.belitong.bigs.core.domain.model.Biodiversity
 import id.belitong.bigs.core.utils.getFirstTwoWords
-import id.belitong.bigs.core.utils.loadGeositeImage
+import id.belitong.bigs.core.utils.loadGeoparkImage
 
 class CardHomeAdapter(private val onItemClick: (Biodiversity) -> Unit) :
     ListAdapter<Biodiversity, CardHomeAdapter.HomeViewHolder>(DIFF_CALLBACK) {
@@ -20,7 +20,7 @@ class CardHomeAdapter(private val onItemClick: (Biodiversity) -> Unit) :
             binding.apply {
                 itemTvTitleHome.text = data.name.getFirstTwoWords()
                 itemTvSubtitleHome.text = data.type
-                itemImgGeositeHome.loadGeositeImage(data.img)
+                itemImgGeositeHome.loadGeoparkImage(data.img)
                 root.setOnClickListener { onItemClick(data) }
             }
         }
