@@ -21,12 +21,12 @@ import org.junit.runner.RunWith
  * for investigating your app's performance.
  */
 @RunWith(AndroidJUnit4::class)
-class ExampleStartupBenchmark {
+class StartupBenchmark {
     @get:Rule
     val benchmarkRule = MacrobenchmarkRule()
 
     @Test
-    fun startup() = benchmarkRule.measureRepeated(
+    fun startupCold() = benchmarkRule.measureRepeated(
         packageName = "id.belitong.bigs",
         metrics = listOf(StartupTimingMetric()),
         iterations = 5,
