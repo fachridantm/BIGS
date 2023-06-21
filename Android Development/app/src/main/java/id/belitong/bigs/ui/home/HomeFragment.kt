@@ -20,7 +20,10 @@ import id.belitong.bigs.core.ui.CarouselHomeAdapter
 import id.belitong.bigs.core.utils.DummyData
 import id.belitong.bigs.core.utils.ZoomOutPageTransformer
 import id.belitong.bigs.core.utils.getFirstName
+import id.belitong.bigs.core.utils.showMessage
 import id.belitong.bigs.databinding.FragmentHomeBinding
+import id.belitong.bigs.ui.details.geoprogramme.GeoprogrammeActivity
+import id.belitong.bigs.ui.details.geosites.GeositesActivity
 import id.belitong.bigs.ui.profile.ProfileActivity
 import id.belitong.bigs.ui.search.SearchResultsActivity
 
@@ -45,11 +48,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
 
         homeViewModel.getAllGeosites().observe(viewLifecycleOwner) {
-            carouselHomeAdapter.submitList(DummyData.getAllGeosites()) // TODO 2: Change to it.data
+            carouselHomeAdapter.submitList(DummyData.getAllGeosites())
         }
 
         homeViewModel.getAllBiodiversity().observe(viewLifecycleOwner) {
-            cardHomeAdapter.submitList(DummyData.getAllBiodiversity()) // TODO 2: Change to it.data
+            cardHomeAdapter.submitList(DummyData.getAllBiodiversity())
         }
     }
 
@@ -110,12 +113,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     override fun initAction() {
-        val selectedChip = binding?.cgGeoparkFilter?.children
-            ?.filter { (it as Chip).isChecked }
-            ?.map { (it as Chip).text.toString() }
-            ?.firstOrNull()
+        with(binding) {
+            val selectedChip = this?.cgGeoparkFilter?.children
+                ?.filter { (it as Chip).isChecked }
+                ?.map { (it as Chip).text.toString() }
+                ?.firstOrNull()
 
+            this?.btnGeosites?.setOnClickListener {
+                startActivity(Intent(requireContext(), GeositesActivity::class.java))
+            }
 
+            this?.btnGeoprogramme?.setOnClickListener {
+                startActivity(Intent(requireContext(), GeoprogrammeActivity::class.java))
+            }
+
+            this?.btnMaps?.setOnClickListener {
+                getString(R.string.onClickHandler).showMessage(requireContext())
+            }
+        }
     }
 
     override fun initObservers() {}
@@ -131,10 +146,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun carouselItemClicked(geosite: Geosite) {
+        // TODO 6: Implement carouselItemClicked
     }
 
     private fun cardItemClicked(biodiversity: Biodiversity) {
-
+        // TODO 7: Implement cardItemClicked
     }
 
 }

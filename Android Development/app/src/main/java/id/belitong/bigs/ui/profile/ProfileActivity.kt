@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import id.belitong.bigs.R
 import id.belitong.bigs.core.utils.loadUserImage
+import id.belitong.bigs.core.utils.showMessage
 import id.belitong.bigs.databinding.ActivityProfileBinding
 import id.belitong.bigs.ui.auth.AuthActivity
 import kotlinx.coroutines.delay
@@ -54,10 +55,18 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun initAction() {
         with(binding) {
-            btnEditProfile.setOnClickListener {  }
-            btnLanguage.setOnClickListener {  }
-            btnHelp.setOnClickListener {  }
-            btnAbout.setOnClickListener {  }
+            btnEditProfile.setOnClickListener {
+                getString(R.string.onClickHandler).showMessage(this@ProfileActivity)
+            }
+            btnLanguage.setOnClickListener {
+                getString(R.string.onClickHandler).showMessage(this@ProfileActivity)
+            }
+            btnHelp.setOnClickListener {
+                getString(R.string.onClickHandler).showMessage(this@ProfileActivity)
+            }
+            btnAbout.setOnClickListener {
+                getString(R.string.onClickHandler).showMessage(this@ProfileActivity)
+            }
             btnLogout.setOnClickListener {
                 logoutHandler()
             }

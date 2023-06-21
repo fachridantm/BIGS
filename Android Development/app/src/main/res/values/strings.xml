@@ -53,4 +53,6 @@
     <string name="logout_message">Ingin keluar dari akun ini?</string>
     <string name="no">Tidak</string>
     <string name="yes">Ya</string>
+    <string name="onClickHandler">Feature not implemented yet</string>
+    <string name="not_given_access">Tidak mendapatkan akses.</string>
 </resources>
