@@ -48,11 +48,13 @@ class GeositesActivity : AppCompatActivity() {
             chipAlphabet.setOnClickListener {
                 val alphabetSort = data.sortedBy { it.name }
                 cardGeositeAdapter.submitList(alphabetSort)
+                rvGeosites.scrollToPosition(0)
             }
 
             chipNearest.setOnClickListener {
                 val nearestSort = data.sortedBy { it.distance }
                 cardGeositeAdapter.submitList(nearestSort)
+                rvGeosites.scrollToPosition(0)
             }
 
             toolbarGeosites.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
