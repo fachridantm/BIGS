@@ -6,4 +6,75 @@
     android:layout_height="match_parent"
     tools:context=".ui.details.geoprogramme.GeoprogrammeActivity">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_geoprogramme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:liftOnScroll="true">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_geoprogramme"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.8"
+            android:background="@android:color/white"
+            app:navigationIcon="@drawable/ic_back"
+            app:title="@string/geoprogramme"
+            app:titleCentered="true"
+            app:titleTextAppearance="@style/Text.SemiBold.H3"
+            app:titleTextColor="@android:color/black" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_tour_guide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_btn_white"
+        android:drawableStart="@drawable/img_tour_guide"
+        android:gravity="center"
+        android:text="@string/tour_guide"
+        android:textAllCaps="false"
+        android:textAppearance="@style/Text.SemiBold.H3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appbar_geoprogramme" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_community"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_btn_white"
+        android:drawableStart="@drawable/img_community"
+        android:gravity="center"
+        android:text="@string/community"
+        android:textAllCaps="false"
+        android:textAppearance="@style/Text.SemiBold.H3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_tour_guide" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_local_resident"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_btn_white"
+        android:drawableStart="@drawable/img_local_resident"
+        android:gravity="center"
+        android:text="@string/local_resident"
+        android:textAllCaps="false"
+        android:textAppearance="@style/Text.SemiBold.H3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_community" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
