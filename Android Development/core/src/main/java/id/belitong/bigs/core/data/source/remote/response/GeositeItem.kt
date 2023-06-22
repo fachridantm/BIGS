@@ -19,8 +19,20 @@ data class GeositeItem(
     @field:SerializedName("desc")
     val desc: String,
 
+    @field:SerializedName("plant")
+    val plant: String?,
+
+    @field:SerializedName("animal")
+    val animal: String?,
+
     @field:SerializedName("distance")
     val distance: Int,
+
+    @field:SerializedName("location")
+    val location: String,
+
+    @field:SerializedName("hours")
+    val hours: List<String>,
 
     @field:SerializedName("img")
     val img: String,

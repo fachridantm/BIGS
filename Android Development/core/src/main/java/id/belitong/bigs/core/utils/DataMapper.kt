@@ -37,7 +37,11 @@ object DataMapper {
         summary = data.summary,
         type = data.type,
         desc = data.desc,
+        plant = data.plant ?: "-",
+        animal = data.animal ?: "-",
         distance = data.distance,
+        location = data.location,
+        hours = data.hours,
         img = data.img,
     )
 
