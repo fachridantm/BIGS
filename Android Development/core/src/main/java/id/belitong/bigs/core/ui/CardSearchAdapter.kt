@@ -17,9 +17,9 @@ class CardSearchAdapter(private val onItemClick: (Biodiversity) -> Unit) :
 
         fun bind(data: Biodiversity) {
             binding.apply {
-                tvSearchItemTitle.text = data.name
-                tvSearchItemSubtitle.text = data.location
-                ivSearchItem.loadGeoparkImage(data.img)
+                itemTvSearchTitle.text = data.name
+                itemTvSearchSubtitle.text = data.location
+                itemIvSearch.loadGeoparkImage(data.img)
                 root.setOnClickListener { onItemClick(data) }
             }
         }

@@ -5,32 +5,32 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import id.belitong.bigs.core.databinding.ItemCarouselHomeBinding
+import id.belitong.bigs.core.databinding.ItemCardGeositeBinding
 import id.belitong.bigs.core.domain.model.Geosite
-import id.belitong.bigs.core.utils.loadGeoparkImage
 
-class CarouselHomeAdapter(private val onItemClick: (Geosite) -> Unit) :
-    ListAdapter<Geosite, CarouselHomeAdapter.CarouselViewHolder>(DIFF_CALLBACK) {
+class CardGeositeAdapter(private val onItemClick: (Geosite) -> Unit) :
+    ListAdapter<Geosite, CardGeositeAdapter.GeositeViewHolder>(DIFF_CALLBACK) {
 
-    inner class CarouselViewHolder(private val binding: ItemCarouselHomeBinding) :
+    inner class GeositeViewHolder(private val binding: ItemCardGeositeBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(data: Geosite) {
             binding.apply {
-                itemTvGeositeHome.text = data.name
-                itemImgGeositeHome.loadGeoparkImage(data.img)
+
                 root.setOnClickListener { onItemClick(data) }
             }
         }
     }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarouselViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): CardGeositeAdapter.GeositeViewHolder {
         val binding =
-            ItemCarouselHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return CarouselViewHolder(binding)
+            ItemCardGeositeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return GeositeViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: CarouselViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CardGeositeAdapter.GeositeViewHolder, position: Int) {
         val geosite = getItem(position)
         if (geosite != null) {
             holder.bind(geosite)
@@ -38,7 +38,7 @@ class CarouselHomeAdapter(private val onItemClick: (Geosite) -> Unit) :
     }
 
     override fun getItemCount(): Int {
-        return 5
+        return currentList.size
     }
 
     companion object {

@@ -16,7 +16,7 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_search_item"
+            android:id="@+id/item_iv_search"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
@@ -26,7 +26,7 @@
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_search_item_title"
+            android:id="@+id/item_tv_search_title"
             style="@style/Text.Medium.Subheader"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -34,15 +34,15 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="18dp"
             android:textColor="@android:color/black"
-            app:layout_constraintBottom_toTopOf="@id/tv_search_item_subtitle"
+            app:layout_constraintBottom_toTopOf="@id/item_tv_search_subtitle"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/iv_search_item"
+            app:layout_constraintStart_toEndOf="@id/item_iv_search"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
             tools:text="Moss Hill" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_search_item_subtitle"
+            android:id="@+id/item_tv_search_subtitle"
             style="@style/Text.Regular.Subtitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -57,8 +57,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@id/iv_search_item"
-            app:layout_constraintTop_toBottomOf="@id/tv_search_item_title"
+            app:layout_constraintStart_toEndOf="@id/item_iv_search"
+            app:layout_constraintTop_toBottomOf="@id/item_tv_search_title"
             app:layout_constraintVertical_chainStyle="packed"
             tools:targetApi="m"
             tools:text="Lilangan, Kec. Gantung, Kab. Belitung Timur" />

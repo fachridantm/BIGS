@@ -21,14 +21,14 @@ class CardOrderAdapter(
 
         fun bind(data: Order) {
             binding.apply {
-                tvTitleGeositeOrder.text = data.geositeName
-                ivOrderGeosite.loadGeoparkImage(data.geositeImage)
-                tvTourGuideName.text = data.tourGuideName
-                tvTourGuidePhone.text = data.tourGuidePhone
-                tvBookingDate.text = data.bookingDate
-                tvTourDate.text = data.tourDate
-                tvProgramName.text = data.programName
-                tvStatus.statusBackgroundFilter(data.status)
+                itemTvTitleGeositeOrder.text = data.geositeName
+                itemIvOrderGeosite.loadGeoparkImage(data.geositeImage)
+                itemTvTourGuideName.text = data.tourGuideName
+                itemTvTourGuidePhone.text = data.tourGuidePhone
+                itemTvBookingDate.text = data.bookingDate
+                itemTvTourDate.text = data.tourDate
+                itemTvProgramName.text = data.programName
+                itemTvStatus.statusBackgroundFilter(data.status)
 
                 if (data.status == HistoryStatus.COMPLETED.value || data.status == HistoryStatus.CANCELLED.value) {
                     btnCancel.visibility = ViewGroup.GONE

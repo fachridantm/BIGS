@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/item_img_geosite"
+            android:id="@+id/item_img_geosite_home"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="@string/geosites"
@@ -28,7 +28,7 @@
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/item_tv_geosite"
+            android:id="@+id/item_tv_geosite_home"
             style="@style/Text.Medium.Subheader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
