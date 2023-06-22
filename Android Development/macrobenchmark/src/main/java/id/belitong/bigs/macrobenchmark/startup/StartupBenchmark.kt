@@ -1,9 +1,10 @@
-package id.belitong.bigs.macrobenchmark
+package id.belitong.bigs.macrobenchmark.startup
 
 import androidx.benchmark.macro.StartupMode
 import androidx.benchmark.macro.StartupTimingMetric
 import androidx.benchmark.macro.junit4.MacrobenchmarkRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.LargeTest
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -20,6 +21,7 @@ import org.junit.runner.RunWith
  * Run this benchmark from Studio to see startup measurements, and captured system traces
  * for investigating your app's performance.
  */
+@LargeTest
 @RunWith(AndroidJUnit4::class)
 class StartupBenchmark {
     @get:Rule
@@ -30,9 +32,13 @@ class StartupBenchmark {
         packageName = "id.belitong.bigs",
         metrics = listOf(StartupTimingMetric()),
         iterations = 5,
-        startupMode = StartupMode.COLD
+        startupMode = StartupMode.COLD,
+        setupBlock = {
+            // Press home button before each run to ensure the starting activity isn't visible.
+            pressHome()
+        }
     ) {
-        pressHome()
+        // starts default launch activity
         startActivityAndWait()
     }
 
@@ -41,9 +47,13 @@ class StartupBenchmark {
         packageName = "id.belitong.bigs",
         metrics = listOf(StartupTimingMetric()),
         iterations = 5,
-        startupMode = StartupMode.WARM
+        startupMode = StartupMode.WARM,
+        setupBlock = {
+            // Press home button before each run to ensure the starting activity isn't visible.
+            pressHome()
+        }
     ) {
-        pressHome()
+        // starts default launch activity
         startActivityAndWait()
     }
 
@@ -52,9 +62,13 @@ class StartupBenchmark {
         packageName = "id.belitong.bigs",
         metrics = listOf(StartupTimingMetric()),
         iterations = 5,
-        startupMode = StartupMode.HOT
+        startupMode = StartupMode.HOT,
+        setupBlock = {
+            // Press home button before each run to ensure the starting activity isn't visible.
+            pressHome()
+        }
     ) {
-        pressHome()
+        // starts default launch activity
         startActivityAndWait()
     }
 }
