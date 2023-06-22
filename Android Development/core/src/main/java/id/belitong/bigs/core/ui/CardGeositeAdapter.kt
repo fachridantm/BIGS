@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import id.belitong.bigs.core.databinding.ItemCardGeositeBinding
 import id.belitong.bigs.core.domain.model.Geosite
+import id.belitong.bigs.core.utils.loadGeoparkImage
+import id.belitong.bigs.core.utils.meterToKilometer
 
 class CardGeositeAdapter(private val onItemClick: (Geosite) -> Unit) :
     ListAdapter<Geosite, CardGeositeAdapter.GeositeViewHolder>(DIFF_CALLBACK) {
@@ -16,7 +18,10 @@ class CardGeositeAdapter(private val onItemClick: (Geosite) -> Unit) :
 
         fun bind(data: Geosite) {
             binding.apply {
-
+                itemIvGeositeDetail.loadGeoparkImage(data.img)
+                itemTvGeositeTitle.text = data.name
+                itemTvSubtitleGeosite.text = data.summary
+                itemTvDistanceGeosite.text = data.distance.meterToKilometer()
                 root.setOnClickListener { onItemClick(data) }
             }
         }

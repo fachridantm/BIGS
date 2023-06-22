@@ -14,7 +14,7 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/item_img_geosite_detail"
+            android:id="@+id/item_iv_geosite_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
@@ -64,7 +64,7 @@
             android:maxLines="2"
             android:textAppearance="@style/Text.Regular.Subtitle"
             android:textColor="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="@id/item_img_geosite_detail"
+            app:layout_constraintBottom_toBottomOf="@id/item_iv_geosite_detail"
             app:layout_constraintEnd_toStartOf="@id/item_tv_distance_geosite"
             app:layout_constraintStart_toStartOf="parent"
             tools:text="@string/punai_beach_detail" />
