@@ -1,5 +1,6 @@
 package id.belitong.bigs.ui.history
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import id.belitong.bigs.BaseFragment
 import id.belitong.bigs.R
 import id.belitong.bigs.databinding.FragmentHistoryBinding
 import id.belitong.bigs.ui.order.TabOrderAdapter
+import id.belitong.bigs.ui.profile.ProfileActivity
 
 @AndroidEntryPoint
 class HistoryFragment: BaseFragment<FragmentHistoryBinding>() {
@@ -38,7 +40,15 @@ class HistoryFragment: BaseFragment<FragmentHistoryBinding>() {
     }
 
     override fun initAction() {
-
+        binding?.toolbarHistory?.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.btn_profile -> {
+                    startActivity(Intent(requireContext(), ProfileActivity::class.java))
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     override fun initObservers() {

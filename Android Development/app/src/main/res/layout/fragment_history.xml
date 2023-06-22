@@ -21,6 +21,7 @@
             android:layout_height="match_parent"
             android:alpha="0.8"
             android:background="@android:color/white"
+            app:menu="@menu/menu_history"
             app:title="@string/history"
             app:titleCentered="true"
             app:titleTextAppearance="@style/Text.SemiBold.H3" />
