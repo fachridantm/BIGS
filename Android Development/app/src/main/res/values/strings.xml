@@ -45,8 +45,8 @@
     <string name="phone_can_not_be_empty">Phone number can not be empty\n</string>
     <string name="invalid_phone_number">Please input phone number correctly!</string>
     <string name="scan_animal">Scan an animal or plant near you to see the details</string>
-    <string name="scan_camera">Scan from Camera</string>
-    <string name="scan_gallery">Scan from Gallery</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="upload_image">Upload Image</string>
     <string name="set_up_your_camera">Set Up Your Camera</string>
     <string name="tab_my_order">My Order</string>
     <string name="tab_my_report">My Report</string>
@@ -55,4 +55,13 @@
     <string name="yes">Ya</string>
     <string name="onClickHandler">Feature not implemented yet</string>
     <string name="not_given_access">Tidak mendapatkan akses.</string>
+    <string name="search_by_category">Search by category</string>
+    <string name="location">Location</string>
+    <string name="plant">Plant</string>
+    <string name="animal">Animal</string>
+    <string name="scan_photo">Scan Photo</string>
+    <string name="no_image_selected">Masukan foto terlebih dahulu</string>
+    <string name="data_not_found">Data not found!</string>
+    <string name="close">Close</string>
+    <string name="add_data">Add</string>
 </resources>

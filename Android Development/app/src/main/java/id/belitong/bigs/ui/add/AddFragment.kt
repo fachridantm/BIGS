@@ -11,8 +11,11 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import id.belitong.bigs.BaseFragment
 import id.belitong.bigs.R
@@ -21,6 +24,8 @@ import id.belitong.bigs.core.utils.rotateBitmap
 import id.belitong.bigs.core.utils.showMessage
 import id.belitong.bigs.core.utils.uriToFile
 import id.belitong.bigs.databinding.FragmentAddBinding
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.io.File
 
 @AndroidEntryPoint
@@ -67,6 +72,7 @@ class AddFragment : BaseFragment<FragmentAddBinding>() {
         with(binding) {
             this?.btnCamera?.setOnClickListener { cameraHandler() }
             this?.btnGallery?.setOnClickListener { galleryHandler() }
+            this?.btnScan?.setOnClickListener { scanHandler() }
         }
     }
 
@@ -123,6 +129,37 @@ class AddFragment : BaseFragment<FragmentAddBinding>() {
             getFile = myFile
             binding?.ivPlant?.setImageURI(selectedImg)
         }
+    }
+
+    private fun scanHandler() {
+        if (getFile != null) {
+            lifecycleScope.launch{
+                binding?.scanPlant?.visibility = ViewGroup.VISIBLE
+                delay(1000)
+                binding?.scanPlant?.visibility = ViewGroup.GONE
+                detectionHandler()
+            }
+        } else {
+            getString(R.string.no_image_selected).showMessage(requireContext())
+        }
+    }
+
+    private fun detectionHandler() {
+        val builder = AlertDialog.Builder(requireContext(), R.style.AlertDialog).create()
+        val view = layoutInflater.inflate(R.layout.view_data_not_found, null)
+        val btnClose = view.findViewById<AppCompatButton>(R.id.btn_close)
+        val btnAdd = view.findViewById<AppCompatButton>(R.id.btn_add)
+
+        btnAdd.setOnClickListener {
+            getString(R.string.onClickHandler).showMessage(requireContext())
+        }
+
+        btnClose.setOnClickListener {
+            builder.dismiss()
+        }
+
+        builder.setView(view)
+        builder.show()
     }
 
     override fun initObservers() {

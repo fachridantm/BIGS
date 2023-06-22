@@ -45,6 +45,7 @@ object DataMapper {
         id = data.id,
         name = data.name,
         type = data.type,
+        location = data.location ?: "-",
         img = data.img,
     )
 

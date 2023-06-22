@@ -162,24 +162,24 @@
             app:singleSelection="true">
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip_all"
-                style="@style/Chip.Subtitle"
+                android:id="@+id/chip_all_home"
+                style="@style/Chip.Subtitle.Primary"
                 android:checked="true"
                 android:text="@string/all" />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip_geosites"
-                style="@style/Chip.Subtitle"
+                android:id="@+id/chip_geosites_home"
+                style="@style/Chip.Subtitle.Primary"
                 android:text="@string/geosites" />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip_plants"
-                style="@style/Chip.Subtitle"
+                android:id="@+id/chip_plants_home"
+                style="@style/Chip.Subtitle.Primary"
                 android:text="@string/plants" />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip_animals"
-                style="@style/Chip.Subtitle"
+                android:id="@+id/chip_animals_home"
+                style="@style/Chip.Subtitle.Primary"
                 android:text="@string/animals" />
 
         </com.google.android.material.chip.ChipGroup>

@@ -7,9 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.core.content.ContextCompat.getDrawable
-import androidx.core.view.children
 import androidx.fragment.app.viewModels
-import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import id.belitong.bigs.BaseFragment
 import id.belitong.bigs.R
@@ -36,9 +34,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private val homeViewModel: HomeViewModel by viewModels()
 
     override fun getViewBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): FragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false)
 
     override fun initData() {
@@ -47,13 +43,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             binding?.textView2?.text = getString(R.string.geopark_belitong_user, name)
         }
 
-        homeViewModel.getAllGeosites().observe(viewLifecycleOwner) {
-            carouselHomeAdapter.submitList(DummyData.getAllGeosites())
-        }
+        carouselHomeAdapter.submitList(DummyData.getAllGeosites())
 
-        homeViewModel.getAllBiodiversity().observe(viewLifecycleOwner) {
-            cardHomeAdapter.submitList(DummyData.getAllBiodiversity())
-        }
+        cardHomeAdapter.submitList(DummyData.getAllBiodiversity())
     }
 
     override fun initView() {
@@ -86,8 +78,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                         if (hasFocus) {
                             startActivity(
                                 Intent(
-                                    requireContext(),
-                                    SearchResultsActivity::class.java
+                                    requireContext(), SearchResultsActivity::class.java
                                 )
                             )
                         }
@@ -114,10 +105,28 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun initAction() {
         with(binding) {
-            val selectedChip = this?.cgGeoparkFilter?.children
-                ?.filter { (it as Chip).isChecked }
-                ?.map { (it as Chip).text.toString() }
-                ?.firstOrNull()
+            val data = DummyData.getAllBiodiversity()
+
+            this?.chipAllHome?.setOnClickListener {
+                cardHomeAdapter.submitList(data)
+            }
+
+            this?.chipGeositesHome?.setOnClickListener {
+                val geosites = data.filter {
+                    it.type != getString(R.string.plant) && it.type != getString(R.string.animal)
+                }
+                cardHomeAdapter.submitList(geosites)
+            }
+
+            this?.chipPlantsHome?.setOnClickListener {
+                val plants = data.filter { it.type == getString(R.string.plant) }
+                cardHomeAdapter.submitList(plants)
+            }
+
+            this?.chipAnimalsHome?.setOnClickListener {
+                val animals = data.filter { it.type == getString(R.string.animal) }
+                cardHomeAdapter.submitList(animals)
+            }
 
             this?.btnGeosites?.setOnClickListener {
                 startActivity(Intent(requireContext(), GeositesActivity::class.java))
@@ -137,12 +146,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun onResume() {
         super.onResume()
-        binding?.toolbarHome?.menu?.findItem(R.id.search_view)?.actionView?.clearFocus()
+        binding?.apply {
+            toolbarHome.menu?.findItem(R.id.search_view)?.actionView?.clearFocus()
+            chipAllHome.isChecked = true
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding?.toolbarHome?.menu?.findItem(R.id.search_view)?.actionView?.clearFocus()
+        binding?.apply {
+            toolbarHome.menu?.findItem(R.id.search_view)?.actionView?.clearFocus()
+            chipAllHome.isChecked = true
+        }
+
     }
 
     private fun carouselItemClicked(geosite: Geosite) {

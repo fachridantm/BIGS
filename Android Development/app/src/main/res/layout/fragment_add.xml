@@ -31,11 +31,11 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/text_view1"
         style="@style/Text.Medium.Subheader"
-        android:layout_marginHorizontal="28dp"
-        android:layout_marginVertical="20dp"
+        android:layout_width="0dp"
+        android:layout_marginHorizontal="30dp"
         android:gravity="center"
         android:text="@string/scan_animal"
-        app:layout_constraintBottom_toTopOf="@id/iv_plant"
+        app:layout_constraintBottom_toTopOf="@id/guideline_horizontalTop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.714"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,41 +59,93 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_plant"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_plant_scanning"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_horizontalBottom"
+        app:layout_constraintEnd_toEndOf="@id/guideline_verticalEnd"
+        app:layout_constraintStart_toStartOf="@id/guideline_verticalStart"
+        app:layout_constraintTop_toTopOf="@id/guideline_horizontalTop" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_plant_scanning"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_camera"
-        style="@style/Button.RoundedSmall.Medium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="28dp"
-        android:backgroundTint="@color/seed"
-        android:text="@string/scan_camera"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/bg_btn_primary"
+        android:drawableStart="@drawable/ic_camera"
+        android:drawablePadding="8dp"
+        android:paddingHorizontal="16dp"
+        android:text="@string/take_photo"
         android:textAllCaps="false"
-        app:layout_constraintBottom_toTopOf="@id/btn_gallery"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textAppearance="@style/Text.SemiBold.Button"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@id/btn_scan"
+        app:layout_constraintEnd_toStartOf="@id/btn_gallery"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_plant"
-        app:layout_constraintVertical_bias="0.88" />
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontalBottom" />
 
-    <com.google.android.material.button.MaterialButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_gallery"
-        style="@style/Button.RoundedSmall.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="28dp"
+        android:background="@drawable/bg_btn_primary"
+        android:drawableStart="@drawable/ic_upload"
+        android:drawablePadding="8dp"
+        android:paddingHorizontal="16dp"
+        android:text="@string/upload_image"
+        android:textAllCaps="false"
+        android:textAppearance="@style/Text.SemiBold.Button"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@id/btn_scan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_camera"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontalBottom" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_scan"
+        style="@style/Button.RoundedSmall.SemiBold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="28dp"
-        android:layout_marginBottom="48dp"
-        android:backgroundTint="@color/seed"
-        android:text="@string/scan_gallery"
-        android:textAllCaps="false"
+        android:text="@string/scan_photo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_camera"
+        app:layout_constraintVertical_bias="0.3"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_verticalStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.22" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_verticalEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.77" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontalTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.36" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontalBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.67" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

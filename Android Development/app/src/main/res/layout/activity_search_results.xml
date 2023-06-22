@@ -1,9 +1,125 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.search.SearchResultsActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:liftOnScroll="true">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.8"
+            android:background="@android:color/white"
+            app:navigationIcon="@drawable/ic_back"
+            app:title="@string/search"
+            app:titleCentered="true"
+            app:titleTextAppearance="@style/Text.SemiBold.H3"
+            app:titleTextColor="@android:color/black" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <SearchView
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:background="@drawable/bg_transparent"
+        android:iconifiedByDefault="false"
+        android:inputType="text"
+        android:queryHint="@string/search_hint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appbar_search" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_view1"
+        style="@style/Text.SemiBold.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/search_by_category"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_view" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/cg_geopark_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="8dp"
+        app:chipSpacingHorizontal="16dp"
+        app:chipSpacingVertical="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view1"
+        app:selectionRequired="true"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_geosites_search"
+            style="@style/Chip.Subtitle.Grey"
+            android:text="@string/geosites"
+            app:checkedIconEnabled="false"
+            app:chipIcon="@drawable/ic_geosites"
+            app:chipIconEnabled="true"
+            app:chipIconTint="@color/chip_icon_geosites"
+            app:iconStartPadding="4dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_plants_search"
+            style="@style/Chip.Subtitle.Grey"
+            android:text="@string/plants"
+            app:checkedIconEnabled="false"
+            app:chipIcon="@drawable/ic_plant"
+            app:chipIconEnabled="true"
+            app:chipIconTint="@color/chip_icon_plants"
+            app:iconStartPadding="4dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_animals_search"
+            style="@style/Chip.Subtitle.Grey"
+            android:text="@string/animals"
+            app:checkedIconEnabled="false"
+            app:chipIcon="@drawable/ic_animals"
+            app:chipIconEnabled="true"
+            app:chipIconTint="@color/chip_icon_animals"
+            app:iconStartPadding="4dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_location_search"
+            style="@style/Chip.Subtitle.Grey"
+            android:text="@string/location"
+            app:checkedIconEnabled="false"
+            app:chipIcon="@drawable/ic_distance"
+            app:chipIconEnabled="true"
+            app:chipIconTint="@color/chip_icon_location"
+            app:iconStartPadding="4dp" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_search_results"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cg_geopark_filter"
+        tools:listitem="@layout/item_card_search" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

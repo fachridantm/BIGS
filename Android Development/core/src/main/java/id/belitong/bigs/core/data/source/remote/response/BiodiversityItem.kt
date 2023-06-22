@@ -13,6 +13,9 @@ data class BiodiversityItem(
     @field:SerializedName("type")
     val type: String,
 
+    @field:SerializedName("location")
+    val location: String?,
+
     @field:SerializedName("img")
     val img: String,
 )
