@@ -5,8 +5,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.textfield.TextInputLayout
 import id.belitong.bigs.core.R
 import id.belitong.bigs.core.di.GlideApp
@@ -47,7 +45,8 @@ fun ImageView.loadGeoparkImage(url: String) {
         .load(url)
         .apply(
             GlideOptions().override(500, 500)
-                .placeholder(R.drawable.ic_placeholder_geopark)
+                .placeholder(R.drawable.img_placeholder_geopark)
+                .error(R.drawable.img_error)
         )
         .into(this)
 }
@@ -58,13 +57,15 @@ fun ImageView.loadUserImage(url: String) {
         .apply(
             GlideOptions().override(500, 500)
                 .placeholder(R.drawable.ic_profile)
+                .error(R.drawable.img_error)
         )
         .into(this)
 }
 
 fun Int.meterToKilometer(): String {
-    return if (this > 1000) {
-        val distance = this / 1000
+    return if (this >= 1000) {
+        val doubleValue = this.toDouble()
+        val distance = doubleValue / 1000
         "$distance km"
     } else {
         "$this m"
