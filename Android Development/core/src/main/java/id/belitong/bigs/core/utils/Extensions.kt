@@ -61,7 +61,7 @@ fun ImageView.loadUserImage(url: String) {
 }
 
 fun Int.meterToKilometer(): String {
-    return if (this > 1000) {
+    return if (this >= 1000) {
         val doubleValue = this.toDouble()
         val distance = doubleValue / 1000
         if (distance % 1 == 0.0) {
