@@ -1,77 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="none"
     tools:context=".ui.details.geosites.GeositesActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_geosites"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:liftOnScroll="true">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar_geosites"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_geosites"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:liftOnScroll="true">
+            android:layout_height="match_parent"
+            android:alpha="0.8"
+            android:background="@android:color/white"
+            app:navigationIcon="@drawable/ic_back"
+            app:title="@string/geosites"
+            app:titleCentered="true"
+            app:titleTextAppearance="@style/Text.SemiBold.H3"
+            app:titleTextColor="@android:color/black" />
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar_geosites"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:alpha="0.8"
-                android:background="@android:color/white"
-                app:navigationIcon="@drawable/ic_back"
-                app:title="@string/geosites"
-                app:titleCentered="true"
-                app:titleTextAppearance="@style/Text.SemiBold.H3"
-                app:titleTextColor="@android:color/black" />
+    </com.google.android.material.appbar.AppBarLayout>
 
-        </com.google.android.material.appbar.AppBarLayout>
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/cg_geosite_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appbar_geosites"
+        app:selectionRequired="true"
+        app:singleSelection="true">
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/cg_geosite_filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="4dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appbar_geosites"
-            app:selectionRequired="true"
-            app:singleSelection="true">
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_alphabet"
+            style="@style/Chip.Subtitle"
+            android:text="@string/alphabet" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_alphabet"
-                style="@style/Chip.Subtitle"
-                android:text="@string/alphabet" />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_nearest"
+            style="@style/Chip.Subtitle"
+            android:text="@string/nearest" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_nearest"
-                style="@style/Chip.Subtitle"
-                android:text="@string/nearest" />
+    </com.google.android.material.chip.ChipGroup>
 
-        </com.google.android.material.chip.ChipGroup>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_geosites"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="10dp"
+        android:orientation="vertical"
+        android:scrollbars="none"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cg_geosite_filter"
+        tools:itemCount="10"
+        tools:listitem="@layout/item_card_geosite" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_geosites"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:orientation="vertical"
-            android:scrollbars="none"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cg_geosite_filter"
-            tools:itemCount="10"
-            tools:listitem="@layout/item_card_geosite" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
