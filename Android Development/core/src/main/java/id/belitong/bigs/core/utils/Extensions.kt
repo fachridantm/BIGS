@@ -46,7 +46,6 @@ fun ImageView.loadGeoparkImage(url: String) {
         .apply(
             GlideOptions().override(500, 500)
                 .placeholder(R.drawable.img_placeholder_geopark)
-                .error(R.drawable.img_error)
         )
         .into(this)
 }
@@ -57,7 +56,6 @@ fun ImageView.loadUserImage(url: String) {
         .apply(
             GlideOptions().override(500, 500)
                 .placeholder(R.drawable.ic_profile)
-                .error(R.drawable.img_error)
         )
         .into(this)
 }
