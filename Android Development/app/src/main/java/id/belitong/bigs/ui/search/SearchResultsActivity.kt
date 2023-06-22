@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import id.belitong.bigs.R
+import id.belitong.bigs.core.domain.model.Biodiversity
 import id.belitong.bigs.core.ui.CardSearchAdapter
 import id.belitong.bigs.core.utils.DummyData
 import id.belitong.bigs.core.utils.showMessage
@@ -79,7 +80,7 @@ class SearchResultsActivity : AppCompatActivity() {
         }
     }
 
-    private fun onItemClick() {
+    private fun onItemClick(biodiversity: Biodiversity) {
         getString(R.string.onClickHandler).showMessage(this)
     }
 

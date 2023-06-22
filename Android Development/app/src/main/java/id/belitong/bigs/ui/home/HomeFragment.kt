@@ -162,11 +162,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun carouselItemClicked(geosite: Geosite) {
-        // TODO 6: Implement carouselItemClicked
+        getString(R.string.onClickHandler).showMessage(requireContext())
     }
 
     private fun cardItemClicked(biodiversity: Biodiversity) {
-        // TODO 7: Implement cardItemClicked
+        getString(R.string.onClickHandler).showMessage(requireContext())
     }
 
 }

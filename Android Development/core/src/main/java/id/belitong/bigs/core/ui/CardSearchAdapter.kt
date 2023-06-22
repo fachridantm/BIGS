@@ -9,7 +9,7 @@ import id.belitong.bigs.core.databinding.ItemCardSearchBinding
 import id.belitong.bigs.core.domain.model.Biodiversity
 import id.belitong.bigs.core.utils.loadGeoparkImage
 
-class CardSearchAdapter(private val onItemClick: () -> Unit) :
+class CardSearchAdapter(private val onItemClick: (Biodiversity) -> Unit) :
     ListAdapter<Biodiversity, CardSearchAdapter.SearchViewHolder>(DIFF_CALLBACK) {
 
     inner class SearchViewHolder(private val binding: ItemCardSearchBinding) :
@@ -20,7 +20,7 @@ class CardSearchAdapter(private val onItemClick: () -> Unit) :
                 tvSearchItemTitle.text = data.name
                 tvSearchItemSubtitle.text = data.location
                 ivSearchItem.loadGeoparkImage(data.img)
-                root.setOnClickListener { onItemClick() }
+                root.setOnClickListener { onItemClick(data) }
             }
         }
     }
