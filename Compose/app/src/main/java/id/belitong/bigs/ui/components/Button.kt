@@ -23,6 +23,7 @@ import id.belitong.bigs.ui.theme.typography
 
 @Composable
 fun ButtonWithDrawableEnd(
+    modifier: Modifier = Modifier,
     buttonColor: ButtonColors,
     textButton: String,
     textColor: Color,
@@ -34,7 +35,7 @@ fun ButtonWithDrawableEnd(
         onClick = onClick,
         colors = buttonColor,
         shape = MaterialTheme.shapes.small,
-        modifier = Modifier.padding(16.dp)
+        modifier = modifier.padding(16.dp)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically
