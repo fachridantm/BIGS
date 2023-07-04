@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ButtonDefaults
@@ -19,10 +20,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.systemuicontroller.SystemUiController
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import id.belitong.bigs.R
 import id.belitong.bigs.ui.components.ButtonWithDrawableEnd
+import id.belitong.bigs.ui.components.HideSystemUIBars
 import id.belitong.bigs.ui.theme.md_theme_dark_secondary
 import id.belitong.bigs.ui.theme.typography
 
@@ -31,8 +31,7 @@ fun SplashScreen(
     modifier: Modifier = Modifier,
     onClickToNavigate: () -> Unit,
 ) {
-    val systemUiController: SystemUiController = rememberSystemUiController()
-    systemUiController.isSystemBarsVisible = false
+    HideSystemUIBars()
 
     SplashScreenContent(
         modifier = modifier,
@@ -84,6 +83,9 @@ fun SplashScreenContent(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             ButtonWithDrawableEnd(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(32.dp),
                 buttonColor = ButtonDefaults.buttonColors(containerColor = md_theme_dark_secondary),
                 textButton = stringResource(R.string.explore_now),
                 textColor = Color.Black,
