@@ -8,73 +8,71 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import id.belitong.bigs.R
 
-private val Poppins = FontFamily(
-    Font(R.font.poppins_regular),
-    Font(R.font.poppins_medium),
-    Font(R.font.poppins_semi_bold),
-    Font(R.font.poppins_bold),
-)
+private val PoppinsBold = FontFamily(Font(R.font.poppins_bold))
+private val PoppinsSemiBold = FontFamily(Font(R.font.poppins_semi_bold))
+private val PoppinsMedium = FontFamily(Font(R.font.poppins_medium))
+private val PoppinsRegular = FontFamily(Font(R.font.poppins_regular))
 
 // Set of Material typography styles to start with
 val typography = Typography(
-    defaultFontFamily = Poppins,
+    defaultFontFamily = PoppinsMedium,
     h1 = TextStyle(
-        fontFamily = Poppins,
+        fontFamily = PoppinsSemiBold,
         fontWeight = FontWeight.SemiBold,
         fontSize = 24.sp,
     ),
     h2 = TextStyle(
-        fontFamily = Poppins,
+        fontFamily = PoppinsBold,
         fontWeight = FontWeight.Bold,
         fontSize = 22.sp,
     ),
     h3 = TextStyle(
-        fontFamily = Poppins,
+        fontFamily = PoppinsBold,
         fontWeight = FontWeight.Bold,
         fontSize = 20.sp,
     ),
     h4 = TextStyle(
-        fontFamily = Poppins,
+        fontFamily = PoppinsMedium,
         fontWeight = FontWeight.Medium,
         fontSize = 18.sp,
     ),
     h5 = TextStyle(
-        fontFamily = Poppins,
+        fontFamily = PoppinsRegular,
         fontWeight = FontWeight.Normal,
         fontSize = 18.sp,
     ),
     body1 = TextStyle(
-        fontFamily = Poppins,
+        fontFamily = PoppinsSemiBold,
         fontWeight = FontWeight.SemiBold,
         fontSize = 16.sp,
     ),
     body2 = TextStyle(
-        fontFamily = Poppins,
+        fontFamily = PoppinsRegular,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
     ),
     subtitle1 = TextStyle(
-        fontFamily = Poppins,
+        fontFamily = PoppinsRegular,
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp,
     ),
     subtitle2 = TextStyle(
-        fontFamily = Poppins,
+        fontFamily = PoppinsMedium,
         fontWeight = FontWeight.Medium,
         fontSize = 14.sp,
     ),
     button = TextStyle(
-        fontFamily = Poppins,
+        fontFamily = PoppinsSemiBold,
         fontWeight = FontWeight.SemiBold,
         fontSize = 16.sp,
     ),
     caption = TextStyle(
-        fontFamily = Poppins,
+        fontFamily = PoppinsRegular,
         fontWeight = FontWeight.Normal,
         fontSize = 12.sp,
     ),
     overline = TextStyle(
-        fontFamily = Poppins,
+        fontFamily = PoppinsRegular,
         fontWeight = FontWeight.Normal,
         fontSize = 12.sp,
     ),
