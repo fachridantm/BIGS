@@ -2,6 +2,7 @@ package id.belitong.bigs.ui.auth.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,7 +60,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             if (email.isEmpty()) {
                 showError(true, getString(R.string.email_can_not_be_empty))
             } else {
-                if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     showError(true, getString(R.string.invalid_email_format))
                 } else {
                     showError(false)
@@ -71,7 +72,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             if (password.isEmpty()) {
                 showError(true, getString(R.string.password_can_not_be_empty))
             } else {
-                if (password.length < 6) {
+                if (password.length < 8) {
                     showError(true, context.getString(R.string.minimum_password_length))
                 } else {
                     showError(false)

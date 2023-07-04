@@ -1,6 +1,7 @@
 package id.belitong.bigs.ui.auth.register
 
 import android.os.Bundle
+import android.util.Patterns
 import android.util.Patterns.PHONE
 import android.view.LayoutInflater
 import android.view.View
@@ -68,7 +69,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
             if (email.isEmpty()) {
                 showError(true, getString(R.string.email_can_not_be_empty))
             } else {
-                if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     showError(true, getString(R.string.invalid_email_format))
                 } else {
                     showError(false)
@@ -80,7 +81,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
             if (password.isEmpty()) {
                 showError(true, getString(R.string.password_can_not_be_empty))
             } else {
-                if (password.length < 6) {
+                if (password.length < 8) {
                     showError(true, context.getString(R.string.minimum_password_length))
                 } else {
                     showError(false)
