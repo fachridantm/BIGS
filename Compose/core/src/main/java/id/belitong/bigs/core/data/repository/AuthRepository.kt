@@ -32,7 +32,7 @@ class AuthRepository @Inject constructor(
         email: String,
         password: String,
     ): Flow<Resource<Register>> = flow {
-        emit(Resource.Loading())
+        emit(Resource.Loading)
         when (val apiResponse =
             remoteDataSource.registerUser(name, email, password).first()) {
             is ApiResponse.Success -> {
@@ -49,7 +49,7 @@ class AuthRepository @Inject constructor(
     }
 
     override fun loginUser(email: String, password: String): Flow<Resource<Login>> = flow {
-        emit(Resource.Loading())
+        emit(Resource.Loading)
         when (val apiResponse = remoteDataSource.loginUser(email, password).first()) {
             is ApiResponse.Success -> {
                 val data = DataMapper.loginResponseToLogin(apiResponse.data)
