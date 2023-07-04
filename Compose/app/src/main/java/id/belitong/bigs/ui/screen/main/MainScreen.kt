@@ -8,7 +8,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
+import id.belitong.bigs.ui.components.BottomNavBar
 import id.belitong.bigs.ui.navigation.BigsNavHost
+import id.belitong.bigs.ui.navigation.Screens
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -16,13 +18,30 @@ fun MainScreen(
     modifier: Modifier = Modifier,
 ) {
     val navController = rememberNavController()
-    val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
+    val bottomBarState = rememberSaveable { (mutableStateOf(false)) }
 
     Scaffold(
         modifier = modifier,
         bottomBar = {
             if (bottomBarState.value) {
+                BottomNavBar(
+                    navController = navController,
+                    onItemClick = {
+                        val route = navController.currentDestination?.route
 
+                        if (route == Screens.HomeScreen.route) {
+                            navController.popBackStack()
+                        } else {
+                            navController.navigate(Screens.HomeScreen.route) {
+                                popUpTo(Screens.HomeScreen.route) {
+                                    inclusive = true
+                                }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        }
+                    }
+                )
             }
         }
     ) { innerPadding ->
