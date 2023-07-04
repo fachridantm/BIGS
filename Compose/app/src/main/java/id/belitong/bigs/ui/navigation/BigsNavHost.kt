@@ -6,6 +6,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import id.belitong.bigs.ui.screen.auth.login.LoginScreen
 import id.belitong.bigs.ui.screen.auth.login.LoginViewModel
 import id.belitong.bigs.ui.screen.splash.SplashScreen
 
@@ -37,6 +38,12 @@ fun BigsNavHost(
         }
         composable(Screens.LoginScreen.route) {
             isBottomBarVisible(false)
+            LoginScreen(
+                onClickLogin = {
+                    navController.popBackStack()
+                    navController.navigate(Screens.HomeScreen.route)
+                }
+            )
         }
     }
 }
