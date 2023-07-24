@@ -1,4 +1,4 @@
-package id.belitong.bigs.ui.components
+package id.belitong.bigs.ui.composable.components
 
 import androidx.compose.material.BottomNavigation
 import androidx.compose.runtime.Composable

@@ -1,4 +1,4 @@
-package id.belitong.bigs.ui.components
+package id.belitong.bigs.ui.composable.components
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
