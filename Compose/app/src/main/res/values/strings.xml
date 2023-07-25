@@ -2,14 +2,27 @@
     <string name="app_name">BIGS</string>
     <string name="BIGS">Belitong Biodiversity Information and Guidance System</string>
     <string name="explore_now">Explore Now</string>
+
     <string name="sign_in">Sign In</string>
     <string name="email_address">Email Address</string>
     <string name="password">Password</string>
+
     <string name="forgot_password">Forgot Password?</string>
     <string name="or">OR</string>
-    <string name="sign_in_with_google">Sign In With Google</string>
+    <string name="sign_in_with_google">Sign In with Google</string>
+
     <string name="dont_have_an_account">Don\'t have an account?</string>
     <string name="sign_up">Sign Up</string>
+
     <string name="title_activity_splash">SplashActivity</string>
     <string name="title_activity_auth">AuthActivity</string>
+
+    <string name="password_toggle_content_desc">Password Toggle</string>
+
+    <string name="invalid_email_format">Please input a valid email address!</string>
+    <string name="email_not_allowed_to_be_empty">Email not allowed to be empty!</string>
+
+    <string name="password_not_allowed_to_be_empty">Password not allowed to be empty!</string>
+    <string name="minimum_password_length">Password should be at least 8 characters long!</string>
+    <string name="login_result">Login %s</string>
 </resources>

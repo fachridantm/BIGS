@@ -1,9 +1,12 @@
 package id.belitong.bigs.ui.screen.auth.login
 
+import android.app.Activity
 import android.util.Log
 import android.util.Patterns
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,109 +16,176 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Error
-import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.ramcosta.composedestinations.annotation.Destination
 import id.belitong.bigs.R
-import id.belitong.bigs.core.data.Resource
-import id.belitong.bigs.ui.components.ButtonWithDrawableStart
-import id.belitong.bigs.ui.components.FormTextField
+import id.belitong.bigs.core.domain.model.FormValidation
+import id.belitong.bigs.core.domain.model.User
+import id.belitong.bigs.core.utils.showToast
+import id.belitong.bigs.ui.composable.components.ButtonWithDrawableStart
+import id.belitong.bigs.ui.composable.components.ValidationForm
+import id.belitong.bigs.ui.composable.utils.ComposableObserver
+import id.belitong.bigs.ui.composable.utils.getActivity
+import id.belitong.bigs.ui.screen.main.MainActivity
+import id.belitong.bigs.ui.theme.Dimension
 import id.belitong.bigs.ui.theme.md_theme_dark_secondary
 import id.belitong.bigs.ui.theme.seed
 import id.belitong.bigs.ui.theme.typography
 
 @Composable
+@Destination
 fun LoginScreen(
-    modifier: Modifier = Modifier,
-    viewModel: LoginViewModel = hiltViewModel(),
-    onClickLogin: () -> Unit,
+    loginViewModel: LoginViewModel = hiltViewModel(),
 ) {
+    val activity = getActivity()
+
+    val loginResult = loginViewModel.result.observeAsState()
+    val isLoading = remember { mutableStateOf(false) }
+
+    BackHandler {
+        activity.finish()
+    }
+
     LoginScreenContent(
-        modifier = modifier,
-        onClickLogin = { email, password ->
-            viewModel.loginUser(email, password)
-            onClickLogin()
+        onClick = { email, password ->
+            loginViewModel.loginUser(email, password)
+        }, isLoading = isLoading.value
+    )
+
+    ComposableObserver(state = loginResult,
+        onLoading = {
+            isLoading.value = true
+        },
+        onSuccess = {
+            isLoading.value = false
+            val token = it.loginResult?.token
+            val user = it.loginResult
+            val message = it.message.toString()
+
+            if (token != null && user != null) {
+                saveSession(loginViewModel, activity, token, user)
+            }
+
+            stringResource(id = R.string.login_result, message).showToast(activity)
+        },
+        onError = { message ->
+            isLoading.value = false
+            message.showToast(activity)
         }
     )
-    viewModel.result.collectAsState(initial = Resource.Loading).value.let {
-        when (it) {
-            is Resource.Loading -> {
-                Log.d("LoginScreen", "Loading")
-            }
-
-            is Resource.Success -> {
-                val token = it.data.loginResult?.token
-                val user = it.data.loginResult
-                val message = it.data.message.toString()
-
-                if (!token.isNullOrEmpty() && user != null) {
-                    viewModel.saveSession(token, user)
-                } else {
-                    Log.e("LoginScreen", "Error: $message")
-                }
-            }
-
-            is Resource.Error -> {
-                Log.e("LoginScreen", "Error: ${it.errorMessage}")
-            }
-        }
-    }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+fun saveSession(loginViewModel: LoginViewModel, activity: Activity, token: String, user: User) {
+    loginViewModel.saveSession(token, user)
+    MainActivity.start(activity)
+    activity.finish()
+}
+
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun LoginScreenContent(
-    modifier: Modifier = Modifier,
-    onClickLogin: (String, String) -> Unit,
+    modifier: Modifier = Modifier, onClick: (String, String) -> Unit, isLoading: Boolean = false
 ) {
-    var showError by rememberSaveable { mutableStateOf(false) }
-    var passwordVisibility by rememberSaveable { mutableStateOf(false) }
-    var textEmailError by rememberSaveable { mutableStateOf("") }
-    var textPasswordError by rememberSaveable { mutableStateOf("") }
-    var textEmail by rememberSaveable { mutableStateOf("") }
-    var textPassword by rememberSaveable { mutableStateOf("") }
+    val keyboardController = LocalSoftwareKeyboardController.current
+
+    var emailErrorMessage by remember { mutableStateOf("") }
+    var passwordErrorMessage by remember { mutableStateOf("") }
+
+    val visibility = if (isLoading) 1f else 0f
 
     Box(
         modifier = modifier
             .fillMaxSize()
-            .padding(32.dp)
+            .padding(horizontal = Dimension.SIZE_24)
             .verticalScroll(rememberScrollState())
     ) {
+        CircularProgressIndicator(
+            modifier = Modifier
+                .align(Alignment.Center)
+                .alpha(visibility),
+            color = seed,
+            strokeWidth = Dimension.SIZE_4,
+            progress = 0.5f,
+        )
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 16.dp),
             verticalArrangement = Arrangement.Top,
         ) {
+
+            val context = LocalContext.current
+
+            val emailValidation =
+                remember {
+                    mutableStateOf(
+                        FormValidation(
+                            hint = "Email Address",
+                            errorMessage = emailErrorMessage
+                        )
+                    )
+                }
+
+            val passwordValidation = remember {
+                mutableStateOf(
+                    FormValidation(
+                        hint = "Password",
+                        errorMessage = passwordErrorMessage
+                    )
+                )
+            }
+
+            val email = emailValidation.value.text
+            val password = passwordValidation.value.text
+
+            emailErrorMessage = if (email.isEmpty()) {
+                stringResource(R.string.email_not_allowed_to_be_empty)
+            } else {
+                stringResource(R.string.invalid_email_format)
+            }
+
+            passwordErrorMessage = if (password.isEmpty()) {
+                stringResource(R.string.password_not_allowed_to_be_empty)
+            } else {
+                stringResource(R.string.minimum_password_length)
+            }
+
+            val buttonValidation =
+                email.isNotEmpty() &&
+                        Patterns.EMAIL_ADDRESS.matcher(email).matches() &&
+                        password.isNotEmpty() &&
+                        password.length >= 8
+
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -131,114 +201,74 @@ fun LoginScreenContent(
                 )
             }
             Text(
-                modifier = Modifier,
+                modifier = Modifier.alpha(0.8f),
                 textAlign = TextAlign.Start,
                 text = stringResource(R.string.sign_in),
                 style = typography.h2
             )
-            FormTextField(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 16.dp),
-                textValue = textEmail,
-                textLabel = stringResource(R.string.email_address),
-                textError = textEmailError,
-                isError = showError,
-                trailingIcon = {
-                    if (showError) {
-                        Icon(
-                            imageVector = Icons.Default.Error,
-                            contentDescription = null
-                        )
-                    }
+            ValidationForm(modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = Dimension.SIZE_18),
+                state = emailValidation,
+                onFormValueChange = {
+                    emailValidation.value = emailValidation.value.copy(
+                        text = it
+                    )
                 },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-                onValueChange = {
-                    textEmail = it
-                }
-            )
-            FormTextField(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 24.dp),
-                textValue = textPassword,
-                textLabel = stringResource(R.string.password),
-                textError = textPasswordError,
-                isError = showError,
-                trailingIcon = {
-                    IconButton(
-                        onClick = { passwordVisibility = !passwordVisibility }
-                    ) {
-                        if (showError) {
-                            Icon(
-                                imageVector = Icons.Default.Error,
-                                contentDescription = null
-                            )
-                        } else {
-                            Icon(
-                                imageVector = if (passwordVisibility) Icons.Filled.VisibilityOff else Icons.Filled.Visibility,
-                                contentDescription = null
-                            )
-                        }
-                    }
+                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
+                onImeKeyAction = {
+                    keyboardController?.hide()
+                })
+            ValidationForm(modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = Dimension.SIZE_18),
+                state = passwordValidation,
+                isPasswordForm = true,
+                onFormValueChange = {
+                    passwordValidation.value = passwordValidation.value.copy(
+                        text = it
+                    )
                 },
-                visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                onValueChange = {
-                    textPassword = it
-                }
-            )
+                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
+                onImeKeyAction = {
+                    keyboardController?.hide()
+                })
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.End
+                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End
             ) {
                 Text(
-                    modifier = Modifier.padding(top = 12.dp),
+                    modifier = Modifier
+                        .padding(top = Dimension.SIZE_8)
+                        .clickable(onClick = {
+                            "Feature not implemented yet".showToast(context)
+                        }),
                     textDecoration = TextDecoration.Underline,
                     textAlign = TextAlign.End,
                     text = stringResource(R.string.forgot_password),
                     style = typography.body2
                 )
             }
-            Button(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 36.dp),
+            Button(modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = Dimension.SIZE_30),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = seed,
-                    contentColor = Color.White
+                    containerColor = seed, contentColor = Color.White
                 ),
                 shape = MaterialTheme.shapes.small,
                 onClick = {
-                    when {
-                        textEmail.isEmpty() -> {
-                            showError = true
-                            textEmailError = "Email cannot be empty!"
-                            if (!Patterns.EMAIL_ADDRESS.matcher(textEmail).matches()) {
-                                textEmailError = "Please input a valid email address!"
-                            } else {
-                                showError = false
-                                textEmailError = ""
-                            }
-                        }
+                    emailValidation.value = emailValidation.value.copy(
+                        isError = email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email)
+                            .matches(),
+                        errorMessage = emailErrorMessage
+                    )
 
-                        textPassword.isEmpty() -> {
-                            showError = true
-                            textPasswordError = "Password cannot be empty!"
-                            if (textPassword.length < 8) {
-                                textPasswordError = "Password should be at least 8 characters long!"
-                            } else {
-                                showError = false
-                                textPasswordError = ""
-                            }
-                        }
+                    passwordValidation.value = passwordValidation.value.copy(
+                        isError = password.isEmpty() || password.length < 8,
+                        errorMessage = passwordErrorMessage
+                    )
 
-                        else -> {
-                            showError = false
-                            textEmailError = ""
-                            textPasswordError = ""
-                            onClickLogin(textEmail, textPassword)
-                        }
+                    if (buttonValidation) {
+                        onClick(email, password)
                     }
                 }
             ) {
@@ -247,33 +277,32 @@ fun LoginScreenContent(
                 )
             }
             Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 24.dp),
-                horizontalArrangement = Arrangement.Center
+                modifier = Modifier.padding(top = Dimension.SIZE_26),
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    modifier = Modifier,
-                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .wrapContentWidth(Alignment.CenterHorizontally)
+                        .weight(2f),
                     text = stringResource(R.string.or),
                     style = typography.h4
                 )
             }
-            ButtonWithDrawableStart(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 24.dp),
+            ButtonWithDrawableStart(modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = Dimension.SIZE_28),
                 buttonColor = ButtonDefaults.buttonColors(containerColor = Color.White),
                 textButton = stringResource(R.string.sign_in_with_google),
                 textColor = Color.Black,
-                borderStroke = BorderStroke(1.dp, Color.Black),
+                borderStroke = BorderStroke(Dimension.SIZE_1, Color.Black),
                 drawableStart = painterResource(R.drawable.ic_google),
-                onClick = {}
-            )
+                onClick = {
+                    "Feature not implemented yet".showToast(context)
+                })
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 24.dp),
+                    .padding(top = Dimension.SIZE_100),
                 horizontalArrangement = Arrangement.Center
             ) {
                 Text(
@@ -283,7 +312,11 @@ fun LoginScreenContent(
                     style = typography.body1
                 )
                 Text(
-                    modifier = Modifier.padding(start = 4.dp),
+                    modifier = Modifier
+                        .padding(start = 4.dp)
+                        .clickable(onClick = {
+                            "Feature not implemented yet".showToast(context)
+                        }),
                     textAlign = TextAlign.Center,
                     text = stringResource(R.string.sign_up),
                     color = md_theme_dark_secondary,
@@ -297,9 +330,7 @@ fun LoginScreenContent(
 @Preview(showBackground = true)
 @Composable
 fun LoginScreenPreview() {
-    LoginScreenContent(
-        onClickLogin = { email, password ->
-            Log.d("LoginScreen", "email: $email, password: $password")
-        }
-    )
+    LoginScreenContent(onClick = { email, password ->
+        Log.d("LoginScreen", "email: $email, password: $password")
+    })
 }
