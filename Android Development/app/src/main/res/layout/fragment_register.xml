@@ -93,10 +93,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            app:passwordToggleEnabled="true"
             app:layout_constraintEnd_toEndOf="@+id/textView"
             app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@id/til_phone_register">
+            app:layout_constraintTop_toBottomOf="@id/til_phone_register"
+            app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_password_register"
@@ -114,8 +114,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="36dp"
-            android:text="@string/sign_up"
             android:backgroundTint="@color/seed"
+            android:text="@string/sign_up"
             android:textAllCaps="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -136,13 +136,14 @@
                 android:layout_width="wrap_content"
                 android:layout_marginEnd="4dp"
                 android:alpha="0.8"
-                android:textColor="@android:color/black"
-                android:text="@string/already_have_an_account" />
+                android:text="@string/already_have_an_account"
+                android:textColor="@android:color/black" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_login_here"
                 style="@style/Text.SemiBold.Title.Center"
                 android:layout_width="wrap_content"
+                android:background="@drawable/bg_text_transparent"
                 android:clickable="true"
                 android:focusable="true"
                 android:text="@string/login"

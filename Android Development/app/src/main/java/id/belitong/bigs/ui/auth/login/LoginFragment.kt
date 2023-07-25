@@ -35,6 +35,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     override fun initAction() {
         binding?.apply {
+            tvForgotPassword.setOnClickListener {
+                requireContext().getString(R.string.on_click_handler).showMessage(requireContext())
+            }
             tvRegisterHere.setOnClickListener {
                 it.findNavController()
                     .navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
@@ -71,9 +74,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         binding?.tilPasswordLogin?.apply {
             if (password.isEmpty()) {
                 showError(true, getString(R.string.password_not_allowed_to_be_empty))
+                errorIconDrawable = null
             } else {
                 if (password.length < 8) {
                     showError(true, context.getString(R.string.minimum_password_length))
+                    errorIconDrawable = null
                 } else {
                     showError(false)
                 }

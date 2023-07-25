@@ -80,9 +80,11 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
         binding?.tilPasswordRegister?.apply {
             if (password.isEmpty()) {
                 showError(true, getString(R.string.password_not_allowed_to_be_empty))
+                errorIconDrawable = null
             } else {
                 if (password.length < 8) {
                     showError(true, context.getString(R.string.minimum_password_length))
+                    errorIconDrawable = null
                 } else {
                     showError(false)
                 }
