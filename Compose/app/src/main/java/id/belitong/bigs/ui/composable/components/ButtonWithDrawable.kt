@@ -79,6 +79,7 @@ fun ButtonWithDrawableStart(
     borderStroke: BorderStroke = BorderStroke(1.dp, Color.Unspecified),
     drawableStart: Painter,
     drawableTint: Color = Color.Unspecified,
+    enabled: Boolean = true,
     onClick: () -> Unit
 ) {
     Button(
@@ -86,6 +87,7 @@ fun ButtonWithDrawableStart(
         colors = buttonColor,
         shape = MaterialTheme.shapes.small,
         border = borderStroke,
+        enabled = enabled,
         modifier = modifier
     ) {
         Row(
