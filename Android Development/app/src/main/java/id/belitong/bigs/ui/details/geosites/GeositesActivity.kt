@@ -62,6 +62,6 @@ class GeositesActivity : AppCompatActivity() {
     }
 
     private fun onItemClick(geosite: Geosite) {
-        getString(R.string.onClickHandler).showMessage(this)
+        getString(R.string.on_click_handler).showMessage(this)
     }
 }

@@ -61,7 +61,7 @@ class SearchResultsActivity : AppCompatActivity() {
             }
 
             chipLocationSearch.setOnClickListener {
-                getString(R.string.onClickHandler).showMessage(this@SearchResultsActivity)
+                getString(R.string.on_click_handler).showMessage(this@SearchResultsActivity)
                 cardSearchAdapter.submitList(emptyList())
             }
 
@@ -81,7 +81,7 @@ class SearchResultsActivity : AppCompatActivity() {
     }
 
     private fun onItemClick(biodiversity: Biodiversity) {
-        getString(R.string.onClickHandler).showMessage(this)
+        getString(R.string.on_click_handler).showMessage(this)
     }
 
     override fun onResume() {

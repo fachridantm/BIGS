@@ -25,15 +25,15 @@ class GeoprogrammeActivity : AppCompatActivity() {
             toolbarGeoprogramme.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
             btnTourGuide.setOnClickListener {
-                getString(R.string.onClickHandler).showMessage(this@GeoprogrammeActivity)
+                getString(R.string.on_click_handler).showMessage(this@GeoprogrammeActivity)
             }
 
             btnCommunity.setOnClickListener {
-                getString(R.string.onClickHandler).showMessage(this@GeoprogrammeActivity)
+                getString(R.string.on_click_handler).showMessage(this@GeoprogrammeActivity)
             }
 
             btnLocalResident.setOnClickListener {
-                getString(R.string.onClickHandler).showMessage(this@GeoprogrammeActivity)
+                getString(R.string.on_click_handler).showMessage(this@GeoprogrammeActivity)
             }
         }
     }

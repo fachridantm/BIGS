@@ -151,7 +151,7 @@ class AddFragment : BaseFragment<FragmentAddBinding>() {
         val btnAdd = view.findViewById<AppCompatButton>(R.id.btn_add)
 
         btnAdd.setOnClickListener {
-            getString(R.string.onClickHandler).showMessage(requireContext())
+            getString(R.string.on_click_handler).showMessage(requireContext())
         }
 
         btnClose.setOnClickListener {

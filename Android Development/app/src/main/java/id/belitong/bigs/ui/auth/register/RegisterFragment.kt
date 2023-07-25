@@ -59,7 +59,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
         binding?.tilNameRegister?.apply {
             if (name.isEmpty()) {
-                showError(true, getString(R.string.name_can_not_be_empty))
+                showError(true, getString(R.string.name_not_allowed_to_be_empty))
             } else {
                 showError(false)
             }
@@ -67,7 +67,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
         binding?.tilEmailRegister?.apply {
             if (email.isEmpty()) {
-                showError(true, getString(R.string.email_can_not_be_empty))
+                showError(true, getString(R.string.email_not_allowed_to_be_empty))
             } else {
                 if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     showError(true, getString(R.string.invalid_email_format))
@@ -79,7 +79,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
         binding?.tilPasswordRegister?.apply {
             if (password.isEmpty()) {
-                showError(true, getString(R.string.password_can_not_be_empty))
+                showError(true, getString(R.string.password_not_allowed_to_be_empty))
             } else {
                 if (password.length < 8) {
                     showError(true, context.getString(R.string.minimum_password_length))
@@ -91,10 +91,10 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
         binding?.tilPhoneRegister?.apply {
             if (phone.isEmpty()) {
-                showError(true, getString(R.string.phone_can_not_be_empty))
+                showError(true, getString(R.string.phone_not_allowed_to_be_empty))
             } else {
                 if (!PHONE.matcher(phone).matches()) {
-                    showError(true, getString(R.string.invalid_phone_number))
+                    showError(true, getString(R.string.invalid_phone_number_format))
                 } else {
                     showError(false)
                 }

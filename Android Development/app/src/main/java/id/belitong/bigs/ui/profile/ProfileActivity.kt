@@ -56,16 +56,16 @@ class ProfileActivity : AppCompatActivity() {
     private fun initAction() {
         with(binding) {
             btnEditProfile.setOnClickListener {
-                getString(R.string.onClickHandler).showMessage(this@ProfileActivity)
+                getString(R.string.on_click_handler).showMessage(this@ProfileActivity)
             }
             btnLanguage.setOnClickListener {
-                getString(R.string.onClickHandler).showMessage(this@ProfileActivity)
+                getString(R.string.on_click_handler).showMessage(this@ProfileActivity)
             }
             btnHelp.setOnClickListener {
-                getString(R.string.onClickHandler).showMessage(this@ProfileActivity)
+                getString(R.string.on_click_handler).showMessage(this@ProfileActivity)
             }
             btnAbout.setOnClickListener {
-                getString(R.string.onClickHandler).showMessage(this@ProfileActivity)
+                getString(R.string.on_click_handler).showMessage(this@ProfileActivity)
             }
             btnLogout.setOnClickListener {
                 logoutHandler()

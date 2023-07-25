@@ -58,7 +58,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
         binding?.tilEmailLogin?.apply {
             if (email.isEmpty()) {
-                showError(true, getString(R.string.email_can_not_be_empty))
+                showError(true, getString(R.string.email_not_allowed_to_be_empty))
             } else {
                 if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     showError(true, getString(R.string.invalid_email_format))
@@ -70,7 +70,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
         binding?.tilPasswordLogin?.apply {
             if (password.isEmpty()) {
-                showError(true, getString(R.string.password_can_not_be_empty))
+                showError(true, getString(R.string.password_not_allowed_to_be_empty))
             } else {
                 if (password.length < 8) {
                     showError(true, context.getString(R.string.minimum_password_length))

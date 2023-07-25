@@ -2,27 +2,37 @@
     <string name="app_name">BIGS</string>
     <string name="bigs_long_text">Belitong Biodiversity Information and Guidance System</string>
     <string name="explore_now">Explore Now</string>
+
     <string name="sign_up">Sign Up</string>
     <string name="email">Email Address</string>
     <string name="full_name">Full Name</string>
     <string name="phone_number">Phone Number</string>
     <string name="password">Password</string>
+
     <string name="already_have_an_account">Already have an account?</string>
     <string name="login">Sign In</string>
+
     <string name="forgot_password"><u>Forgot Password?</u></string>
     <string name="dont_have_an_account">Don’t have an account?</string>
+
     <string name="or">OR</string>
+
     <string name="login_with_google">Sign In with Google</string>
+
     <string name="home">Home</string>
     <string name="maps">Maps</string>
     <string name="add"><![CDATA[Scan & Add]]></string>
+
     <string name="welcome">Welcome to</string>
     <string name="geopark_belitong_user">Geopark Belitong, %s!</string>
+
     <string name="profile">Profile</string>
     <string name="search">Search</string>
     <string name="geosites">Geosites</string>
     <string name="geoprogramme">Geo-Programme</string>
+
     <string name="explore_geopark">Explore Geopark Belitong</string>
+
     <string name="animals">Animals</string>
     <string name="plants">Plants</string>
     <string name="all">All</string>
@@ -31,37 +41,51 @@
     <string name="help">Help</string>
     <string name="about">About Us</string>
     <string name="logout">Log out</string>
+
     <string name="alphabet">A - Z</string>
     <string name="nearest">Nearest</string>
     <string name="history">History</string>
+
     <string name="search_hint">Find Geosites, Plants, Animals</string>
-    <string name="email_can_not_be_empty">Email can not be empty!</string>
-    <string name="invalid_email_format">Please input email correctly!</string>
-    <string name="password_can_not_be_empty">Password can not be empty!</string>
-    <string name="minimum_password_length">Password should be more than 8 character!</string>
+
+    <string name="email_not_allowed_to_be_empty">Email not allowed to be empty!</string>
+    <string name="invalid_email_format">Please input a valid email address!</string>
+
+    <string name="password_not_allowed_to_be_empty">Password not allowed to empty!</string>
+    <string name="minimum_password_length">Password should be at least 8 characters long!</string>
+
+    <string name="name_not_allowed_to_be_empty">Name not allowed to be empty!</string>
+    <string name="phone_not_allowed_to_be_empty">Phone number not allowed to be empty\n</string>
+    <string name="invalid_phone_number_format">Please input a valid phone number!</string>
+
     <string name="login_result">Login %s</string>
-    <string name="name_can_not_be_empty">Name can not be empty!</string>
-    <string name="phone_can_not_be_empty">Phone number can not be empty\n</string>
-    <string name="invalid_phone_number">Please input phone number correctly!</string>
+
     <string name="scan_animal">Scan an animal or plant near you to see the details</string>
     <string name="take_photo">Take Photo</string>
     <string name="upload_image">Upload Image</string>
     <string name="set_up_your_camera">Set Up Your Camera</string>
+
     <string name="tab_my_order">My Order</string>
     <string name="tab_my_report">My Report</string>
-    <string name="logout_message">Ingin keluar dari akun ini?</string>
-    <string name="no">Tidak</string>
-    <string name="yes">Ya</string>
-    <string name="onClickHandler">Feature not implemented yet</string>
-    <string name="not_given_access">Tidak mendapatkan akses.</string>
+
+    <string name="logout_message">Are you sure want to sign out?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+
+    <string name="on_click_handler">Feature not implemented yet</string>
+    <string name="not_given_access">Access not granted</string>
+
     <string name="search_by_category">Search by category</string>
     <string name="location">Location</string>
     <string name="plant">Plant</string>
     <string name="animal">Animal</string>
+
     <string name="scan_photo">Scan Photo</string>
     <string name="no_image_selected">Masukan foto terlebih dahulu</string>
     <string name="data_not_found">Data not found!</string>
+
     <string name="close">Close</string>
+
     <string name="add_data">Add</string>
     <string name="tour_guide">Tour Guide</string>
     <string name="community">Community</string>

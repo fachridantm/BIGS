@@ -137,7 +137,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
 
             this?.btnMaps?.setOnClickListener {
-                getString(R.string.onClickHandler).showMessage(requireContext())
+                getString(R.string.on_click_handler).showMessage(requireContext())
             }
         }
     }
@@ -162,11 +162,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun carouselItemClicked(geosite: Geosite) {
-        getString(R.string.onClickHandler).showMessage(requireContext())
+        getString(R.string.on_click_handler).showMessage(requireContext())
     }
 
     private fun cardItemClicked(biodiversity: Biodiversity) {
-        getString(R.string.onClickHandler).showMessage(requireContext())
+        getString(R.string.on_click_handler).showMessage(requireContext())
     }
 
 }
