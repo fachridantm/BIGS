@@ -19,9 +19,9 @@ inline fun <reified T> ComposableObserver(
     state: State<Resource<T>?>,
     onLoading: @Composable () -> Unit,
     onSuccess: @Composable (T) -> Unit,
-    onFailure: @Composable (String) -> Unit
+    onError: @Composable (String) -> Unit
 ) {
-    when (state.value as Resource<T>) {
+    when (state.value) {
         is Resource.Loading -> {
             onLoading.invoke()
         }
@@ -31,7 +31,7 @@ inline fun <reified T> ComposableObserver(
         }
 
         is Resource.Error -> {
-            onFailure.invoke(getErrorMessage(state.value))
+            onError.invoke(getErrorMessage(state.value))
         }
 
         else -> {}
