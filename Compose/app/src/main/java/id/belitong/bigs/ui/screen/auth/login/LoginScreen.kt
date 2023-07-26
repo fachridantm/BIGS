@@ -48,6 +48,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import id.belitong.bigs.R
 import id.belitong.bigs.core.domain.model.FormValidation
 import id.belitong.bigs.core.domain.model.User
@@ -57,16 +58,20 @@ import id.belitong.bigs.ui.composable.components.ValidationForm
 import id.belitong.bigs.ui.composable.utils.ComposableObserver
 import id.belitong.bigs.ui.composable.utils.getActivity
 import id.belitong.bigs.ui.composable.utils.getContext
+import id.belitong.bigs.ui.navigation.AuthNavGraph
+import id.belitong.bigs.ui.screen.destinations.RegisterScreenDestination
 import id.belitong.bigs.ui.screen.main.MainActivity
 import id.belitong.bigs.ui.theme.Dimension
 import id.belitong.bigs.ui.theme.md_theme_dark_secondary
 import id.belitong.bigs.ui.theme.seed
 import id.belitong.bigs.ui.theme.typography
 
-@Composable
+@AuthNavGraph(true)
 @Destination
+@Composable
 fun LoginScreen(
     loginViewModel: LoginViewModel = hiltViewModel(),
+    navigator: DestinationsNavigator? = null,
 ) {
     val activity = getActivity()
 
@@ -80,7 +85,9 @@ fun LoginScreen(
     LoginScreenContent(
         onClick = { email, password ->
             loginViewModel.loginUser(email, password)
-        }, isLoading = isLoading.value
+        },
+        isLoading = isLoading.value,
+        navigator = navigator,
     )
 
     ComposableObserver(state = loginResult,
@@ -117,7 +124,8 @@ fun saveSession(loginViewModel: LoginViewModel, activity: Activity, token: Strin
 fun LoginScreenContent(
     modifier: Modifier = Modifier,
     onClick: (String, String) -> Unit,
-    isLoading: Boolean = false
+    isLoading: Boolean = false,
+    navigator: DestinationsNavigator? = null,
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -322,11 +330,11 @@ fun LoginScreenContent(
                 Text(
                     modifier = Modifier
                         .padding(start = Dimension.SIZE_4)
-                        .clickable(onClick = {
-                            context
-                                .getString(R.string.on_click_handler)
-                                .showToast(context)
-                        }),
+                        .clickable(
+                            onClick = {
+                                navigator?.navigate(RegisterScreenDestination)
+                            }
+                        ),
                     textAlign = TextAlign.Center,
                     text = stringResource(R.string.sign_up),
                     color = md_theme_dark_secondary,
