@@ -33,6 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import id.belitong.bigs.R
 import id.belitong.bigs.core.domain.model.FormValidation
 import id.belitong.bigs.core.utils.emptyString
+import id.belitong.bigs.ui.composable.utils.getContext
 import id.belitong.bigs.ui.theme.Dimension
 import id.belitong.bigs.ui.theme.md_theme_light_error
 import id.belitong.bigs.ui.theme.seed
@@ -170,13 +171,13 @@ fun passwordToggleView(showPassword: Boolean, onClick: () -> Unit): @Composable 
 @Preview(showBackground = true)
 @Composable
 fun ValidationFormPreview() {
-
+    val context = getContext()
     val emailValidation =
         remember {
             mutableStateOf(
                 FormValidation(
-                    hint = "Email Address",
-                    errorMessage = "Email cannot be empty!"
+                    hint = context.getString(R.string.email_address),
+                    errorMessage = context.getString(R.string.email_not_allowed_to_be_empty),
                 )
             )
         }

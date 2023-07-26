@@ -7,7 +7,7 @@ import retrofit2.HttpException
 
 fun HttpException.getErrorMessage(): String? {
     val response = this.response()?.errorBody()?.string()
-    if (response == null || response.isEmpty()) return "Terjadi Kesalahan"
+    if (response == null || response.isEmpty()) return "Something went wrong"
     return try {
         val jsonObject = JSONObject(response)
         jsonObject.getString("message")

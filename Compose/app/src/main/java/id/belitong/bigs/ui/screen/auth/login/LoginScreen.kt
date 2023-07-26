@@ -37,11 +37,11 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
@@ -56,6 +56,7 @@ import id.belitong.bigs.ui.composable.components.ButtonWithDrawableStart
 import id.belitong.bigs.ui.composable.components.ValidationForm
 import id.belitong.bigs.ui.composable.utils.ComposableObserver
 import id.belitong.bigs.ui.composable.utils.getActivity
+import id.belitong.bigs.ui.composable.utils.getContext
 import id.belitong.bigs.ui.screen.main.MainActivity
 import id.belitong.bigs.ui.theme.Dimension
 import id.belitong.bigs.ui.theme.md_theme_dark_secondary
@@ -146,13 +147,13 @@ fun LoginScreenContent(
             verticalArrangement = Arrangement.Top,
         ) {
 
-            val context = LocalContext.current
+            val context = getContext()
 
             val emailValidation =
                 remember {
                     mutableStateOf(
                         FormValidation(
-                            hint = "Email Address",
+                            hint = context.getString(R.string.email_address),
                             errorMessage = emailErrorMessage
                         )
                     )
@@ -161,7 +162,7 @@ fun LoginScreenContent(
             val passwordValidation = remember {
                 mutableStateOf(
                     FormValidation(
-                        hint = "Password",
+                        hint = context.getString(R.string.password),
                         errorMessage = passwordErrorMessage
                     )
                 )
@@ -217,7 +218,10 @@ fun LoginScreenContent(
                         text = it
                     )
                 },
-                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    imeAction = ImeAction.Done,
+                    keyboardType = KeyboardType.Email
+                ),
                 onImeKeyAction = {
                     keyboardController?.hide()
                 })
@@ -242,7 +246,9 @@ fun LoginScreenContent(
                     modifier = Modifier
                         .padding(top = Dimension.SIZE_8)
                         .clickable(onClick = {
-                            "Feature not implemented yet".showToast(context)
+                            context
+                                .getString(R.string.on_click_handler)
+                                .showToast(context)
                         }),
                     textDecoration = TextDecoration.Underline,
                     textAlign = TextAlign.End,
@@ -299,7 +305,7 @@ fun LoginScreenContent(
                 borderStroke = BorderStroke(Dimension.SIZE_1, Color.Black),
                 drawableStart = painterResource(R.drawable.ic_google),
                 onClick = {
-                    "Feature not implemented yet".showToast(context)
+                    context.getString(R.string.on_click_handler).showToast(context)
                 })
             Row(
                 modifier = Modifier
@@ -317,7 +323,9 @@ fun LoginScreenContent(
                     modifier = Modifier
                         .padding(start = 4.dp)
                         .clickable(onClick = {
-                            "Feature not implemented yet".showToast(context)
+                            context
+                                .getString(R.string.on_click_handler)
+                                .showToast(context)
                         }),
                     textAlign = TextAlign.Center,
                     text = stringResource(R.string.sign_up),

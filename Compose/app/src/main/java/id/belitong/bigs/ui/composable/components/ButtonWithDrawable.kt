@@ -119,7 +119,7 @@ fun ButtonWithDrawableEndPreview() {
     ButtonWithDrawableEnd(
         modifier = Modifier.padding(16.dp),
         buttonColor = ButtonDefaults.buttonColors(containerColor = md_theme_dark_secondary),
-        textButton = "Explore Now",
+        textButton = stringResource(R.string.explore_now),
         textColor = Color.Black,
         drawableEnd = painterResource(R.drawable.ic_explore_now),
         drawableTint = Color.Black,
