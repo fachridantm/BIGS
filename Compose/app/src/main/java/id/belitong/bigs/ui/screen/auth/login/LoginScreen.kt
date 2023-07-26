@@ -114,7 +114,9 @@ fun saveSession(loginViewModel: LoginViewModel, activity: Activity, token: Strin
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun LoginScreenContent(
-    modifier: Modifier = Modifier, onClick: (String, String) -> Unit, isLoading: Boolean = false
+    modifier: Modifier = Modifier,
+    onClick: (String, String) -> Unit,
+    isLoading: Boolean = false
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
 
