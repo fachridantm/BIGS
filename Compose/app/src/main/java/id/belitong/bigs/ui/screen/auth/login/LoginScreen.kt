@@ -243,7 +243,10 @@ fun LoginScreenContent(
                         text = it
                     )
                 },
-                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    imeAction = ImeAction.Done,
+                    keyboardType = KeyboardType.Password
+                ),
                 onImeKeyAction = {
                     keyboardController?.hide()
                 })
