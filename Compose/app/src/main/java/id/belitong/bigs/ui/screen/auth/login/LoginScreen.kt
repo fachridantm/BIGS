@@ -321,7 +321,7 @@ fun LoginScreenContent(
                 )
                 Text(
                     modifier = Modifier
-                        .padding(start = 4.dp)
+                        .padding(start = Dimension.SIZE_4)
                         .clickable(onClick = {
                             context
                                 .getString(R.string.on_click_handler)
