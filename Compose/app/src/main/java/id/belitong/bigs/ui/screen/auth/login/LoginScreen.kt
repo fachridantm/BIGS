@@ -340,7 +340,9 @@ fun LoginScreenContent(
 @Preview(showBackground = true)
 @Composable
 fun LoginScreenPreview() {
-    LoginScreenContent(onClick = { email, password ->
-        Log.d("LoginScreen", "email: $email, password: $password")
-    })
+    LoginScreenContent(
+        onClick = { email, password ->
+            Log.d("LoginScreen", "email: $email, password: $password")
+        }
+    )
 }
