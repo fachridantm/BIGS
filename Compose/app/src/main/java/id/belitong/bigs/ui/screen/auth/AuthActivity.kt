@@ -5,8 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import com.ramcosta.composedestinations.DestinationsNavHost
 import dagger.hilt.android.AndroidEntryPoint
-import id.belitong.bigs.ui.screen.auth.login.LoginScreen
+import id.belitong.bigs.ui.screen.NavGraphs
 import id.belitong.bigs.ui.theme.BIGSComposeTheme
 
 @AndroidEntryPoint
@@ -15,7 +16,7 @@ class AuthActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             BIGSComposeTheme {
-                LoginScreen()
+                DestinationsNavHost(navGraph = NavGraphs.auth)
             }
         }
     }
