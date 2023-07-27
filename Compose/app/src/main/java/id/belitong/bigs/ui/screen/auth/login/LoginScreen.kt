@@ -145,8 +145,7 @@ fun LoginScreenContent(
                 .align(Alignment.Center)
                 .alpha(visibility),
             color = seed,
-            strokeWidth = Dimension.SIZE_4,
-            progress = 0.5f,
+            strokeWidth = Dimension.SIZE_8,
         )
         Column(
             modifier = Modifier
@@ -200,7 +199,7 @@ fun LoginScreenContent(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 64.dp),
+                    .padding(top = Dimension.SIZE_64),
                 horizontalArrangement = Arrangement.Center,
             ) {
                 Image(
