@@ -119,6 +119,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     private fun saveSession(token: String, user: User) {
         loginViewModel.saveSession(token, user)
         startActivity(Intent(requireActivity(), MainActivity::class.java))
+        requireActivity.finish()
     }
 
     private fun showLoading(isLoading: Boolean) {
