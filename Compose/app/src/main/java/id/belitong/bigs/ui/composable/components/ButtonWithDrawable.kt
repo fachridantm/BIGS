@@ -21,6 +21,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import id.belitong.bigs.R
+import id.belitong.bigs.ui.theme.Dimension
 import id.belitong.bigs.ui.theme.md_theme_dark_secondary
 import id.belitong.bigs.ui.theme.typography
 
@@ -43,7 +44,7 @@ fun ButtonWithDrawableEnd(
         modifier = modifier
     ) {
         Row(
-            modifier = Modifier.padding(horizontal = 32.dp, vertical = 4.dp),
+            modifier = Modifier.padding(horizontal = Dimension.SIZE_32, vertical = Dimension.SIZE_8),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
@@ -76,7 +77,7 @@ fun ButtonWithDrawableStart(
     buttonColor: ButtonColors,
     textButton: String,
     textColor: Color,
-    borderStroke: BorderStroke = BorderStroke(1.dp, Color.Unspecified),
+    borderStroke: BorderStroke = BorderStroke(Dimension.SIZE_1, Color.Unspecified),
     drawableStart: Painter,
     drawableTint: Color = Color.Unspecified,
     enabled: Boolean = true,
@@ -91,7 +92,7 @@ fun ButtonWithDrawableStart(
         modifier = modifier
     ) {
         Row(
-            modifier = Modifier.padding(horizontal = 32.dp, vertical = 4.dp),
+            modifier = Modifier.padding(horizontal = Dimension.SIZE_32, vertical = 4.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
@@ -102,7 +103,7 @@ fun ButtonWithDrawableStart(
                     .padding(end = 16.dp)
             )
             Text(
-                modifier = Modifier.padding(horizontal = 12.dp),
+                modifier = Modifier.padding(horizontal = Dimension.SIZE_12),
                 text = textButton,
                 maxLines = 1,
                 style = typography.button,
@@ -117,7 +118,7 @@ fun ButtonWithDrawableStart(
 @Composable
 fun ButtonWithDrawableEndPreview() {
     ButtonWithDrawableEnd(
-        modifier = Modifier.padding(16.dp),
+        modifier = Modifier.padding(Dimension.SIZE_16),
         buttonColor = ButtonDefaults.buttonColors(containerColor = md_theme_dark_secondary),
         textButton = stringResource(R.string.explore_now),
         textColor = Color.Black,
@@ -131,7 +132,7 @@ fun ButtonWithDrawableEndPreview() {
 @Composable
 fun ButtonWithDrawableStartPreview() {
     ButtonWithDrawableStart(
-        modifier = Modifier.padding(16.dp),
+        modifier = Modifier.padding(Dimension.SIZE_16),
         buttonColor = ButtonDefaults.buttonColors(containerColor = Color.White),
         textButton = stringResource(R.string.sign_in_with_google),
         textColor = Color.Black,
