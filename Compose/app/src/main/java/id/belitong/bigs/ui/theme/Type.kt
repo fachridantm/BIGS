@@ -5,7 +5,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
 import id.belitong.bigs.R
 
 private val PoppinsBold = FontFamily(Font(R.font.poppins_bold))
@@ -19,61 +18,61 @@ val typography = Typography(
     h1 = TextStyle(
         fontFamily = PoppinsSemiBold,
         fontWeight = FontWeight.SemiBold,
-        fontSize = 24.sp,
+        fontSize = TextSize.SIZE_24,
     ),
     h2 = TextStyle(
         fontFamily = PoppinsBold,
         fontWeight = FontWeight.Bold,
-        fontSize = 22.sp,
+        fontSize = TextSize.SIZE_22,
     ),
     h3 = TextStyle(
         fontFamily = PoppinsBold,
         fontWeight = FontWeight.Bold,
-        fontSize = 20.sp,
+        fontSize = TextSize.SIZE_20,
     ),
     h4 = TextStyle(
         fontFamily = PoppinsMedium,
         fontWeight = FontWeight.Medium,
-        fontSize = 18.sp,
+        fontSize = TextSize.SIZE_18,
     ),
     h5 = TextStyle(
         fontFamily = PoppinsRegular,
         fontWeight = FontWeight.Normal,
-        fontSize = 18.sp,
+        fontSize = TextSize.SIZE_18,
     ),
     body1 = TextStyle(
         fontFamily = PoppinsSemiBold,
         fontWeight = FontWeight.SemiBold,
-        fontSize = 16.sp,
+        fontSize = TextSize.SIZE_16,
     ),
     body2 = TextStyle(
         fontFamily = PoppinsRegular,
         fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
+        fontSize = TextSize.SIZE_16,
     ),
     subtitle1 = TextStyle(
         fontFamily = PoppinsRegular,
         fontWeight = FontWeight.Normal,
-        fontSize = 14.sp,
+        fontSize = TextSize.SIZE_14,
     ),
     subtitle2 = TextStyle(
         fontFamily = PoppinsMedium,
         fontWeight = FontWeight.Medium,
-        fontSize = 14.sp,
+        fontSize = TextSize.SIZE_14,
     ),
     button = TextStyle(
         fontFamily = PoppinsSemiBold,
         fontWeight = FontWeight.SemiBold,
-        fontSize = 16.sp,
+        fontSize = TextSize.SIZE_16,
     ),
     caption = TextStyle(
         fontFamily = PoppinsRegular,
         fontWeight = FontWeight.Normal,
-        fontSize = 12.sp,
+        fontSize = TextSize.SIZE_12,
     ),
     overline = TextStyle(
         fontFamily = PoppinsRegular,
         fontWeight = FontWeight.Normal,
-        fontSize = 12.sp,
+        fontSize = TextSize.SIZE_12,
     ),
 )

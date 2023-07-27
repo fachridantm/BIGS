@@ -35,6 +35,8 @@ object TextSize {
     val SIZE_14 = 14.sp
     val SIZE_16 = 16.sp
     val SIZE_18 = 18.sp
+    val SIZE_20 = 20.sp
+    val SIZE_22 = 22.sp
     val SIZE_24 = 24.sp
     val SIZE_32 = 32.sp
     val SIZE_40 = 40.sp
