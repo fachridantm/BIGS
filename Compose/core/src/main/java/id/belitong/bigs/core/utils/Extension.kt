@@ -20,3 +20,5 @@ fun HttpException.getErrorMessage(): String? {
 fun String.showToast(context: Context) {
     Toast.makeText(context, this, Toast.LENGTH_SHORT).show()
 }
+
+fun String.getFirstName(): String = this.split(" ")[0]
