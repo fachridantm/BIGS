@@ -45,7 +45,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import id.belitong.bigs.R
-import id.belitong.bigs.core.domain.model.FormValidation
+import id.belitong.bigs.ui.composable.model.FormValidation
 import id.belitong.bigs.core.utils.emptyString
 import id.belitong.bigs.core.utils.showToast
 import id.belitong.bigs.ui.composable.components.ValidationForm

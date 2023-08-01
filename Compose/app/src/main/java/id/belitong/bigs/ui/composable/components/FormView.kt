@@ -31,7 +31,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import id.belitong.bigs.R
-import id.belitong.bigs.core.domain.model.FormValidation
+import id.belitong.bigs.ui.composable.model.FormValidation
 import id.belitong.bigs.core.utils.emptyString
 import id.belitong.bigs.ui.composable.utils.getContext
 import id.belitong.bigs.ui.theme.Dimension
