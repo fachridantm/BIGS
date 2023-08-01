@@ -12,11 +12,11 @@ plugins {
 apply from: '../shared_dependencies.gradle'
 
 android {
-    namespace 'id.belitong.bigs'
+    namespace 'id.belitong.bigs.compose'
     compileSdk 33
 
     defaultConfig {
-        applicationId "id.belitong.bigs"
+        applicationId "id.belitong.bigs.compose"
         minSdk 24
         targetSdk 33
         versionCode 1
