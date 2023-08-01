@@ -1,4 +1,4 @@
-package id.belitong.bigs.core.domain.model
+package id.belitong.bigs.ui.composable.model
 
 import id.belitong.bigs.core.utils.emptyString
 

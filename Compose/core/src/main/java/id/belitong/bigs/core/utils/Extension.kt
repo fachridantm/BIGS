@@ -22,3 +22,5 @@ fun String.showToast(context: Context) {
 }
 
 fun String.getFirstName(): String = this.split(" ")[0]
+
+fun String.getFirstTwoWords(): String = this.split(" ")[0] + " " + this.split(" ")[1]

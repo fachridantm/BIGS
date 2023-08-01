@@ -35,4 +35,24 @@
 
     <string name="login_result">Login %s</string>
     <string name="on_click_handler">Feature not implemented yet</string>
+
+    <string name="home">Home</string>
+    <string name="maps">Maps</string>
+    <string name="add"><![CDATA[Scan & Add]]></string>
+
+    <string name="welcome">Welcome to</string>
+    <string name="geopark_belitong_user">Geopark Belitong, %s!</string>
+
+    <string name="profile">Profile</string>
+    <string name="search">Search</string>
+    <string name="geosites">Geosites</string>
+    <string name="geoprogramme">Geo-Programme</string>
+
+    <string name="explore_geopark">Explore Geopark Belitong</string>
+
+    <string name="all">All</string>
+    <string name="animals">Animals</string>
+    <string name="plants">Plants</string>
+
+    <string name="search_hint">Find Geosites, Plants, Animals</string>
 </resources>

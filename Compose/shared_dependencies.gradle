@@ -20,6 +20,9 @@ dependencies {
     implementation 'androidx.compose.material:material'
     implementation 'androidx.compose.material:material-icons-extended'
 
+    // Compose Glide
+    implementation 'com.github.bumptech.glide:compose:1.0.0-alpha.1'
+
     // Compose Navigation
     implementation 'androidx.navigation:navigation-compose:2.6.0'
 
