@@ -31,7 +31,7 @@ import id.belitong.bigs.compose.core.domain.model.Biodiversity
 import id.belitong.bigs.compose.core.domain.model.Geosite
 import id.belitong.bigs.compose.core.utils.getFirstTwoWords
 import id.belitong.bigs.compose.ui.theme.Dimension
-import id.belitong.bigs.compose.ui.theme.TextSize
+import id.belitong.bigs.compose.ui.theme.Text
 import id.belitong.bigs.compose.ui.theme.md_theme_dark_tertiary
 import id.belitong.bigs.compose.ui.theme.typography
 
@@ -75,7 +75,7 @@ fun CarouselItem(
                 text = geosites[page].name,
                 textAlign = TextAlign.Center,
                 color = Color.White,
-                style = typography.h4.copy(fontSize = TextSize.SIZE_14),
+                style = typography.h4.copy(fontSize = Text.SIZE_14),
             )
         }
     }
