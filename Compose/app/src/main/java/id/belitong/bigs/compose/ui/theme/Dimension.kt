@@ -28,7 +28,7 @@ object Dimension {
     val SIZE_100 = 100.dp
 }
 
-object Text {
+object TextS {
     val SIZE_1 = 1.sp
     val SIZE_2 = 2.sp
     val SIZE_4 = 4.sp
