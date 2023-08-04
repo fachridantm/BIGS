@@ -38,6 +38,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -64,7 +65,6 @@ import id.belitong.bigs.compose.ui.composable.components.ChipGroupSingleSelectio
 import id.belitong.bigs.compose.ui.composable.components.HomeGridItem
 import id.belitong.bigs.compose.ui.composable.model.BiodiversityFilter
 import id.belitong.bigs.compose.ui.composable.model.getAllBiodiversityFilter
-import id.belitong.bigs.compose.ui.composable.model.getBiodiversityFilter
 import id.belitong.bigs.compose.ui.composable.utils.getActivity
 import id.belitong.bigs.compose.ui.navigation.MainNavGraph
 import id.belitong.bigs.compose.ui.theme.Dimension
@@ -78,20 +78,40 @@ import id.belitong.bigs.compose.ui.theme.typography
 @Destination
 @Composable
 fun HomeScreen(
-    navigator: DestinationsNavigator? = null,
-    homeViewModel: HomeViewModel = hiltViewModel()
+    navigator: DestinationsNavigator? = null, homeViewModel: HomeViewModel = hiltViewModel()
 ) {
     val activity = getActivity()
     val name = homeViewModel.getName().observeAsState()
+
+    val selectedChip = remember { mutableStateOf(BiodiversityFilter.ALL) }
 
     BackHandler {
         activity.finish()
     }
 
+    val biodiversities = getAllBiodiversity()
+    var chipData by remember { mutableStateOf(biodiversities) }
+
+    when (selectedChip.value) {
+        BiodiversityFilter.GEOSITE -> {
+            chipData = biodiversities.filter { it.type != stringResource(R.string.animal) && it.type != stringResource(R.string.plant) }
+        }
+        BiodiversityFilter.ANIMAL -> {
+            chipData = biodiversities.filter { it.type == stringResource(R.string.animal) }
+        }
+        BiodiversityFilter.PLANT -> {
+            chipData = biodiversities.filter { it.type == stringResource(R.string.plant) }
+        }
+        else -> {
+            chipData = biodiversities
+        }
+    }
+
     HomeScreenContent(
         name = name.value?.getFirstName() ?: "No Name",
         geosites = getAllGeosites(),
-        biodiversities = getAllBiodiversity()
+        biodiversities = chipData,
+        selectedChip = selectedChip,
     )
 }
 
@@ -102,15 +122,12 @@ fun HomeScreenContent(
     name: String = "",
     geosites: List<Geosite> = emptyList(),
     biodiversities: List<Biodiversity> = emptyList(),
+    selectedChip: MutableState<BiodiversityFilter> = remember { mutableStateOf(BiodiversityFilter.ALL) },
     intentToGeosite: (Geosite) -> Unit = {},
     intentToDetail: () -> Unit = {},
     intentToProfile: () -> Unit = {},
     intentToSearchResult: () -> Unit = {},
 ) {
-
-    val selectedChip: MutableState<BiodiversityFilter> =
-        remember { mutableStateOf(getBiodiversityFilter(BiodiversityFilter.ALL.value)) }
-
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -179,8 +196,7 @@ fun HomeScreenContent(
                     color = Color.Black
                 )
                 HomeCarouselView(
-                    geosites = geosites,
-                    onItemClicked = intentToGeosite
+                    geosites = geosites, onItemClicked = intentToGeosite
                 )
                 Row(
                     modifier = Modifier
@@ -224,7 +240,7 @@ fun HomeScreenContent(
                     modifier = Modifier.fillMaxWidth(),
                     biodiversityFilter = getAllBiodiversityFilter(),
                     selectedChip = selectedChip.value,
-                    onChipSelected = { selectedChip.value = getBiodiversityFilter(it) },
+                    onChipSelected = { selectedChip.value = it },
                 )
                 LazyHorizontalGrid(
                     modifier = Modifier
@@ -238,8 +254,7 @@ fun HomeScreenContent(
                 ) {
                     items(biodiversities) {
                         HomeGridItem(
-                            biodiversity = it,
-                            onItemClicked = intentToDetail
+                            biodiversity = it, onItemClicked = intentToDetail
                         )
                     }
                 }
@@ -268,9 +283,7 @@ fun HomeCarouselView(
             pageSpacing = Dimension.SIZE_12,
         ) { page ->
             CarouselItem(
-                page = page,
-                geosites = geosites,
-                onItemClicked = onItemClicked
+                page = page, geosites = geosites, onItemClicked = onItemClicked
             )
         }
         DotsIndicator(
@@ -282,7 +295,7 @@ fun HomeCarouselView(
                 ), shiftSizeFactor = 2.5f
             ),
             pagerState = carouselPagerState,
-            dotSpacing = Dimension.SIZE_4,
+            dotSpacing = Dimension.SIZE_6,
         )
     }
 }

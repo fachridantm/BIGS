@@ -15,13 +15,3 @@ fun getAllBiodiversityFilter(): List<BiodiversityFilter> {
         BiodiversityFilter.PLANT,
     )
 }
-
-fun getBiodiversityFilter(value: String): BiodiversityFilter {
-    return when (value) {
-        BiodiversityFilter.ALL.value -> BiodiversityFilter.ALL
-        BiodiversityFilter.GEOSITE.value -> BiodiversityFilter.GEOSITE
-        BiodiversityFilter.ANIMAL.value -> BiodiversityFilter.ANIMAL
-        BiodiversityFilter.PLANT.value -> BiodiversityFilter.PLANT
-        else -> BiodiversityFilter.ALL
-    }
-}

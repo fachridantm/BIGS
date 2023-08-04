@@ -28,8 +28,8 @@ import id.belitong.bigs.compose.ui.theme.typography
 fun ChipGroupSingleSelection(
     modifier: Modifier = Modifier,
     biodiversityFilter: List<BiodiversityFilter> = getAllBiodiversityFilter(),
-    selectedChip: BiodiversityFilter? = BiodiversityFilter.ALL,
-    onChipSelected: (String) -> Unit,
+    selectedChip: BiodiversityFilter = BiodiversityFilter.ALL,
+    onChipSelected: (BiodiversityFilter) -> Unit,
 ) {
     LazyRow(
         modifier = modifier,
@@ -39,7 +39,7 @@ fun ChipGroupSingleSelection(
             FilterChip(
                 selected = selectedChip == it,
                 onClick = {
-                    onChipSelected(it.value)
+                    onChipSelected(it)
                 },
                 label = {
                     Text(
