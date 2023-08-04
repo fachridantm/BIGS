@@ -55,4 +55,17 @@
     <string name="plants">Plants</string>
 
     <string name="search_hint">Find Geosites, Plants, Animals</string>
+
+    <string name="plant">Plant</string>
+    <string name="animal">Animal</string>
+
+    <string name="set_up_your_camera">Set Up Your Camera</string>
+    <string name="scan_animal">Scan an animal or plant near you to see the details</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="upload_image">Upload Image</string>
+
+    <string name="scan_photo">Scan Photo</string>
+    <string name="no_image_selected">Masukan foto terlebih dahulu</string>
+    <string name="data_not_found">Data not found!</string>
+    <string name="scanning_plant">Scanning plant</string>
 </resources>

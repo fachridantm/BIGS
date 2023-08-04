@@ -20,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -92,34 +93,44 @@ fun ButtonWithDrawableStart(
     drawableStart: Painter,
     drawableTint: Color = Color.Unspecified,
     enabled: Boolean = true,
+    shape: Shape = MaterialTheme.shapes.small,
+    innerPadding: PaddingValues = PaddingValues(
+        horizontal = Dimension.SIZE_32,
+        vertical = Dimension.SIZE_12
+    ),
+    textPadding: PaddingValues = PaddingValues(horizontal = Dimension.SIZE_12),
+    iconPadding: PaddingValues = PaddingValues(end = Dimension.SIZE_12),
+    textOverflow: TextOverflow = TextOverflow.Visible,
+    horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
     onClick: () -> Unit
 ) {
     Button(
         onClick = onClick,
         colors = buttonColor,
-        shape = MaterialTheme.shapes.small,
+        shape = shape,
         border = borderStroke,
         enabled = enabled,
-        modifier = modifier
+        modifier = modifier,
+        contentPadding = innerPadding,
     ) {
         Row(
-            modifier = Modifier.padding(horizontal = Dimension.SIZE_32, vertical = 4.dp),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = horizontalArrangement,
         ) {
             Icon(
                 painter = drawableStart,
                 contentDescription = null,
                 tint = drawableTint,
-                modifier = Modifier
-                    .padding(end = 16.dp)
+                modifier = Modifier.padding(iconPadding)
             )
             Text(
-                modifier = Modifier.padding(horizontal = Dimension.SIZE_12),
+                modifier = Modifier.padding(textPadding),
                 text = textButton,
                 maxLines = 1,
                 style = typography.button,
                 textAlign = TextAlign.Center,
                 color = textColor,
+                overflow = textOverflow
             )
         }
     }

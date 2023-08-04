@@ -26,8 +26,8 @@ val typography = Typography(
         fontSize = TextS.SIZE_22,
     ),
     h3 = TextStyle(
-        fontFamily = PoppinsBold,
-        fontWeight = FontWeight.Bold,
+        fontFamily = PoppinsSemiBold,
+        fontWeight = FontWeight.SemiBold,
         fontSize = TextS.SIZE_20,
     ),
     h4 = TextStyle(
