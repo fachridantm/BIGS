@@ -1,6 +1,6 @@
 {
     "target": "Chip",
-    "package": "id.belitong.bigs.compose.chip",
+    "package": "id.belitong.bigs.compose.ui.composable.components",
     "generateImplementation": true,
     "generatePreviews": true
 }
