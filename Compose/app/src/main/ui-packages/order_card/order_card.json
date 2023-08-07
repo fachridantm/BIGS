@@ -1,0 +1,676 @@
+{
+  "name": "order_card",
+  "version": 32,
+  "source-key": {
+    "type": "figma",
+    "file": "BNBEq2adTG6wzEWpkbTuHH",
+    "node": "1472:360",
+    "version": "3946340199",
+    "component-id": "cfec91c37a34cf32fbb03477bc78802d6285b404"
+  },
+  "default": "Order Card",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "adin_component",
+        "id": "Chip",
+        "key": "chip"
+      },
+      {
+        "type": "group",
+        "id": "Group 7143"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 1627"
+      },
+      {
+        "type": "text",
+        "id": "Moss Hill"
+      },
+      {
+        "type": "group",
+        "id": "Group 7137"
+      },
+      {
+        "type": "group",
+        "id": "Group 7138"
+      },
+      {
+        "type": "group",
+        "id": "Group 7139"
+      },
+      {
+        "type": "group",
+        "id": "Group 7140"
+      },
+      {
+        "type": "group",
+        "id": "Group 7142"
+      },
+      {
+        "type": "image",
+        "id": "image 117"
+      },
+      {
+        "type": "text",
+        "id": "Status :"
+      },
+      {
+        "type": "text",
+        "id": "Tour Guide Name:"
+      },
+      {
+        "type": "text",
+        "id": "Givan Massa"
+      },
+      {
+        "type": "text",
+        "id": "Booking Date:"
+      },
+      {
+        "type": "text",
+        "id": "Sat, 5 June 2023, At 08.00 WIB"
+      },
+      {
+        "type": "text",
+        "id": "Tour Date:"
+      },
+      {
+        "type": "text",
+        "id": "Sun, 6 June 2023, At 10.00 WIB"
+      },
+      {
+        "type": "text",
+        "id": "Contact :"
+      },
+      {
+        "type": "text",
+        "id": "08134848470333"
+      },
+      {
+        "type": "text",
+        "id": "Program"
+      },
+      {
+        "type": "text",
+        "id": "Vacation"
+      }
+    ],
+    "modes": {
+      "Order Card": {
+        "rules": [
+          {
+            "id": "top_level",
+            "is-structured": "false",
+            "children": [
+              "Chip",
+              "Group 7143"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Chip",
+            "margin": {
+              "left": "17.718017578125",
+              "top": "227.29959106445312",
+              "right": "174.692138671875",
+              "bottom": "14.159141540527344"
+            },
+            "design": "Property 1=Variant2",
+            "chip-text": "$subchip-text"
+          },
+          {
+            "id": "Group 7143",
+            "is-structured": "false",
+            "children": [
+              "Rectangle 1627",
+              "Moss Hill",
+              "Group 7137",
+              "Group 7138",
+              "Group 7139",
+              "Group 7140",
+              "Group 7142",
+              "image 117",
+              "Status :"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Rectangle 1627",
+            "border-radius": "7.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "rectangle_1627.svg"
+          },
+          {
+            "id": "Moss Hill",
+            "margin": {
+              "left": "15.363037109375",
+              "top": "10.7666015625",
+              "right": "236.636962890625",
+              "bottom": "234.16455078125"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "font-weight": "500.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.0"
+            },
+            "text-content": "$headline",
+            "overflow": "visible",
+            "text-align": "left",
+            "line-height": "1.4285714721679688",
+            "typeface": "Poppins"
+          },
+          {
+            "id": "Group 7137",
+            "margin": {
+              "left": "15.363037109375",
+              "top": "139.853515625",
+              "right": "207.636962890625",
+              "bottom": "96.07763671875"
+            },
+            "is-structured": "false",
+            "children": [
+              "Tour Guide Name:",
+              "Givan Massa"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Group 7138",
+            "margin": {
+              "left": "15.363037109375",
+              "top": "37.853515625",
+              "right": "150.636962890625",
+              "bottom": "198.07763671875"
+            },
+            "is-structured": "false",
+            "children": [
+              "Booking Date:",
+              "Sat, 5 June 2023, At 08.00 WIB"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Group 7139",
+            "margin": {
+              "left": "15.363037109375",
+              "top": "71.853515625",
+              "right": "151.636962890625",
+              "bottom": "164.07763671875"
+            },
+            "is-structured": "false",
+            "children": [
+              "Tour Date:",
+              "Sun, 6 June 2023, At 10.00 WIB"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Group 7140",
+            "margin": {
+              "left": "15.363037109375",
+              "top": "173.853515625",
+              "right": "214.636962890625",
+              "bottom": "62.07763671875"
+            },
+            "is-structured": "false",
+            "children": [
+              "Contact :",
+              "08134848470333"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Group 7142",
+            "margin": {
+              "left": "15.363037109375",
+              "top": "105.853515625",
+              "right": "251.636962890625",
+              "bottom": "130.07763671875"
+            },
+            "is-structured": "false",
+            "children": [
+              "Program",
+              "Vacation"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "image 117",
+            "margin": {
+              "left": "177.0",
+              "top": "19.0166015625",
+              "right": "15.0",
+              "bottom": "139.1549072265625"
+            },
+            "border-radius": "10.0",
+            "drop-shadow": {
+              "color": {
+                "alpha": "0.24705882352941178",
+                "hue": "0.0",
+                "saturation": "0.0",
+                "value": "0.0"
+              },
+              "blur": "4.0",
+              "offset-x": "0.0",
+              "offset-y": "4.0",
+              "spread": "0.0",
+              "blend-mode": "normal"
+            },
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": "-4.0"
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": "0.0"
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "image-content": "$hero-image",
+            "scale": "cover"
+          },
+          {
+            "id": "Status :",
+            "margin": {
+              "left": "15.363037109375",
+              "top": "207.853515625",
+              "right": "260.636962890625",
+              "bottom": "44.07763671875"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "color": {
+              "alpha": "0.4",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.0"
+            },
+            "text-content": "Status :",
+            "overflow": "visible",
+            "text-align": "left",
+            "text-size": "10.0",
+            "line-height": "1.3",
+            "typeface": "Poppins"
+          },
+          {
+            "id": "Tour Guide Name:",
+            "margin": {
+              "bottom": "16.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "color": {
+              "alpha": "0.4",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.0"
+            },
+            "text-content": "Tour Guide Name:",
+            "overflow": "visible",
+            "text-align": "left",
+            "text-size": "10.0",
+            "line-height": "1.3",
+            "typeface": "Poppins"
+          },
+          {
+            "id": "Givan Massa",
+            "margin": {
+              "top": "16.0",
+              "right": "25.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.0"
+            },
+            "text-content": "Givan Massa",
+            "overflow": "visible",
+            "text-align": "left",
+            "text-size": "10.0",
+            "line-height": "1.3",
+            "typeface": "Poppins"
+          },
+          {
+            "id": "Booking Date:",
+            "margin": {
+              "right": "78.0",
+              "bottom": "16.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "color": {
+              "alpha": "0.4",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.0"
+            },
+            "text-content": "$title",
+            "overflow": "visible",
+            "text-align": "left",
+            "text-size": "10.0",
+            "line-height": "1.3",
+            "typeface": "Poppins"
+          },
+          {
+            "id": "Sat, 5 June 2023, At 08.00 WIB",
+            "margin": {
+              "top": "16.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.0"
+            },
+            "text-content": "$subtitle",
+            "overflow": "visible",
+            "text-align": "left",
+            "text-size": "10.0",
+            "line-height": "1.3",
+            "typeface": "Poppins"
+          },
+          {
+            "id": "Tour Date:",
+            "margin": {
+              "right": "95.0",
+              "bottom": "16.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "color": {
+              "alpha": "0.4",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.0"
+            },
+            "text-content": "Tour Date:",
+            "overflow": "visible",
+            "text-align": "left",
+            "text-size": "10.0",
+            "line-height": "1.3",
+            "typeface": "Poppins"
+          },
+          {
+            "id": "Sun, 6 June 2023, At 10.00 WIB",
+            "margin": {
+              "top": "16.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.0"
+            },
+            "text-content": "Sun, 6 June 2023, At 10.00 WIB",
+            "overflow": "visible",
+            "text-align": "left",
+            "text-size": "10.0",
+            "line-height": "1.3",
+            "typeface": "Poppins"
+          },
+          {
+            "id": "Contact :",
+            "margin": {
+              "right": "37.0",
+              "bottom": "16.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "color": {
+              "alpha": "0.4",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.0"
+            },
+            "text-content": "Contact :",
+            "overflow": "visible",
+            "text-align": "left",
+            "text-size": "10.0",
+            "line-height": "1.3",
+            "typeface": "Poppins"
+          },
+          {
+            "id": "08134848470333",
+            "margin": {
+              "top": "16.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.0"
+            },
+            "text-content": "08134848470333",
+            "overflow": "visible",
+            "text-align": "left",
+            "text-size": "10.0",
+            "line-height": "1.3",
+            "typeface": "Poppins"
+          },
+          {
+            "id": "Program",
+            "margin": {
+              "right": "2.0",
+              "bottom": "16.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "color": {
+              "alpha": "0.4",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.0"
+            },
+            "text-content": "Program",
+            "overflow": "visible",
+            "text-align": "left",
+            "text-size": "10.0",
+            "line-height": "1.3",
+            "typeface": "Poppins"
+          },
+          {
+            "id": "Vacation",
+            "margin": {
+              "top": "16.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.0"
+            },
+            "text-content": "Vacation",
+            "overflow": "visible",
+            "text-align": "left",
+            "text-size": "10.0",
+            "line-height": "1.3",
+            "typeface": "Poppins"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "subchip-text": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    },
+    "headline": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    },
+    "hero-image": {
+      "data-type": "image",
+      "required": false,
+      "description": ""
+    },
+    "title": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    },
+    "subtitle": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    }
+  },
+  "previews": [
+    {
+      "design": "Order Card",
+      "size": {
+        "width": 313.0,
+        "height": 264.93115234375
+      },
+      "parameters": {
+        "subchip-text": "Completed",
+        "headline": "Moss Hill",
+        "hero-image": "image_117.png",
+        "title": "Booking Date:",
+        "subtitle": "Sat, 5 June 2023, At 08.00 WIB"
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}

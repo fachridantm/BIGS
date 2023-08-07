@@ -1,0 +1,6 @@
+{
+    "target": "OrderCard",
+    "package": "id.belitong.bigs.compose.ui.composable.components",
+    "generateImplementation": true,
+    "generatePreviews": true
+}
