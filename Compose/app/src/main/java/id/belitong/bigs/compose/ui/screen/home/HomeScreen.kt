@@ -2,8 +2,8 @@ package id.belitong.bigs.compose.ui.screen.home
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,7 +21,6 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
@@ -42,7 +41,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -94,14 +92,19 @@ fun HomeScreen(
 
     when (selectedChip.value) {
         BiodiversityFilter.GEOSITE -> {
-            chipData = biodiversities.filter { it.type != stringResource(R.string.animal) && it.type != stringResource(R.string.plant) }
+            chipData = biodiversities.filter {
+                it.type != stringResource(R.string.animal) && it.type != stringResource(R.string.plant)
+            }
         }
+
         BiodiversityFilter.ANIMAL -> {
             chipData = biodiversities.filter { it.type == stringResource(R.string.animal) }
         }
+
         BiodiversityFilter.PLANT -> {
             chipData = biodiversities.filter { it.type == stringResource(R.string.plant) }
         }
+
         else -> {
             chipData = biodiversities
         }
@@ -128,6 +131,8 @@ fun HomeScreenContent(
     intentToProfile: () -> Unit = {},
     intentToSearchResult: () -> Unit = {},
 ) {
+    val interactionSource = remember { MutableInteractionSource() }
+
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -138,15 +143,21 @@ fun HomeScreenContent(
             modifier = Modifier.fillMaxHeight()
         ) {
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = Dimension.SIZE_4),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceEvenly
+                horizontalArrangement = Arrangement.End
             ) {
                 OutlinedTextField(
                     modifier = Modifier
-                        .clip(RoundedCornerShape(Dimension.SIZE_8))
+                        .height(Dimension.SIZE_48)
+                        .weight(1f)
+                        .padding(horizontal = Dimension.SIZE_12)
                         .clickable(
-                            onClick = intentToSearchResult
+                            onClick = intentToSearchResult,
+                            interactionSource = interactionSource,
+                            indication = null,
                         ),
                     value = "",
                     onValueChange = {},
@@ -161,19 +172,22 @@ fun HomeScreenContent(
                     leadingIcon = {
                         Icon(
                             modifier = Modifier.clickable(
-                                onClick = intentToSearchResult
+                                onClick = intentToSearchResult,
+                                interactionSource = interactionSource,
+                                indication = null,
                             ), imageVector = Icons.Default.Search, contentDescription = null
                         )
                     },
+                    enabled = false,
                     colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = Color.Black,
-                        unfocusedBorderColor = Color.Black,
+                        unfocusedBorderColor = Color.Black.copy(alpha = 0.6f),
+                        disabledBorderColor = Color.Black.copy(alpha = 0.6f),
                         cursorColor = Color.Transparent
                     ),
                 )
-                Image(
+                Icon(
                     modifier = Modifier
-                        .padding(start = Dimension.SIZE_4, end = Dimension.SIZE_8)
+                        .padding(end = Dimension.SIZE_24)
                         .clickable(
                             onClick = intentToProfile
                         ),
