@@ -39,7 +39,6 @@ import id.belitong.bigs.compose.ui.theme.typography
 fun AddScreen(
     navigator: DestinationsNavigator? = null
 ) {
-    // TODO 4: Create UI AddScreen
     AddScreenContent()
 }
 
