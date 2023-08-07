@@ -68,4 +68,8 @@
     <string name="no_image_selected">Masukan foto terlebih dahulu</string>
     <string name="data_not_found">Data not found!</string>
     <string name="scanning_plant">Scanning plant</string>
+
+    <string name="history">History</string>
+    <string name="my_order">My Order</string>
+    <string name="my_report">My Report</string>
 </resources>
