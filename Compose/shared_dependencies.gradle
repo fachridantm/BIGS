@@ -48,6 +48,10 @@ dependencies {
     // Dots Indicator
     implementation 'com.tbuonomo:dotsindicator:5.0'
 
+    // Accompanist Pager
+    implementation "com.google.accompanist:accompanist-pager:0.13.0"
+    implementation "com.google.accompanist:accompanist-pager-indicators:0.13.0"
+
     // Dependency Injection
     kapt 'androidx.hilt:hilt-compiler:1.0.0'
     kapt 'com.google.dagger:hilt-compiler:2.45'
