@@ -1,0 +1,279 @@
+{
+  "name": "chip",
+  "version": 32,
+  "source-key": {
+    "type": "figma",
+    "file": "BNBEq2adTG6wzEWpkbTuHH",
+    "node": "1472:312",
+    "version": "3946340199",
+    "component-id": "8c9c6d2191180b65e20f63c54d1fedb17f4dd2f4"
+  },
+  "default": "Property 1=Default",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "group",
+        "id": "Group 7136"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 1663"
+      },
+      {
+        "type": "text",
+        "id": "Pending"
+      }
+    ],
+    "modes": {
+      "Property 1=Default": {
+        "rules": [
+          {
+            "id": "top_level",
+            "is-structured": "false",
+            "children": [
+              "Group 7136"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Group 7136",
+            "is-structured": "false",
+            "children": [
+              "Rectangle 1663",
+              "Pending"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Rectangle 1663",
+            "border-radius": "5.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "rectangle_1663.svg"
+          },
+          {
+            "id": "Pending",
+            "margin": {
+              "left": "34.794921875",
+              "top": "1.736328125",
+              "right": "34.794921875",
+              "bottom": "1.736083984375"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "font-weight": "600.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            },
+            "text-content": "$chip-text",
+            "overflow": "visible",
+            "text-align": "left",
+            "text-size": "12.0",
+            "line-height": "1.6666667175292968",
+            "typeface": "Poppins"
+          }
+        ]
+      },
+      "Property 1=Variant2": {
+        "rules": [
+          {
+            "id": "top_level",
+            "is-structured": "false",
+            "children": [
+              "Group 7136"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Group 7136",
+            "is-structured": "false",
+            "children": [
+              "Rectangle 1663",
+              "Pending"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Rectangle 1663",
+            "border-radius": "5.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "rectangle_1664.svg"
+          },
+          {
+            "id": "Pending",
+            "margin": {
+              "left": "25.794921875",
+              "top": "1.736328125",
+              "right": "25.794921875",
+              "bottom": "1.736083984375"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "font-weight": "600.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            },
+            "text-content": "$chip-text",
+            "overflow": "visible",
+            "text-size": "12.0",
+            "line-height": "1.6666667175292968",
+            "typeface": "Poppins"
+          }
+        ]
+      },
+      "Property 1=Variant3": {
+        "rules": [
+          {
+            "id": "top_level",
+            "is-structured": "false",
+            "children": [
+              "Group 7136"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Group 7136",
+            "is-structured": "false",
+            "children": [
+              "Rectangle 1663",
+              "Pending"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Rectangle 1663",
+            "border-radius": "5.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "rectangle_1665.svg"
+          },
+          {
+            "id": "Pending",
+            "margin": {
+              "left": "28.794921875",
+              "top": "1.736328125",
+              "right": "28.794921875",
+              "bottom": "1.736083984375"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "font-weight": "600.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            },
+            "text-content": "$chip-text",
+            "overflow": "visible",
+            "text-size": "12.0",
+            "line-height": "1.6666667175292968",
+            "typeface": "Poppins"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "chip-text": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    }
+  },
+  "previews": [
+    {
+      "design": "Property 1=Default",
+      "size": {
+        "width": 120.58984375,
+        "height": 23.472412109375
+      },
+      "parameters": {
+        "chip-text": "Pending"
+      }
+    },
+    {
+      "design": "Property 1=Variant2",
+      "size": {
+        "width": 120.58984375,
+        "height": 23.472412109375
+      },
+      "parameters": {
+        "chip-text": "Completed"
+      }
+    },
+    {
+      "design": "Property 1=Variant3",
+      "size": {
+        "width": 120.58984375,
+        "height": 23.472412109375
+      },
+      "parameters": {
+        "chip-text": "Cancelled"
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}
