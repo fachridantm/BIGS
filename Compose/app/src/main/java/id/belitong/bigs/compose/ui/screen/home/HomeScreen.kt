@@ -42,6 +42,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -57,6 +58,7 @@ import id.belitong.bigs.compose.core.domain.model.Geosite
 import id.belitong.bigs.compose.core.utils.DummyData.getAllBiodiversity
 import id.belitong.bigs.compose.core.utils.DummyData.getAllGeosites
 import id.belitong.bigs.compose.core.utils.getFirstName
+import id.belitong.bigs.compose.core.utils.showToast
 import id.belitong.bigs.compose.ui.composable.components.ButtonWithDrawableTop
 import id.belitong.bigs.compose.ui.composable.components.CarouselItem
 import id.belitong.bigs.compose.ui.composable.components.ChipGroupSingleSelection
@@ -65,6 +67,10 @@ import id.belitong.bigs.compose.ui.composable.model.BiodiversityFilter
 import id.belitong.bigs.compose.ui.composable.model.getAllBiodiversityFilter
 import id.belitong.bigs.compose.ui.composable.utils.getActivity
 import id.belitong.bigs.compose.ui.navigation.MainNavGraph
+import id.belitong.bigs.compose.ui.screen.details.geoprogramme.GeoprogrammeActivity
+import id.belitong.bigs.compose.ui.screen.details.geosite.GeositesActivity
+import id.belitong.bigs.compose.ui.screen.profile.ProfileActivity
+import id.belitong.bigs.compose.ui.screen.search.SearchActivity
 import id.belitong.bigs.compose.ui.theme.Dimension
 import id.belitong.bigs.compose.ui.theme.dark_Quaternary
 import id.belitong.bigs.compose.ui.theme.md_theme_dark_secondary
@@ -115,6 +121,10 @@ fun HomeScreen(
         geosites = getAllGeosites(),
         biodiversities = chipData,
         selectedChip = selectedChip,
+        intentToProfile = { ProfileActivity.start(activity) },
+        intentToSearchResult = { SearchActivity.start(activity) },
+        intentToGeoprogramme = { GeoprogrammeActivity.start(activity) },
+        intentToGeosite = { GeositesActivity.start(activity) }
     )
 }
 
@@ -126,12 +136,13 @@ fun HomeScreenContent(
     geosites: List<Geosite> = emptyList(),
     biodiversities: List<Biodiversity> = emptyList(),
     selectedChip: MutableState<BiodiversityFilter> = remember { mutableStateOf(BiodiversityFilter.ALL) },
-    intentToGeosite: (Geosite) -> Unit = {},
-    intentToDetail: () -> Unit = {},
     intentToProfile: () -> Unit = {},
     intentToSearchResult: () -> Unit = {},
+    intentToGeoprogramme: () -> Unit = {},
+    intentToGeosite: () -> Unit = {},
 ) {
     val interactionSource = remember { MutableInteractionSource() }
+    val context = LocalContext.current
 
     Box(
         modifier = modifier
@@ -210,7 +221,10 @@ fun HomeScreenContent(
                     color = Color.Black
                 )
                 HomeCarouselView(
-                    geosites = geosites, onItemClicked = intentToGeosite
+                    geosites = geosites,
+                    onItemClicked = {
+                        context.getString(R.string.on_click_handler).showToast(context)
+                    }
                 )
                 Row(
                     modifier = Modifier
@@ -225,7 +239,7 @@ fun HomeScreenContent(
                         textButton = stringResource(R.string.geosites),
                         textColor = Color.Black,
                         drawableStart = painterResource(R.drawable.ic_geosites),
-                        onClick = intentToDetail
+                        onClick = intentToGeosite
                     )
                     ButtonWithDrawableTop(
                         modifier = Modifier.weight(1f),
@@ -233,7 +247,7 @@ fun HomeScreenContent(
                         textButton = stringResource(R.string.geoprogramme),
                         textColor = Color.Black,
                         drawableStart = painterResource(R.drawable.ic_geoprogramme),
-                        onClick = intentToDetail
+                        onClick = intentToGeoprogramme
                     )
                     ButtonWithDrawableTop(
                         modifier = Modifier.weight(1f),
@@ -241,7 +255,9 @@ fun HomeScreenContent(
                         textButton = stringResource(R.string.maps),
                         textColor = Color.Black,
                         drawableStart = painterResource(R.drawable.ic_maps),
-                        onClick = intentToDetail
+                        onClick = {
+                            context.getString(R.string.on_click_handler).showToast(context)
+                        }
                     )
                 }
                 Text(
@@ -268,7 +284,10 @@ fun HomeScreenContent(
                 ) {
                     items(biodiversities) {
                         HomeGridItem(
-                            biodiversity = it, onItemClicked = intentToDetail
+                            biodiversity = it,
+                            onItemClicked = {
+                                context.getString(R.string.on_click_handler).showToast(context)
+                            }
                         )
                     }
                 }
