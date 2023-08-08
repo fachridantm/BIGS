@@ -3,6 +3,7 @@ package id.belitong.bigs.compose.ui.composable.components
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.TabRow
 import androidx.compose.material.TabRowDefaults
@@ -38,8 +39,9 @@ fun TabLayout(tabList: List<String>, pagerState: PagerState) {
         indicator = { tabPositions ->
             TabRowDefaults.Indicator(
                 modifier = Modifier
-                    .pagerTabIndicatorOffset(pagerState, tabPositions),
-                height = Dimension.SIZE_5,
+                    .pagerTabIndicatorOffset(pagerState, tabPositions)
+                    .requiredWidth(Dimension.SIZE_60),
+                height = Dimension.SIZE_3,
                 color = md_theme_dark_secondary
             )
         },
@@ -69,18 +71,18 @@ fun TabLayout(tabList: List<String>, pagerState: PagerState) {
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun TabContent(pagerState: PagerState) {
+fun TabContent(content: @Composable () -> Unit, pagerState: PagerState) {
     HorizontalPager(state = pagerState) { index ->
         when (index) {
             0 -> {
-
+                content()
             }
 
             1 -> {
-
+                content()
             }
         }
 
     }
-
 }
+

@@ -72,4 +72,12 @@
     <string name="history">History</string>
     <string name="my_order">My Order</string>
     <string name="my_report">My Report</string>
+
+    <string name="tour_guide_name">Tour Guide Name:</string>
+    <string name="booking_date">Booking Date:</string>
+    <string name="tour_date">Tour Date:</string>
+    <string name="contact">Contact:</string>
+    <string name="program">Program:</string>
+    <string name="status">Status:</string>
+    <string name="cancel">Cancel</string>
 </resources>

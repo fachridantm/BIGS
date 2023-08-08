@@ -7,6 +7,7 @@ object Dimension {
     val SIZE_0 = 0.dp
     val SIZE_1 = 1.dp
     val SIZE_2 = 2.dp
+    val SIZE_3 = 3.dp
     val SIZE_4 = 4.dp
     val SIZE_5 = 5.dp
     val SIZE_6 = 6.dp
@@ -26,6 +27,7 @@ object Dimension {
     val SIZE_40 = 40.dp
     val SIZE_48 = 48.dp
     val SIZE_50 = 50.dp
+    val SIZE_60 = 60.dp
     val SIZE_64 = 64.dp
     val SIZE_100 = 100.dp
 }
