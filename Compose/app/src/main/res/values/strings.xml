@@ -86,4 +86,6 @@
     <string name="cancel">Cancel</string>
     <string name="add_data">Add</string>
     <string name="details">Details</string>
+    <string name="title_activity_geosites">Geosites</string>
+    <string name="title_activity_geoprogramme">Geo-Programme</string>
 </resources>
