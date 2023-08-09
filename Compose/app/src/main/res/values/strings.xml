@@ -36,7 +36,9 @@
     <string name="invalid_phone_number_format">Please input a valid phone number!</string>
 
     <string name="login_result">Login %s</string>
+
     <string name="on_click_handler">Feature not implemented yet</string>
+    <string name="not_given_access">Access not granted</string>
 
     <string name="home">Home</string>
     <string name="maps">Maps</string>
