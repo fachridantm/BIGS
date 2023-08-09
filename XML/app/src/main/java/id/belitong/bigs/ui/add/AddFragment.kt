@@ -136,7 +136,7 @@ class AddFragment : BaseFragment<FragmentAddBinding>() {
         if (getFile != null) {
             lifecycleScope.launch{
                 binding?.scanPlant?.visibility = ViewGroup.VISIBLE
-                delay(1000)
+                delay(2000)
                 binding?.scanPlant?.visibility = ViewGroup.GONE
                 detectionHandler()
             }
