@@ -39,6 +39,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
@@ -173,7 +174,7 @@ fun AddScreenContent(
         modifier = modifier
             .fillMaxSize()
             .padding(horizontal = Dimension.SIZE_24, vertical = Dimension.SIZE_12),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
             modifier = Modifier.padding(top = Dimension.SIZE_8),
@@ -183,7 +184,7 @@ fun AddScreenContent(
             textAlign = TextAlign.Center
         )
         Text(
-            modifier = Modifier.padding(vertical = Dimension.SIZE_64),
+            modifier = Modifier.padding(top = Dimension.SIZE_64, bottom = Dimension.SIZE_60),
             text = stringResource(R.string.scan_animal),
             style = typography.h4,
             textAlign = TextAlign.Center
@@ -193,17 +194,17 @@ fun AddScreenContent(
             modifier = Modifier
                 .width(594.pxToDp())
                 .height(628.pxToDp())
-                .padding(bottom = Dimension.SIZE_48),
+                .padding(bottom = Dimension.SIZE_4),
             model = image,
             contentDescription = stringResource(R.string.scanning_plant),
-            contentScale = ContentScale.Fit
+            contentScale = ContentScale.Crop
         ) {
             it.placeholder(R.drawable.ic_plant_scanning)
         }
         Row(
             modifier = Modifier
                 .wrapContentSize()
-                .padding(top = Dimension.SIZE_48),
+                .padding(top = Dimension.SIZE_64),
             horizontalArrangement = Arrangement.SpaceEvenly,
         ) {
             ButtonWithDrawableStart(
@@ -262,4 +263,10 @@ fun AddScreenContent(
             )
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun AddScreenPreview() {
+    AddScreenContent()
 }
