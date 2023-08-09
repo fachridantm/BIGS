@@ -2,6 +2,7 @@ package id.belitong.bigs.compose.ui.screen.add
 
 import android.Manifest
 import android.app.Activity.RESULT_OK
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
@@ -11,6 +12,7 @@ import android.provider.MediaStore
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -26,6 +28,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -33,6 +36,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -40,6 +44,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
@@ -54,11 +59,13 @@ import id.belitong.bigs.compose.core.utils.rotateBitmap
 import id.belitong.bigs.compose.core.utils.showToast
 import id.belitong.bigs.compose.core.utils.uriToFile
 import id.belitong.bigs.compose.ui.composable.components.ButtonWithDrawableStart
+import id.belitong.bigs.compose.ui.composable.components.BasicLottieAnimation
 import id.belitong.bigs.compose.ui.composable.utils.getActivity
 import id.belitong.bigs.compose.ui.navigation.MainNavGraph
 import id.belitong.bigs.compose.ui.theme.Dimension
 import id.belitong.bigs.compose.ui.theme.md_theme_light_primary
 import id.belitong.bigs.compose.ui.theme.typography
+import kotlinx.coroutines.delay
 import java.io.File
 
 @MainNavGraph
@@ -69,6 +76,8 @@ fun AddScreen(
 ) {
     val context = LocalContext.current
     val activity = getActivity()
+
+    var isLoading by remember { mutableStateOf(false) }
 
     var getFile by remember { mutableStateOf<File?>(null) }
     var image by remember { mutableStateOf<Any?>(null) }
@@ -153,12 +162,24 @@ fun AddScreen(
         },
         scanHandler = {
             if (getFile != null) {
-                // TODO: Detection Plant Handler
+                isLoading = true
+                detectionHandler(context)
             } else {
                 context.getString(R.string.no_image_selected).showToast(context)
             }
-        }
+        },
+        isLoading = isLoading
     )
+    LaunchedEffect(isLoading) {
+        if (isLoading) {
+            delay(2000)
+            isLoading = false
+        }
+    }
+}
+
+fun detectionHandler(context: Context) {
+    "Success".showToast(context)
 }
 
 @OptIn(ExperimentalGlideComposeApi::class)
@@ -169,98 +190,110 @@ fun AddScreenContent(
     cameraHandler: () -> Unit = {},
     mediaHandler: () -> Unit = {},
     scanHandler: () -> Unit = {},
+    isLoading: Boolean = false,
 ) {
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(horizontal = Dimension.SIZE_24, vertical = Dimension.SIZE_12),
-        horizontalAlignment = Alignment.CenterHorizontally,
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.TopCenter
     ) {
-        Text(
-            modifier = Modifier.padding(top = Dimension.SIZE_8),
-            text = stringResource(id = R.string.set_up_your_camera),
-            style = typography.h3,
-            color = Color.Black.copy(alpha = 0.8f),
-            textAlign = TextAlign.Center
+        val visibility = if (isLoading) 1f else 0f
+        BasicLottieAnimation(
+            modifier = Modifier
+                .alpha(visibility)
+                .padding(top = 155.dp),
+            resId = R.raw.plant_scanning
         )
-        Text(
-            modifier = Modifier.padding(top = Dimension.SIZE_64, bottom = Dimension.SIZE_60),
-            text = stringResource(R.string.scan_animal),
-            style = typography.h4,
-            textAlign = TextAlign.Center
-        )
-        // TODO: Add Lottie Animation
-        GlideImage(
-            modifier = Modifier
-                .width(594.pxToDp())
-                .height(628.pxToDp())
-                .padding(bottom = Dimension.SIZE_4),
-            model = image,
-            contentDescription = stringResource(R.string.scanning_plant),
-            contentScale = ContentScale.Crop
-        ) {
-            it.placeholder(R.drawable.ic_plant_scanning)
-        }
-        Row(
-            modifier = Modifier
-                .wrapContentSize()
-                .padding(top = Dimension.SIZE_64),
-            horizontalArrangement = Arrangement.SpaceEvenly,
-        ) {
-            ButtonWithDrawableStart(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-                    .weight(0.8f)
-                    .padding(end = Dimension.SIZE_8),
-                buttonColor = ButtonDefaults.buttonColors(
-                    containerColor = md_theme_light_primary, contentColor = Color.White
-                ),
-                textButton = stringResource(id = R.string.take_photo),
-                textColor = Color.White,
-                drawableStart = painterResource(id = R.drawable.ic_camera),
-                shape = RoundedCornerShape(Dimension.SIZE_12),
-                innerPadding = PaddingValues(vertical = Dimension.SIZE_12),
-                iconPadding = PaddingValues(horizontal = Dimension.SIZE_4),
-                textPadding = PaddingValues(Dimension.SIZE_0),
-                onClick = cameraHandler
-            )
-            ButtonWithDrawableStart(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-                    .weight(1f)
-                    .padding(start = Dimension.SIZE_8),
-                buttonColor = ButtonDefaults.buttonColors(
-                    containerColor = md_theme_light_primary, contentColor = Color.White
-                ),
-                textButton = stringResource(id = R.string.upload_image),
-                textColor = Color.White,
-                drawableStart = painterResource(id = R.drawable.ic_upload),
-                shape = RoundedCornerShape(Dimension.SIZE_12),
-                innerPadding = PaddingValues(vertical = Dimension.SIZE_12),
-                iconPadding = PaddingValues(horizontal = Dimension.SIZE_4),
-                textPadding = PaddingValues(Dimension.SIZE_0),
-                onClick = mediaHandler
-            )
-        }
-        Button(
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
-                .padding(top = Dimension.SIZE_24),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = md_theme_light_primary, contentColor = Color.White
-            ),
-            shape = RoundedCornerShape(Dimension.SIZE_12),
-            contentPadding = PaddingValues(vertical = Dimension.SIZE_12),
-            onClick = scanHandler
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .padding(horizontal = Dimension.SIZE_24, vertical = Dimension.SIZE_12),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
-                text = stringResource(id = R.string.scan_photo),
-                style = typography.button,
-                color = Color.White
+                modifier = Modifier.padding(top = Dimension.SIZE_8),
+                text = stringResource(id = R.string.set_up_your_camera),
+                style = typography.h3,
+                color = Color.Black.copy(alpha = 0.8f),
+                textAlign = TextAlign.Center
             )
+            Text(
+                modifier = Modifier.padding(top = Dimension.SIZE_64, bottom = Dimension.SIZE_60),
+                text = stringResource(R.string.scan_animal),
+                style = typography.h4,
+                textAlign = TextAlign.Center
+            )
+            GlideImage(
+                modifier = Modifier
+                    .width(594.pxToDp())
+                    .height(628.pxToDp())
+                    .padding(bottom = Dimension.SIZE_4),
+                model = image,
+                contentDescription = stringResource(R.string.scanning_plant),
+                contentScale = ContentScale.Crop
+            ) {
+                it.placeholder(R.drawable.ic_plant_scanning)
+            }
+            Row(
+                modifier = Modifier
+                    .wrapContentSize()
+                    .padding(top = Dimension.SIZE_64),
+                horizontalArrangement = Arrangement.SpaceEvenly,
+            ) {
+                ButtonWithDrawableStart(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight()
+                        .weight(0.8f)
+                        .padding(end = Dimension.SIZE_8),
+                    buttonColor = ButtonDefaults.buttonColors(
+                        containerColor = md_theme_light_primary, contentColor = Color.White
+                    ),
+                    textButton = stringResource(id = R.string.take_photo),
+                    textColor = Color.White,
+                    drawableStart = painterResource(id = R.drawable.ic_camera),
+                    shape = RoundedCornerShape(Dimension.SIZE_12),
+                    innerPadding = PaddingValues(vertical = Dimension.SIZE_12),
+                    iconPadding = PaddingValues(horizontal = Dimension.SIZE_4),
+                    textPadding = PaddingValues(Dimension.SIZE_0),
+                    onClick = cameraHandler
+                )
+                ButtonWithDrawableStart(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight()
+                        .weight(1f)
+                        .padding(start = Dimension.SIZE_8),
+                    buttonColor = ButtonDefaults.buttonColors(
+                        containerColor = md_theme_light_primary, contentColor = Color.White
+                    ),
+                    textButton = stringResource(id = R.string.upload_image),
+                    textColor = Color.White,
+                    drawableStart = painterResource(id = R.drawable.ic_upload),
+                    shape = RoundedCornerShape(Dimension.SIZE_12),
+                    innerPadding = PaddingValues(vertical = Dimension.SIZE_12),
+                    iconPadding = PaddingValues(horizontal = Dimension.SIZE_4),
+                    textPadding = PaddingValues(Dimension.SIZE_0),
+                    onClick = mediaHandler
+                )
+            }
+            Button(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .padding(top = Dimension.SIZE_24),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = md_theme_light_primary, contentColor = Color.White
+                ),
+                shape = RoundedCornerShape(Dimension.SIZE_12),
+                contentPadding = PaddingValues(vertical = Dimension.SIZE_12),
+                onClick = scanHandler
+            ) {
+                Text(
+                    text = stringResource(id = R.string.scan_photo),
+                    style = typography.button,
+                    color = Color.White
+                )
+            }
         }
     }
 }
