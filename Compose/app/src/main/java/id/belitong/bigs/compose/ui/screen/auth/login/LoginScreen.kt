@@ -23,7 +23,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -50,11 +49,12 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import id.belitong.bigs.compose.R
-import id.belitong.bigs.compose.ui.composable.model.FormValidation
 import id.belitong.bigs.compose.core.domain.model.User
 import id.belitong.bigs.compose.core.utils.showToast
+import id.belitong.bigs.compose.ui.composable.components.BasicLottieAnimation
 import id.belitong.bigs.compose.ui.composable.components.ButtonWithDrawableStart
 import id.belitong.bigs.compose.ui.composable.components.ValidationForm
+import id.belitong.bigs.compose.ui.composable.model.FormValidation
 import id.belitong.bigs.compose.ui.composable.utils.ComposableObserver
 import id.belitong.bigs.compose.ui.composable.utils.getActivity
 import id.belitong.bigs.compose.ui.composable.utils.getContext
@@ -140,12 +140,11 @@ fun LoginScreenContent(
             .padding(horizontal = Dimension.SIZE_24)
             .verticalScroll(rememberScrollState())
     ) {
-        CircularProgressIndicator(
+        BasicLottieAnimation(
             modifier = Modifier
                 .align(Alignment.Center)
                 .alpha(visibility),
-            color = seed,
-            strokeWidth = Dimension.SIZE_8,
+            resId = R.raw.loading,
         )
         Column(
             modifier = Modifier
