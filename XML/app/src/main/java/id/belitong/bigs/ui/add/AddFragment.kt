@@ -85,7 +85,7 @@ class AddFragment : BaseFragment<FragmentAddBinding>() {
         createTempFile(requireContext()).also {
             val photoURI: Uri = FileProvider.getUriForFile(
                 requireContext(),
-                BuildConfig.APPLICATION_ID + ".provider",
+                BuildConfig.APPLICATION_ID,
                 it
             )
             currentPhotoPath = it.absolutePath
