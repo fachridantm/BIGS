@@ -18,6 +18,7 @@ import androidx.core.content.FileProvider
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import id.belitong.bigs.BaseFragment
+import id.belitong.bigs.BuildConfig
 import id.belitong.bigs.R
 import id.belitong.bigs.core.utils.createTempFile
 import id.belitong.bigs.core.utils.rotateBitmap
@@ -84,7 +85,7 @@ class AddFragment : BaseFragment<FragmentAddBinding>() {
         createTempFile(requireContext()).also {
             val photoURI: Uri = FileProvider.getUriForFile(
                 requireContext(),
-                "id.belitong.bigs",
+                BuildConfig.APPLICATION_ID + ".provider",
                 it
             )
             currentPhotoPath = it.absolutePath
