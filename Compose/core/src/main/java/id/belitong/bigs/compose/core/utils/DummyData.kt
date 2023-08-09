@@ -3,6 +3,7 @@ package id.belitong.bigs.compose.core.utils
 import id.belitong.bigs.compose.core.domain.model.Biodiversity
 import id.belitong.bigs.compose.core.domain.model.Geosite
 import id.belitong.bigs.compose.core.domain.model.Order
+import id.belitong.bigs.compose.core.domain.model.Plant
 
 object DummyData {
     fun getAllGeosites() = listOf(
@@ -415,5 +416,11 @@ object DummyData {
             programName = "Research-Programme",
             status = "Cancelled",
         ),
+    )
+
+    fun getPlant() = Plant(
+        id = 1,
+        name = "Tropical Pitcher",
+        latin = "Nepenthes",
     )
 }

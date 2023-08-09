@@ -84,4 +84,6 @@
     <string name="program">Program:</string>
     <string name="status">Status:</string>
     <string name="cancel">Cancel</string>
+    <string name="add_data">Add</string>
+    <string name="details">Details</string>
 </resources>

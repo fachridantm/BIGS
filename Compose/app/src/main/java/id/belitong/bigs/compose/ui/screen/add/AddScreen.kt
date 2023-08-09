@@ -2,7 +2,6 @@ package id.belitong.bigs.compose.ui.screen.add
 
 import android.Manifest
 import android.app.Activity.RESULT_OK
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
@@ -54,12 +53,14 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.tbuonomo.viewpagerdotsindicator.pxToDp
 import id.belitong.bigs.compose.BuildConfig
 import id.belitong.bigs.compose.R
+import id.belitong.bigs.compose.core.utils.DummyData.getPlant
 import id.belitong.bigs.compose.core.utils.createTempFile
 import id.belitong.bigs.compose.core.utils.rotateBitmap
 import id.belitong.bigs.compose.core.utils.showToast
 import id.belitong.bigs.compose.core.utils.uriToFile
-import id.belitong.bigs.compose.ui.composable.components.ButtonWithDrawableStart
 import id.belitong.bigs.compose.ui.composable.components.BasicLottieAnimation
+import id.belitong.bigs.compose.ui.composable.components.ButtonWithDrawableStart
+import id.belitong.bigs.compose.ui.composable.components.ScanResultDialog
 import id.belitong.bigs.compose.ui.composable.utils.getActivity
 import id.belitong.bigs.compose.ui.navigation.MainNavGraph
 import id.belitong.bigs.compose.ui.theme.Dimension
@@ -78,6 +79,10 @@ fun AddScreen(
     val activity = getActivity()
 
     var isLoading by remember { mutableStateOf(false) }
+
+    var isSuccess by remember { mutableStateOf(false) }
+    var isFailed by remember { mutableStateOf(false) }
+    var showDialog by remember { mutableStateOf(false) }
 
     var getFile by remember { mutableStateOf<File?>(null) }
     var image by remember { mutableStateOf<Any?>(null) }
@@ -151,6 +156,10 @@ fun AddScreen(
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
                 cameraLauncher.launch(intent)
             }
+
+            // TODO: Remove this dummy state
+            isSuccess = true
+            isFailed = false
         },
         mediaHandler = {
             val intent = Intent()
@@ -159,11 +168,14 @@ fun AddScreen(
 
             val chooser = Intent.createChooser(intent, "Pilih gambar")
             mediaLauncher.launch(chooser)
+
+            // TODO: Remove this dummy state
+            isSuccess = false
+            isFailed = true
         },
         scanHandler = {
             if (getFile != null) {
                 isLoading = true
-                detectionHandler(context)
             } else {
                 context.getString(R.string.no_image_selected).showToast(context)
             }
@@ -174,12 +186,25 @@ fun AddScreen(
         if (isLoading) {
             delay(2000)
             isLoading = false
+            showDialog = true
         }
     }
-}
-
-fun detectionHandler(context: Context) {
-    "Success".showToast(context)
+    if (showDialog) {
+        ScanResultDialog(
+            plant = getPlant(),
+            isFailed = isFailed,
+            isSuccess = isSuccess,
+            onClickDetails = {
+                context.getString(R.string.on_click_handler).showToast(context)
+            },
+            onClickCancel = {
+                showDialog = false
+            },
+            onClickAddData = {
+                context.getString(R.string.on_click_handler).showToast(context)
+            }
+        )
+    }
 }
 
 @OptIn(ExperimentalGlideComposeApi::class)
