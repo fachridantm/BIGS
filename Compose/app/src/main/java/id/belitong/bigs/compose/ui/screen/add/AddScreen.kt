@@ -17,9 +17,8 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -50,7 +49,6 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import com.tbuonomo.viewpagerdotsindicator.pxToDp
 import id.belitong.bigs.compose.BuildConfig
 import id.belitong.bigs.compose.R
 import id.belitong.bigs.compose.core.utils.DummyData.getPlant
@@ -164,9 +162,9 @@ fun AddScreen(
         mediaHandler = {
             val intent = Intent()
             intent.action = Intent.ACTION_GET_CONTENT
-            intent.type = "image/*"
+            intent.type = context.getString(R.string.image_format)
 
-            val chooser = Intent.createChooser(intent, "Pilih gambar")
+            val chooser = Intent.createChooser(intent, context.getString(R.string.pilih_gambar))
             mediaLauncher.launch(chooser)
 
             // TODO: Remove this dummy state
@@ -248,10 +246,7 @@ fun AddScreenContent(
                 textAlign = TextAlign.Center
             )
             GlideImage(
-                modifier = Modifier
-                    .width(594.pxToDp())
-                    .height(628.pxToDp())
-                    .padding(bottom = Dimension.SIZE_4),
+                modifier = Modifier.size(220.dp),
                 model = image,
                 contentDescription = stringResource(R.string.scanning_plant),
                 contentScale = ContentScale.Crop

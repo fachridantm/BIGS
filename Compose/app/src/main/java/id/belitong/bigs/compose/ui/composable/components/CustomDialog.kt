@@ -47,12 +47,12 @@ fun ScanResultDialog(
                 modifier = modifier
                     .fillMaxWidth()
                     .wrapContentHeight()
-                    .padding(Dimension.SIZE_24),
+                    .padding(Dimension.SIZE_12),
                 shape = RoundedCornerShape(Dimension.SIZE_12),
                 color = Color.White
             ) {
                 Column(
-                    modifier = Modifier.padding(Dimension.SIZE_12),
+                    modifier = Modifier.padding(Dimension.SIZE_18),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     LottieAnimationForScanPlant(
@@ -63,7 +63,6 @@ fun ScanResultDialog(
                         isSuccess = isSuccess
                     )
                     Text(
-                        modifier = Modifier,
                         text = plant.name,
                         style = typography.h3,
                         color = Color.Black,
@@ -71,7 +70,6 @@ fun ScanResultDialog(
                         maxLines = 2
                     )
                     Text(
-                        modifier = Modifier,
                         text = plant.latin,
                         style = typography.body2,
                         color = md_theme_light_primary,
@@ -87,8 +85,8 @@ fun ScanResultDialog(
                         ),
                         shape = RoundedCornerShape(Dimension.SIZE_12),
                         contentPadding = PaddingValues(
-                            start = Dimension.SIZE_20,
-                            end = Dimension.SIZE_20,
+                            start = Dimension.SIZE_8,
+                            end = Dimension.SIZE_8,
                             top = Dimension.SIZE_2,
                             bottom = Dimension.SIZE_2
                         )
@@ -110,12 +108,12 @@ fun ScanResultDialog(
                 modifier = modifier
                     .fillMaxWidth()
                     .wrapContentHeight()
-                    .padding(Dimension.SIZE_24),
+                    .padding(Dimension.SIZE_12),
                 shape = RoundedCornerShape(Dimension.SIZE_12),
                 color = Color.White
             ) {
                 Column(
-                    modifier = Modifier.padding(Dimension.SIZE_12),
+                    modifier = Modifier.padding(Dimension.SIZE_18),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     LottieAnimationForScanPlant(

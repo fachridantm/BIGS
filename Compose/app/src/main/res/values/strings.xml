@@ -22,6 +22,8 @@
     <string name="title_activity_auth">Auth Screen</string>
     <string name="title_activity_profile">Profile</string>
     <string name="title_activity_search">Search</string>
+    <string name="title_activity_geosites">Geosites</string>
+    <string name="title_activity_geoprogramme">Geo-Programme</string>
 
     <string name="password_toggle_content_desc">Password Toggle</string>
 
@@ -72,6 +74,8 @@
     <string name="no_image_selected">Masukan foto terlebih dahulu</string>
     <string name="data_not_found">Data not found!</string>
     <string name="scanning_plant">Scanning plant</string>
+    <string name="pilih_gambar">Pilih gambar</string>
+    <string name="image_format">image/*</string>
 
     <string name="history">History</string>
     <string name="my_order">My Order</string>
@@ -86,6 +90,4 @@
     <string name="cancel">Cancel</string>
     <string name="add_data">Add</string>
     <string name="details">Details</string>
-    <string name="title_activity_geosites">Geosites</string>
-    <string name="title_activity_geoprogramme">Geo-Programme</string>
 </resources>
