@@ -23,5 +23,6 @@ object DataMapper {
         userId = data.userId,
         name = data.name,
         token = data.token,
+        photoUrl = data.photoUrl,
     )
 }

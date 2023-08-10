@@ -1,5 +1,6 @@
 package id.belitong.bigs.compose.ui.composable.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -20,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import id.belitong.bigs.compose.R
@@ -47,7 +49,7 @@ fun ScanResultDialog(
                 modifier = modifier
                     .fillMaxWidth()
                     .wrapContentHeight()
-                    .padding(Dimension.SIZE_12),
+                    .padding(horizontal = Dimension.SIZE_12),
                 shape = RoundedCornerShape(Dimension.SIZE_12),
                 color = Color.White
             ) {
@@ -108,7 +110,7 @@ fun ScanResultDialog(
                 modifier = modifier
                     .fillMaxWidth()
                     .wrapContentHeight()
-                    .padding(Dimension.SIZE_12),
+                    .padding(horizontal = Dimension.SIZE_12),
                 shape = RoundedCornerShape(Dimension.SIZE_12),
                 color = Color.White
             ) {
@@ -181,6 +183,95 @@ fun ScanResultDialog(
                                 color = Color.White,
                             )
                         }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun LogoutDialog(
+    modifier: Modifier = Modifier,
+    onClickCancel: () -> Unit = {},
+    onClickLogout: () -> Unit = {}
+) {
+    Dialog(
+        onDismissRequest = onClickCancel,
+    ) {
+        Surface(
+            modifier = modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(horizontal = Dimension.SIZE_12),
+            shape = RoundedCornerShape(Dimension.SIZE_12),
+            color = Color.White
+        ) {
+            Column(
+                modifier = Modifier.padding(Dimension.SIZE_24),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                Text(
+                    text = stringResource(id = R.string.logout_message),
+                    style = typography.body1,
+                    textAlign = TextAlign.Center,
+                    color = Color.Black,
+                    maxLines = 1
+                )
+                Row(
+                    modifier = Modifier.padding(top = Dimension.SIZE_26),
+                    horizontalArrangement = Arrangement.spacedBy(Dimension.SIZE_8),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Button(
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(end = Dimension.SIZE_8),
+                        onClick = onClickCancel,
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color.White,
+                            contentColor = Color.White
+                        ),
+                        shape = RoundedCornerShape(Dimension.SIZE_12),
+                        contentPadding = PaddingValues(
+                            start = Dimension.SIZE_16,
+                            end = Dimension.SIZE_16,
+                            top = Dimension.SIZE_2,
+                            bottom = Dimension.SIZE_2
+                        ),
+                        border = BorderStroke(
+                            width = Dimension.SIZE_1,
+                            color = Color.Black
+                        )
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.no),
+                            style = typography.subtitle1,
+                            color = Color.Black,
+                        )
+                    }
+                    Button(
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(start = Dimension.SIZE_8),
+                        onClick = onClickLogout,
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = md_theme_light_error,
+                            contentColor = Color.White
+                        ),
+                        shape = RoundedCornerShape(Dimension.SIZE_12),
+                        contentPadding = PaddingValues(
+                            start = Dimension.SIZE_16,
+                            end = Dimension.SIZE_16,
+                            top = Dimension.SIZE_2,
+                            bottom = Dimension.SIZE_2
+                        )
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.yes),
+                            style = typography.subtitle1,
+                            color = Color.White,
+                        )
                     }
                 }
             }

@@ -27,5 +27,11 @@ class AuthActivity : ComponentActivity() {
                 context.startActivity(this)
             }
         }
+        fun logout(context: Context) {
+            Intent(context, AuthActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                context.startActivity(this)
+            }
+        }
     }
 }

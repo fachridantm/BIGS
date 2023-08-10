@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -40,6 +41,7 @@ fun ButtonWithDrawableEnd(
     buttonColor: ButtonColors,
     textButton: String,
     textColor: Color,
+    textStyle: TextStyle = typography.button,
     borderStroke: BorderStroke = BorderStroke(1.dp, Color.Unspecified),
     drawableEnd: Painter,
     drawableTint: Color = Color.Unspecified,
@@ -63,7 +65,7 @@ fun ButtonWithDrawableEnd(
                 modifier = Modifier,
                 text = textButton,
                 maxLines = 1,
-                style = typography.button,
+                style = textStyle,
                 textAlign = TextAlign.Center,
                 color = textColor,
             )
@@ -89,6 +91,7 @@ fun ButtonWithDrawableStart(
     buttonColor: ButtonColors,
     textButton: String,
     textColor: Color,
+    textStyle: TextStyle = typography.button,
     borderStroke: BorderStroke = BorderStroke(Dimension.SIZE_1, Color.Unspecified),
     drawableStart: Painter,
     drawableTint: Color = Color.Unspecified,
@@ -118,16 +121,16 @@ fun ButtonWithDrawableStart(
             horizontalArrangement = horizontalArrangement,
         ) {
             Icon(
+                modifier = Modifier.padding(iconPadding),
                 painter = drawableStart,
                 contentDescription = null,
-                tint = drawableTint,
-                modifier = Modifier.padding(iconPadding)
+                tint = drawableTint
             )
             Text(
                 modifier = Modifier.padding(textPadding),
                 text = textButton,
                 maxLines = 1,
-                style = typography.button,
+                style = textStyle,
                 textAlign = TextAlign.Center,
                 color = textColor,
                 overflow = textOverflow
@@ -142,6 +145,7 @@ fun ButtonWithDrawableTop(
     buttonColor: ButtonColors,
     textButton: String,
     textColor: Color,
+    textStyle: TextStyle = typography.body2,
     borderStroke: BorderStroke = BorderStroke(Dimension.SIZE_1, Color.Unspecified),
     drawableStart: Painter,
     drawableTint: Color = Color.Unspecified,
@@ -178,9 +182,72 @@ fun ButtonWithDrawableTop(
                 text = textButton,
                 maxLines = 2,
                 overflow = TextOverflow.Visible,
-                style = typography.body2,
+                style = textStyle,
                 textAlign = TextAlign.Center,
                 color = textColor,
+            )
+        }
+    }
+}
+
+@Composable
+fun ButtonWithDrawableStartAndEnd(
+    modifier: Modifier = Modifier,
+    buttonColor: ButtonColors,
+    textButton: String,
+    textColor: Color,
+    textStyle: TextStyle = typography.button,
+    borderStroke: BorderStroke = BorderStroke(Dimension.SIZE_1, Color.Unspecified),
+    drawableStart: Painter,
+    drawableEnd: Painter,
+    drawableTint: Color = Color.Unspecified,
+    enabled: Boolean = true,
+    shape: Shape = RoundedCornerShape(Dimension.SIZE_10),
+    innerPadding: PaddingValues = PaddingValues(
+        horizontal = Dimension.SIZE_12,
+        vertical = Dimension.SIZE_12
+    ),
+    textPadding: PaddingValues = PaddingValues(start = Dimension.SIZE_16),
+    iconPadding: PaddingValues = PaddingValues(Dimension.SIZE_0),
+    textOverflow: TextOverflow = TextOverflow.Visible,
+    horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
+    onClick: () -> Unit
+) {
+    Button(
+        onClick = onClick,
+        colors = buttonColor,
+        shape = shape,
+        border = borderStroke,
+        enabled = enabled,
+        modifier = modifier,
+        contentPadding = innerPadding,
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = horizontalArrangement,
+        ) {
+            Icon(
+                modifier = Modifier.padding(iconPadding),
+                painter = drawableStart,
+                contentDescription = null,
+                tint = drawableTint
+            )
+            Text(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(textPadding),
+                text = textButton,
+                maxLines = 1,
+                style = textStyle,
+                textAlign = TextAlign.Start,
+                color = textColor,
+                overflow = textOverflow
+            )
+            Icon(
+                modifier = Modifier.padding(iconPadding),
+                painter = drawableEnd,
+                contentDescription = null,
+                tint = drawableTint
             )
         }
     }
@@ -223,6 +290,21 @@ fun ButtonWithDrawableTopPreview() {
         textButton = stringResource(R.string.geosites),
         textColor = Color.Black,
         drawableStart = painterResource(R.drawable.ic_geosites),
+        onClick = {}
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ButtonWithDrawableStartAndEndPreview() {
+    ButtonWithDrawableStartAndEnd(
+        modifier = Modifier.padding(Dimension.SIZE_16),
+        buttonColor = ButtonDefaults.buttonColors(containerColor = Color.White),
+        textButton = stringResource(R.string.edit_profile),
+        textColor = Color.Black,
+        borderStroke = BorderStroke(1.dp, Color.Black),
+        drawableStart = painterResource(R.drawable.ic_profile),
+        drawableEnd = painterResource(R.drawable.ic_arrow_right),
         onClick = {}
     )
 }
