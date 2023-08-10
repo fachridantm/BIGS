@@ -13,7 +13,6 @@ import id.belitong.bigs.core.utils.loadUserImage
 import id.belitong.bigs.core.utils.showMessage
 import id.belitong.bigs.databinding.ActivityProfileBinding
 import id.belitong.bigs.ui.auth.AuthActivity
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -80,13 +79,12 @@ class ProfileActivity : AppCompatActivity() {
         val btnNo = view.findViewById<AppCompatButton>(R.id.btn_logout_no)
         btnYes.setOnClickListener {
             lifecycleScope.launch {
-                profileViewModel.deleteSession()
-                delay(500)
                 val loginIntent = Intent(this@ProfileActivity, AuthActivity::class.java)
                 loginIntent.flags =
                     Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(loginIntent)
                 finish()
+                profileViewModel.deleteSession()
             }
         }
         btnNo.setOnClickListener {
