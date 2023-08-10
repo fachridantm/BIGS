@@ -43,7 +43,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/text_view1"
-        style="@style/Text.SemiBold.Title"
+        style="@style/Text.SemiBold.Body1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

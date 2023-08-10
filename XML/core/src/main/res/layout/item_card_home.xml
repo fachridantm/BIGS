@@ -28,7 +28,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/item_tv_title_home"
-            style="@style/Text.SemiBold.Title.Center"
+            style="@style/Text.SemiBold.Body1.Center"
             android:singleLine="true"
             android:includeFontPadding="false"
             android:textColor="@color/md_theme_dark_tertiary"
@@ -42,7 +42,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/item_tv_subtitle_home"
-            style="@style/Text.Regular.Subtitle"
+            style="@style/Text.Regular.Subtitle1"
             android:gravity="center"
             android:singleLine="true"
             android:textColor="@android:color/white"

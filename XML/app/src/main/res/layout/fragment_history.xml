@@ -37,7 +37,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appbar_history"
         app:tabIndicatorColor="@color/md_theme_dark_secondary"
-        app:tabTextAppearance="@style/Text.Medium.Subheader"
+        app:tabTextAppearance="@style/Text.Medium.H4"
         app:tabTextColor="@android:color/black" />
 
     <androidx.viewpager2.widget.ViewPager2

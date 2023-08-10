@@ -27,7 +27,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/item_tv_search_title"
-            style="@style/Text.Medium.Subheader"
+            style="@style/Text.Medium.H4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="22dp"
@@ -43,7 +43,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/item_tv_search_subtitle"
-            style="@style/Text.Regular.Subtitle"
+            style="@style/Text.Regular.Subtitle1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"

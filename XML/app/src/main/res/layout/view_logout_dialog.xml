@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/tv_logout_title"
-        style="@style/Text.SemiBold.Title.Center"
+        style="@style/Text.SemiBold.Body1.Center"
         android:text="@string/logout_message"
         android:textColor="@android:color/black" />
 
@@ -27,7 +27,7 @@
             android:paddingHorizontal="16dp"
             android:text="@string/no"
             android:textAllCaps="false"
-            android:textAppearance="@style/Text.Regular.Subtitle"
+            android:textAppearance="@style/Text.Regular.Subtitle1"
             android:textColor="@android:color/black" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -38,7 +38,7 @@
             android:background="@drawable/bg_btn_red"
             android:text="@string/yes"
             android:textAllCaps="false"
-            android:textAppearance="@style/Text.Regular.Subtitle"
+            android:textAppearance="@style/Text.Regular.Subtitle1"
             android:textColor="@android:color/white" />
     </LinearLayout>
 </LinearLayout>

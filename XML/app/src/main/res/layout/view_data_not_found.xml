@@ -24,7 +24,7 @@
 
     <TextView
         android:id="@+id/tv_logout_title"
-        style="@style/Text.Regular.Title"
+        style="@style/Text.Regular.Body2"
         android:gravity="center"
         android:text="@string/data_not_found"
         android:textColor="@color/md_theme_light_error" />
@@ -45,7 +45,7 @@
             android:paddingHorizontal="16dp"
             android:text="@string/close"
             android:textAllCaps="false"
-            android:textAppearance="@style/Text.Regular.Subtitle"
+            android:textAppearance="@style/Text.Regular.Subtitle1"
             android:textColor="@android:color/white" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -56,7 +56,7 @@
             android:background="@drawable/bg_btn_primary"
             android:text="@string/add_data"
             android:textAllCaps="false"
-            android:textAppearance="@style/Text.Regular.Subtitle"
+            android:textAppearance="@style/Text.Regular.Subtitle1"
             android:textColor="@android:color/white" />
     </LinearLayout>
 </LinearLayout>

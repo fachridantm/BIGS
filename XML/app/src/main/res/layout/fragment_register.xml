@@ -46,7 +46,7 @@
                 android:layout_height="match_parent"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
-                android:textAppearance="@style/Text.Medium.Subheader" />
+                android:textAppearance="@style/Text.Medium.H4" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -65,7 +65,7 @@
                 android:layout_height="match_parent"
                 android:hint="@string/full_name"
                 android:inputType="textPersonName"
-                android:textAppearance="@style/Text.Medium.Subheader" />
+                android:textAppearance="@style/Text.Medium.H4" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -84,7 +84,7 @@
                 android:layout_height="match_parent"
                 android:hint="@string/phone_number"
                 android:inputType="phone"
-                android:textAppearance="@style/Text.Medium.Subheader" />
+                android:textAppearance="@style/Text.Medium.H4" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -104,7 +104,7 @@
                 android:layout_height="match_parent"
                 android:hint="@string/password"
                 android:inputType="textPassword"
-                android:textAppearance="@style/Text.Medium.Subheader" />
+                android:textAppearance="@style/Text.Medium.H4" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
@@ -132,7 +132,7 @@
             app:layout_constraintTop_toBottomOf="@id/btn_register">
 
             <androidx.appcompat.widget.AppCompatTextView
-                style="@style/Text.SemiBold.Title.Center"
+                style="@style/Text.SemiBold.Body1.Center"
                 android:layout_width="wrap_content"
                 android:layout_marginEnd="4dp"
                 android:alpha="0.8"
@@ -141,7 +141,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_login_here"
-                style="@style/Text.SemiBold.Title.Center"
+                style="@style/Text.SemiBold.Body1.Center"
                 android:layout_width="wrap_content"
                 android:background="@drawable/bg_text_transparent"
                 android:clickable="true"

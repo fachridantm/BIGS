@@ -23,7 +23,7 @@
             android:id="@+id/item_tv_title_geosite_order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/Text.Medium.Subheader"
+            android:textAppearance="@style/Text.Medium.H4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Most Hill" />
@@ -35,7 +35,7 @@
             android:layout_marginTop="12dp"
             android:alpha="0.4"
             android:text="@string/tour_guide_name"
-            android:textAppearance="@style/Text.Regular.Subtitle"
+            android:textAppearance="@style/Text.Regular.Subtitle1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_tv_title_geosite_order" />
 
@@ -43,7 +43,7 @@
             android:id="@+id/item_tv_tour_guide_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/Text.Regular.Subtitle"
+            android:textAppearance="@style/Text.Regular.Subtitle1"
             app:layout_constraintEnd_toEndOf="@id/vertical_guideline"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +57,7 @@
             android:layout_marginTop="12dp"
             android:alpha="0.4"
             android:text="@string/booking_date"
-            android:textAppearance="@style/Text.Regular.Subtitle"
+            android:textAppearance="@style/Text.Regular.Subtitle1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_tv_tour_guide_name" />
 
@@ -65,7 +65,7 @@
             android:id="@+id/item_tv_booking_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/Text.Regular.Subtitle"
+            android:textAppearance="@style/Text.Regular.Subtitle1"
             app:layout_constraintEnd_toEndOf="@id/vertical_guideline"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -79,7 +79,7 @@
             android:layout_marginTop="12dp"
             android:alpha="0.4"
             android:text="@string/tour_date"
-            android:textAppearance="@style/Text.Regular.Subtitle"
+            android:textAppearance="@style/Text.Regular.Subtitle1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_tv_booking_date" />
 
@@ -87,7 +87,7 @@
             android:id="@+id/item_tv_tour_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/Text.Regular.Subtitle"
+            android:textAppearance="@style/Text.Regular.Subtitle1"
             app:layout_constraintEnd_toEndOf="@id/vertical_guideline"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -101,7 +101,7 @@
             android:layout_marginTop="12dp"
             android:alpha="0.4"
             android:text="@string/contact"
-            android:textAppearance="@style/Text.Regular.Subtitle"
+            android:textAppearance="@style/Text.Regular.Subtitle1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_tv_tour_date" />
 
@@ -109,7 +109,7 @@
             android:id="@+id/item_tv_tour_guide_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/Text.Regular.Subtitle"
+            android:textAppearance="@style/Text.Regular.Subtitle1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_view4"
             tools:text="08123456789" />
@@ -121,7 +121,7 @@
             android:layout_marginTop="12dp"
             android:alpha="0.4"
             android:text="@string/program"
-            android:textAppearance="@style/Text.Regular.Subtitle"
+            android:textAppearance="@style/Text.Regular.Subtitle1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_tv_tour_guide_phone" />
 
@@ -129,7 +129,7 @@
             android:id="@+id/item_tv_program_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/Text.Regular.Subtitle"
+            android:textAppearance="@style/Text.Regular.Subtitle1"
             app:layout_constraintEnd_toEndOf="@id/vertical_guideline"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -143,7 +143,7 @@
             android:layout_marginTop="12dp"
             android:alpha="0.4"
             android:text="@string/status"
-            android:textAppearance="@style/Text.Regular.Subtitle"
+            android:textAppearance="@style/Text.Regular.Subtitle1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_tv_program_name" />
 
@@ -156,7 +156,7 @@
             android:backgroundTint="@color/md_theme_dark_secondary"
             android:paddingHorizontal="20dp"
             android:paddingVertical="4dp"
-            android:textAppearance="@style/Text.SemiBold.Title"
+            android:textAppearance="@style/Text.SemiBold.Body1"
             android:textColor="@android:color/white"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -187,7 +187,7 @@
             android:backgroundTint="@color/md_theme_light_error"
             android:text="@string/cancel"
             android:textAllCaps="false"
-            android:textAppearance="@style/Text.Regular.Title"
+            android:textAppearance="@style/Text.Regular.Body2"
             android:textColor="@android:color/white"
             app:cornerRadius="12dp"
             app:layout_constraintEnd_toEndOf="@id/item_iv_order_geosite"

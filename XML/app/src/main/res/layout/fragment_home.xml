@@ -95,7 +95,7 @@
             android:paddingTop="36dp"
             android:text="@string/geosites"
             android:textAllCaps="false"
-            android:textAppearance="@style/Text.Regular.Title"
+            android:textAppearance="@style/Text.Regular.Body2"
             app:layout_constraintEnd_toStartOf="@id/btn_geoprogramme"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/dots_indicator"
@@ -115,7 +115,7 @@
             android:paddingTop="36dp"
             android:text="@string/geoprogramme"
             android:textAllCaps="false"
-            android:textAppearance="@style/Text.Regular.Title"
+            android:textAppearance="@style/Text.Regular.Body2"
             app:layout_constraintEnd_toStartOf="@id/btn_maps"
             app:layout_constraintStart_toEndOf="@id/btn_geosites"
             app:layout_constraintTop_toBottomOf="@id/dots_indicator" />
@@ -134,7 +134,7 @@
             android:paddingTop="36dp"
             android:text="@string/maps"
             android:textAllCaps="false"
-            android:textAppearance="@style/Text.Regular.Title"
+            android:textAppearance="@style/Text.Regular.Body2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/btn_geoprogramme"
             app:layout_constraintTop_toBottomOf="@id/dots_indicator" />
