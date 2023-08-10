@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
@@ -20,6 +21,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import id.belitong.bigs.BaseFragment
 import id.belitong.bigs.BuildConfig
 import id.belitong.bigs.R
+import id.belitong.bigs.core.domain.model.Plant
+import id.belitong.bigs.core.utils.DummyData.getPlant
 import id.belitong.bigs.core.utils.createTempFile
 import id.belitong.bigs.core.utils.rotateBitmap
 import id.belitong.bigs.core.utils.showMessage
@@ -33,7 +36,9 @@ import java.io.File
 class AddFragment : BaseFragment<FragmentAddBinding>() {
 
     private var getFile: File? = null
-    private lateinit var currentPhotoPath: String
+    private var currentPhotoPath = ""
+
+    private var scannerState = false
 
     override fun getViewBinding(
         inflater: LayoutInflater,
@@ -70,10 +75,13 @@ class AddFragment : BaseFragment<FragmentAddBinding>() {
     }
 
     override fun initAction() {
+        val data = getPlant()
         with(binding) {
             this?.btnCamera?.setOnClickListener { cameraHandler() }
             this?.btnGallery?.setOnClickListener { galleryHandler() }
-            this?.btnScan?.setOnClickListener { scanHandler() }
+            this?.btnScan?.setOnClickListener {
+                scanHandler(data)
+            }
         }
     }
 
@@ -93,6 +101,8 @@ class AddFragment : BaseFragment<FragmentAddBinding>() {
             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
             launcherIntentCamera.launch(intent)
         }
+
+        scannerState = true
     }
 
     private val launcherIntentCamera = registerForActivityResult(
@@ -114,10 +124,12 @@ class AddFragment : BaseFragment<FragmentAddBinding>() {
     private fun galleryHandler() {
         val intent = Intent()
         intent.action = Intent.ACTION_GET_CONTENT
-        intent.type = "image/*"
+        intent.type = getString(R.string.image_format)
 
-        val chooser = Intent.createChooser(intent, "Pilih gambar")
+        val chooser = Intent.createChooser(intent, getString(R.string.pilih_gambar))
         launcherIntentGallery.launch(chooser)
+
+        scannerState = false
     }
 
     private val launcherIntentGallery = registerForActivityResult(
@@ -132,24 +144,31 @@ class AddFragment : BaseFragment<FragmentAddBinding>() {
         }
     }
 
-    private fun scanHandler() {
+    private fun scanHandler(plant: Plant) {
         if (getFile != null) {
             lifecycleScope.launch{
                 binding?.scanPlant?.visibility = ViewGroup.VISIBLE
                 delay(2000)
                 binding?.scanPlant?.visibility = ViewGroup.GONE
-                detectionHandler()
+                detectionHandler(plant)
             }
         } else {
             getString(R.string.no_image_selected).showMessage(requireContext())
         }
     }
 
-    private fun detectionHandler() {
+    private fun detectionHandler(plant: Plant) {
         val builder = AlertDialog.Builder(requireContext(), R.style.AlertDialog).create()
-        val view = layoutInflater.inflate(R.layout.view_data_not_found, null)
-        val btnClose = view.findViewById<AppCompatButton>(R.id.btn_close)
-        val btnAdd = view.findViewById<AppCompatButton>(R.id.btn_add)
+        val viewSuccess = layoutInflater.inflate(R.layout.view_data_found, null)
+        val viewFailed = layoutInflater.inflate(R.layout.view_data_not_found, null)
+        val tvLatinName = viewSuccess.findViewById<TextView>(R.id.tv_latin_name)
+        val tvScientificName = viewSuccess.findViewById<TextView>(R.id.tv_scientific_name)
+        val btnClose = viewFailed.findViewById<AppCompatButton>(R.id.btn_close)
+        val btnAdd = viewFailed.findViewById<AppCompatButton>(R.id.btn_add)
+        val btnDetails = viewSuccess.findViewById<AppCompatButton>(R.id.btn_details)
+
+        tvLatinName.text = plant.latinName
+        tvScientificName.text = plant.scientificName
 
         btnAdd.setOnClickListener {
             getString(R.string.on_click_handler).showMessage(requireContext())
@@ -159,7 +178,16 @@ class AddFragment : BaseFragment<FragmentAddBinding>() {
             builder.dismiss()
         }
 
-        builder.setView(view)
+        btnDetails.setOnClickListener {
+            getString(R.string.on_click_handler).showMessage(requireContext())
+        }
+
+        if (scannerState) {
+            builder.setView(viewSuccess)
+        } else {
+            builder.setView(viewFailed)
+        }
+
         builder.show()
     }
 

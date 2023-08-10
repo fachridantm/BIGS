@@ -1,6 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginHorizontal="36dp"
+    android:orientation="vertical"
+    android:padding="24dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_error"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="false"
+        app:lottie_rawRes="@raw/success" />
+
+    <TextView
+        android:id="@+id/tv_latin_name"
+        style="@style/Text.SemiBold.H3"
+        android:gravity="center"
+        android:maxLines="2"
+        android:layout_marginTop="12dp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        tools:text="Tropical Pitcher" />
+
+    <TextView
+        android:id="@+id/tv_scientific_name"
+        style="@style/Text.Regular.Body2"
+        android:gravity="center"
+        android:maxLines="2"
+        android:textColor="@color/md_theme_light_primary"
+        android:textStyle="italic"
+        tools:text="Nepenthes" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_details"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_btn_primary"
+        android:text="@string/details"
+        android:textAllCaps="false"
+        android:textAppearance="@style/Text.Regular.Subtitle1"
+        android:textColor="@android:color/white" />
+</LinearLayout>

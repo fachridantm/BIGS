@@ -81,7 +81,10 @@
     <string name="animal">Animal</string>
 
     <string name="scan_photo">Scan Photo</string>
+    <string name="pilih_gambar">Pilih gambar</string>
+    <string name="image_format">image/*</string>
     <string name="no_image_selected">Masukan foto terlebih dahulu</string>
+
     <string name="data_not_found">Data not found!</string>
 
     <string name="close">Close</string>
@@ -90,4 +93,5 @@
     <string name="tour_guide">Tour Guide</string>
     <string name="community">Community</string>
     <string name="local_resident">Local Resident</string>
+    <string name="details">Details</string>
 </resources>

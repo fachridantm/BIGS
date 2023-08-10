@@ -3,6 +3,7 @@ package id.belitong.bigs.core.utils
 import id.belitong.bigs.core.domain.model.Biodiversity
 import id.belitong.bigs.core.domain.model.Geosite
 import id.belitong.bigs.core.domain.model.Order
+import id.belitong.bigs.core.domain.model.Plant
 
 object DummyData {
     fun getAllGeosites() = listOf(
@@ -415,5 +416,19 @@ object DummyData {
             programName = "Research-Programme",
             status = "Cancelled",
         ),
+    )
+
+    fun getPlant() = Plant(
+        id = 1,
+        latinName = "Tropical Pitcher",
+        scientificName = "Nepenthes",
+        type = "Plant",
+        location = "Moss Hill",
+        desc = "Nepenthes, also known as tropical pitcher plants, is a genus of carnivorous plants in the monotypic family Nepenthaceae. " +
+                "The genus comprises roughly 200 species, and numerous natural and many cultivated hybrids. " +
+                "They are mostly liana-forming plants of the Old World tropics, ranging from South China, Indonesia, Malaysia and the Philippines; " +
+                "westward to Madagascar (two species) and the Seychelles (one); southward to Australia (three) and New Caledonia (one); " +
+                "and northward to India (one) and Sri Lanka (one).",
+        img = "https://images.squarespace-cdn.com/content/v1/5cdcf79637f3770001708f38/1560494821473-0AFVKPLCVCQIUTZBJK4P/Martin-Gunung-Lumut-04.jpg?format=300w",
     )
 }
