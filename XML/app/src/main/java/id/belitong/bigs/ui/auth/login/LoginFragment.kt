@@ -43,6 +43,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                     .navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
             }
             btnLogin.setOnClickListener { loginHandler() }
+            btnGoogleLogin.setOnClickListener {
+                requireContext().getString(R.string.on_click_handler).showMessage(requireContext())
+            }
         }
     }
 
