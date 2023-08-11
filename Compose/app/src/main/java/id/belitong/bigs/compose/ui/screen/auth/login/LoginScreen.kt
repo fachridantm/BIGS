@@ -8,6 +8,8 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.indication
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,6 +25,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -135,6 +138,8 @@ fun LoginScreenContent(
 
     var emailErrorMessage by remember { mutableStateOf("") }
     var passwordErrorMessage by remember { mutableStateOf("") }
+
+    val interactionSource = remember { MutableInteractionSource() }
 
     val visibility = if (isLoading) 1f else 0f
 
@@ -254,7 +259,8 @@ fun LoginScreenContent(
                             enabled = !isLoading,
                             onClick = {
                                 context
-                                .getString(R.string.on_click_handler).showToast(context)
+                                    .getString(R.string.on_click_handler)
+                                    .showToast(context)
                             }
                         ),
                     textDecoration = TextDecoration.Underline,
@@ -311,8 +317,22 @@ fun LoginScreenContent(
                     .shadow(
                         elevation = Dimension.SIZE_2,
                         shape = RoundedCornerShape(Dimension.SIZE_8)
+                    )
+                    .indication(
+                        interactionSource = interactionSource,
+                        indication = rememberRipple(
+                            color = Color.DarkGray,
+                            radius = Dimension.SIZE_18,
+                            bounded = false,
+                        )
                     ),
-                buttonColor = ButtonDefaults.buttonColors(containerColor = Color.White),
+                interactionSource = interactionSource,
+                buttonColor = ButtonDefaults.buttonColors(
+                    containerColor = Color.White,
+                    contentColor = Color.Black,
+                    disabledContainerColor = Color.LightGray,
+                    disabledContentColor = Color.LightGray,
+                ),
                 textButton = stringResource(R.string.sign_in_with_google),
                 textColor = Color.Black,
                 borderStroke = BorderStroke(Dimension.SIZE_1, Color.Black),
