@@ -6,8 +6,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.ContentAlpha
 import androidx.compose.material.IconButton
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
@@ -15,7 +17,6 @@ import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Visibility
 import androidx.compose.material.icons.rounded.VisibilityOff
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
@@ -31,8 +32,8 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import id.belitong.bigs.compose.R
-import id.belitong.bigs.compose.ui.composable.model.FormValidation
 import id.belitong.bigs.compose.core.utils.emptyString
+import id.belitong.bigs.compose.ui.composable.model.FormValidation
 import id.belitong.bigs.compose.ui.composable.utils.getContext
 import id.belitong.bigs.compose.ui.theme.Dimension
 import id.belitong.bigs.compose.ui.theme.md_theme_light_error
@@ -103,10 +104,9 @@ fun FormTextField(
         verticalArrangement = Arrangement.Center,
     ) {
         OutlinedTextField(
-            modifier = modifier
-                .fillMaxWidth(),
+            modifier = modifier.fillMaxWidth(),
             value = value,
-            shape = MaterialTheme.shapes.small,
+            shape = RoundedCornerShape(Dimension.SIZE_5),
             onValueChange = {
                 onFormValueChange?.invoke(it)
             },
@@ -114,11 +114,11 @@ fun FormTextField(
             singleLine = singleLine,
             readOnly = readOnly,
             visualTransformation = visualTransformation,
-            textStyle = typography.body1,
+            textStyle = typography.h4,
             label = {
                 Text(
                     text = label,
-                    style = typography.body1,
+                    style = typography.h4,
                 )
             },
             leadingIcon = leadingIcon,
@@ -163,6 +163,7 @@ fun passwordToggleView(showPassword: Boolean, onClick: () -> Unit): @Composable 
             Image(
                 icon,
                 contentDescription = stringResource(R.string.password_toggle_content_desc),
+                alpha = ContentAlpha.medium
             )
         }
     }

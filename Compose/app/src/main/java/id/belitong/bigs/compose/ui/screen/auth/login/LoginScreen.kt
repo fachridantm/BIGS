@@ -1,6 +1,7 @@
 package id.belitong.bigs.compose.ui.screen.auth.login
 
 import android.app.Activity
+import android.content.Context
 import android.util.Log
 import android.util.Patterns
 import androidx.activity.compose.BackHandler
@@ -15,12 +16,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -35,7 +37,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -57,7 +61,6 @@ import id.belitong.bigs.compose.ui.composable.components.ValidationForm
 import id.belitong.bigs.compose.ui.composable.model.FormValidation
 import id.belitong.bigs.compose.ui.composable.utils.ComposableObserver
 import id.belitong.bigs.compose.ui.composable.utils.getActivity
-import id.belitong.bigs.compose.ui.composable.utils.getContext
 import id.belitong.bigs.compose.ui.navigation.AuthNavGraph
 import id.belitong.bigs.compose.ui.screen.destinations.RegisterScreenDestination
 import id.belitong.bigs.compose.ui.screen.main.MainActivity
@@ -123,6 +126,7 @@ fun saveSession(loginViewModel: LoginViewModel, activity: Activity, token: Strin
 @Composable
 fun LoginScreenContent(
     modifier: Modifier = Modifier,
+    context: Context = LocalContext.current,
     onClick: (String, String) -> Unit,
     isLoading: Boolean = false,
     navigator: DestinationsNavigator? = null,
@@ -137,24 +141,19 @@ fun LoginScreenContent(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .padding(horizontal = Dimension.SIZE_24)
+            .padding(Dimension.SIZE_32)
             .verticalScroll(rememberScrollState())
     ) {
         BasicLottieAnimation(
             modifier = Modifier
+                .size(150.dp)
                 .align(Alignment.Center)
                 .alpha(visibility),
             resId = R.raw.loading,
         )
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 16.dp),
             verticalArrangement = Arrangement.Top,
         ) {
-
-            val context = getContext()
-
             val emailValidation =
                 remember {
                     mutableStateOf(
@@ -196,9 +195,7 @@ fun LoginScreenContent(
                         password.length >= 8
 
             Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = Dimension.SIZE_64),
+                modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center,
             ) {
                 Image(
@@ -210,14 +207,13 @@ fun LoginScreenContent(
                 )
             }
             Text(
-                modifier = Modifier.alpha(0.8f),
                 textAlign = TextAlign.Start,
                 text = stringResource(R.string.sign_in),
-                style = typography.h2
+                style = typography.h2,
             )
             ValidationForm(modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = Dimension.SIZE_18),
+                .padding(top = Dimension.SIZE_24),
                 state = emailValidation,
                 onFormValueChange = {
                     emailValidation.value = emailValidation.value.copy(
@@ -256,13 +252,12 @@ fun LoginScreenContent(
                         .padding(top = Dimension.SIZE_8)
                         .clickable(onClick = {
                             context
-                                .getString(R.string.on_click_handler)
-                                .showToast(context)
+                                .getString(R.string.on_click_handler).showToast(context)
                         }),
                     textDecoration = TextDecoration.Underline,
                     textAlign = TextAlign.End,
                     text = stringResource(R.string.forgot_password),
-                    style = typography.body2
+                    style = typography.h5
                 )
             }
             Button(modifier = Modifier
@@ -271,7 +266,7 @@ fun LoginScreenContent(
                 colors = ButtonDefaults.buttonColors(
                     containerColor = seed, contentColor = Color.White
                 ),
-                shape = MaterialTheme.shapes.small,
+                shape = RoundedCornerShape(Dimension.SIZE_8),
                 onClick = {
                     emailValidation.value = emailValidation.value.copy(
                         isError = email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email)
@@ -305,17 +300,24 @@ fun LoginScreenContent(
                     style = typography.h4
                 )
             }
-            ButtonWithDrawableStart(modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = Dimension.SIZE_28),
+            ButtonWithDrawableStart(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = Dimension.SIZE_28)
+                    .shadow(
+                        elevation = Dimension.SIZE_2,
+                        shape = RoundedCornerShape(Dimension.SIZE_8)
+                    ),
                 buttonColor = ButtonDefaults.buttonColors(containerColor = Color.White),
                 textButton = stringResource(R.string.sign_in_with_google),
                 textColor = Color.Black,
                 borderStroke = BorderStroke(Dimension.SIZE_1, Color.Black),
+                shape = RoundedCornerShape(Dimension.SIZE_8),
                 drawableStart = painterResource(R.drawable.ic_google),
                 onClick = {
                     context.getString(R.string.on_click_handler).showToast(context)
-                })
+                }
+            )
             Row(
                 modifier = Modifier
                     .fillMaxWidth()

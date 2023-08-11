@@ -15,9 +15,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -228,7 +228,6 @@ fun RegisterScreenContent(
                 )
             }
             Text(
-                modifier = Modifier.alpha(0.8f),
                 textAlign = TextAlign.Start,
                 text = stringResource(R.string.sign_up),
                 style = typography.h2
@@ -236,7 +235,7 @@ fun RegisterScreenContent(
             ValidationForm(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = Dimension.SIZE_18),
+                    .padding(top = Dimension.SIZE_24),
                 state = emailValidation,
                 onFormValueChange = {
                     emailValidation.value = emailValidation.value.copy(
@@ -314,7 +313,7 @@ fun RegisterScreenContent(
                 colors = ButtonDefaults.buttonColors(
                     containerColor = seed, contentColor = Color.White
                 ),
-                shape = MaterialTheme.shapes.small,
+                shape = RoundedCornerShape(Dimension.SIZE_8),
                 onClick = {
                     emailValidation.value = emailValidation.value.copy(
                         isError = email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email)
