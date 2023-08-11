@@ -139,6 +139,7 @@ fun FormTextField(
                 focusedBorderColor = seed,
                 unfocusedBorderColor = Color.Gray,
                 disabledBorderColor = Color.Gray,
+                cursorColor = seed,
             )
         )
 
