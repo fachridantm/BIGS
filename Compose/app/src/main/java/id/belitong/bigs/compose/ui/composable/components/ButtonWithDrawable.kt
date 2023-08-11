@@ -15,6 +15,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ButtonElevation
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -103,6 +104,11 @@ fun ButtonWithDrawableStart(
         horizontal = Dimension.SIZE_32,
         vertical = Dimension.SIZE_12
     ),
+    elevation: ButtonElevation = ButtonDefaults.buttonElevation(
+        defaultElevation = Dimension.SIZE_0,
+        pressedElevation = Dimension.SIZE_0,
+        disabledElevation = Dimension.SIZE_0
+    ),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     textPadding: PaddingValues = PaddingValues(horizontal = Dimension.SIZE_12),
     iconPadding: PaddingValues = PaddingValues(end = Dimension.SIZE_12),
@@ -117,6 +123,7 @@ fun ButtonWithDrawableStart(
         border = borderStroke,
         enabled = enabled,
         modifier = modifier,
+        elevation = elevation,
         contentPadding = innerPadding,
         interactionSource = interactionSource
     ) {

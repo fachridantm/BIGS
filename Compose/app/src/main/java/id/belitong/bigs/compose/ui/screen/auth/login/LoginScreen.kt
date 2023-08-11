@@ -40,7 +40,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
@@ -142,6 +141,7 @@ fun LoginScreenContent(
     val interactionSource = remember { MutableInteractionSource() }
 
     val visibility = if (isLoading) 1f else 0f
+    val elevation = if (isLoading) Dimension.SIZE_0 else Dimension.SIZE_2
 
     Box(
         modifier = modifier
@@ -149,13 +149,6 @@ fun LoginScreenContent(
             .padding(Dimension.SIZE_32)
             .verticalScroll(rememberScrollState())
     ) {
-        BasicLottieAnimation(
-            modifier = Modifier
-                .size(150.dp)
-                .align(Alignment.Center)
-                .alpha(visibility),
-            resId = R.raw.loading,
-        )
         Column(
             verticalArrangement = Arrangement.Top,
         ) {
@@ -314,10 +307,6 @@ fun LoginScreenContent(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = Dimension.SIZE_28)
-                    .shadow(
-                        elevation = Dimension.SIZE_2,
-                        shape = RoundedCornerShape(Dimension.SIZE_8)
-                    )
                     .indication(
                         interactionSource = interactionSource,
                         indication = rememberRipple(
@@ -327,11 +316,16 @@ fun LoginScreenContent(
                         )
                     ),
                 interactionSource = interactionSource,
+                elevation = ButtonDefaults.buttonElevation(
+                    defaultElevation = elevation,
+                    pressedElevation = elevation,
+                    disabledElevation = elevation,
+                ),
                 buttonColor = ButtonDefaults.buttonColors(
                     containerColor = Color.White,
-                    contentColor = Color.Black,
-                    disabledContainerColor = Color.LightGray,
-                    disabledContentColor = Color.LightGray,
+                    contentColor = Color.White,
+                    disabledContainerColor = Color.White,
+                    disabledContentColor = Color.White,
                 ),
                 textButton = stringResource(R.string.sign_in_with_google),
                 textColor = Color.Black,
@@ -371,6 +365,13 @@ fun LoginScreenContent(
                 )
             }
         }
+        BasicLottieAnimation(
+            modifier = Modifier
+                .size(150.dp)
+                .align(Alignment.Center)
+                .alpha(visibility),
+            resId = R.raw.loading,
+        )
     }
 }
 
