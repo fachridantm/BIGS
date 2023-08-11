@@ -314,6 +314,7 @@ fun RegisterScreenContent(
                     containerColor = seed, contentColor = Color.White
                 ),
                 shape = RoundedCornerShape(Dimension.SIZE_8),
+                enabled = !isLoading,
                 onClick = {
                     emailValidation.value = emailValidation.value.copy(
                         isError = email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email)
@@ -362,6 +363,7 @@ fun RegisterScreenContent(
                     modifier = Modifier
                         .padding(start = Dimension.SIZE_4)
                         .clickable(
+                            enabled = !isLoading,
                             onClick = {
                                 navigator?.navigate(LoginScreenDestination)
                             }

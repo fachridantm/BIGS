@@ -272,6 +272,7 @@ fun AddScreenContent(
                     textColor = Color.White,
                     drawableStart = painterResource(id = R.drawable.ic_camera),
                     shape = RoundedCornerShape(Dimension.SIZE_12),
+                    enabled = !isLoading,
                     innerPadding = PaddingValues(vertical = Dimension.SIZE_12),
                     iconPadding = PaddingValues(horizontal = Dimension.SIZE_4),
                     textPadding = PaddingValues(Dimension.SIZE_0),
@@ -290,6 +291,7 @@ fun AddScreenContent(
                     textColor = Color.White,
                     drawableStart = painterResource(id = R.drawable.ic_upload),
                     shape = RoundedCornerShape(Dimension.SIZE_12),
+                    enabled = !isLoading,
                     innerPadding = PaddingValues(vertical = Dimension.SIZE_12),
                     iconPadding = PaddingValues(horizontal = Dimension.SIZE_4),
                     textPadding = PaddingValues(Dimension.SIZE_0),
@@ -306,6 +308,7 @@ fun AddScreenContent(
                 ),
                 shape = RoundedCornerShape(Dimension.SIZE_12),
                 contentPadding = PaddingValues(vertical = Dimension.SIZE_12),
+                enabled = !isLoading,
                 onClick = scanHandler
             ) {
                 Text(

@@ -250,10 +250,13 @@ fun LoginScreenContent(
                 Text(
                     modifier = Modifier
                         .padding(top = Dimension.SIZE_8)
-                        .clickable(onClick = {
-                            context
+                        .clickable(
+                            enabled = !isLoading,
+                            onClick = {
+                                context
                                 .getString(R.string.on_click_handler).showToast(context)
-                        }),
+                            }
+                        ),
                     textDecoration = TextDecoration.Underline,
                     textAlign = TextAlign.End,
                     text = stringResource(R.string.forgot_password),
@@ -267,6 +270,7 @@ fun LoginScreenContent(
                     containerColor = seed, contentColor = Color.White
                 ),
                 shape = RoundedCornerShape(Dimension.SIZE_8),
+                enabled = !isLoading,
                 onClick = {
                     emailValidation.value = emailValidation.value.copy(
                         isError = email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email)
@@ -316,7 +320,8 @@ fun LoginScreenContent(
                 drawableStart = painterResource(R.drawable.ic_google),
                 onClick = {
                     context.getString(R.string.on_click_handler).showToast(context)
-                }
+                },
+                enabled = !isLoading
             )
             Row(
                 modifier = Modifier
@@ -334,6 +339,7 @@ fun LoginScreenContent(
                     modifier = Modifier
                         .padding(start = Dimension.SIZE_4)
                         .clickable(
+                            enabled = !isLoading,
                             onClick = {
                                 navigator?.navigate(RegisterScreenDestination)
                             }
