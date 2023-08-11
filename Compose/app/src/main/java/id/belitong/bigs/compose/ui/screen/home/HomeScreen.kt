@@ -162,7 +162,7 @@ fun HomeScreenContent(
             ) {
                 OutlinedTextField(
                     modifier = Modifier
-                        .height(Dimension.SIZE_48)
+                        .height(Dimension.SIZE_50)
                         .weight(1f)
                         .padding(horizontal = Dimension.SIZE_12)
                         .clickable(
@@ -177,7 +177,7 @@ fun HomeScreenContent(
                         Text(
                             modifier = Modifier.alpha(0.4f),
                             text = stringResource(R.string.search_hint),
-                            color = Color.Black
+                            color = Color.Black,
                         )
                     },
                     leadingIcon = {
