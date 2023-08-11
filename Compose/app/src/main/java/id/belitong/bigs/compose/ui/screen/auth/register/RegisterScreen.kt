@@ -122,13 +122,6 @@ fun RegisterScreenContent(
             .padding(horizontal = Dimension.SIZE_24)
             .verticalScroll(rememberScrollState())
     ) {
-        BasicLottieAnimation(
-            modifier = Modifier
-                .size(150.dp)
-                .align(Alignment.Center)
-                .alpha(visibility),
-            resId = R.raw.loading,
-        )
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -377,6 +370,13 @@ fun RegisterScreenContent(
                 )
             }
         }
+        BasicLottieAnimation(
+            modifier = Modifier
+                .size(150.dp)
+                .align(Alignment.Center)
+                .alpha(visibility),
+            resId = R.raw.loading,
+        )
     }
 }
 
