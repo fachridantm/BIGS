@@ -24,13 +24,14 @@ object Dimension {
     val SIZE_32 = 32.dp
     val SIZE_36 = 36.dp
     val SIZE_48 = 48.dp
+    val SIZE_50 = 50.dp
     val SIZE_60 = 60.dp
     val SIZE_64 = 64.dp
     val SIZE_68 = 68.dp
     val SIZE_100 = 100.dp
 }
 
-object Text {
+object TextSize {
     val SIZE_8 = 8.sp
     val SIZE_12 = 12.sp
     val SIZE_14 = 14.sp
