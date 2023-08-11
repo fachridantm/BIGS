@@ -220,12 +220,6 @@ fun AddScreenContent(
         contentAlignment = Alignment.TopCenter
     ) {
         val visibility = if (isLoading) 1f else 0f
-        BasicLottieAnimation(
-            modifier = Modifier
-                .alpha(visibility)
-                .padding(top = 155.dp),
-            resId = R.raw.plant_scanning
-        )
         Column(
             modifier = modifier
                 .fillMaxSize()
@@ -285,7 +279,8 @@ fun AddScreenContent(
                         .weight(1f)
                         .padding(start = Dimension.SIZE_8),
                     buttonColor = ButtonDefaults.buttonColors(
-                        containerColor = md_theme_light_primary, contentColor = Color.White
+                        containerColor = md_theme_light_primary,
+                        contentColor = Color.White
                     ),
                     textButton = stringResource(id = R.string.upload_image),
                     textColor = Color.White,
@@ -318,6 +313,13 @@ fun AddScreenContent(
                 )
             }
         }
+        BasicLottieAnimation(
+            modifier = Modifier
+                .size(520.dp)
+                .padding(top = 135.dp)
+                .alpha(visibility),
+            resId = R.raw.plant_scanning
+        )
     }
 }
 
