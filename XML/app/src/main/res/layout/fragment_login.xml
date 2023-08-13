@@ -90,7 +90,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:backgroundTint="@color/seed"
+            android:backgroundTint="@color/btn_bg_seed"
             android:text="@string/login"
             android:textAllCaps="false"
             app:layout_constraintEnd_toEndOf="parent"

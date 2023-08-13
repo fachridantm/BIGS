@@ -147,9 +147,17 @@ class AddFragment : BaseFragment<FragmentAddBinding>() {
     private fun scanHandler(plant: Plant) {
         if (getFile != null) {
             lifecycleScope.launch{
-                binding?.scanPlant?.visibility = ViewGroup.VISIBLE
-                delay(2000)
-                binding?.scanPlant?.visibility = ViewGroup.GONE
+                binding?.apply {
+                    scanPlant.visibility = ViewGroup.VISIBLE
+                    btnCamera.isEnabled = false
+                    btnGallery.isEnabled = false
+                    btnScan.isEnabled = false
+                    delay(2000)
+                    scanPlant.visibility = ViewGroup.GONE
+                    btnCamera.isEnabled = true
+                    btnGallery.isEnabled = true
+                    btnScan.isEnabled = true
+                }
                 detectionHandler(plant)
             }
         } else {

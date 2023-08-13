@@ -39,8 +39,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                 requireContext().getString(R.string.on_click_handler).showMessage(requireContext())
             }
             tvRegisterHere.setOnClickListener {
-                it.findNavController()
-                    .navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
+                it.findNavController().navigate(
+                    LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
+                )
             }
             btnLogin.setOnClickListener { loginHandler() }
             btnGoogleLogin.setOnClickListener {
@@ -131,10 +132,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                 pbLogin.visibility = View.VISIBLE
                 btnLogin.isEnabled = false
                 btnGoogleLogin.isEnabled = false
+                tvForgotPassword.isEnabled = false
+                tvRegisterHere.isEnabled = false
             } else {
                 pbLogin.visibility = View.GONE
                 btnLogin.isEnabled = true
                 btnGoogleLogin.isEnabled = true
+                tvForgotPassword.isEnabled = true
+                tvRegisterHere.isEnabled = true
             }
         }
     }
