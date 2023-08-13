@@ -260,7 +260,8 @@ fun AddScreenContent(
                         .weight(0.8f)
                         .padding(end = Dimension.SIZE_8),
                     buttonColor = ButtonDefaults.buttonColors(
-                        containerColor = md_theme_light_primary, contentColor = Color.White
+                        containerColor = md_theme_light_primary,
+                        contentColor = Color.White
                     ),
                     textButton = stringResource(id = R.string.take_photo),
                     textColor = Color.White,
@@ -315,8 +316,8 @@ fun AddScreenContent(
         }
         BasicLottieAnimation(
             modifier = Modifier
-                .size(520.dp)
-                .padding(top = 135.dp)
+                .wrapContentSize()
+                .padding(top = 157.dp)
                 .alpha(visibility),
             resId = R.raw.plant_scanning
         )
