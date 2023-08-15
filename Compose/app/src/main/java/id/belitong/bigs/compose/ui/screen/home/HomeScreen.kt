@@ -141,8 +141,8 @@ fun HomeScreenContent(
     intentToGeoprogramme: () -> Unit = {},
     intentToGeosite: () -> Unit = {},
 ) {
-    val interactionSource = remember { MutableInteractionSource() }
     val context = LocalContext.current
+    val interactionSource = remember { MutableInteractionSource() }
 
     Box(
         modifier = modifier

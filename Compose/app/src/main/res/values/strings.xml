@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BIGS</string>
+    <string name="app_name">BIGS-Compose</string>
     <string name="BIGS">Belitong Biodiversity Information and Guidance System</string>
     <string name="explore_now">Explore Now</string>
 
@@ -102,4 +102,8 @@
     <string name="logout_message">Are you sure want to sign out?</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
+
+    <string name="tour_guide">Tour Guide</string>
+    <string name="community">Community</string>
+    <string name="local_resident">Local Resident</string>
 </resources>
