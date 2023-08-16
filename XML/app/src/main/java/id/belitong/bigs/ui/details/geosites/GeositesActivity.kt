@@ -15,7 +15,7 @@ class GeositesActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityGeositesBinding
     private val cardGeositeAdapter: CardGeositeAdapter by lazy { CardGeositeAdapter(::onItemClick) }
-
+    private val data = DummyData.getAllGeosites()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +28,7 @@ class GeositesActivity : AppCompatActivity() {
     }
 
     private fun initData() {
-        cardGeositeAdapter.submitList(DummyData.getAllGeosites())
+        cardGeositeAdapter.submitList(data)
     }
 
     private fun initView() {
@@ -42,19 +42,16 @@ class GeositesActivity : AppCompatActivity() {
 
     private fun initAction() {
         with(binding) {
-
-            val data = DummyData.getAllGeosites()
-
             chipAlphabet.setOnClickListener {
                 val alphabetSort = data.sortedBy { it.name }
                 cardGeositeAdapter.submitList(alphabetSort)
-                rvGeosites.scrollToPosition(0)
+                rvGeosites.smoothScrollToPosition(0)
             }
 
             chipNearest.setOnClickListener {
                 val nearestSort = data.sortedBy { it.distance }
                 cardGeositeAdapter.submitList(nearestSort)
-                rvGeosites.scrollToPosition(0)
+                rvGeosites.smoothScrollToPosition(0)
             }
 
             toolbarGeosites.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }

@@ -45,7 +45,6 @@ class CardGeositeAdapter(private val onItemClick: (Geosite) -> Unit) :
     override fun getItemCount(): Int {
         return currentList.size
     }
-
     companion object {
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Geosite>() {
             override fun areItemsTheSame(oldItem: Geosite, newItem: Geosite): Boolean =
