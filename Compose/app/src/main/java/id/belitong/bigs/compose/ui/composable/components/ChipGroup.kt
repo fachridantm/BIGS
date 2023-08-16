@@ -17,8 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import id.belitong.bigs.compose.R
-import id.belitong.bigs.compose.ui.composable.model.BiodiversityFilter
-import id.belitong.bigs.compose.ui.composable.model.getAllBiodiversityFilter
+import id.belitong.bigs.compose.ui.composable.model.ChipFilter
+import id.belitong.bigs.compose.ui.composable.model.getBiodiversityFilter
 import id.belitong.bigs.compose.ui.theme.Dimension
 import id.belitong.bigs.compose.ui.theme.seed
 import id.belitong.bigs.compose.ui.theme.typography
@@ -27,15 +27,15 @@ import id.belitong.bigs.compose.ui.theme.typography
 @Composable
 fun ChipGroupSingleSelection(
     modifier: Modifier = Modifier,
-    biodiversityFilter: List<BiodiversityFilter> = getAllBiodiversityFilter(),
-    selectedChip: BiodiversityFilter = BiodiversityFilter.ALL,
-    onChipSelected: (BiodiversityFilter) -> Unit,
+    listFilter: List<ChipFilter> = getBiodiversityFilter(),
+    selectedChip: ChipFilter = ChipFilter.ALL,
+    onChipSelected: (ChipFilter) -> Unit,
 ) {
     LazyRow(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(Dimension.SIZE_6),
     ) {
-        items(biodiversityFilter) {
+        items(listFilter) {
             FilterChip(
                 selected = selectedChip == it,
                 onClick = {

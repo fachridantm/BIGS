@@ -63,8 +63,8 @@ import id.belitong.bigs.compose.ui.composable.components.ButtonWithDrawableTop
 import id.belitong.bigs.compose.ui.composable.components.CarouselItem
 import id.belitong.bigs.compose.ui.composable.components.ChipGroupSingleSelection
 import id.belitong.bigs.compose.ui.composable.components.HomeGridItem
-import id.belitong.bigs.compose.ui.composable.model.BiodiversityFilter
-import id.belitong.bigs.compose.ui.composable.model.getAllBiodiversityFilter
+import id.belitong.bigs.compose.ui.composable.model.ChipFilter
+import id.belitong.bigs.compose.ui.composable.model.getBiodiversityFilter
 import id.belitong.bigs.compose.ui.composable.utils.getActivity
 import id.belitong.bigs.compose.ui.navigation.MainNavGraph
 import id.belitong.bigs.compose.ui.screen.details.geoprogramme.GeoprogrammeActivity
@@ -87,7 +87,7 @@ fun HomeScreen(
     val activity = getActivity()
     val name = homeViewModel.getName().observeAsState()
 
-    val selectedChip = remember { mutableStateOf(BiodiversityFilter.ALL) }
+    val selectedChip = remember { mutableStateOf(ChipFilter.ALL) }
 
     BackHandler {
         activity.finish()
@@ -97,17 +97,17 @@ fun HomeScreen(
     var chipData by remember { mutableStateOf(biodiversities) }
 
     when (selectedChip.value) {
-        BiodiversityFilter.GEOSITE -> {
+        ChipFilter.GEOSITE -> {
             chipData = biodiversities.filter {
                 it.type != stringResource(R.string.animal) && it.type != stringResource(R.string.plant)
             }
         }
 
-        BiodiversityFilter.ANIMAL -> {
+        ChipFilter.ANIMAL -> {
             chipData = biodiversities.filter { it.type == stringResource(R.string.animal) }
         }
 
-        BiodiversityFilter.PLANT -> {
+        ChipFilter.PLANT -> {
             chipData = biodiversities.filter { it.type == stringResource(R.string.plant) }
         }
 
@@ -135,7 +135,7 @@ fun HomeScreenContent(
     name: String = "",
     geosites: List<Geosite> = emptyList(),
     biodiversities: List<Biodiversity> = emptyList(),
-    selectedChip: MutableState<BiodiversityFilter> = remember { mutableStateOf(BiodiversityFilter.ALL) },
+    selectedChip: MutableState<ChipFilter> = remember { mutableStateOf(ChipFilter.ALL) },
     intentToProfile: () -> Unit = {},
     intentToSearchResult: () -> Unit = {},
     intentToGeoprogramme: () -> Unit = {},
@@ -268,7 +268,7 @@ fun HomeScreenContent(
                 )
                 ChipGroupSingleSelection(
                     modifier = Modifier.fillMaxWidth(),
-                    biodiversityFilter = getAllBiodiversityFilter(),
+                    listFilter = getBiodiversityFilter(),
                     selectedChip = selectedChip.value,
                     onChipSelected = { selectedChip.value = it },
                 )
