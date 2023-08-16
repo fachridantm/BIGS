@@ -96,24 +96,18 @@ fun HomeScreen(
     val biodiversities = getAllBiodiversity()
     var chipData by remember { mutableStateOf(biodiversities) }
 
-    when (selectedChip.value) {
+    chipData = when (selectedChip.value) {
         ChipFilter.GEOSITE -> {
-            chipData = biodiversities.filter {
+            biodiversities.filter {
                 it.type != stringResource(R.string.animal) && it.type != stringResource(R.string.plant)
             }
         }
 
-        ChipFilter.ANIMAL -> {
-            chipData = biodiversities.filter { it.type == stringResource(R.string.animal) }
-        }
+        ChipFilter.ANIMAL -> { biodiversities.filter { it.type == stringResource(R.string.animal) } }
 
-        ChipFilter.PLANT -> {
-            chipData = biodiversities.filter { it.type == stringResource(R.string.plant) }
-        }
+        ChipFilter.PLANT -> { biodiversities.filter { it.type == stringResource(R.string.plant) } }
 
-        else -> {
-            chipData = biodiversities
-        }
+        else -> { biodiversities }
     }
 
     HomeScreenContent(
