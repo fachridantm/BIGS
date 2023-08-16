@@ -68,7 +68,7 @@ fun GeoprogrammeScreenContent(
                 .fillMaxWidth()
                 .padding(top = Dimension.SIZE_16, bottom = Dimension.SIZE_26),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Start
+            horizontalArrangement = Arrangement.Center
         ) {
             Icon(
                 modifier = Modifier
@@ -79,7 +79,7 @@ fun GeoprogrammeScreenContent(
                 contentDescription = stringResource(R.string.back),
             )
             Text(
-                modifier = Modifier.padding(start = 100.dp),
+                modifier = Modifier.weight(1f),
                 text = stringResource(id = R.string.title_activity_geoprogramme),
                 style = typography.h3,
                 color = Color.Black.copy(alpha = 0.8f),
