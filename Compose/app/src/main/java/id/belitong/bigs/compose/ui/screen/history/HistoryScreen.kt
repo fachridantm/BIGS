@@ -29,7 +29,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import id.belitong.bigs.compose.R
 import id.belitong.bigs.compose.core.domain.model.Order
-import id.belitong.bigs.compose.core.utils.DummyData.getAllOrder
+import id.belitong.bigs.compose.core.utils.DummyData
 import id.belitong.bigs.compose.core.utils.showToast
 import id.belitong.bigs.compose.ui.composable.components.HistoryGridItem
 import id.belitong.bigs.compose.ui.composable.components.TabContent
@@ -49,7 +49,7 @@ fun HistoryScreen(
 ) {
     val activity = getActivity()
 
-    val tabData = getAllOrder()
+    val tabData = DummyData.getAllOrder()
     val tabList = listOf(stringResource(R.string.my_order), stringResource(R.string.my_report))
     val pagerState = rememberPagerState(pageCount = tabData.size)
 

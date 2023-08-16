@@ -51,7 +51,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import id.belitong.bigs.compose.BuildConfig
 import id.belitong.bigs.compose.R
-import id.belitong.bigs.compose.core.utils.DummyData.getPlant
+import id.belitong.bigs.compose.core.utils.DummyData
 import id.belitong.bigs.compose.core.utils.createTempFile
 import id.belitong.bigs.compose.core.utils.rotateBitmap
 import id.belitong.bigs.compose.core.utils.showToast
@@ -189,7 +189,7 @@ fun AddScreen(
     }
     if (showDialog) {
         ScanResultDialog(
-            plant = getPlant(),
+            plant = DummyData.getPlant(),
             isFailed = isFailed,
             isSuccess = isSuccess,
             onClickDetails = {

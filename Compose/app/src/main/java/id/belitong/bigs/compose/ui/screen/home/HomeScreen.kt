@@ -55,8 +55,7 @@ import com.tbuonomo.viewpagerdotsindicator.compose.type.ShiftIndicatorType
 import id.belitong.bigs.compose.R
 import id.belitong.bigs.compose.core.domain.model.Biodiversity
 import id.belitong.bigs.compose.core.domain.model.Geosite
-import id.belitong.bigs.compose.core.utils.DummyData.getAllBiodiversity
-import id.belitong.bigs.compose.core.utils.DummyData.getAllGeosites
+import id.belitong.bigs.compose.core.utils.DummyData
 import id.belitong.bigs.compose.core.utils.getFirstName
 import id.belitong.bigs.compose.core.utils.showToast
 import id.belitong.bigs.compose.ui.composable.components.ButtonWithDrawableTop
@@ -93,7 +92,7 @@ fun HomeScreen(
         activity.finish()
     }
 
-    val biodiversities = getAllBiodiversity()
+    val biodiversities = DummyData.getAllBiodiversity()
     var chipData by remember { mutableStateOf(biodiversities) }
 
     chipData = when (selectedChip.value) {
@@ -112,7 +111,7 @@ fun HomeScreen(
 
     HomeScreenContent(
         name = name.value?.getFirstName() ?: "No Name",
-        geosites = getAllGeosites(),
+        geosites = DummyData.getAllGeosites(),
         biodiversities = chipData,
         selectedChip = selectedChip,
         intentToProfile = { ProfileActivity.start(activity) },
