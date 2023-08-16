@@ -21,6 +21,20 @@ fun String.showToast(context: Context) {
     Toast.makeText(context, this, Toast.LENGTH_SHORT).show()
 }
 
+fun Int.meterToKilometer(): String {
+    return if (this >= 1000) {
+        val doubleValue = this.toDouble()
+        val distance = doubleValue / 1000
+        if (distance % 1 == 0.0) {
+            "${distance.toInt()} km"
+        } else {
+            "$distance km"
+        }
+    } else {
+        "$this m"
+    }
+}
+
 fun String.getFirstName(): String = this.split(" ")[0]
 
 fun String.getFirstTwoWords(): String = this.split(" ")[0] + " " + this.split(" ")[1]

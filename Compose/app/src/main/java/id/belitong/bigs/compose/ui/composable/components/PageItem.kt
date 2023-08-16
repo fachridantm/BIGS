@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
@@ -20,6 +21,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,6 +32,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -42,12 +45,14 @@ import id.belitong.bigs.compose.core.domain.model.Geosite
 import id.belitong.bigs.compose.core.domain.model.Order
 import id.belitong.bigs.compose.core.utils.HistoryStatus
 import id.belitong.bigs.compose.core.utils.getFirstTwoWords
+import id.belitong.bigs.compose.core.utils.meterToKilometer
 import id.belitong.bigs.compose.ui.theme.Dimension
 import id.belitong.bigs.compose.ui.theme.TextSize
 import id.belitong.bigs.compose.ui.theme.md_theme_dark_secondary
 import id.belitong.bigs.compose.ui.theme.md_theme_dark_tertiary
 import id.belitong.bigs.compose.ui.theme.md_theme_light_error
 import id.belitong.bigs.compose.ui.theme.md_theme_light_primary
+import id.belitong.bigs.compose.ui.theme.Error
 import id.belitong.bigs.compose.ui.theme.typography
 
 @OptIn(ExperimentalGlideComposeApi::class)
@@ -342,6 +347,102 @@ fun HistoryGridItem(
                     }
                 }
             }
+        }
+    }
+}
+
+@OptIn(ExperimentalGlideComposeApi::class)
+@Composable
+fun GeositeItem(
+    modifier: Modifier = Modifier,
+    geosite: Geosite,
+    onItemClicked: (Geosite) -> Unit = {}
+) {
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .clip(RoundedCornerShape(Dimension.SIZE_12))
+            .shadow(
+                elevation = Dimension.SIZE_4,
+                shape = RoundedCornerShape(Dimension.SIZE_12),
+                clip = true
+            )
+            .clickable(
+                onClick = { onItemClicked(geosite) }
+            )
+    ) {
+        GlideImage(
+            modifier = Modifier
+                .fillMaxWidth()
+                .requiredHeight(200.dp),
+            model = geosite.img,
+            contentDescription = geosite.name,
+            contentScale = ContentScale.Crop,
+        ) {
+            it.placeholder(R.drawable.img_placeholder_geopark)
+        }
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .align(Alignment.BottomCenter)
+                .background(
+                    color = Color.Black.copy(alpha = 0.6f),
+                    shape = RoundedCornerShape(
+                        bottomStart = Dimension.SIZE_12,
+                        bottomEnd = Dimension.SIZE_12
+                    )
+                )
+                .padding(horizontal = Dimension.SIZE_12, vertical = Dimension.SIZE_8),
+            verticalArrangement = Arrangement.Bottom,
+            horizontalAlignment = Alignment.Start
+        ) {
+            Text(
+                modifier = Modifier
+                    .wrapContentSize()
+                    .padding(bottom = Dimension.SIZE_4),
+                text = geosite.name,
+                style = typography.h4,
+                color = Color.White,
+                textAlign = TextAlign.Start,
+                maxLines = 1,
+            )
+            Text(
+                modifier = Modifier
+                    .wrapContentSize()
+                    .padding(bottom = Dimension.SIZE_4, end = Dimension.SIZE_64),
+                text = geosite.summary,
+                style = typography.subtitle1,
+                color = Color.White,
+                textAlign = TextAlign.Start,
+                maxLines = 2,
+            )
+        }
+        Row(
+            modifier = Modifier
+                .wrapContentSize()
+                .padding(Dimension.SIZE_12)
+                .align(Alignment.BottomEnd),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.End
+        ) {
+            Icon(
+                modifier = Modifier
+                    .wrapContentSize()
+                    .padding(end = Dimension.SIZE_4),
+                painter = painterResource(id = R.drawable.ic_nearest_location),
+                contentDescription = geosite.location,
+                tint = Error,
+            )
+            Text(
+                modifier = Modifier.wrapContentSize(),
+                text = geosite.distance.meterToKilometer(),
+                style = typography.subtitle1,
+                color = Color.White,
+                maxLines = 1,
+                overflow = TextOverflow.Clip,
+            )
         }
     }
 }
