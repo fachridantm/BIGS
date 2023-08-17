@@ -48,16 +48,16 @@ import id.belitong.bigs.compose.core.utils.getFirstTwoWords
 import id.belitong.bigs.compose.core.utils.meterToKilometer
 import id.belitong.bigs.compose.ui.theme.Dimension
 import id.belitong.bigs.compose.ui.theme.TextSize
+import id.belitong.bigs.compose.ui.theme.error
 import id.belitong.bigs.compose.ui.theme.md_theme_dark_secondary
 import id.belitong.bigs.compose.ui.theme.md_theme_dark_tertiary
 import id.belitong.bigs.compose.ui.theme.md_theme_light_error
 import id.belitong.bigs.compose.ui.theme.md_theme_light_primary
-import id.belitong.bigs.compose.ui.theme.Error
 import id.belitong.bigs.compose.ui.theme.typography
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun CarouselItem(
+fun CarouselPagerItem(
     modifier: Modifier = Modifier,
     page: Int = 0,
     geosites: List<Geosite> = emptyList(),
@@ -353,7 +353,7 @@ fun HistoryGridItem(
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun GeositeItem(
+fun GeositeListItem(
     modifier: Modifier = Modifier,
     geosite: Geosite,
     onItemClicked: (Geosite) -> Unit = {}
@@ -433,7 +433,7 @@ fun GeositeItem(
                     .padding(end = Dimension.SIZE_4),
                 painter = painterResource(id = R.drawable.ic_nearest_location),
                 contentDescription = geosite.location,
-                tint = Error,
+                tint = error,
             )
             Text(
                 modifier = Modifier.wrapContentSize(),
@@ -443,6 +443,92 @@ fun GeositeItem(
                 maxLines = 1,
                 overflow = TextOverflow.Clip,
             )
+        }
+    }
+}
+
+@OptIn(ExperimentalGlideComposeApi::class)
+@Composable
+fun SearchListItem(
+    modifier: Modifier = Modifier,
+    biodiversity: Biodiversity,
+    onItemClicked: (Biodiversity) -> Unit = {}
+) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .clip(RoundedCornerShape(Dimension.SIZE_12))
+            .shadow(
+                elevation = Dimension.SIZE_4,
+                shape = RoundedCornerShape(Dimension.SIZE_12),
+                clip = true
+            )
+            .clickable(
+                onClick = { onItemClicked(biodiversity) }
+            ),
+        elevation = CardDefaults.cardElevation(Dimension.SIZE_4),
+        shape = RoundedCornerShape(Dimension.SIZE_12),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(Dimension.SIZE_16),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Start
+        ) {
+            GlideImage(
+                modifier = Modifier
+                    .width(80.dp)
+                    .height(80.dp)
+                    .clip(MaterialTheme.shapes.medium),
+                model = biodiversity.img,
+                contentDescription = biodiversity.name,
+                contentScale = ContentScale.Crop,
+            ) {
+                it.placeholder(R.drawable.img_placeholder_geopark)
+            }
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .padding(start = Dimension.SIZE_16),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.Start
+            ) {
+                Text(
+                    modifier = Modifier
+                        .wrapContentSize()
+                        .padding(bottom = Dimension.SIZE_4),
+                    text = biodiversity.name,
+                    style = typography.h4,
+                    color = Color.Black,
+                    textAlign = TextAlign.Start,
+                    maxLines = 1,
+                )
+                Text(
+                    modifier = Modifier
+                        .wrapContentSize()
+                        .padding(bottom = Dimension.SIZE_4),
+                    text = biodiversity.type,
+                    style = typography.subtitle1,
+                    color = Color.Black,
+                    textAlign = TextAlign.Start,
+                    maxLines = 1,
+                )
+                Text(
+                    modifier = Modifier
+                        .wrapContentSize()
+                        .padding(bottom = Dimension.SIZE_4),
+                    text = biodiversity.location,
+                    style = typography.subtitle1,
+                    color = Color.Black,
+                    textAlign = TextAlign.Start,
+                    maxLines = 2,
+                )
+            }
         }
     }
 }

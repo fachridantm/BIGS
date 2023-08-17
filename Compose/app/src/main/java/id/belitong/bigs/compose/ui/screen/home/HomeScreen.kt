@@ -40,7 +40,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -59,7 +58,7 @@ import id.belitong.bigs.compose.core.utils.DummyData
 import id.belitong.bigs.compose.core.utils.getFirstName
 import id.belitong.bigs.compose.core.utils.showToast
 import id.belitong.bigs.compose.ui.composable.components.ButtonWithDrawableTop
-import id.belitong.bigs.compose.ui.composable.components.CarouselItem
+import id.belitong.bigs.compose.ui.composable.components.CarouselPagerItem
 import id.belitong.bigs.compose.ui.composable.components.ChipGroupSingleSelection
 import id.belitong.bigs.compose.ui.composable.components.HomeGridItem
 import id.belitong.bigs.compose.ui.composable.model.ChipFilter
@@ -168,9 +167,8 @@ fun HomeScreenContent(
                     shape = MaterialTheme.shapes.small,
                     placeholder = {
                         Text(
-                            modifier = Modifier.alpha(0.4f),
                             text = stringResource(R.string.search_hint),
-                            color = Color.Black,
+                            color = Color.Black.copy(alpha = 0.4f),
                         )
                     },
                     leadingIcon = {
@@ -308,7 +306,7 @@ fun HomeCarouselView(
             state = carouselPagerState,
             pageSpacing = Dimension.SIZE_12,
         ) { page ->
-            CarouselItem(
+            CarouselPagerItem(
                 page = page, geosites = geosites, onItemClicked = onItemClicked
             )
         }

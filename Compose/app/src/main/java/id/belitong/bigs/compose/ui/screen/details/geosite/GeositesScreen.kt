@@ -13,8 +13,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -37,7 +35,7 @@ import id.belitong.bigs.compose.core.domain.model.Geosite
 import id.belitong.bigs.compose.core.utils.DummyData
 import id.belitong.bigs.compose.core.utils.showToast
 import id.belitong.bigs.compose.ui.composable.components.ChipGroupSingleSelection
-import id.belitong.bigs.compose.ui.composable.components.GeositeItem
+import id.belitong.bigs.compose.ui.composable.components.GeositeListItem
 import id.belitong.bigs.compose.ui.composable.model.ChipFilter
 import id.belitong.bigs.compose.ui.composable.model.getGeositesFilter
 import id.belitong.bigs.compose.ui.theme.Dimension
@@ -135,7 +133,7 @@ fun GeositesScreenContent(
             state = listState,
         ) {
             items(geosites) { geosite ->
-                GeositeItem(
+                GeositeListItem(
                     geosite = geosite,
                     onItemClicked = { onItemClicked(geosite) }
                 )
