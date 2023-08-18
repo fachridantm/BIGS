@@ -23,8 +23,6 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -101,11 +99,17 @@ fun HomeScreen(
             }
         }
 
-        ChipFilter.ANIMAL -> { biodiversities.filter { it.type == stringResource(R.string.animal) } }
+        ChipFilter.ANIMAL -> {
+            biodiversities.filter { it.type == stringResource(R.string.animal) }
+        }
 
-        ChipFilter.PLANT -> { biodiversities.filter { it.type == stringResource(R.string.plant) } }
+        ChipFilter.PLANT -> {
+            biodiversities.filter { it.type == stringResource(R.string.plant) }
+        }
 
-        else -> { biodiversities }
+        else -> {
+            biodiversities
+        }
     }
 
     HomeScreenContent(
@@ -177,7 +181,9 @@ fun HomeScreenContent(
                                 onClick = intentToSearchResult,
                                 interactionSource = interactionSource,
                                 indication = null,
-                            ), imageVector = Icons.Default.Search, contentDescription = null
+                            ),
+                            painter = painterResource(id = R.drawable.ic_search),
+                            contentDescription = null
                         )
                     },
                     enabled = false,
