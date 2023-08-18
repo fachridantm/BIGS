@@ -1,5 +1,6 @@
 package id.belitong.bigs.compose.ui.composable.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -460,30 +461,29 @@ fun SearchListItem(
             .wrapContentHeight()
             .clip(RoundedCornerShape(Dimension.SIZE_12))
             .shadow(
-                elevation = Dimension.SIZE_4,
+                elevation = Dimension.SIZE_8,
                 shape = RoundedCornerShape(Dimension.SIZE_12),
                 clip = true
             )
             .clickable(
                 onClick = { onItemClicked(biodiversity) }
             ),
-        elevation = CardDefaults.cardElevation(Dimension.SIZE_4),
+        border = BorderStroke(width = Dimension.SIZE_1, color = Color.Black.copy(alpha = 0.1f)),
+        elevation = CardDefaults.cardElevation(Dimension.SIZE_8),
         shape = RoundedCornerShape(Dimension.SIZE_12),
         colors = CardDefaults.cardColors(containerColor = Color.White),
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .wrapContentHeight()
-                .padding(Dimension.SIZE_16),
+                .wrapContentHeight(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Start
         ) {
             GlideImage(
                 modifier = Modifier
-                    .width(80.dp)
-                    .height(80.dp)
-                    .clip(MaterialTheme.shapes.medium),
+                    .height(130.dp)
+                    .width(130.dp),
                 model = biodiversity.img,
                 contentDescription = biodiversity.name,
                 contentScale = ContentScale.Crop,
@@ -492,9 +492,8 @@ fun SearchListItem(
             }
             Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-                    .padding(start = Dimension.SIZE_16),
+                    .fillMaxHeight()
+                    .padding(horizontal = Dimension.SIZE_16),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.Start
             ) {
@@ -508,26 +507,28 @@ fun SearchListItem(
                     textAlign = TextAlign.Start,
                     maxLines = 1,
                 )
-                Text(
+                Row(
                     modifier = Modifier
                         .wrapContentSize()
                         .padding(bottom = Dimension.SIZE_4),
-                    text = biodiversity.type,
-                    style = typography.subtitle1,
-                    color = Color.Black,
-                    textAlign = TextAlign.Start,
-                    maxLines = 1,
-                )
-                Text(
-                    modifier = Modifier
-                        .wrapContentSize()
-                        .padding(bottom = Dimension.SIZE_4),
-                    text = biodiversity.location,
-                    style = typography.subtitle1,
-                    color = Color.Black,
-                    textAlign = TextAlign.Start,
-                    maxLines = 2,
-                )
+                ) {
+                    Icon(
+                        modifier = Modifier.padding(end = Dimension.SIZE_8),
+                        painter = painterResource(id = R.drawable.ic_distance),
+                        contentDescription = stringResource(id = R.string.location),
+                        tint = error,
+                    )
+                    Text(
+                        modifier = Modifier
+                            .wrapContentSize()
+                            .align(Alignment.CenterVertically),
+                        text = biodiversity.location,
+                        style = typography.subtitle1,
+                        color = Color.Black,
+                        textAlign = TextAlign.Start,
+                        maxLines = 2,
+                    )
+                }
             }
         }
     }

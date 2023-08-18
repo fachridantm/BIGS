@@ -106,4 +106,7 @@
     <string name="tour_guide">Tour Guide</string>
     <string name="community">Community</string>
     <string name="local_resident">Local Resident</string>
+    <string name="close">Close</string>
+    <string name="search_by_category">Search by category</string>
+    <string name="location">Location</string>
 </resources>
