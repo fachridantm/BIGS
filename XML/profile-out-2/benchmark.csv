@@ -1,0 +1,15 @@
+scenario,default
+version,Gradle 8.0
+tasks,default tasks
+value,total execution time
+warm-up build #1,111155.74
+warm-up build #2,18957.88
+warm-up build #3,21955.90
+warm-up build #4,13602.26
+warm-up build #5,12540.87
+warm-up build #6,10928.06
+measured build #1,11220.14
+measured build #2,12896.55
+measured build #3,10580.41
+measured build #4,14673.99
+measured build #5,13000.34
