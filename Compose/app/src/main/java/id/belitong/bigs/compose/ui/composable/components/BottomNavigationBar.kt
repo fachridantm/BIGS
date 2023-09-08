@@ -38,7 +38,7 @@ fun MainBottomNavigation(navController: NavController) {
                 color = seed,
                 shape = RoundedCornerShape(topStart = Dimension.SIZE_12, topEnd = Dimension.SIZE_12)
             )
-            .padding(top = Dimension.SIZE_12),
+            .padding(bottom = Dimension.SIZE_12, top = Dimension.SIZE_12),
         contentColor = Color.White,
         backgroundColor = seed,
         elevation = Dimension.SIZE_0
@@ -55,11 +55,12 @@ fun MainBottomNavigation(navController: NavController) {
                 icon = {
                     Icon(
                         modifier = Modifier
+                            .padding(bottom = Dimension.SIZE_7)
                             .background(
                                 color = selectedColor,
                                 shape = CircleShape
                             )
-                            .padding(horizontal = Dimension.SIZE_20, vertical = Dimension.SIZE_2),
+                            .padding(horizontal = Dimension.SIZE_20, vertical = Dimension.SIZE_4),
                         painter = painterResource(id = item.icon),
                         contentDescription = item.title,
                         tint = Color.White
