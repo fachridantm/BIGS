@@ -3,10 +3,12 @@ package id.belitong.bigs.compose.ui.screen.home
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,6 +21,8 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PageSize
+import androidx.compose.foundation.pager.PagerDefaults
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -300,7 +304,10 @@ fun HomeCarouselView(
     onItemClicked: (Geosite) -> Unit = {},
 ) {
     val carouselPageCount by remember { mutableStateOf(5) }
-    val carouselPagerState = rememberPagerState()
+    val carouselPagerState = rememberPagerState(
+        initialPage = 0,
+        initialPageOffsetFraction = 0f
+    ) { carouselPageCount }
 
     Column {
         HorizontalPager(
@@ -308,14 +315,25 @@ fun HomeCarouselView(
                 .fillMaxSize()
                 .height(250.dp)
                 .padding(top = Dimension.SIZE_8, bottom = Dimension.SIZE_18),
-            pageCount = carouselPageCount,
             state = carouselPagerState,
             pageSpacing = Dimension.SIZE_12,
-        ) { page ->
-            CarouselPagerItem(
-                page = page, geosites = geosites, onItemClicked = onItemClicked
-            )
-        }
+            userScrollEnabled = true,
+            reverseLayout = false,
+            contentPadding = PaddingValues(0.dp),
+            beyondBoundsPageCount = 0,
+            pageSize = PageSize.Fill,
+            flingBehavior = PagerDefaults.flingBehavior(state = carouselPagerState),
+            key = null,
+            pageNestedScrollConnection = PagerDefaults.pageNestedScrollConnection(
+                Orientation.Horizontal
+            ),
+            pageContent = {
+                CarouselPagerItem(
+                    geosites = geosites,
+                    onItemClicked = onItemClicked
+                )
+            }
+        )
         DotsIndicator(
             dotCount = carouselPageCount,
             type = ShiftIndicatorType(
