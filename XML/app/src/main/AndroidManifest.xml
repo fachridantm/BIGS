@@ -22,14 +22,12 @@
         android:roundIcon="@mipmap/ic_bigs_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:targetApi="33">
+        tools:targetApi="tiramisu">
         <activity
             android:name=".ui.details.geoprogramme.GeoprogrammeActivity"
             android:exported="false" />
 
-        <profileable
-            android:shell="true"
-            tools:targetApi="29" />
+        <profileable android:shell="true" />
 
         <activity
             android:name=".ui.search.SearchResultsActivity"
