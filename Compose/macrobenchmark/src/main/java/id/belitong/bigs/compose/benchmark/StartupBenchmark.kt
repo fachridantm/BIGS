@@ -1,4 +1,4 @@
-package id.belitong.bigs.compose.macrobenchmark
+package id.belitong.bigs.compose.benchmark
 
 import androidx.benchmark.macro.StartupMode
 import androidx.benchmark.macro.StartupTimingMetric
