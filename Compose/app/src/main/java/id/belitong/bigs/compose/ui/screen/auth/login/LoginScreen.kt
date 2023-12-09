@@ -29,12 +29,14 @@ import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -70,6 +72,8 @@ import id.belitong.bigs.compose.ui.theme.Dimension
 import id.belitong.bigs.compose.ui.theme.md_theme_dark_secondary
 import id.belitong.bigs.compose.ui.theme.seed
 import id.belitong.bigs.compose.ui.theme.typography
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 @AuthNavGraph(true)
 @Destination
@@ -77,6 +81,8 @@ import id.belitong.bigs.compose.ui.theme.typography
 fun LoginScreen(
     loginViewModel: LoginViewModel = hiltViewModel(),
     navigator: DestinationsNavigator? = null,
+    scope: CoroutineScope = rememberCoroutineScope(),
+    snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
 ) {
     val activity = getActivity()
 
@@ -93,6 +99,8 @@ fun LoginScreen(
         },
         isLoading = isLoading.value,
         navigator = navigator,
+        scope = scope,
+        snackbarHostState = snackbarHostState
     )
 
     ComposableObserver(state = loginResult,
@@ -132,6 +140,8 @@ fun LoginScreenContent(
     onClick: (String, String) -> Unit,
     isLoading: Boolean = false,
     navigator: DestinationsNavigator? = null,
+    scope: CoroutineScope = rememberCoroutineScope(),
+    snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -251,9 +261,11 @@ fun LoginScreenContent(
                         .clickable(
                             enabled = !isLoading,
                             onClick = {
-                                context
-                                    .getString(R.string.on_click_handler)
-                                    .showToast(context)
+                                scope.launch {
+                                    snackbarHostState.showSnackbar(
+                                        context.getString(R.string.on_click_handler)
+                                    )
+                                }
                             }
                         ),
                     textDecoration = TextDecoration.Underline,
@@ -333,7 +345,11 @@ fun LoginScreenContent(
                 shape = RoundedCornerShape(Dimension.SIZE_8),
                 drawableStart = painterResource(R.drawable.ic_google),
                 onClick = {
-                    context.getString(R.string.on_click_handler).showToast(context)
+                    scope.launch {
+                        snackbarHostState.showSnackbar(
+                            context.getString(R.string.on_click_handler)
+                        )
+                    }
                 },
                 enabled = !isLoading
             )

@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -31,6 +32,7 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -64,7 +66,9 @@ import id.belitong.bigs.compose.ui.navigation.MainNavGraph
 import id.belitong.bigs.compose.ui.theme.Dimension
 import id.belitong.bigs.compose.ui.theme.md_theme_light_primary
 import id.belitong.bigs.compose.ui.theme.typography
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.io.File
 
 @MainNavGraph
@@ -72,6 +76,8 @@ import java.io.File
 @Composable
 fun AddScreen(
     navigator: DestinationsNavigator? = null,
+    scope: CoroutineScope = rememberCoroutineScope(),
+    snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
 ) {
     val context = LocalContext.current
     val activity = getActivity()
@@ -178,7 +184,9 @@ fun AddScreen(
                 context.getString(R.string.no_image_selected).showToast(context)
             }
         },
-        isLoading = isLoading
+        isLoading = isLoading,
+        scope = scope,
+        snackbarHostState = snackbarHostState
     )
     LaunchedEffect(isLoading) {
         if (isLoading) {
@@ -193,13 +201,21 @@ fun AddScreen(
             isFailed = isFailed,
             isSuccess = isSuccess,
             onClickDetails = {
-                context.getString(R.string.on_click_handler).showToast(context)
+                scope.launch {
+                    snackbarHostState.showSnackbar(
+                        context.getString(R.string.on_click_handler)
+                    )
+                }
             },
             onClickCancel = {
                 showDialog = false
             },
             onClickAddData = {
-                context.getString(R.string.on_click_handler).showToast(context)
+                scope.launch {
+                    snackbarHostState.showSnackbar(
+                        context.getString(R.string.on_click_handler)
+                    )
+                }
             }
         )
     }
@@ -214,6 +230,8 @@ fun AddScreenContent(
     mediaHandler: () -> Unit = {},
     scanHandler: () -> Unit = {},
     isLoading: Boolean = false,
+    scope: CoroutineScope = rememberCoroutineScope(),
+    snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
 ) {
     Box(
         modifier = Modifier.fillMaxSize(),

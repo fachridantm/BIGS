@@ -14,8 +14,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,14 +29,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import id.belitong.bigs.compose.R
-import id.belitong.bigs.compose.core.utils.showToast
 import id.belitong.bigs.compose.ui.composable.components.ButtonWithDrawableStart
 import id.belitong.bigs.compose.ui.theme.Dimension
 import id.belitong.bigs.compose.ui.theme.typography
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 @Composable
 fun GeoprogrammeScreen(
     modifier: Modifier = Modifier,
+    scope: CoroutineScope = rememberCoroutineScope(),
+    snackbarHostState: SnackbarHostState = remember { SnackbarHostState() }
 ) {
     val context = LocalContext.current
     val onBackPressedDispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
@@ -41,9 +47,27 @@ fun GeoprogrammeScreen(
     GeoprogrammeScreenContent(
         modifier = modifier,
         onBackPressed = { onBackPressedDispatcher?.onBackPressed() },
-        onClickTourGuide = { context.getString(R.string.on_click_handler).showToast(context) },
-        onClickCommunity = { context.getString(R.string.on_click_handler).showToast(context) },
-        onClickLocalResident = { context.getString(R.string.on_click_handler).showToast(context) },
+        onClickTourGuide = {
+            scope.launch {
+                snackbarHostState.showSnackbar(
+                    context.getString(R.string.on_click_handler)
+                )
+            }
+        },
+        onClickCommunity = {
+            scope.launch {
+                snackbarHostState.showSnackbar(
+                    context.getString(R.string.on_click_handler)
+                )
+            }
+        },
+        onClickLocalResident = {
+            scope.launch {
+                snackbarHostState.showSnackbar(
+                    context.getString(R.string.on_click_handler)
+                )
+            }
+        },
     )
 }
 

@@ -18,6 +18,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -25,6 +26,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,7 +45,6 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import id.belitong.bigs.compose.R
 import id.belitong.bigs.compose.core.domain.model.User
-import id.belitong.bigs.compose.core.utils.showToast
 import id.belitong.bigs.compose.ui.composable.components.ButtonWithDrawableStartAndEnd
 import id.belitong.bigs.compose.ui.composable.components.LogoutDialog
 import id.belitong.bigs.compose.ui.composable.utils.getActivity
@@ -51,10 +52,14 @@ import id.belitong.bigs.compose.ui.screen.auth.AuthActivity
 import id.belitong.bigs.compose.ui.theme.Dimension
 import id.belitong.bigs.compose.ui.theme.md_theme_light_error
 import id.belitong.bigs.compose.ui.theme.typography
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 @Composable
 fun ProfileScreen(
-    profileViewModel: ProfileViewModel = hiltViewModel()
+    profileViewModel: ProfileViewModel = hiltViewModel(),
+    scope: CoroutineScope = rememberCoroutineScope(),
+    snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
 ) {
     val activity = getActivity()
     val context = LocalContext.current
@@ -71,10 +76,34 @@ fun ProfileScreen(
             name = name.value ?: "No Name",
         ),
         onBackPressed = { onBackPressedDispatcher?.onBackPressed() },
-        onClickEditProfile = { context.getString(R.string.on_click_handler).showToast(context) },
-        onClickLanguage = { context.getString(R.string.on_click_handler).showToast(context) },
-        onClickHelp = { context.getString(R.string.on_click_handler).showToast(context) },
-        onClickAboutUs = { context.getString(R.string.on_click_handler).showToast(context) },
+        onClickEditProfile = {
+            scope.launch {
+                snackbarHostState.showSnackbar(
+                    context.getString(R.string.on_click_handler)
+                )
+            }
+        },
+        onClickLanguage = {
+            scope.launch {
+                snackbarHostState.showSnackbar(
+                    context.getString(R.string.on_click_handler)
+                )
+            }
+        },
+        onClickHelp = {
+            scope.launch {
+                snackbarHostState.showSnackbar(
+                    context.getString(R.string.on_click_handler)
+                )
+            }
+        },
+        onClickAboutUs = {
+            scope.launch {
+                snackbarHostState.showSnackbar(
+                    context.getString(R.string.on_click_handler)
+                )
+            }
+        },
         onClickLogout = {
             showDialog = true
         },

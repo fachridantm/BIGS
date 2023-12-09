@@ -20,12 +20,14 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,13 +39,14 @@ import androidx.compose.ui.text.style.TextAlign
 import id.belitong.bigs.compose.R
 import id.belitong.bigs.compose.core.domain.model.Biodiversity
 import id.belitong.bigs.compose.core.utils.DummyData
-import id.belitong.bigs.compose.core.utils.showToast
 import id.belitong.bigs.compose.ui.composable.components.ChipGroupSingleSelectionWithDrawableStart
 import id.belitong.bigs.compose.ui.composable.components.SearchListItem
 import id.belitong.bigs.compose.ui.composable.model.ChipFilter
 import id.belitong.bigs.compose.ui.composable.model.getSearchFilter
 import id.belitong.bigs.compose.ui.theme.Dimension
 import id.belitong.bigs.compose.ui.theme.typography
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 @Composable
 fun SearchScreen(
@@ -97,7 +100,9 @@ fun SearchScreenContent(
     context: Context = LocalContext.current,
     biodiversities: List<Biodiversity> = emptyList(),
     selectedChip: MutableState<ChipFilter> = remember { mutableStateOf(ChipFilter.NULL) },
-    onBackPressed: () -> Unit = {}
+    onBackPressed: () -> Unit = {},
+    scope: CoroutineScope = rememberCoroutineScope(),
+    snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
 ) {
     var query by remember { mutableStateOf("") }
     Column(
@@ -185,7 +190,11 @@ fun SearchScreenContent(
             onChipSelected = {
                 selectedChip.value = it
                 if (selectedChip.value == ChipFilter.LOCATION) {
-                    context.getString(R.string.on_click_handler).showToast(context)
+                    scope.launch {
+                        snackbarHostState.showSnackbar(
+                            context.getString(R.string.on_click_handler)
+                        )
+                    }
                 }
             },
         )
@@ -201,7 +210,11 @@ fun SearchScreenContent(
                         .padding(vertical = Dimension.SIZE_8),
                     biodiversity = biodiversity,
                     onItemClicked = {
-                        context.getString(R.string.on_click_handler).showToast(context)
+                        scope.launch {
+                            snackbarHostState.showSnackbar(
+                                context.getString(R.string.on_click_handler)
+                            )
+                        }
                     }
                 )
             }

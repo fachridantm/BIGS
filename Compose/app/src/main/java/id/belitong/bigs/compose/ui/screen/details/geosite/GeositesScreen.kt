@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Icon
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -21,6 +22,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,17 +35,20 @@ import androidx.compose.ui.tooling.preview.Preview
 import id.belitong.bigs.compose.R
 import id.belitong.bigs.compose.core.domain.model.Geosite
 import id.belitong.bigs.compose.core.utils.DummyData
-import id.belitong.bigs.compose.core.utils.showToast
 import id.belitong.bigs.compose.ui.composable.components.ChipGroupSingleSelection
 import id.belitong.bigs.compose.ui.composable.components.GeositeListItem
 import id.belitong.bigs.compose.ui.composable.model.ChipFilter
 import id.belitong.bigs.compose.ui.composable.model.getGeositesFilter
 import id.belitong.bigs.compose.ui.theme.Dimension
 import id.belitong.bigs.compose.ui.theme.typography
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 @Composable
 fun GeositesScreen(
     modifier: Modifier = Modifier,
+    scope: CoroutineScope = rememberCoroutineScope(),
+    snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
 ) {
     val context = LocalContext.current
     val onBackPressedDispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
@@ -55,10 +60,21 @@ fun GeositesScreen(
     var chipData by remember { mutableStateOf(geosites) }
 
     chipData = when (selectedChip.value) {
-        ChipFilter.ALPHABET -> { geosites.sortedBy { it.name } }
-        ChipFilter.NEAREST -> { geosites.sortedBy { it.distance } }
-        ChipFilter.NULL -> { geosites }
-        else -> { geosites }
+        ChipFilter.ALPHABET -> {
+            geosites.sortedBy { it.name }
+        }
+
+        ChipFilter.NEAREST -> {
+            geosites.sortedBy { it.distance }
+        }
+
+        ChipFilter.NULL -> {
+            geosites
+        }
+
+        else -> {
+            geosites
+        }
     }
 
     LaunchedEffect(selectedChip.value) {
@@ -71,7 +87,13 @@ fun GeositesScreen(
         selectedChip = selectedChip,
         listState = listState,
         onBackPressed = { onBackPressedDispatcher?.onBackPressed() },
-        onItemClicked = { context.getString(R.string.on_click_handler).showToast(context) },
+        onItemClicked = {
+            scope.launch {
+                snackbarHostState.showSnackbar(
+                    context.getString(R.string.on_click_handler)
+                )
+            }
+        },
     )
 }
 

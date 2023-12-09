@@ -5,7 +5,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.manualcomposablecalls.composable
@@ -28,9 +32,13 @@ fun MainScreen(
     val engine = rememberNavHostEngine()
     val navController = engine.rememberNavController()
 
+    val scope = rememberCoroutineScope()
+    val snackbarHostState = remember { SnackbarHostState() }
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        bottomBar = { MainBottomNavigation(navController) }
+        bottomBar = { MainBottomNavigation(navController) },
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
     ) {
         Box(
             modifier = Modifier.padding(bottom = it.calculateBottomPadding())
@@ -40,13 +48,17 @@ fun MainScreen(
                 navController = navController,
             ) {
                 composable(HomeScreenDestination) {
-                    HomeScreen(navigator)
+                    HomeScreen(navigator, scope = scope, snackbarHostState = snackbarHostState)
                 }
                 composable(AddScreenDestination) {
-                    AddScreen(navigator)
+                    AddScreen(navigator, scope = scope, snackbarHostState = snackbarHostState)
                 }
                 composable(HistoryScreenDestination) {
-                    HistoryScreen(navigator = navigator)
+                    HistoryScreen(
+                        navigator = navigator,
+                        scope = scope,
+                        snackbarHostState = snackbarHostState
+                    )
                 }
             }
         }

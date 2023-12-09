@@ -32,6 +32,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -39,6 +40,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -58,7 +60,6 @@ import id.belitong.bigs.compose.core.domain.model.Biodiversity
 import id.belitong.bigs.compose.core.domain.model.Geosite
 import id.belitong.bigs.compose.core.utils.DummyData
 import id.belitong.bigs.compose.core.utils.getFirstName
-import id.belitong.bigs.compose.core.utils.showToast
 import id.belitong.bigs.compose.ui.composable.components.ButtonWithDrawableTop
 import id.belitong.bigs.compose.ui.composable.components.CarouselPagerItem
 import id.belitong.bigs.compose.ui.composable.components.ChipGroupSingleSelection
@@ -77,12 +78,17 @@ import id.belitong.bigs.compose.ui.theme.md_theme_dark_secondary
 import id.belitong.bigs.compose.ui.theme.md_theme_dark_tertiary
 import id.belitong.bigs.compose.ui.theme.seed
 import id.belitong.bigs.compose.ui.theme.typography
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 @MainNavGraph(true)
 @Destination
 @Composable
 fun HomeScreen(
-    navigator: DestinationsNavigator? = null, homeViewModel: HomeViewModel = hiltViewModel()
+    navigator: DestinationsNavigator? = null,
+    homeViewModel: HomeViewModel = hiltViewModel(),
+    scope: CoroutineScope = rememberCoroutineScope(),
+    snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
 ) {
     val activity = getActivity()
     val name = homeViewModel.getName().observeAsState()
@@ -124,7 +130,9 @@ fun HomeScreen(
         intentToProfile = { ProfileActivity.start(activity) },
         intentToSearchResult = { SearchActivity.start(activity) },
         intentToGeoprogramme = { GeoprogrammeActivity.start(activity) },
-        intentToGeosite = { GeositesActivity.start(activity) }
+        intentToGeosite = { GeositesActivity.start(activity) },
+        scope = scope,
+        snackbarHostState = snackbarHostState,
     )
 }
 
@@ -140,6 +148,8 @@ fun HomeScreenContent(
     intentToSearchResult: () -> Unit = {},
     intentToGeoprogramme: () -> Unit = {},
     intentToGeosite: () -> Unit = {},
+    scope: CoroutineScope = rememberCoroutineScope(),
+    snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
 ) {
     val context = LocalContext.current
     val interactionSource = remember { MutableInteractionSource() }
@@ -224,7 +234,11 @@ fun HomeScreenContent(
                 HomeCarouselView(
                     geosites = geosites,
                     onItemClicked = {
-                        context.getString(R.string.on_click_handler).showToast(context)
+                        scope.launch {
+                            snackbarHostState.showSnackbar(
+                                context.getString(R.string.on_click_handler)
+                            )
+                        }
                     }
                 )
                 Row(
@@ -257,7 +271,11 @@ fun HomeScreenContent(
                         textColor = Color.Black,
                         drawableStart = painterResource(R.drawable.ic_maps),
                         onClick = {
-                            context.getString(R.string.on_click_handler).showToast(context)
+                            scope.launch {
+                                snackbarHostState.showSnackbar(
+                                    context.getString(R.string.on_click_handler)
+                                )
+                            }
                         }
                     )
                 }
@@ -287,7 +305,11 @@ fun HomeScreenContent(
                         HomeGridItem(
                             biodiversity = it,
                             onItemClicked = {
-                                context.getString(R.string.on_click_handler).showToast(context)
+                                scope.launch {
+                                    snackbarHostState.showSnackbar(
+                                        context.getString(R.string.on_click_handler)
+                                    )
+                                }
                             }
                         )
                     }

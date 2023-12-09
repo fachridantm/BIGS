@@ -15,12 +15,14 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Icon
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -51,6 +53,8 @@ import id.belitong.bigs.compose.ui.navigation.MainNavGraph
 import id.belitong.bigs.compose.ui.screen.profile.ProfileActivity
 import id.belitong.bigs.compose.ui.theme.Dimension
 import id.belitong.bigs.compose.ui.theme.typography
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
 @MainNavGraph
@@ -58,7 +62,9 @@ import id.belitong.bigs.compose.ui.theme.typography
 @Composable
 fun HistoryScreen(
     historyViewModel: HistoryViewModel = hiltViewModel(),
-    navigator: DestinationsNavigator? = null
+    navigator: DestinationsNavigator? = null,
+    scope: CoroutineScope = rememberCoroutineScope(),
+    snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
 ) {
     val activity = getActivity()
 
@@ -148,14 +154,28 @@ fun HistoryScreen(
         when (tabList[pagerState.currentPage]) {
             stringResource(R.string.my_order) -> {
                 TabContent(
-                    content = { OrderScreenContent(orders = orders.value, isLoading = isLoading.value) },
+                    content = {
+                        OrderScreenContent(
+                            orders = orders.value,
+                            isLoading = isLoading.value,
+                            scope = scope,
+                            snackbarHostState = snackbarHostState
+                        )
+                    },
                     pagerState = pagerState
                 )
             }
 
             stringResource(R.string.my_report) -> {
                 TabContent(
-                    content = { ReportScreenContent(reports = reports.value, isLoading = isLoading.value) },
+                    content = {
+                        ReportScreenContent(
+                            reports = reports.value,
+                            isLoading = isLoading.value,
+                            scope = scope,
+                            snackbarHostState = snackbarHostState
+                        )
+                    },
                     pagerState = pagerState
                 )
             }
@@ -168,6 +188,8 @@ fun OrderScreenContent(
     modifier: Modifier = Modifier,
     orders: List<Order> = emptyList(),
     isLoading: Boolean = false,
+    scope: CoroutineScope = rememberCoroutineScope(),
+    snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
 ) {
     val context = LocalContext.current
     val visibility = if (isLoading) 1f else 0f
@@ -184,7 +206,11 @@ fun OrderScreenContent(
                 OrderGridItem(
                     order = it,
                     onItemClicked = {
-                        context.getString(R.string.on_click_handler).showToast(context)
+                        scope.launch {
+                            snackbarHostState.showSnackbar(
+                                context.getString(R.string.on_click_handler)
+                            )
+                        }
                     }
                 )
             }
@@ -204,6 +230,8 @@ fun ReportScreenContent(
     modifier: Modifier = Modifier,
     reports: List<Report> = emptyList(),
     isLoading: Boolean = false,
+    scope: CoroutineScope = rememberCoroutineScope(),
+    snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
 ) {
     val context = LocalContext.current
     val visibility = if (isLoading) 1f else 0f
@@ -220,7 +248,11 @@ fun ReportScreenContent(
                 ReportGridItem(
                     report = it,
                     onItemClicked = {
-                        context.getString(R.string.on_click_handler).showToast(context)
+                        scope.launch {
+                            snackbarHostState.showSnackbar(
+                                context.getString(R.string.on_click_handler)
+                            )
+                        }
                     }
                 )
             }
