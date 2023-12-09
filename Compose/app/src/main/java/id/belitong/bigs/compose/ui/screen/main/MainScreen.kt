@@ -46,7 +46,7 @@ fun MainScreen(
                     AddScreen(navigator)
                 }
                 composable(HistoryScreenDestination) {
-                    HistoryScreen(navigator)
+                    HistoryScreen(navigator = navigator)
                 }
             }
         }

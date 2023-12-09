@@ -4,6 +4,7 @@ import id.belitong.bigs.compose.core.domain.model.Biodiversity
 import id.belitong.bigs.compose.core.domain.model.Geosite
 import id.belitong.bigs.compose.core.domain.model.Order
 import id.belitong.bigs.compose.core.domain.model.Plant
+import id.belitong.bigs.compose.core.domain.model.Report
 
 object DummyData {
     fun getAllGeosites() = listOf(
@@ -14,7 +15,7 @@ object DummyData {
             type = "Hill",
             desc = "The hill itself is the highest point in the southeast region of Belitung Island. Visitors can enjoy a beautiful scenery at the peak of Moss Hill. \n" +
                     "\n" +
-                    "The Moss Hill Geosite is a conservation area with rich biological diversity atop the flysch metasediment rock in the Kelapa Kampit Formation. The biome consists of numerous types of tropical rainforest moss and orchids including around 9 species of moss (Bryophytasp.), around 9 species of orchids (Orchidaceae), and pasakbumi (Eurycomalongifolia).",
+                    "The Moss Hill GeositeItem is a conservation area with rich biological diversity atop the flysch metasediment rock in the Kelapa Kampit Formation. The biome consists of numerous types of tropical rainforest moss and orchids including around 9 species of moss (Bryophytasp.), around 9 species of orchids (Orchidaceae), and pasakbumi (Eurycomalongifolia).",
             plant = "Tropical Pitcher (Nepenthes)",
             animal = "-",
             distance = 500,
@@ -29,7 +30,7 @@ object DummyData {
         Geosite(
             id = 2,
             name = "Juru Seberang",
-            summary = "Juru Seberang Geosite: a tin-rich alluvial area formed by weathering of granite and metasediments",
+            summary = "Juru Seberang GeositeItem: a tin-rich alluvial area formed by weathering of granite and metasediments",
             type = "Former Mining Area",
             desc = "The Juru Seberang geosite is a tin rich-alluvial area that resulted from weathering of Tanjung Pandang granite/ S-type granite mixed with weathering from the metasediment of Kelapakampit Formation. A lamp shell (Lingula Unguis) was found in the area, the animal representing evolution from the Cambrian Period (542 million years ago). \n" +
                     "\n" +
@@ -86,7 +87,7 @@ object DummyData {
             name = "Tanjung Kelayang",
             summary = "This geosite offers an exotic view from the coastal rock structures composed of Triassic",
             type = "Granite Rock",
-            desc = "The Tanjung Kelayang Granite Geosite is located at the end of the Southeast Asian granite province. \n" +
+            desc = "The Tanjung Kelayang Granite GeositeItem is located at the end of the Southeast Asian granite province. \n" +
                     "\n" +
                     "This geosite offers an exotic view from the coastal rock structures composed of Triassic (213 million years ago) granite Tor morphology undersea.  The granite Tor sea environment morphology has been recognized as a world class geological heritage. \n" +
                     "\n" +
@@ -259,9 +260,9 @@ object DummyData {
             name = "Baginda Rocks",
             summary = "The two rocks are according to local folklore called the Meninda Men and Bukit Baginda Wanita hills.",
             type = "Granite Rock",
-            desc = "Batuan itu sendiri terbentuk dari kuarsa, feldspar, plagioklas, biotit, hornblende dan material sekunder berupa aktor, karbonat, limonit dan oksida besi. Geosite ini tidak mengandung timah sehingga terhindar dari aktivitas penambangan.  \n" +
+            desc = "Batuan itu sendiri terbentuk dari kuarsa, feldspar, plagioklas, biotit, hornblende dan material sekunder berupa aktor, karbonat, limonit dan oksida besi. GeositeItem ini tidak mengandung timah sehingga terhindar dari aktivitas penambangan.  \n" +
                     "\n" +
-                    "Geosite ini penting karena mewakili granit tipe-I dalam bentuk adamelit, sebuah granit yang dibedakan dari granodiorit dalam hal kandungan plagioklas.",
+                    "GeositeItem ini penting karena mewakili granit tipe-I dalam bentuk adamelit, sebuah granit yang dibedakan dari granodiorit dalam hal kandungan plagioklas.",
             plant = "-",
             animal = "-",
             distance = 10000,
@@ -297,7 +298,7 @@ object DummyData {
             type = "The Mining",
             desc = "The tektite is an important geological resource of Belitung - the Belitung name itself comes from a locally found form of tektite, the ‘Billitonite’. These rocks commonly known as ‘Satam Stones’ or ‘Black Diamonds’ are formed by collisions of extraterrestrial objects under high pressure and temperature and contain a significant amount of tin. Thus, the tektite is the reason for Belitong’s rich tin mining history.\n" +
                     "\n" +
-                    "The Garumedang Tektite is a designated conservation area; tin mining is prohibited here as to not damage the coastal environment it lies on. The geosite also houses information on the history and culture of tin mining in Belitung. Biodiversity conservation is also practiced here; this area is populated by sea cypress  (Casuarinaequisetifolia) and other flora that have conservation and environmental treatment uses such as lake treatment and bird conservation.",
+                    "The Garumedang Tektite is a designated conservation area; tin mining is prohibited here as to not damage the coastal environment it lies on. The geosite also houses information on the history and culture of tin mining in Belitung. BiodiversityItem conservation is also practiced here; this area is populated by sea cypress  (Casuarinaequisetifolia) and other flora that have conservation and environmental treatment uses such as lake treatment and bird conservation.",
             plant = "Cemara Laut (Casuarinaequisetifolia)",
             animal = "-",
             distance = 11000,
@@ -362,7 +363,7 @@ object DummyData {
         Biodiversity(
             id = 4,
             name = "Tristaniopsis Merguensis",
-            type = "Plant",
+            type = "PlantItem",
             location = "-",
             img = "https://images.squarespace-cdn.com/content/v1/5cdcf79637f3770001708f38/1560552291389-Y01PGQ7IJKQYQ60RPIZ1/Oki-Cendil-Kulat-Pelawan-2.jpg?format=1000w",
         ),
@@ -376,45 +377,9 @@ object DummyData {
         Biodiversity(
             id = 6,
             name = "Tropical Pitcher",
-            type = "Plant",
+            type = "PlantItem",
             location = "Moss Hill",
             img = "https://images.squarespace-cdn.com/content/v1/5cdcf79637f3770001708f38/1560494821473-0AFVKPLCVCQIUTZBJK4P/Martin-Gunung-Lumut-04.jpg?format=300w",
-        ),
-    )
-
-    fun getAllOrder() = listOf(
-        Order(
-            id = 1,
-            geositeName = "Moss Hill",
-            geositeImage = "https://images.squarespace-cdn.com/content/v1/5cdcf79637f3770001708f38/1560494357865-JI4N7MAOI1B2IVO99HLC/Martin-Gunung-Lumut-01.jpg?format=1500w",
-            tourGuideName = "Givan Massa Adrian",
-            tourGuidePhone = "08123456789",
-            bookingDate = "Sat, 5 June 2023 at 08.00 WIB",
-            tourDate = "Sun, 6 June 2023 at 10.00 WIB",
-            programName = "Geo-Education",
-            status = "Pending",
-        ),
-        Order(
-            id = 2,
-            geositeName = "Nam Salu Open Pit",
-            geositeImage = "https://images.squarespace-cdn.com/content/v1/5cdcf79637f3770001708f38/1558970893738-X3BO2VX1PBE34AHDRVV7/nam-salu-7.jpg?format=1000w",
-            tourGuideName = "Fachridan Tio",
-            tourGuidePhone = "08123456789",
-            bookingDate = "Sat, 8 June 2023 at 08.00 WIB",
-            tourDate = "Sun, 12 June 2023 at 10.00 WIB",
-            programName = "Research-Programme",
-            status = "Completed",
-        ),
-        Order(
-            id = 3,
-            geositeName = "Juru Seberang",
-            geositeImage = "https://images.squarespace-cdn.com/content/v1/5cdcf79637f3770001708f38/1558849946386-EYT83UVSON1V10TCFIEO/Juru-Seberang-7.jpg?format=500w",
-            tourGuideName = "Yolanda Putri",
-            tourGuidePhone = "08123456789",
-            bookingDate = "Sat, 8 June 2023 at 08.00 WIB",
-            tourDate = "Sun, 12 June 2023 at 10.00 WIB",
-            programName = "Research-Programme",
-            status = "Cancelled",
         ),
     )
 

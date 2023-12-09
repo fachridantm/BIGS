@@ -1,5 +1,6 @@
 package id.belitong.bigs.compose.core.data
 
+import id.belitong.bigs.compose.core.data.Resource.Companion.loading
 import id.belitong.bigs.compose.core.data.source.remote.network.ApiResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emitAll
@@ -9,10 +10,10 @@ import kotlinx.coroutines.flow.map
 
 abstract class NetworkBoundResource<ResultType : Any, RequestType> {
     private var result: Flow<Resource<ResultType>> = flow {
-        emit(Resource.Loading)
+        emit(loading())
         val dbSource = loadFromDB().first()
         if (shouldFetch(dbSource)) {
-            emit(Resource.Loading)
+            emit(loading())
             when (val apiResponse = createCall().first()) {
                 is ApiResponse.Success -> {
                     saveCallResult(apiResponse.data)

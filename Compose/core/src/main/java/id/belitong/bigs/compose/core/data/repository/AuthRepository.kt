@@ -1,6 +1,7 @@
 package id.belitong.bigs.compose.core.data.repository
 
 import id.belitong.bigs.compose.core.data.Resource
+import id.belitong.bigs.compose.core.data.Resource.Companion.loading
 import id.belitong.bigs.compose.core.data.source.local.LocalDataSource
 import id.belitong.bigs.compose.core.data.source.remote.RemoteDataSource
 import id.belitong.bigs.compose.core.data.source.remote.network.ApiResponse
@@ -21,18 +22,18 @@ class AuthRepository @Inject constructor(
     private val remoteDataSource: RemoteDataSource
 ) : IAuthRepository {
 
-    override fun getAuthToken(): Flow<String> = localDataSource.getAuthToken()
+    override fun getAuthToken() = localDataSource.getAuthToken()
 
-    override fun getUserId(): Flow<String> = localDataSource.getUserId()
+    override fun getUserId() = localDataSource.getUserId()
 
-    override fun getName(): Flow<String> = localDataSource.getName()
+    override fun getName() = localDataSource.getName()
 
     override fun registerUser(
         name: String,
         email: String,
         password: String,
-    ): Flow<Resource<Register>> = flow {
-        emit(Resource.Loading)
+    ) = flow {
+        emit(loading())
         when (val apiResponse = remoteDataSource.registerUser(name, email, password).first()) {
             is ApiResponse.Success -> {
                 val data = DataMapper.registerResponseToRegister(apiResponse.data)
@@ -47,8 +48,8 @@ class AuthRepository @Inject constructor(
         }
     }
 
-    override fun loginUser(email: String, password: String): Flow<Resource<Login>> = flow {
-        emit(Resource.Loading)
+    override fun loginUser(email: String, password: String) = flow {
+        emit(loading())
         when (val apiResponse = remoteDataSource.loginUser(email, password).first()) {
             is ApiResponse.Success -> {
                 val data = DataMapper.loginResponseToLogin(apiResponse.data)

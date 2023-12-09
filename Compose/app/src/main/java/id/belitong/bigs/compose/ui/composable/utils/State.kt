@@ -11,7 +11,7 @@ inline fun <reified T> getValue(resource: Resource<T>?): T {
 
 inline fun <reified T> getErrorMessage(resource: Resource<T>?): String {
     val errorResource = resource as Resource.Error
-    return errorResource.errorMessage
+    return errorResource.message
 }
 
 @Composable

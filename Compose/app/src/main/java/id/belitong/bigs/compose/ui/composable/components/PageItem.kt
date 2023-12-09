@@ -44,12 +44,14 @@ import id.belitong.bigs.compose.R
 import id.belitong.bigs.compose.core.domain.model.Biodiversity
 import id.belitong.bigs.compose.core.domain.model.Geosite
 import id.belitong.bigs.compose.core.domain.model.Order
+import id.belitong.bigs.compose.core.domain.model.Report
 import id.belitong.bigs.compose.core.utils.HistoryStatus
 import id.belitong.bigs.compose.core.utils.getFirstTwoWords
 import id.belitong.bigs.compose.core.utils.meterToKilometer
 import id.belitong.bigs.compose.ui.theme.Dimension
 import id.belitong.bigs.compose.ui.theme.TextSize
 import id.belitong.bigs.compose.ui.theme.error
+import id.belitong.bigs.compose.ui.theme.light_Senary
 import id.belitong.bigs.compose.ui.theme.md_theme_dark_secondary
 import id.belitong.bigs.compose.ui.theme.md_theme_dark_tertiary
 import id.belitong.bigs.compose.ui.theme.md_theme_light_error
@@ -164,13 +166,15 @@ fun HomeGridItem(
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun HistoryGridItem(
+fun OrderGridItem(
     modifier: Modifier = Modifier,
     order: Order,
     onItemClicked: (Order) -> Unit
 ) {
     val invisible = if (
         order.status == HistoryStatus.COMPLETED.value ||
+        order.status == HistoryStatus.CONFIRMED.value ||
+        order.status == HistoryStatus.REJECTED.value ||
         order.status == HistoryStatus.CANCELLED.value
     ) 0f else 1f
 
@@ -212,13 +216,13 @@ fun HistoryGridItem(
                         modifier = Modifier
                             .wrapContentSize()
                             .padding(top = Dimension.SIZE_12),
-                        text = stringResource(id = R.string.tour_guide_name),
+                        text = stringResource(id = R.string.program),
                         style = typography.subtitle1,
                         color = Color.Black.copy(alpha = 0.4f),
                     )
                     Text(
                         modifier = Modifier.wrapContentSize(),
-                        text = order.tourGuideName,
+                        text = order.program,
                         style = typography.subtitle1,
                         color = Color.Black,
                     )
@@ -226,13 +230,27 @@ fun HistoryGridItem(
                         modifier = Modifier
                             .wrapContentSize()
                             .padding(top = Dimension.SIZE_12),
-                        text = stringResource(id = R.string.booking_date),
+                        text = stringResource(id = R.string.instance),
                         style = typography.subtitle1,
                         color = Color.Black.copy(alpha = 0.4f),
                     )
                     Text(
                         modifier = Modifier.wrapContentSize(),
-                        text = order.bookingDate,
+                        text = order.instance,
+                        style = typography.subtitle1,
+                        color = Color.Black,
+                    )
+                    Text(
+                        modifier = Modifier
+                            .wrapContentSize()
+                            .padding(top = Dimension.SIZE_12),
+                        text = stringResource(id = R.string.phone_number),
+                        style = typography.subtitle1,
+                        color = Color.Black.copy(alpha = 0.4f),
+                    )
+                    Text(
+                        modifier = Modifier.wrapContentSize(),
+                        text = order.phoneNumber,
                         style = typography.subtitle1,
                         color = Color.Black,
                     )
@@ -254,27 +272,13 @@ fun HistoryGridItem(
                         modifier = Modifier
                             .wrapContentSize()
                             .padding(top = Dimension.SIZE_12),
-                        text = stringResource(id = R.string.contact),
+                        text = stringResource(id = R.string.tour_guide_name),
                         style = typography.subtitle1,
                         color = Color.Black.copy(alpha = 0.4f),
                     )
                     Text(
                         modifier = Modifier.wrapContentSize(),
-                        text = order.tourGuidePhone,
-                        style = typography.subtitle1,
-                        color = Color.Black,
-                    )
-                    Text(
-                        modifier = Modifier
-                            .wrapContentSize()
-                            .padding(top = Dimension.SIZE_12),
-                        text = stringResource(id = R.string.program),
-                        style = typography.subtitle1,
-                        color = Color.Black.copy(alpha = 0.4f),
-                    )
-                    Text(
-                        modifier = Modifier.wrapContentSize(),
-                        text = order.programName,
+                        text = order.tourGuideName,
                         style = typography.subtitle1,
                         color = Color.Black,
                     )
@@ -291,13 +295,14 @@ fun HistoryGridItem(
                             .wrapContentSize()
                             .background(
                                 color = when (order.status) {
-                                    HistoryStatus.ACCEPTED.value, HistoryStatus.COMPLETED.value -> md_theme_light_primary
+                                    HistoryStatus.CONFIRMED.value -> light_Senary
+                                    HistoryStatus.COMPLETED.value -> md_theme_light_primary
                                     HistoryStatus.REJECTED.value, HistoryStatus.CANCELLED.value -> md_theme_light_error
                                     else -> md_theme_dark_secondary
                                 },
-                                shape = RoundedCornerShape(Dimension.SIZE_20)
+                                shape = RoundedCornerShape(Dimension.SIZE_4)
                             )
-                            .padding(vertical = Dimension.SIZE_4, horizontal = Dimension.SIZE_20),
+                            .padding(vertical = Dimension.SIZE_4, horizontal = Dimension.SIZE_32),
                         text = order.status,
                         style = typography.subtitle1,
                         color = Color.White,
@@ -307,14 +312,29 @@ fun HistoryGridItem(
                 Column(
                     modifier = Modifier
                         .wrapContentHeight()
-                        .padding(start = Dimension.SIZE_4, top = Dimension.SIZE_48),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
+                        .padding(start = Dimension.SIZE_4),
+                    horizontalAlignment = Alignment.End,
+                    verticalArrangement = Arrangement.Top
                 ) {
+                    Text(
+                        modifier = Modifier.wrapContentSize(),
+                        text = order.bookingDate,
+                        textAlign = TextAlign.End,
+                        style = typography.subtitle1,
+                        color = Color.Black.copy(alpha = 0.4f),
+                    )
+                    Text(
+                        modifier = Modifier.wrapContentSize(),
+                        text = order.bookingTime,
+                        textAlign = TextAlign.End,
+                        style = typography.subtitle1,
+                        color = Color.Black.copy(alpha = 0.4f),
+                    )
                     GlideImage(
                         modifier = Modifier
                             .width(130.dp)
                             .height(130.dp)
+                            .padding(top = Dimension.SIZE_12)
                             .clip(MaterialTheme.shapes.medium),
                         model = order.geositeImage,
                         contentDescription = order.geositeName,
@@ -325,9 +345,183 @@ fun HistoryGridItem(
                     Button(
                         modifier = Modifier
                             .wrapContentSize()
-                            .padding(top = Dimension.SIZE_16)
+                            .padding(top = Dimension.SIZE_16, end = Dimension.SIZE_20)
                             .alpha(invisible),
                         onClick = { onItemClicked(order) },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = md_theme_light_error,
+                            contentColor = Color.White
+                        ),
+                        shape = RoundedCornerShape(Dimension.SIZE_12),
+                        contentPadding = PaddingValues(
+                            start = Dimension.SIZE_20,
+                            end = Dimension.SIZE_20,
+                            top = Dimension.SIZE_2,
+                            bottom = Dimension.SIZE_2
+                        )
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.cancel),
+                            style = typography.body2,
+                            color = Color.White,
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalGlideComposeApi::class)
+@Composable
+fun ReportGridItem(
+    modifier: Modifier = Modifier,
+    report: Report,
+    onItemClicked: (Report) -> Unit
+) {
+    val invisible = if (
+        report.status == HistoryStatus.COMPLETED.value ||
+        report.status == HistoryStatus.CONFIRMED.value ||
+        report.status == HistoryStatus.REJECTED.value ||
+        report.status == HistoryStatus.CANCELLED.value
+    ) 0f else 1f
+
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .shadow(
+                elevation = Dimension.SIZE_8,
+                shape = RoundedCornerShape(Dimension.SIZE_12),
+                clip = true
+            ),
+        elevation = CardDefaults.cardElevation(Dimension.SIZE_8),
+        shape = RoundedCornerShape(Dimension.SIZE_12),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(Dimension.SIZE_16),
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .weight(1f),
+                    horizontalAlignment = Alignment.Start,
+                    verticalArrangement = Arrangement.Center,
+                ) {
+                    Text(
+                        modifier = Modifier.wrapContentSize(),
+                        text = stringResource(id = R.string.category),
+                        style = typography.subtitle1,
+                        color = Color.Black.copy(alpha = 0.4f),
+                    )
+                    Text(
+                        modifier = Modifier.wrapContentSize(),
+                        text = report.category,
+                        style = typography.subtitle1,
+                        color = Color.Black,
+                    )
+                    Text(
+                        modifier = Modifier
+                            .wrapContentSize()
+                            .padding(top = Dimension.SIZE_12),
+                        text = stringResource(id = R.string.name),
+                        style = typography.subtitle1,
+                        color = Color.Black.copy(alpha = 0.4f),
+                    )
+                    Text(
+                        modifier = Modifier.wrapContentSize(),
+                        text = report.name,
+                        style = typography.subtitle1,
+                        color = Color.Black,
+                    )
+                    Text(
+                        modifier = Modifier
+                            .wrapContentSize()
+                            .padding(top = Dimension.SIZE_12),
+                        text = stringResource(id = R.string.short_desc),
+                        style = typography.subtitle1,
+                        color = Color.Black.copy(alpha = 0.4f),
+                    )
+                    Text(
+                        modifier = Modifier
+                            .wrapContentSize()
+                            .padding(end = Dimension.SIZE_8),
+                        text = report.shortDesc,
+                        overflow = TextOverflow.Visible,
+                        style = typography.subtitle1,
+                        color = Color.Black,
+                    )
+                    Text(
+                        modifier = Modifier
+                            .wrapContentSize()
+                            .padding(top = Dimension.SIZE_12),
+                        text = stringResource(id = R.string.place),
+                        style = typography.subtitle1,
+                        color = Color.Black.copy(alpha = 0.4f),
+                    )
+                    Text(
+                        modifier = Modifier.wrapContentSize(),
+                        text = report.place,
+                        style = typography.subtitle1,
+                        color = Color.Black,
+                    )
+                    Text(
+                        modifier = Modifier
+                            .wrapContentSize()
+                            .padding(top = Dimension.SIZE_12),
+                        text = stringResource(id = R.string.status),
+                        style = typography.subtitle1,
+                        color = Color.Black.copy(alpha = 0.4f),
+                    )
+                    Text(
+                        modifier = Modifier
+                            .wrapContentSize()
+                            .background(
+                                color = when (report.status) {
+                                    HistoryStatus.CONFIRMED.value -> light_Senary
+                                    HistoryStatus.COMPLETED.value -> md_theme_light_primary
+                                    HistoryStatus.REJECTED.value, HistoryStatus.CANCELLED.value -> md_theme_light_error
+                                    else -> md_theme_dark_secondary
+                                },
+                                shape = RoundedCornerShape(Dimension.SIZE_4)
+                            )
+                            .padding(vertical = Dimension.SIZE_4, horizontal = Dimension.SIZE_32),
+                        text = report.status,
+                        style = typography.subtitle1,
+                        color = Color.White,
+                        textAlign = TextAlign.Center,
+                    )
+                }
+                Column(
+                    modifier = Modifier
+                        .wrapContentHeight()
+                        .padding(start = Dimension.SIZE_4),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Top
+                ) {
+                    GlideImage(
+                        modifier = Modifier
+                            .width(130.dp)
+                            .height(130.dp)
+                            .clip(MaterialTheme.shapes.medium),
+                        model = report.photo,
+                        contentDescription = report.place,
+                        contentScale = ContentScale.Crop,
+                    ) {
+                        it.placeholder(R.drawable.img_placeholder_geopark)
+                    }
+                    Button(
+                        modifier = Modifier
+                            .wrapContentSize()
+                            .padding(top = Dimension.SIZE_16)
+                            .alpha(invisible),
+                        onClick = { onItemClicked(report) },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = md_theme_light_error,
                             contentColor = Color.White

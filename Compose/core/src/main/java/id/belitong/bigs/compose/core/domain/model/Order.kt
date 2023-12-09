@@ -5,9 +5,11 @@ data class Order(
     val geositeName: String,
     val geositeImage: String,
     val tourGuideName: String,
-    val tourGuidePhone: String,
     val bookingDate: String,
+    val bookingTime: String,
     val tourDate: String,
-    val programName: String,
+    val phoneNumber: String,
+    val program: String,
     val status: String,
+    val instance: String,
 )

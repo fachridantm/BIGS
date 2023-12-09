@@ -12,3 +12,14 @@ data class LoginResponse(
     @field:SerializedName("loginResult")
     val loginResult: LoginResult,
 )
+
+data class LoginResult(
+    @field:SerializedName("userId")
+    val userId: String,
+
+    @field:SerializedName("name")
+    val name: String,
+
+    @field:SerializedName("token")
+    val token: String? = null,
+)

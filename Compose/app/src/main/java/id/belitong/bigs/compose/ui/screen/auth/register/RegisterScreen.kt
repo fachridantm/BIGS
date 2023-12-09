@@ -83,7 +83,8 @@ fun RegisterScreen(
         navigator = navigator
     )
 
-    ComposableObserver(state = registerResult,
+    ComposableObserver(
+        state = registerResult,
         onLoading = {
             isLoading.value = true
         },
