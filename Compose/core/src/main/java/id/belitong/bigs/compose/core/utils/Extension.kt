@@ -38,3 +38,5 @@ fun Int.meterToKilometer(): String {
 fun String.getFirstName(): String = this.split(" ")[0]
 
 fun String.getFirstTwoWords(): String = this.split(" ")[0] + " " + this.split(" ")[1]
+
+fun String.orDash(): String = if (this.isEmpty()) "-" else this
