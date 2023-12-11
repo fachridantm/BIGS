@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 interface GeoparkUseCase {
     fun getGeosites(): Flow<Resource<List<Geosite>>>
     fun getBiodiversities(): Flow<Resource<List<Biodiversity>>>
-    fun getPlants(): Flow<Resource<List<Plant>>>
+    fun getPlant(): Flow<Resource<Plant>>
     fun getOrders(): Flow<Resource<List<Order>>>
     fun getReports(): Flow<Resource<List<Report>>>
 }

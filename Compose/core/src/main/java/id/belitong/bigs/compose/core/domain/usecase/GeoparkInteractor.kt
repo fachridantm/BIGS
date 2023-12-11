@@ -8,7 +8,7 @@ class GeoparkInteractor @Inject constructor(
 ) : GeoparkUseCase {
     override fun getGeosites() = geoparkRepository.getGeosites()
     override fun getBiodiversities() = geoparkRepository.getBiodiversities()
-    override fun getPlants() = geoparkRepository.getPlants()
+    override fun getPlant() = geoparkRepository.getPlant()
     override fun getOrders() = geoparkRepository.getOrders()
     override fun getReports() = geoparkRepository.getReports()
 
