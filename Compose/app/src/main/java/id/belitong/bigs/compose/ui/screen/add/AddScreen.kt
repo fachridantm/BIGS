@@ -27,7 +27,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -121,11 +120,6 @@ fun AddScreen(
         }
     }
 
-    LaunchedEffect(key1 = Unit) {
-        mainViewModel.getPlant()
-        delay(1000)
-    }
-
     SideEffect {
         requestPermissionLauncher.launch(cameraPermission)
     }
@@ -206,7 +200,10 @@ fun AddScreen(
         },
         scanHandler = {
             if (getFile != null) {
-                isLoading = true
+                scope.launch {
+                    delay(1000)
+                    mainViewModel.getPlant()
+                }
             } else {
                 context.getString(R.string.no_image_selected).showToast(context)
             }
