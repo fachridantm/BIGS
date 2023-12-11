@@ -34,7 +34,7 @@ import id.belitong.bigs.compose.ui.theme.typography
 @Composable
 fun ScanResultDialog(
     modifier: Modifier = Modifier,
-    plant: Plant,
+    plant: Plant? = null,
     isFailed: Boolean = false,
     isSuccess: Boolean = false,
     onClickDetails: () -> Unit = {},
@@ -65,14 +65,14 @@ fun ScanResultDialog(
                         isSuccess = isSuccess
                     )
                     Text(
-                        text = plant.name,
+                        text = plant?.name ?: stringResource(R.string.dash),
                         style = typography.h3,
                         color = Color.Black,
                         fontWeight = FontWeight.Bold,
                         maxLines = 2
                     )
                     Text(
-                        text = plant.latin,
+                        text = plant?.latin ?: stringResource(R.string.dash),
                         style = typography.body2,
                         color = md_theme_light_primary,
                         fontStyle = FontStyle.Italic,
