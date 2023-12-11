@@ -85,17 +85,15 @@ fun ScanResultDialog(
                             containerColor = md_theme_light_primary,
                             contentColor = Color.White
                         ),
-                        shape = RoundedCornerShape(Dimension.SIZE_12),
+                        shape = RoundedCornerShape(Dimension.SIZE_5),
                         contentPadding = PaddingValues(
-                            start = Dimension.SIZE_8,
-                            end = Dimension.SIZE_8,
-                            top = Dimension.SIZE_2,
-                            bottom = Dimension.SIZE_2
+                            horizontal = Dimension.SIZE_18,
+                            vertical = Dimension.SIZE_8
                         )
                     ) {
                         Text(
                             text = stringResource(id = R.string.details),
-                            style = typography.subtitle1,
+                            style = typography.body2,
                             color = Color.White,
                         )
                     }
