@@ -2,7 +2,7 @@ package id.belitong.bigs.compose.core.data.source.remote.network
 
 import id.belitong.bigs.compose.core.data.source.remote.response.BiodiversityItem
 import id.belitong.bigs.compose.core.data.source.remote.response.GeositeItem
-import id.belitong.bigs.compose.core.data.source.remote.response.PlantItem
+import id.belitong.bigs.compose.core.data.source.remote.response.PlantResponse
 import retrofit2.http.GET
 
 interface BeceptorApiService {
@@ -13,5 +13,5 @@ interface BeceptorApiService {
     suspend fun getBiodiversities(): List<BiodiversityItem>
 
     @GET("plants")
-    suspend fun getPlants(): List<PlantItem>
+    suspend fun getPlant(): PlantResponse
 }

@@ -49,11 +49,11 @@ class GeoparkRepository @Inject constructor(
         }
     }
 
-    override fun getPlants() = flow {
+    override fun getPlant() = flow {
         emit(loading())
-        when (val apiResponse = remoteDataSource.getPlants().first()) {
+        when (val apiResponse = remoteDataSource.getPlant().first()) {
             is ApiResponse.Success -> {
-                val data = DataMapper.plantItemToPlant(apiResponse.data)
+                val data = DataMapper.plantResponseToPlant(apiResponse.data)
                 emit(Resource.Success(data))
             }
 
