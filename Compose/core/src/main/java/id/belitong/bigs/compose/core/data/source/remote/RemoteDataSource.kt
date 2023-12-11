@@ -40,6 +40,7 @@ class RemoteDataSource @Inject constructor(
             when (e) {
                 is HttpException -> {
                     val message = e.getErrorMessage()
+                    Log.d("Register", "registerUser: $message")
                     if (message != null) {
                         emit(ApiResponse.Error(message))
                     }
@@ -91,7 +92,7 @@ class RemoteDataSource @Inject constructor(
                 when (e) {
                     is HttpException -> {
                         val message = e.getErrorMessage()
-                        Log.d("GeositeItem", "getGeositeItems: $message")
+                        Log.d("Geosites", "getGeosites: $message")
                         if (message != null) {
                             emit(ApiResponse.Error(message))
                         }
@@ -117,7 +118,7 @@ class RemoteDataSource @Inject constructor(
                 when (e) {
                     is HttpException -> {
                         val message = e.getErrorMessage()
-                        Log.d("BiodiversityItem", "getBiodiversities: $message")
+                        Log.d("Biodiversities", "getBiodiversities: $message")
                         if (message != null) {
                             emit(ApiResponse.Error(message))
                         }
@@ -143,7 +144,7 @@ class RemoteDataSource @Inject constructor(
                 when (e) {
                     is HttpException -> {
                         val message = e.getErrorMessage()
-                        Log.d("PlantItem", "getPlants: $message")
+                        Log.d("Plants", "getPlants: $message")
                         if (message != null) {
                             emit(ApiResponse.Error(message))
                         }
@@ -169,7 +170,7 @@ class RemoteDataSource @Inject constructor(
                 when (e) {
                     is HttpException -> {
                         val message = e.getErrorMessage()
-                        Log.d("OrderItem", "getOrders: $message")
+                        Log.d("Orders", "getOrders: $message")
                         if (message != null) {
                             emit(ApiResponse.Error(message))
                         }
@@ -195,7 +196,7 @@ class RemoteDataSource @Inject constructor(
                 when (e) {
                     is HttpException -> {
                         val message = e.getErrorMessage()
-                        Log.d("ReportItem", "getReports: $message")
+                        Log.d("Reports", "getReports: $message")
                         if (message != null) {
                             emit(ApiResponse.Error(message))
                         }
