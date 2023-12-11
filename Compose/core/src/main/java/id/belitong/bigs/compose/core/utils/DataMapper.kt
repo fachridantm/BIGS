@@ -5,7 +5,7 @@ import id.belitong.bigs.compose.core.data.source.remote.response.BiodiversityIte
 import id.belitong.bigs.compose.core.data.source.remote.response.GeositeItem
 import id.belitong.bigs.compose.core.data.source.remote.response.LoginResponse
 import id.belitong.bigs.compose.core.data.source.remote.response.OrderItem
-import id.belitong.bigs.compose.core.data.source.remote.response.PlantItem
+import id.belitong.bigs.compose.core.data.source.remote.response.PlantResponse
 import id.belitong.bigs.compose.core.data.source.remote.response.RegisterResponse
 import id.belitong.bigs.compose.core.data.source.remote.response.ReportItem
 import id.belitong.bigs.compose.core.domain.model.Biodiversity
@@ -64,13 +64,11 @@ object DataMapper {
             )
         }
 
-    fun plantItemToPlant(data: List<PlantItem>): List<Plant> = data.map {
-        Plant(
-            id = it.id,
-            name = it.name,
-            latin = it.latin,
-        )
-    }
+    fun plantResponseToPlant(data: PlantResponse): Plant = Plant(
+        id = data.id,
+        name = data.name,
+        latin = data.latin,
+    )
 
     fun orderItemToOrder(data: List<OrderItem>): List<Order> = data.map {
         Order(
