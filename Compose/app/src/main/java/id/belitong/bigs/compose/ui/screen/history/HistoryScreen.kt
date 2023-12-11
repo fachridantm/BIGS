@@ -83,9 +83,7 @@ fun HistoryScreen(
 
     ComposableObserver(
         state = ordersState,
-        onLoading = {
-            isLoading.value = true
-        },
+        onLoading = { isLoading.value = true },
         onSuccess = {
             isLoading.value = false
             orders.value = it
