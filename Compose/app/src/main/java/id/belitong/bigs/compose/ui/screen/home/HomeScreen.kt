@@ -152,7 +152,7 @@ fun HomeScreen(
     }
 
     HomeScreenContent(
-        name = name.value?.getFirstName() ?: "No Name",
+        name = name.value?.getFirstName() ?: stringResource(R.string.no_name),
         geosites = DummyData.getAllGeosites(),
         biodiversities = chipData,
         selectedChip = selectedChip,
