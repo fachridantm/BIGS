@@ -9,7 +9,7 @@ import id.belitong.bigs.compose.core.data.source.remote.response.BiodiversityIte
 import id.belitong.bigs.compose.core.data.source.remote.response.GeositeItem
 import id.belitong.bigs.compose.core.data.source.remote.response.LoginResponse
 import id.belitong.bigs.compose.core.data.source.remote.response.OrderItem
-import id.belitong.bigs.compose.core.data.source.remote.response.PlantItem
+import id.belitong.bigs.compose.core.data.source.remote.response.PlantResponse
 import id.belitong.bigs.compose.core.data.source.remote.response.RegisterResponse
 import id.belitong.bigs.compose.core.data.source.remote.response.ReportItem
 import id.belitong.bigs.compose.core.utils.getErrorMessage
@@ -39,11 +39,22 @@ class RemoteDataSource @Inject constructor(
         } catch (e: Exception) {
             when (e) {
                 is HttpException -> {
-                    val message = e.getErrorMessage()
-                    Log.d("Register", "registerUser: $message")
-                    if (message != null) {
-                        emit(ApiResponse.Error(message))
+                    val message = when (e.code()) {
+                        401 -> "Unauthorized/Sessions Expired"
+                        403 -> "Forbidden"
+                        404 -> "Not Found"
+                        429 -> "Too Many Requests"
+                        500 -> "Internal Server Error"
+                        else -> {
+                            e.getErrorMessage().toString()
+                            Log.e(
+                                "RemoteDataSource::registerUser(${e.code()})",
+                                e.getErrorMessage().toString()
+                            )
+                        }
                     }
+                    emit(ApiResponse.Error(message.toString()))
+                    Log.d("Geosite", "getGeosites: $message")
                 }
 
                 is UnknownHostException -> {
@@ -65,11 +76,22 @@ class RemoteDataSource @Inject constructor(
             } catch (e: Exception) {
                 when (e) {
                     is HttpException -> {
-                        val message = e.getErrorMessage()
-                        Log.d("Login", "loginUser: $message")
-                        if (message != null) {
-                            emit(ApiResponse.Error(message))
+                        val message = when (e.code()) {
+                            401 -> "Unauthorized/Sessions Expired"
+                            403 -> "Forbidden"
+                            404 -> "Not Found"
+                            429 -> "Too Many Requests"
+                            500 -> "Internal Server Error"
+                            else -> {
+                                e.getErrorMessage().toString()
+                                Log.e(
+                                    "RemoteDataSource::loginUser(${e.code()})",
+                                    e.getErrorMessage().toString()
+                                )
+                            }
                         }
+                        emit(ApiResponse.Error(message.toString()))
+                        Log.d("Geosite", "getGeosites: $message")
                     }
 
                     is UnknownHostException -> {
@@ -91,11 +113,22 @@ class RemoteDataSource @Inject constructor(
             } catch (e: Exception) {
                 when (e) {
                     is HttpException -> {
-                        val message = e.getErrorMessage()
-                        Log.d("Geosites", "getGeosites: $message")
-                        if (message != null) {
-                            emit(ApiResponse.Error(message))
+                        val message = when (e.code()) {
+                            401 -> "Unauthorized/Sessions Expired"
+                            403 -> "Forbidden"
+                            404 -> "Not Found"
+                            429 -> "Too Many Requests"
+                            500 -> "Internal Server Error"
+                            else -> {
+                                e.getErrorMessage().toString()
+                                Log.e(
+                                    "RemoteDataSource::getGeosites(${e.code()})",
+                                    e.getErrorMessage().toString()
+                                )
+                            }
                         }
+                        emit(ApiResponse.Error(message.toString()))
+                        Log.d("Geosite", "getGeosites: $message")
                     }
 
                     is UnknownHostException -> {
@@ -117,11 +150,22 @@ class RemoteDataSource @Inject constructor(
             } catch (e: Exception) {
                 when (e) {
                     is HttpException -> {
-                        val message = e.getErrorMessage()
-                        Log.d("Biodiversities", "getBiodiversities: $message")
-                        if (message != null) {
-                            emit(ApiResponse.Error(message))
+                        val message = when (e.code()) {
+                            401 -> "Unauthorized/Sessions Expired"
+                            403 -> "Forbidden"
+                            404 -> "Not Found"
+                            429 -> "Too Many Requests"
+                            500 -> "Internal Server Error"
+                            else -> {
+                                e.getErrorMessage().toString()
+                                Log.e(
+                                    "RemoteDataSource::getBiodiversities(${e.code()})",
+                                    e.getErrorMessage().toString()
+                                )
+                            }
                         }
+                        emit(ApiResponse.Error(message.toString()))
+                        Log.d("Plant", "getBiodiversities: $message")
                     }
 
                     is UnknownHostException -> {
@@ -135,19 +179,30 @@ class RemoteDataSource @Inject constructor(
             }
         }.flowOn(Dispatchers.IO)
 
-    suspend fun getPlants(): Flow<ApiResponse<List<PlantItem>>> =
+    suspend fun getPlant(): Flow<ApiResponse<PlantResponse>> =
         flow {
             try {
-                val response = beceptorApiService.getPlants()
+                val response = beceptorApiService.getPlant()
                 emit(ApiResponse.Success(response))
             } catch (e: Exception) {
                 when (e) {
                     is HttpException -> {
-                        val message = e.getErrorMessage()
-                        Log.d("Plants", "getPlants: $message")
-                        if (message != null) {
-                            emit(ApiResponse.Error(message))
+                        val message = when (e.code()) {
+                            401 -> "Unauthorized/Sessions Expired"
+                            403 -> "Forbidden"
+                            404 -> "Not Found"
+                            429 -> "Too Many Requests"
+                            500 -> "Internal Server Error"
+                            else -> {
+                                e.getErrorMessage().toString()
+                                Log.e(
+                                    "RemoteDataSource::getPlant(${e.code()})",
+                                    e.getErrorMessage().toString()
+                                )
+                            }
                         }
+                        emit(ApiResponse.Error(message.toString()))
+                        Log.d("Plant", "getPlant: $message")
                     }
 
                     is UnknownHostException -> {
@@ -169,11 +224,22 @@ class RemoteDataSource @Inject constructor(
             } catch (e: Exception) {
                 when (e) {
                     is HttpException -> {
-                        val message = e.getErrorMessage()
-                        Log.d("Orders", "getOrders: $message")
-                        if (message != null) {
-                            emit(ApiResponse.Error(message))
+                        val message = when (e.code()) {
+                            401 -> "Unauthorized/Sessions Expired"
+                            403 -> "Forbidden"
+                            404 -> "Not Found"
+                            429 -> "Too Many Requests"
+                            500 -> "Internal Server Error"
+                            else -> {
+                                e.getErrorMessage().toString()
+                                Log.e(
+                                    "RemoteDataSource::getOrders(${e.code()})",
+                                    e.getErrorMessage().toString()
+                                )
+                            }
                         }
+                        emit(ApiResponse.Error(message.toString()))
+                        Log.d("Orders", "getOrders: $message")
                     }
 
                     is UnknownHostException -> {
@@ -195,11 +261,22 @@ class RemoteDataSource @Inject constructor(
             } catch (e: Exception) {
                 when (e) {
                     is HttpException -> {
-                        val message = e.getErrorMessage()
-                        Log.d("Reports", "getReports: $message")
-                        if (message != null) {
-                            emit(ApiResponse.Error(message))
+                        val message = when (e.code()) {
+                            401 -> "Unauthorized/Sessions Expired"
+                            403 -> "Forbidden"
+                            404 -> "Not Found"
+                            429 -> "Too Many Requests"
+                            500 -> "Internal Server Error"
+                            else -> {
+                                e.getErrorMessage().toString()
+                                Log.e(
+                                    "RemoteDataSource::getReports(${e.code()})",
+                                    e.getErrorMessage().toString()
+                                )
+                            }
                         }
+                        emit(ApiResponse.Error(message.toString()))
+                        Log.d("Reports", "getReports: $message")
                     }
 
                     is UnknownHostException -> {
