@@ -114,5 +114,8 @@
     <string name="name">Name:</string>
     <string name="short_desc">Short Description:</string>
     <string name="place">Place:</string>
+
+    <string name="dash">-</string>
+    <string name="no_name">No Name</string>
     <string name="no_data">Data is empty</string>
 </resources>
