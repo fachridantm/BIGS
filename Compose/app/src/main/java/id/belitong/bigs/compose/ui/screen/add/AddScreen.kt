@@ -30,13 +30,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -47,22 +47,24 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import id.belitong.bigs.compose.BuildConfig
 import id.belitong.bigs.compose.R
-import id.belitong.bigs.compose.core.utils.DummyData
+import id.belitong.bigs.compose.core.domain.model.Plant
 import id.belitong.bigs.compose.core.utils.createTempFile
 import id.belitong.bigs.compose.core.utils.rotateBitmap
 import id.belitong.bigs.compose.core.utils.showToast
 import id.belitong.bigs.compose.core.utils.uriToFile
-import id.belitong.bigs.compose.ui.composable.components.BasicLottieAnimation
 import id.belitong.bigs.compose.ui.composable.components.ButtonWithDrawableStart
 import id.belitong.bigs.compose.ui.composable.components.ScanResultDialog
+import id.belitong.bigs.compose.ui.composable.utils.ComposableObserver
 import id.belitong.bigs.compose.ui.composable.utils.getActivity
 import id.belitong.bigs.compose.ui.navigation.MainNavGraph
+import id.belitong.bigs.compose.ui.screen.main.MainViewModel
 import id.belitong.bigs.compose.ui.theme.Dimension
 import id.belitong.bigs.compose.ui.theme.md_theme_light_primary
 import id.belitong.bigs.compose.ui.theme.typography
@@ -76,16 +78,21 @@ import java.io.File
 @Composable
 fun AddScreen(
     navigator: DestinationsNavigator? = null,
+    mainViewModel: MainViewModel = hiltViewModel(),
     scope: CoroutineScope = rememberCoroutineScope(),
     snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
 ) {
     val context = LocalContext.current
     val activity = getActivity()
 
-    var isLoading by remember { mutableStateOf(false) }
+    val plantState = mainViewModel.plant.observeAsState()
 
+    var isLoading by remember { mutableStateOf(false) }
     var isSuccess by remember { mutableStateOf(false) }
     var isFailed by remember { mutableStateOf(false) }
+
+    val plant = remember { mutableStateOf<Plant?>(null) }
+
     var showDialog by remember { mutableStateOf(false) }
 
     var getFile by remember { mutableStateOf<File?>(null) }
@@ -113,9 +120,29 @@ fun AddScreen(
             context.getString(R.string.not_given_access).showToast(context)
         }
     }
+
+    LaunchedEffect(key1 = Unit) {
+        mainViewModel.getPlant()
+        delay(1000)
+    }
+
     SideEffect {
         requestPermissionLauncher.launch(cameraPermission)
     }
+
+    ComposableObserver(
+        state = plantState,
+        onLoading = { isLoading = true },
+        onSuccess = {
+            isLoading = false
+            plant.value = it
+            showDialog = true
+        },
+        onError = { message ->
+            isLoading = false
+            message.showToast(activity)
+        }
+    )
 
     val cameraLauncher =
         rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -185,19 +212,11 @@ fun AddScreen(
             }
         },
         isLoading = isLoading,
-        scope = scope,
-        snackbarHostState = snackbarHostState
     )
-    LaunchedEffect(isLoading) {
-        if (isLoading) {
-            delay(2000)
-            isLoading = false
-            showDialog = true
-        }
-    }
+
     if (showDialog) {
         ScanResultDialog(
-            plant = DummyData.getPlant(),
+            plant = plant.value,
             isFailed = isFailed,
             isSuccess = isSuccess,
             onClickDetails = {
@@ -230,14 +249,11 @@ fun AddScreenContent(
     mediaHandler: () -> Unit = {},
     scanHandler: () -> Unit = {},
     isLoading: Boolean = false,
-    scope: CoroutineScope = rememberCoroutineScope(),
-    snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
 ) {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.TopCenter
     ) {
-        val visibility = if (isLoading) 1f else 0f
         Column(
             modifier = modifier
                 .fillMaxSize()
@@ -332,13 +348,6 @@ fun AddScreenContent(
                 )
             }
         }
-        BasicLottieAnimation(
-            modifier = Modifier
-                .wrapContentSize()
-                .padding(top = 157.dp)
-                .alpha(visibility),
-            resId = R.raw.plant_scanning
-        )
     }
 }
 
