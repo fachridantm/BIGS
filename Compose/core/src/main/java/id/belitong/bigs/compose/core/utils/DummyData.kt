@@ -1,6 +1,5 @@
 package id.belitong.bigs.compose.core.utils
 
-import id.belitong.bigs.compose.core.domain.model.Biodiversity
 import id.belitong.bigs.compose.core.domain.model.Geosite
 import id.belitong.bigs.compose.core.domain.model.Plant
 
@@ -326,58 +325,6 @@ object DummyData {
                 "Sunday:\tClosed",
             ),
             img = "https://images.squarespace-cdn.com/content/v1/5cdcf79637f3770001708f38/1558990195742-8AEQYYV6N5Q0KN0EILSI/Kuale-Sijuk-1.jpg?format=500w",
-        ),
-    )
-
-    fun getAllBiodiversity() = listOf(
-        Biodiversity(
-            id = 1,
-            name = "Moss Hill",
-            type = "Hill",
-            location = "Limbongan, Kec. Gantung, East Belitung Regency",
-            img = "https://images.squarespace-cdn.com/content/v1/5cdcf79637f3770001708f38/1560494357865-JI4N7MAOI1B2IVO99HLC/Martin-Gunung-Lumut-01.jpg?format=1500w",
-        ),
-        Biodiversity(
-            id = 2,
-            name = "Belitong Tersier",
-            type = "Animal",
-            location = "Peramun Hill",
-            img = "https://images.squarespace-cdn.com/content/v1/5cdcf79637f3770001708f38/1558800513560-U4GR2ZHB6PFYFMUHE9PT/SLIDER-BG12.jpg?format=750w",
-        ),
-        Biodiversity(
-            id = 3,
-            name = "Batu Pulas",
-            type = "Granite Rock",
-            location = "Dusun Mengguru, Cendil, Kec. Klp. Kampit, Kabupaten Belitung Timur",
-            img = "https://images.squarespace-cdn.com/content/v1/5cdcf79637f3770001708f38/1560485122888-WEC7W4U7BRBTOKXBR5BC/Martin-Batu-Pulas-07.jpg?format=1500w",
-        ),
-        Biodiversity(
-            id = 3,
-            name = "Peramun Hill Granite Forest",
-            type = "Hill",
-            location = "Jl. Peramun, Air Selumar, Sijuk, Kabupaten Belitung",
-            img = "https://images.squarespace-cdn.com/content/v1/5cdcf79637f3770001708f38/1558975216815-9IOOH4H0AO2KKZ4PNGWQ/peramun4.jpg?format=1000w",
-        ),
-        Biodiversity(
-            id = 4,
-            name = "Tristaniopsis Merguensis",
-            type = "Plant",
-            location = "-",
-            img = "https://images.squarespace-cdn.com/content/v1/5cdcf79637f3770001708f38/1560552291389-Y01PGQ7IJKQYQ60RPIZ1/Oki-Cendil-Kulat-Pelawan-2.jpg?format=1000w",
-        ),
-        Biodiversity(
-            id = 5,
-            name = "Asian Arowana",
-            type = "Animal",
-            location = "Tebat Rasau Cenozoic",
-            img = "https://images.squarespace-cdn.com/content/v1/5cdcf79637f3770001708f38/1558919810324-P7UUJK9T9UHF51W2958U/asian-arowana.jpg?format=300w",
-        ),
-        Biodiversity(
-            id = 6,
-            name = "Tropical Pitcher",
-            type = "Plant",
-            location = "Moss Hill",
-            img = "https://images.squarespace-cdn.com/content/v1/5cdcf79637f3770001708f38/1560494821473-0AFVKPLCVCQIUTZBJK4P/Martin-Gunung-Lumut-04.jpg?format=300w",
         ),
     )
 
