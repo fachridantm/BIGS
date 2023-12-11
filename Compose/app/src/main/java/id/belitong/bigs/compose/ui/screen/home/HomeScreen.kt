@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
@@ -35,6 +36,7 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -44,6 +46,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -60,16 +63,20 @@ import id.belitong.bigs.compose.core.domain.model.Biodiversity
 import id.belitong.bigs.compose.core.domain.model.Geosite
 import id.belitong.bigs.compose.core.utils.DummyData
 import id.belitong.bigs.compose.core.utils.getFirstName
+import id.belitong.bigs.compose.core.utils.showToast
+import id.belitong.bigs.compose.ui.composable.components.BasicLottieAnimation
 import id.belitong.bigs.compose.ui.composable.components.ButtonWithDrawableTop
 import id.belitong.bigs.compose.ui.composable.components.CarouselPagerItem
 import id.belitong.bigs.compose.ui.composable.components.ChipGroupSingleSelection
 import id.belitong.bigs.compose.ui.composable.components.HomeGridItem
 import id.belitong.bigs.compose.ui.composable.model.ChipFilter
 import id.belitong.bigs.compose.ui.composable.model.getBiodiversityFilter
+import id.belitong.bigs.compose.ui.composable.utils.ComposableObserver
 import id.belitong.bigs.compose.ui.composable.utils.getActivity
 import id.belitong.bigs.compose.ui.navigation.MainNavGraph
 import id.belitong.bigs.compose.ui.screen.details.geoprogramme.GeoprogrammeActivity
 import id.belitong.bigs.compose.ui.screen.details.geosite.GeositesActivity
+import id.belitong.bigs.compose.ui.screen.main.MainViewModel
 import id.belitong.bigs.compose.ui.screen.profile.ProfileActivity
 import id.belitong.bigs.compose.ui.screen.search.SearchActivity
 import id.belitong.bigs.compose.ui.theme.Dimension
@@ -86,39 +93,61 @@ import kotlinx.coroutines.launch
 @Composable
 fun HomeScreen(
     navigator: DestinationsNavigator? = null,
-    homeViewModel: HomeViewModel = hiltViewModel(),
+    mainViewModel: MainViewModel = hiltViewModel(),
     scope: CoroutineScope = rememberCoroutineScope(),
     snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
 ) {
     val activity = getActivity()
-    val name = homeViewModel.getName().observeAsState()
+
+    val name = mainViewModel.getName().observeAsState()
+    val biodiversitiesState = mainViewModel.biodiversities.observeAsState()
+
+    val isLoading = remember { mutableStateOf(false) }
+
+    val biodiversities = remember { mutableStateOf(emptyList<Biodiversity>()) }
 
     val selectedChip = remember { mutableStateOf(ChipFilter.ALL) }
+    var chipData by remember { biodiversities }
 
     BackHandler {
         activity.finish()
     }
 
-    val biodiversities = DummyData.getAllBiodiversity()
-    var chipData by remember { mutableStateOf(biodiversities) }
+    LaunchedEffect(key1 = Unit) {
+        mainViewModel.getName()
+        mainViewModel.getBiodiversities()
+    }
+
+    ComposableObserver(
+        state = biodiversitiesState,
+        onLoading = { isLoading.value = true },
+        onSuccess = {
+            isLoading.value = false
+            biodiversities.value = it
+        },
+        onError = { message ->
+            isLoading.value = false
+            message.showToast(activity)
+        }
+    )
 
     chipData = when (selectedChip.value) {
         ChipFilter.GEOSITE -> {
-            biodiversities.filter {
+            biodiversities.value.filter {
                 it.type != stringResource(R.string.animal) && it.type != stringResource(R.string.plant)
             }
         }
 
         ChipFilter.ANIMAL -> {
-            biodiversities.filter { it.type == stringResource(R.string.animal) }
+            biodiversities.value.filter { it.type == stringResource(R.string.animal) }
         }
 
         ChipFilter.PLANT -> {
-            biodiversities.filter { it.type == stringResource(R.string.plant) }
+            biodiversities.value.filter { it.type == stringResource(R.string.plant) }
         }
 
         else -> {
-            biodiversities
+            biodiversities.value
         }
     }
 
@@ -133,6 +162,7 @@ fun HomeScreen(
         intentToGeosite = { GeositesActivity.start(activity) },
         scope = scope,
         snackbarHostState = snackbarHostState,
+        isLoading = isLoading.value
     )
 }
 
@@ -150,9 +180,11 @@ fun HomeScreenContent(
     intentToGeosite: () -> Unit = {},
     scope: CoroutineScope = rememberCoroutineScope(),
     snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
+    isLoading: Boolean = false,
 ) {
     val context = LocalContext.current
     val interactionSource = remember { MutableInteractionSource() }
+    val visibility = if (isLoading) 1f else 0f
 
     Box(
         modifier = modifier
@@ -316,6 +348,13 @@ fun HomeScreenContent(
                 }
             }
         }
+        BasicLottieAnimation(
+            modifier = Modifier
+                .size(150.dp)
+                .align(Alignment.Center)
+                .alpha(visibility),
+            resId = R.raw.loading,
+        )
     }
 }
 
@@ -352,6 +391,7 @@ fun HomeCarouselView(
             pageContent = {
                 CarouselPagerItem(
                     geosites = geosites,
+                    page = carouselPagerState.currentPage,
                     onItemClicked = onItemClicked
                 )
             }
