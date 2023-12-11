@@ -2,9 +2,7 @@ package id.belitong.bigs.compose.core.utils
 
 import id.belitong.bigs.compose.core.domain.model.Biodiversity
 import id.belitong.bigs.compose.core.domain.model.Geosite
-import id.belitong.bigs.compose.core.domain.model.Order
 import id.belitong.bigs.compose.core.domain.model.Plant
-import id.belitong.bigs.compose.core.domain.model.Report
 
 object DummyData {
     fun getAllGeosites() = listOf(
@@ -363,7 +361,7 @@ object DummyData {
         Biodiversity(
             id = 4,
             name = "Tristaniopsis Merguensis",
-            type = "PlantItem",
+            type = "Plant",
             location = "-",
             img = "https://images.squarespace-cdn.com/content/v1/5cdcf79637f3770001708f38/1560552291389-Y01PGQ7IJKQYQ60RPIZ1/Oki-Cendil-Kulat-Pelawan-2.jpg?format=1000w",
         ),
@@ -377,7 +375,7 @@ object DummyData {
         Biodiversity(
             id = 6,
             name = "Tropical Pitcher",
-            type = "PlantItem",
+            type = "Plant",
             location = "Moss Hill",
             img = "https://images.squarespace-cdn.com/content/v1/5cdcf79637f3770001708f38/1560494821473-0AFVKPLCVCQIUTZBJK4P/Martin-Gunung-Lumut-04.jpg?format=300w",
         ),
