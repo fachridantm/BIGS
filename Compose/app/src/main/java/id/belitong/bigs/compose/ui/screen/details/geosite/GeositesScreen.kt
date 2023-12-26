@@ -102,6 +102,10 @@ fun GeositesScreen(
         listState.animateScrollToItem(0)
     }
 
+    LaunchedEffect(key1 = Unit) {
+        mainViewModel.getGeosites()
+    }
+
     GeositesScreenContent(
         modifier = modifier,
         geosites = chipData,
