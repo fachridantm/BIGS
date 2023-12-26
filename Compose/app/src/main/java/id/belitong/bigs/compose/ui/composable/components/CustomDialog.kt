@@ -24,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import id.belitong.bigs.compose.R
 import id.belitong.bigs.compose.core.domain.model.Plant
 import id.belitong.bigs.compose.ui.theme.Dimension
@@ -44,6 +45,7 @@ fun ScanResultDialog(
     if (isSuccess) {
         Dialog(
             onDismissRequest = onClickCancel,
+            properties = DialogProperties(dismissOnBackPress = true, dismissOnClickOutside = true)
         ) {
             Surface(
                 modifier = modifier
@@ -103,6 +105,7 @@ fun ScanResultDialog(
     } else {
         Dialog(
             onDismissRequest = onClickCancel,
+            properties = DialogProperties(dismissOnBackPress = true, dismissOnClickOutside = true)
         ) {
             Surface(
                 modifier = modifier

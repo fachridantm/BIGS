@@ -36,6 +36,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -58,6 +59,7 @@ import id.belitong.bigs.compose.core.utils.createTempFile
 import id.belitong.bigs.compose.core.utils.rotateBitmap
 import id.belitong.bigs.compose.core.utils.showToast
 import id.belitong.bigs.compose.core.utils.uriToFile
+import id.belitong.bigs.compose.ui.composable.components.BasicLottieAnimation
 import id.belitong.bigs.compose.ui.composable.components.ButtonWithDrawableStart
 import id.belitong.bigs.compose.ui.composable.components.ScanResultDialog
 import id.belitong.bigs.compose.ui.composable.utils.ComposableObserver
@@ -120,23 +122,21 @@ fun AddScreen(
         }
     }
 
-    SideEffect {
-        requestPermissionLauncher.launch(cameraPermission)
-    }
-
     ComposableObserver(
         state = plantState,
         onLoading = { isLoading = true },
         onSuccess = {
-            isLoading = false
             plant.value = it
-            showDialog = true
         },
         onError = { message ->
             isLoading = false
             message.showToast(activity)
         }
     )
+
+    SideEffect {
+        requestPermissionLauncher.launch(cameraPermission)
+    }
 
     val cameraLauncher =
         rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -182,9 +182,8 @@ fun AddScreen(
                 cameraLauncher.launch(intent)
             }
 
-            // TODO: Remove this dummy state
-            isSuccess = true
-            isFailed = false
+            isSuccess = false
+            isFailed = true
         },
         mediaHandler = {
             val intent = Intent()
@@ -194,15 +193,16 @@ fun AddScreen(
             val chooser = Intent.createChooser(intent, context.getString(R.string.pilih_gambar))
             mediaLauncher.launch(chooser)
 
-            // TODO: Remove this dummy state
-            isSuccess = false
-            isFailed = true
+            isSuccess = true
+            isFailed = false
         },
         scanHandler = {
             if (getFile != null) {
                 scope.launch {
-                    delay(1000)
                     mainViewModel.getPlant()
+                    delay(2000)
+                    isLoading = false
+                    showDialog = true
                 }
             } else {
                 context.getString(R.string.no_image_selected).showToast(context)
@@ -223,9 +223,7 @@ fun AddScreen(
                     )
                 }
             },
-            onClickCancel = {
-                showDialog = false
-            },
+            onClickCancel = { showDialog = false },
             onClickAddData = {
                 scope.launch {
                     snackbarHostState.showSnackbar(
@@ -251,6 +249,7 @@ fun AddScreenContent(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.TopCenter
     ) {
+        val visibility = if (isLoading) 1f else 0f
         Column(
             modifier = modifier
                 .fillMaxSize()
@@ -345,6 +344,13 @@ fun AddScreenContent(
                 )
             }
         }
+        BasicLottieAnimation(
+            modifier = Modifier
+                .wrapContentSize()
+                .padding(top = 157.dp)
+                .alpha(visibility),
+            resId = R.raw.plant_scanning
+        )
     }
 }
 
