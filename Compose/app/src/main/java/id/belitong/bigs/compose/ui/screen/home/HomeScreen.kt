@@ -8,7 +8,6 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,7 +21,6 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.pager.HorizontalPager
-import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.PagerDefaults
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
@@ -61,7 +59,6 @@ import com.tbuonomo.viewpagerdotsindicator.compose.type.ShiftIndicatorType
 import id.belitong.bigs.compose.R
 import id.belitong.bigs.compose.core.domain.model.Biodiversity
 import id.belitong.bigs.compose.core.domain.model.Geosite
-import id.belitong.bigs.compose.core.utils.DummyData
 import id.belitong.bigs.compose.core.utils.getFirstName
 import id.belitong.bigs.compose.core.utils.showToast
 import id.belitong.bigs.compose.ui.composable.components.BasicLottieAnimation
@@ -101,10 +98,12 @@ fun HomeScreen(
 
     val name = mainViewModel.getName().observeAsState()
     val biodiversitiesState = mainViewModel.biodiversities.observeAsState()
+    val geositesState = mainViewModel.geosites.observeAsState()
 
     val isLoading = remember { mutableStateOf(false) }
 
     val biodiversities = remember { mutableStateOf(emptyList<Biodiversity>()) }
+    val geosites = remember { mutableStateOf(emptyList<Geosite>()) }
 
     val selectedChip = remember { mutableStateOf(ChipFilter.ALL) }
     var chipData by remember { biodiversities }
@@ -115,8 +114,22 @@ fun HomeScreen(
 
     LaunchedEffect(key1 = Unit) {
         mainViewModel.getName()
+        mainViewModel.getGeosites()
         mainViewModel.getBiodiversities()
     }
+
+    ComposableObserver(
+        state = geositesState,
+        onLoading = { isLoading.value = true },
+        onSuccess = {
+            isLoading.value = false
+            geosites.value = it
+        },
+        onError = { message ->
+            isLoading.value = false
+            message.showToast(activity)
+        }
+    )
 
     ComposableObserver(
         state = biodiversitiesState,
@@ -153,7 +166,7 @@ fun HomeScreen(
 
     HomeScreenContent(
         name = name.value?.getFirstName() ?: stringResource(R.string.no_name),
-        geosites = DummyData.getAllGeosites(),
+        geosites = geosites.value,
         biodiversities = chipData,
         selectedChip = selectedChip,
         intentToProfile = { ProfileActivity.start(activity) },
@@ -364,11 +377,8 @@ fun HomeCarouselView(
     geosites: List<Geosite> = emptyList(),
     onItemClicked: (Geosite) -> Unit = {},
 ) {
-    val carouselPageCount by remember { mutableStateOf(5) }
-    val carouselPagerState = rememberPagerState(
-        initialPage = 0,
-        initialPageOffsetFraction = 0f
-    ) { carouselPageCount }
+    val carouselPageCount = geosites.size / 3
+    val carouselPagerState = rememberPagerState { carouselPageCount }
 
     Column {
         HorizontalPager(
@@ -378,23 +388,16 @@ fun HomeCarouselView(
                 .padding(top = Dimension.SIZE_8, bottom = Dimension.SIZE_18),
             state = carouselPagerState,
             pageSpacing = Dimension.SIZE_12,
-            userScrollEnabled = true,
-            reverseLayout = false,
-            contentPadding = PaddingValues(0.dp),
-            beyondBoundsPageCount = 0,
-            pageSize = PageSize.Fill,
-            flingBehavior = PagerDefaults.flingBehavior(state = carouselPagerState),
-            key = null,
             pageNestedScrollConnection = PagerDefaults.pageNestedScrollConnection(
                 Orientation.Horizontal
             ),
             pageContent = {
                 CarouselPagerItem(
                     geosites = geosites,
-                    page = carouselPagerState.currentPage,
+                    page = it,
                     onItemClicked = onItemClicked
                 )
-            }
+            },
         )
         DotsIndicator(
             dotCount = carouselPageCount,
@@ -402,7 +405,7 @@ fun HomeCarouselView(
                 dotsGraphic = DotGraphic(
                     color = seed,
                     size = Dimension.SIZE_12,
-                ), shiftSizeFactor = 2.5f
+                )
             ),
             pagerState = carouselPagerState,
             dotSpacing = Dimension.SIZE_6,

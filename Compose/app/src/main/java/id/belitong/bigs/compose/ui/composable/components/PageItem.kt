@@ -66,25 +66,51 @@ fun CarouselPagerItem(
     geosites: List<Geosite> = emptyList(),
     onItemClicked: (Geosite) -> Unit = {}
 ) {
-    Card(
-        modifier = modifier
-            .fillMaxSize()
-            .clip(RoundedCornerShape(Dimension.SIZE_12))
-            .clickable { onItemClicked(geosites[page]) },
-        elevation = CardDefaults.cardElevation(defaultElevation = Dimension.SIZE_4)
-    ) {
-        Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.BottomStart
+    if (geosites.isNotEmpty()) {
+        Card(
+            modifier = modifier
+                .fillMaxSize()
+                .clip(RoundedCornerShape(Dimension.SIZE_12))
+                .clickable { onItemClicked(geosites[page]) },
+            elevation = CardDefaults.cardElevation(defaultElevation = Dimension.SIZE_4)
         ) {
-            GlideImage(
+            Box(
                 modifier = Modifier.fillMaxSize(),
-                model = geosites[page].img,
-                contentDescription = geosites[page].name,
-                contentScale = ContentScale.Crop,
+                contentAlignment = Alignment.BottomStart
             ) {
-                it.placeholder(R.drawable.img_placeholder_geopark)
+                GlideImage(
+                    modifier = Modifier.fillMaxSize(),
+                    model = geosites[page].img,
+                    contentDescription = geosites[page].name,
+                    contentScale = ContentScale.Crop,
+                ) {
+                    it.placeholder(R.drawable.img_placeholder_geopark)
+                }
+                Text(
+                    modifier = Modifier
+                        .wrapContentSize()
+                        .padding(start = Dimension.SIZE_16, bottom = Dimension.SIZE_16)
+                        .alpha(0.8f)
+                        .background(
+                            color = Color.Black,
+                            shape = RoundedCornerShape(Dimension.SIZE_20),
+                        )
+                        .padding(horizontal = Dimension.SIZE_28, vertical = Dimension.SIZE_6),
+                    text = geosites[page].name,
+                    textAlign = TextAlign.Center,
+                    color = Color.White,
+                    style = typography.h4.copy(fontSize = TextSize.SIZE_14),
+                )
             }
+        }
+    } else {
+        Box(
+            modifier = modifier
+                .fillMaxSize()
+                .clip(RoundedCornerShape(Dimension.SIZE_12))
+                .clickable { onItemClicked(geosites[page]) },
+            contentAlignment = Alignment.Center
+        ) {
             Text(
                 modifier = Modifier
                     .wrapContentSize()
@@ -95,13 +121,14 @@ fun CarouselPagerItem(
                         shape = RoundedCornerShape(Dimension.SIZE_20),
                     )
                     .padding(horizontal = Dimension.SIZE_28, vertical = Dimension.SIZE_6),
-                text = geosites[page].name,
+                text = stringResource(id = R.string.no_data),
                 textAlign = TextAlign.Center,
                 color = Color.White,
                 style = typography.h4.copy(fontSize = TextSize.SIZE_14),
             )
         }
     }
+
 }
 
 @OptIn(ExperimentalGlideComposeApi::class)
