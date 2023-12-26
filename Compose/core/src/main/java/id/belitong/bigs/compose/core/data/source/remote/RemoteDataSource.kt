@@ -3,7 +3,6 @@ package id.belitong.bigs.compose.core.data.source.remote
 import android.util.Log
 import id.belitong.bigs.compose.core.data.source.remote.network.ApiResponse
 import id.belitong.bigs.compose.core.data.source.remote.network.AuthApiService
-import id.belitong.bigs.compose.core.data.source.remote.network.BeceptorApiService
 import id.belitong.bigs.compose.core.data.source.remote.network.MockApiService
 import id.belitong.bigs.compose.core.data.source.remote.response.BiodiversityItem
 import id.belitong.bigs.compose.core.data.source.remote.response.GeositeItem
@@ -18,6 +17,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import retrofit2.HttpException
+import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -25,7 +25,6 @@ import javax.inject.Singleton
 @Singleton
 class RemoteDataSource @Inject constructor(
     private val authApiService: AuthApiService,
-    private val beceptorApiService: BeceptorApiService,
     private val mockApiService: MockApiService
 ) {
     suspend fun registerUser(
@@ -59,6 +58,10 @@ class RemoteDataSource @Inject constructor(
 
                 is UnknownHostException -> {
                     emit(ApiResponse.Error("No internet connection"))
+                }
+
+                is SocketTimeoutException -> {
+                    emit(ApiResponse.Error("Request timeout"))
                 }
 
                 else -> {
@@ -98,6 +101,10 @@ class RemoteDataSource @Inject constructor(
                         emit(ApiResponse.Error("No internet connection"))
                     }
 
+                    is SocketTimeoutException -> {
+                        emit(ApiResponse.Error("Request timeout"))
+                    }
+
                     else -> {
                         emit(ApiResponse.Error(e.message.toString()))
                     }
@@ -108,7 +115,7 @@ class RemoteDataSource @Inject constructor(
     suspend fun getGeosites(): Flow<ApiResponse<List<GeositeItem>>> =
         flow {
             try {
-                val response = beceptorApiService.getGeosites()
+                val response = mockApiService.getGeosites()
                 emit(ApiResponse.Success(response))
             } catch (e: Exception) {
                 when (e) {
@@ -135,6 +142,10 @@ class RemoteDataSource @Inject constructor(
                         emit(ApiResponse.Error("No internet connection"))
                     }
 
+                    is SocketTimeoutException -> {
+                        emit(ApiResponse.Error("Request timeout"))
+                    }
+
                     else -> {
                         emit(ApiResponse.Error(e.message.toString()))
                     }
@@ -145,7 +156,7 @@ class RemoteDataSource @Inject constructor(
     suspend fun getBiodiversities(): Flow<ApiResponse<List<BiodiversityItem>>> =
         flow {
             try {
-                val response = beceptorApiService.getBiodiversities()
+                val response = mockApiService.getBiodiversities()
                 emit(ApiResponse.Success(response))
             } catch (e: Exception) {
                 when (e) {
@@ -172,6 +183,10 @@ class RemoteDataSource @Inject constructor(
                         emit(ApiResponse.Error("No internet connection"))
                     }
 
+                    is SocketTimeoutException -> {
+                        emit(ApiResponse.Error("Request timeout"))
+                    }
+
                     else -> {
                         emit(ApiResponse.Error(e.message.toString()))
                     }
@@ -182,7 +197,7 @@ class RemoteDataSource @Inject constructor(
     suspend fun getPlant(): Flow<ApiResponse<PlantResponse>> =
         flow {
             try {
-                val response = beceptorApiService.getPlant()
+                val response = mockApiService.getPlant()
                 emit(ApiResponse.Success(response))
             } catch (e: Exception) {
                 when (e) {
@@ -207,6 +222,10 @@ class RemoteDataSource @Inject constructor(
 
                     is UnknownHostException -> {
                         emit(ApiResponse.Error("No internet connection"))
+                    }
+
+                    is SocketTimeoutException -> {
+                        emit(ApiResponse.Error("Request timeout"))
                     }
 
                     else -> {
@@ -246,6 +265,10 @@ class RemoteDataSource @Inject constructor(
                         emit(ApiResponse.Error("No internet connection"))
                     }
 
+                    is SocketTimeoutException -> {
+                        emit(ApiResponse.Error("Request timeout"))
+                    }
+
                     else -> {
                         emit(ApiResponse.Error(e.message.toString()))
                     }
@@ -281,6 +304,10 @@ class RemoteDataSource @Inject constructor(
 
                     is UnknownHostException -> {
                         emit(ApiResponse.Error("No internet connection"))
+                    }
+
+                    is SocketTimeoutException -> {
+                        emit(ApiResponse.Error("Request timeout"))
                     }
 
                     else -> {
