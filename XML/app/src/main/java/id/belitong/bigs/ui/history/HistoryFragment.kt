@@ -1,6 +1,5 @@
 package id.belitong.bigs.ui.history
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -43,7 +42,7 @@ class HistoryFragment: BaseFragment<FragmentHistoryBinding>() {
         binding?.toolbarHistory?.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.btn_profile -> {
-                    startActivity(Intent(requireContext(), ProfileActivity::class.java))
+                    ProfileActivity.start(requireContext())
                     true
                 }
                 else -> false

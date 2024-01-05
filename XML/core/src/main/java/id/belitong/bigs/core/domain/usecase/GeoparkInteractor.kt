@@ -1,0 +1,14 @@
+package id.belitong.bigs.core.domain.usecase
+
+import id.belitong.bigs.core.domain.repository.IGeoparkRepository
+import javax.inject.Inject
+
+class GeoparkInteractor @Inject constructor(
+    private val geoparkRepository: IGeoparkRepository,
+) : GeoparkUseCase {
+    override fun getGeosites() = geoparkRepository.getGeosites()
+    override fun getBiodiversities() = geoparkRepository.getBiodiversities()
+    override fun getPlant() = geoparkRepository.getPlant()
+    override fun getOrders() = geoparkRepository.getOrders()
+    override fun getReports() = geoparkRepository.getReports()
+}

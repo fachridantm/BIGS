@@ -1,17 +1,18 @@
 package id.belitong.bigs.ui.profile
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatButton
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import id.belitong.bigs.R
 import id.belitong.bigs.core.utils.loadUserImage
-import id.belitong.bigs.core.utils.showMessage
+import id.belitong.bigs.core.utils.showToast
 import id.belitong.bigs.databinding.ActivityProfileBinding
+import id.belitong.bigs.databinding.DialogLogoutBinding
 import id.belitong.bigs.ui.auth.AuthActivity
 import kotlinx.coroutines.launch
 
@@ -55,16 +56,16 @@ class ProfileActivity : AppCompatActivity() {
     private fun initAction() {
         with(binding) {
             btnEditProfile.setOnClickListener {
-                getString(R.string.on_click_handler).showMessage(this@ProfileActivity)
+                getString(R.string.on_click_handler).showToast(this@ProfileActivity)
             }
             btnLanguage.setOnClickListener {
-                getString(R.string.on_click_handler).showMessage(this@ProfileActivity)
+                getString(R.string.on_click_handler).showToast(this@ProfileActivity)
             }
             btnHelp.setOnClickListener {
-                getString(R.string.on_click_handler).showMessage(this@ProfileActivity)
+                getString(R.string.on_click_handler).showToast(this@ProfileActivity)
             }
             btnAbout.setOnClickListener {
-                getString(R.string.on_click_handler).showMessage(this@ProfileActivity)
+                getString(R.string.on_click_handler).showToast(this@ProfileActivity)
             }
             btnLogout.setOnClickListener {
                 logoutHandler()
@@ -74,23 +75,27 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun logoutHandler() {
         val builder = AlertDialog.Builder(this, R.style.AlertDialog).create()
-        val view = layoutInflater.inflate(R.layout.view_logout_dialog, null)
-        val btnYes = view.findViewById<AppCompatButton>(R.id.btn_logout_yes)
-        val btnNo = view.findViewById<AppCompatButton>(R.id.btn_logout_no)
-        btnYes.setOnClickListener {
-            lifecycleScope.launch {
-                val loginIntent = Intent(this@ProfileActivity, AuthActivity::class.java)
-                loginIntent.flags =
-                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(loginIntent)
-                finish()
-                profileViewModel.deleteSession()
+        val dialogBinding = DialogLogoutBinding.inflate(layoutInflater)
+
+        dialogBinding.apply {
+            btnLogoutYes.setOnClickListener {
+                lifecycleScope.launch {
+                    AuthActivity.startNewTask(this@ProfileActivity)
+                    finish()
+                    profileViewModel.deleteSession()
+                }
+            }
+            btnLogoutNo.setOnClickListener {
+                builder.dismiss()
             }
         }
-        btnNo.setOnClickListener {
-            builder.dismiss()
-        }
-        builder.setView(view)
+        builder.setView(dialogBinding.root)
         builder.show()
+    }
+
+    companion object {
+        fun start(context: Context) {
+            Intent(context, ProfileActivity::class.java).run { context.startActivity(this) }
+        }
     }
 }

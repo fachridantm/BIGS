@@ -10,26 +10,26 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import id.belitong.bigs.BaseFragment
 import id.belitong.bigs.BuildConfig
 import id.belitong.bigs.R
+import id.belitong.bigs.core.data.Resource
 import id.belitong.bigs.core.domain.model.Plant
-import id.belitong.bigs.core.utils.DummyData.getPlant
 import id.belitong.bigs.core.utils.createTempFile
 import id.belitong.bigs.core.utils.rotateBitmap
-import id.belitong.bigs.core.utils.showMessage
+import id.belitong.bigs.core.utils.showSnackbar
+import id.belitong.bigs.core.utils.showToast
 import id.belitong.bigs.core.utils.uriToFile
+import id.belitong.bigs.databinding.DialogDataFoundBinding
+import id.belitong.bigs.databinding.DialogDataNotFoundBinding
 import id.belitong.bigs.databinding.FragmentAddBinding
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import id.belitong.bigs.ui.main.MainViewModel
 import java.io.File
 
 @AndroidEntryPoint
@@ -39,6 +39,8 @@ class AddFragment : BaseFragment<FragmentAddBinding>() {
     private var currentPhotoPath = ""
 
     private var scannerState = false
+
+    private val mainViewModel: MainViewModel by viewModels()
 
     override fun getViewBinding(
         inflater: LayoutInflater,
@@ -62,7 +64,7 @@ class AddFragment : BaseFragment<FragmentAddBinding>() {
             allPermissionsGranted()
         } else {
             // PERMISSION NOT GRANTED
-            getString(R.string.not_given_access).showMessage(requireContext())
+            getString(R.string.not_given_access).showToast(requireContext())
         }
     }
 
@@ -70,18 +72,13 @@ class AddFragment : BaseFragment<FragmentAddBinding>() {
         ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED
     }
 
-    override fun initView() {
-
-    }
+    override fun initView() {}
 
     override fun initAction() {
-        val data = getPlant()
         with(binding) {
             this?.btnCamera?.setOnClickListener { cameraHandler() }
             this?.btnGallery?.setOnClickListener { galleryHandler() }
-            this?.btnScan?.setOnClickListener {
-                scanHandler(data)
-            }
+            this?.btnScan?.setOnClickListener { scanHandler() }
         }
     }
 
@@ -144,57 +141,73 @@ class AddFragment : BaseFragment<FragmentAddBinding>() {
         }
     }
 
-    private fun scanHandler(plant: Plant) {
+    private fun scanHandler() {
         if (getFile != null) {
-            lifecycleScope.launch{
-                binding?.apply {
-                    scanPlant.visibility = ViewGroup.VISIBLE
-                    btnCamera.isEnabled = false
-                    btnGallery.isEnabled = false
-                    btnScan.isEnabled = false
-                    delay(2000)
-                    scanPlant.visibility = ViewGroup.GONE
-                    btnCamera.isEnabled = true
-                    btnGallery.isEnabled = true
-                    btnScan.isEnabled = true
+            binding?.apply {
+                mainViewModel.plant.observe(viewLifecycleOwner) {
+                    when (it) {
+                        is Resource.Loading -> showLoading(true)
+
+                        is Resource.Success -> {
+                            showLoading(false)
+                            detectionHandler(it.data)
+                        }
+
+                        is Resource.Error -> {
+                            showLoading(false)
+                            it.message.showToast(requireContext())
+                        }
+
+                        else -> {}
+                    }
                 }
-                detectionHandler(plant)
             }
         } else {
-            getString(R.string.no_image_selected).showMessage(requireContext())
+            getString(R.string.no_image_selected).showSnackbar(requireView())
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding?.apply {
+            if (isLoading) {
+                scanPlant.visibility = ViewGroup.VISIBLE
+                btnCamera.isEnabled = false
+                btnGallery.isEnabled = false
+                btnScan.isEnabled = false
+            } else {
+                scanPlant.visibility = ViewGroup.GONE
+                btnCamera.isEnabled = true
+                btnGallery.isEnabled = true
+                btnScan.isEnabled = true
+            }
         }
     }
 
     private fun detectionHandler(plant: Plant) {
         val builder = AlertDialog.Builder(requireContext(), R.style.AlertDialog).create()
-        val viewSuccess = layoutInflater.inflate(R.layout.view_data_found, null)
-        val viewFailed = layoutInflater.inflate(R.layout.view_data_not_found, null)
-        val tvLatinName = viewSuccess.findViewById<TextView>(R.id.tv_latin_name)
-        val tvScientificName = viewSuccess.findViewById<TextView>(R.id.tv_scientific_name)
-        val btnClose = viewFailed.findViewById<AppCompatButton>(R.id.btn_close)
-        val btnAdd = viewFailed.findViewById<AppCompatButton>(R.id.btn_add)
-        val btnDetails = viewSuccess.findViewById<AppCompatButton>(R.id.btn_details)
+        val dialogSuccessBinding = DialogDataFoundBinding.inflate(layoutInflater)
+        val dialogFailedBinding = DialogDataNotFoundBinding.inflate(layoutInflater)
 
-        tvLatinName.text = plant.latinName
-        tvScientificName.text = plant.scientificName
-
-        btnAdd.setOnClickListener {
-            getString(R.string.on_click_handler).showMessage(requireContext())
+        dialogSuccessBinding.apply {
+            tvName.text = plant.name
+            tvLatinName.text = plant.latin
+            btnDetails.setOnClickListener {
+                getString(R.string.on_click_handler).showSnackbar(requireView())
+            }
         }
 
-        btnClose.setOnClickListener {
-            builder.dismiss()
+        dialogFailedBinding.apply {
+            btnAdd.setOnClickListener {
+                getString(R.string.on_click_handler).showSnackbar(requireView())
+            }
+
+            btnClose.setOnClickListener {
+                builder.dismiss()
+            }
         }
 
-        btnDetails.setOnClickListener {
-            getString(R.string.on_click_handler).showMessage(requireContext())
-        }
-
-        if (scannerState) {
-            builder.setView(viewSuccess)
-        } else {
-            builder.setView(viewFailed)
-        }
+        if (scannerState) builder.setView(dialogSuccessBinding.root)
+        else builder.setView(dialogFailedBinding.root)
 
         builder.show()
     }

@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import id.belitong.bigs.R
-import id.belitong.bigs.core.utils.showMessage
+import id.belitong.bigs.core.utils.showSnackbar
 import id.belitong.bigs.databinding.ActivityGeoprogrammeBinding
 
 @AndroidEntryPoint
@@ -25,15 +25,15 @@ class GeoprogrammeActivity : AppCompatActivity() {
             toolbarGeoprogramme.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
             btnTourGuide.setOnClickListener {
-                getString(R.string.on_click_handler).showMessage(this@GeoprogrammeActivity)
+                getString(R.string.on_click_handler).showSnackbar(binding.root)
             }
 
             btnCommunity.setOnClickListener {
-                getString(R.string.on_click_handler).showMessage(this@GeoprogrammeActivity)
+                getString(R.string.on_click_handler).showSnackbar(binding.root)
             }
 
             btnLocalResident.setOnClickListener {
-                getString(R.string.on_click_handler).showMessage(this@GeoprogrammeActivity)
+                getString(R.string.on_click_handler).showSnackbar(binding.root)
             }
         }
     }

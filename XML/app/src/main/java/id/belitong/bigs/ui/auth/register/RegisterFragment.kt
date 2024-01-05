@@ -13,7 +13,7 @@ import id.belitong.bigs.BaseFragment
 import id.belitong.bigs.R
 import id.belitong.bigs.core.data.Resource
 import id.belitong.bigs.core.utils.showError
-import id.belitong.bigs.core.utils.showMessage
+import id.belitong.bigs.core.utils.showToast
 import id.belitong.bigs.databinding.FragmentRegisterBinding
 
 @AndroidEntryPoint
@@ -119,14 +119,17 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
                 is Resource.Loading -> showLoading(true)
                 is Resource.Success -> {
                     showLoading(false)
-                    it.data?.message?.showMessage(requireContext())
+                    it.data.message?.showToast(requireContext())
                     binding?.root?.findNavController()
                         ?.navigate(R.id.action_registerFragment_to_loginFragment)
                 }
+
                 is Resource.Error -> {
                     showLoading(false)
-                    it.message?.showMessage(requireContext())
+                    it.message.showToast(requireContext())
                 }
+
+                else -> {}
             }
         }
     }

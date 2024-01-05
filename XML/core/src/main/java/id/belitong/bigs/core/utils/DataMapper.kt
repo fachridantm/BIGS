@@ -1,13 +1,20 @@
 package id.belitong.bigs.core.utils
 
 import id.belitong.bigs.core.data.source.local.entity.UserEntity
+import id.belitong.bigs.core.data.source.remote.response.BiodiversityItem
+import id.belitong.bigs.core.data.source.remote.response.GeositeItem
 import id.belitong.bigs.core.data.source.remote.response.LoginResponse
+import id.belitong.bigs.core.data.source.remote.response.OrderItem
+import id.belitong.bigs.core.data.source.remote.response.PlantResponse
 import id.belitong.bigs.core.data.source.remote.response.RegisterResponse
+import id.belitong.bigs.core.data.source.remote.response.ReportItem
 import id.belitong.bigs.core.domain.model.Biodiversity
 import id.belitong.bigs.core.domain.model.Geosite
 import id.belitong.bigs.core.domain.model.Login
 import id.belitong.bigs.core.domain.model.Order
+import id.belitong.bigs.core.domain.model.Plant
 import id.belitong.bigs.core.domain.model.Register
+import id.belitong.bigs.core.domain.model.Report
 import id.belitong.bigs.core.domain.model.User
 
 object DataMapper {
@@ -23,42 +30,71 @@ object DataMapper {
     fun registerResponseToRegister(data: RegisterResponse): Register = Register(data.message)
 
     fun userToUserEntity(data: User): UserEntity = UserEntity(
-        userId =  data.userId,
+        userId = data.userId,
         name = data.name,
         token = data.token,
+        photoUrl = data.photoUrl,
     )
 
-    fun geositeResponseToGeosite(data: GeositeItem): Geosite = Geosite(
+    fun geositeItemToGeosite(data: List<GeositeItem>): List<Geosite> = data.map {
+        Geosite(
+            id = it.id,
+            name = it.name,
+            summary = it.summary,
+            type = it.type,
+            desc = it.desc,
+            plant = it.plant,
+            animal = it.animal,
+            distance = it.distance,
+            location = it.location,
+            hours = it.hours,
+            img = it.img.orEmpty(),
+        )
+    }
+
+
+    fun biodiversityItemToBiodiversity(data: List<BiodiversityItem>): List<Biodiversity> =
+        data.map {
+            Biodiversity(
+                id = it.id,
+                name = it.name,
+                type = it.type,
+                location = it.location,
+                img = it.img.orEmpty(),
+            )
+        }
+
+    fun plantResponseToPlant(data: PlantResponse): Plant = Plant(
         id = data.id,
         name = data.name,
-        summary = data.summary,
-        type = data.type,
-        desc = data.desc,
-        plant = data.plant ?: "-",
-        animal = data.animal ?: "-",
-        distance = data.distance,
-        location = data.location,
-        hours = data.hours,
-        img = data.img,
+        latin = data.latin,
     )
 
-    fun biodiversityResponseToBiodiversity(data: BiodiversityItem): Biodiversity = Biodiversity(
-        id = data.id,
-        name = data.name,
-        type = data.type,
-        location = data.location ?: "-",
-        img = data.img,
-    )
+    fun orderItemToOrder(data: List<OrderItem>): List<Order> = data.map {
+        Order(
+            id = it.id,
+            geositeName = it.geositeName,
+            geositeImage = it.geositeImage.orEmpty(),
+            tourGuideName = it.tourGuideName,
+            bookingDate = it.bookingDate,
+            bookingTime = it.bookingTime,
+            tourDate = it.tourDate,
+            phoneNumber = it.phoneNumber,
+            program = it.program,
+            status = it.status,
+            instance = it.instance,
+        )
+    }
 
-    fun orderResponseToOrder(data: OrderItem): Order = Order(
-        id = data.id,
-        geositeName = data.geositeName,
-        geositeImage = data.geositeImage,
-        tourGuideName = data.tourGuideName,
-        tourGuidePhone = data.tourGuidePhone,
-        bookingDate = data.bookingDate,
-        tourDate = data.tourDate,
-        programName = data.programName,
-        status = data.status,
-    )
+    fun reportItemToReport(data: List<ReportItem>): List<Report> = data.map {
+        Report(
+            id = it.id,
+            category = it.category,
+            name = it.name,
+            shortDesc = it.shortDesc,
+            place = it.place,
+            photo = it.photo.orEmpty(),
+            status = it.status,
+        )
+    }
 }

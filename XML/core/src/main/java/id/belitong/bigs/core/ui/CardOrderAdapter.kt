@@ -23,11 +23,13 @@ class CardOrderAdapter(
             binding.apply {
                 itemTvTitleGeositeOrder.text = data.geositeName
                 itemIvOrderGeosite.loadGeoparkImage(data.geositeImage)
-                itemTvTourGuideName.text = data.tourGuideName
-                itemTvTourGuidePhone.text = data.tourGuidePhone
-                itemTvBookingDate.text = data.bookingDate
+                itemTvProgram.text = data.program
+                itemTvInstance.text = data.instance
+                itemTvPhoneNumber.text = data.phoneNumber
                 itemTvTourDate.text = data.tourDate
-                itemTvProgramName.text = data.programName
+                itemTvTourGuideName.text = data.tourGuideName
+                itemTvBookingDate.text = data.bookingDate
+                itemTvBookingTime.text = data.bookingTime
                 itemTvStatus.statusBackgroundFilter(data.status)
 
                 if (data.status == HistoryStatus.COMPLETED.value || data.status == HistoryStatus.CANCELLED.value) {

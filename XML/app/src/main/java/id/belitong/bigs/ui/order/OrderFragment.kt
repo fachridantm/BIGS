@@ -7,17 +7,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import id.belitong.bigs.BaseFragment
+import id.belitong.bigs.core.data.Resource
 import id.belitong.bigs.core.domain.model.Order
 import id.belitong.bigs.core.ui.CardOrderAdapter
-import id.belitong.bigs.core.utils.DummyData
+import id.belitong.bigs.core.utils.showSnackbar
 import id.belitong.bigs.databinding.FragmentOrderBinding
+import id.belitong.bigs.ui.main.MainViewModel
 
 @AndroidEntryPoint
 class OrderFragment : BaseFragment<FragmentOrderBinding>() {
 
     private val cardOrderAdapter: CardOrderAdapter by lazy { CardOrderAdapter(::cancelClicked) }
 
-    private val orderViewModel: OrderViewModel by viewModels()
+    private val mainViewModel: MainViewModel by viewModels()
 
     override fun getViewBinding(
         inflater: LayoutInflater,
@@ -28,17 +30,36 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>() {
     override fun initData() {
         val position = arguments?.getInt(SECTION_NUMBER)
 
-        orderViewModel.getAllOrder().observe(viewLifecycleOwner) {
-            cardOrderAdapter.submitList(DummyData.getAllOrder())
+        mainViewModel.orders.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Loading -> showLoading(true)
+
+                is Resource.Success -> {
+                    showLoading(false)
+                    cardOrderAdapter.submitList(it.data)
+                }
+
+                is Resource.Error -> {
+                    showLoading(false)
+                    it.message.showSnackbar(requireView())
+                }
+
+                else -> {}
+            }
+        }
+
+        when (position) {
+            0 -> mainViewModel.getOrders()
+            1 -> mainViewModel.getReports()
         }
     }
 
     private fun showLoading(isLoading: Boolean) {
         binding?.apply {
             if (isLoading) {
-                binding?.pbOrder?.visibility = View.VISIBLE
+                pbOrder.visibility = View.VISIBLE
             } else {
-                binding?.pbOrder?.visibility = View.GONE
+                pbOrder.visibility = View.GONE
             }
         }
     }

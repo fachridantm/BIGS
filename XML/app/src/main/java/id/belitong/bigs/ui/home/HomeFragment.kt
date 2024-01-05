@@ -11,17 +11,19 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import id.belitong.bigs.BaseFragment
 import id.belitong.bigs.R
+import id.belitong.bigs.core.data.Resource
 import id.belitong.bigs.core.domain.model.Biodiversity
 import id.belitong.bigs.core.domain.model.Geosite
 import id.belitong.bigs.core.ui.CardHomeAdapter
 import id.belitong.bigs.core.ui.CarouselHomeAdapter
-import id.belitong.bigs.core.utils.DummyData
 import id.belitong.bigs.core.utils.ZoomOutPageTransformer
 import id.belitong.bigs.core.utils.getFirstName
-import id.belitong.bigs.core.utils.showMessage
+import id.belitong.bigs.core.utils.showSnackbar
+import id.belitong.bigs.core.utils.showToast
 import id.belitong.bigs.databinding.FragmentHomeBinding
 import id.belitong.bigs.ui.details.geoprogramme.GeoprogrammeActivity
 import id.belitong.bigs.ui.details.geosites.GeositesActivity
+import id.belitong.bigs.ui.main.MainViewModel
 import id.belitong.bigs.ui.profile.ProfileActivity
 import id.belitong.bigs.ui.search.SearchResultsActivity
 
@@ -31,21 +33,59 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private val carouselHomeAdapter: CarouselHomeAdapter by lazy { CarouselHomeAdapter(::carouselItemClicked) }
     private val cardHomeAdapter: CardHomeAdapter by lazy { CardHomeAdapter(::cardItemClicked) }
 
-    private val homeViewModel: HomeViewModel by viewModels()
+    private val mainViewModel: MainViewModel by viewModels()
+
+    private var biodiversities: List<Biodiversity> = listOf()
+    private var geosites: List<Geosite> = listOf()
 
     override fun getViewBinding(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): FragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false)
 
     override fun initData() {
-        homeViewModel.getName().observe(viewLifecycleOwner) {
+        mainViewModel.getName().observe(viewLifecycleOwner) {
             val name = it.getFirstName()
             binding?.textView2?.text = getString(R.string.geopark_belitong_user, name)
         }
 
-        carouselHomeAdapter.submitList(DummyData.getAllGeosites())
+        mainViewModel.biodiversities.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Loading -> showLoading(true)
 
-        cardHomeAdapter.submitList(DummyData.getAllBiodiversity())
+                is Resource.Success -> {
+                    showLoading(false)
+                    cardHomeAdapter.submitList(it.data)
+                    biodiversities = it.data
+
+                }
+
+                is Resource.Error -> {
+                    showLoading(false)
+                    it.message.showSnackbar(requireView())
+                }
+
+                else -> {}
+            }
+        }
+
+        mainViewModel.geosites.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Loading -> showLoading(true)
+
+                is Resource.Success -> {
+                    showLoading(false)
+                    carouselHomeAdapter.submitList(it.data)
+                    geosites = it.data
+                }
+
+                is Resource.Error -> {
+                    showLoading(false)
+                    it.message.showSnackbar(requireView())
+                }
+
+                else -> {}
+            }
+        }
     }
 
     override fun initView() {
@@ -92,7 +132,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 setOnMenuItemClickListener {
                     when (it.itemId) {
                         R.id.btn_profile -> {
-                            startActivity(Intent(requireContext(), ProfileActivity::class.java))
+                            ProfileActivity.start(requireContext())
                             true
                         }
 
@@ -105,26 +145,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun initAction() {
         with(binding) {
-            val data = DummyData.getAllBiodiversity()
-
             this?.chipAllHome?.setOnClickListener {
-                cardHomeAdapter.submitList(data)
+                cardHomeAdapter.submitList(biodiversities)
             }
 
             this?.chipGeositesHome?.setOnClickListener {
-                val geosites = data.filter {
+                val geosites = biodiversities.filter {
                     it.type != getString(R.string.plant) && it.type != getString(R.string.animal)
                 }
                 cardHomeAdapter.submitList(geosites)
             }
 
             this?.chipPlantsHome?.setOnClickListener {
-                val plants = data.filter { it.type == getString(R.string.plant) }
+                val plants = biodiversities.filter { it.type == getString(R.string.plant) }
                 cardHomeAdapter.submitList(plants)
             }
 
             this?.chipAnimalsHome?.setOnClickListener {
-                val animals = data.filter { it.type == getString(R.string.animal) }
+                val animals = biodiversities.filter { it.type == getString(R.string.animal) }
                 cardHomeAdapter.submitList(animals)
             }
 
@@ -137,7 +175,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
 
             this?.btnMaps?.setOnClickListener {
-                getString(R.string.on_click_handler).showMessage(requireContext())
+                getString(R.string.on_click_handler).showToast(requireContext())
             }
         }
     }
@@ -162,11 +200,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun carouselItemClicked(geosite: Geosite) {
-        getString(R.string.on_click_handler).showMessage(requireContext())
+        getString(R.string.on_click_handler).showSnackbar(requireView())
     }
 
     private fun cardItemClicked(biodiversity: Biodiversity) {
-        getString(R.string.on_click_handler).showMessage(requireContext())
+        getString(R.string.on_click_handler).showSnackbar(requireView())
     }
 
+    private fun showLoading(isLoading: Boolean) {
+        binding?.apply {
+            if (isLoading) {
+                pbHome.visibility = android.view.View.VISIBLE
+            } else {
+                pbHome.visibility = android.view.View.GONE
+            }
+        }
+    }
 }

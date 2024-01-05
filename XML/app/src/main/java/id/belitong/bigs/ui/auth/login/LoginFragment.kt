@@ -14,7 +14,7 @@ import id.belitong.bigs.R
 import id.belitong.bigs.core.data.Resource
 import id.belitong.bigs.core.domain.model.User
 import id.belitong.bigs.core.utils.showError
-import id.belitong.bigs.core.utils.showMessage
+import id.belitong.bigs.core.utils.showToast
 import id.belitong.bigs.databinding.FragmentLoginBinding
 import id.belitong.bigs.ui.main.MainActivity
 
@@ -36,7 +36,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     override fun initAction() {
         binding?.apply {
             tvForgotPassword.setOnClickListener {
-                requireContext().getString(R.string.on_click_handler).showMessage(requireContext())
+                requireContext().getString(R.string.on_click_handler).showToast(requireContext())
             }
             tvRegisterHere.setOnClickListener {
                 it.findNavController().navigate(
@@ -45,7 +45,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             }
             btnLogin.setOnClickListener { loginHandler() }
             btnGoogleLogin.setOnClickListener {
-                requireContext().getString(R.string.on_click_handler).showMessage(requireContext())
+                requireContext().getString(R.string.on_click_handler).showToast(requireContext())
             }
         }
     }
@@ -101,21 +101,24 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         loginViewModel.result.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Loading -> showLoading(true)
+
                 is Resource.Success -> {
-                    val token = it.data?.loginResult?.token
-                    val user = it.data?.loginResult
-                    val message = it.data?.message
+                    val token = it.data.loginResult?.token
+                    val user = it.data.loginResult
+                    val message = it.data.message
                     showLoading(false)
                     if (token != null && user != null) {
                         saveSession(token, user)
                     }
-                    getString(R.string.login_result, message).showMessage(requireContext())
+                    getString(R.string.login_result, message).showToast(requireContext())
                 }
 
                 is Resource.Error -> {
                     showLoading(false)
-                    it.message?.showMessage(requireContext())
+                    it.message.showToast(requireContext())
                 }
+
+                else -> {}
             }
         }
     }

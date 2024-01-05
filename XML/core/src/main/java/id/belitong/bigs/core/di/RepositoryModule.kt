@@ -5,9 +5,9 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import id.belitong.bigs.core.data.repository.AuthRepository
-import id.belitong.bigs.core.data.repository.MainRepository
+import id.belitong.bigs.core.data.repository.GeoparkRepository
 import id.belitong.bigs.core.domain.repository.IAuthRepository
-import id.belitong.bigs.core.domain.repository.IMainRepository
+import id.belitong.bigs.core.domain.repository.IGeoparkRepository
 
 @Module(includes = [NetworkModule::class])
 @InstallIn(SingletonComponent::class)
@@ -16,5 +16,5 @@ abstract class RepositoryModule {
     abstract fun provideAuthRepository(authRepository: AuthRepository): IAuthRepository
 
     @Binds
-    abstract fun provideMainRepository(mainRepository: MainRepository): IMainRepository
+    abstract fun provideMainRepository(geoparkRepository: GeoparkRepository): IGeoparkRepository
 }

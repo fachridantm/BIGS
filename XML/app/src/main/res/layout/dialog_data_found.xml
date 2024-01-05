@@ -24,7 +24,7 @@
         app:lottie_rawRes="@raw/success" />
 
     <TextView
-        android:id="@+id/tv_latin_name"
+        android:id="@+id/tv_name"
         style="@style/Text.SemiBold.H3"
         android:gravity="center"
         android:maxLines="2"
@@ -34,7 +34,7 @@
         tools:text="Tropical Pitcher" />
 
     <TextView
-        android:id="@+id/tv_scientific_name"
+        android:id="@+id/tv_latin_name"
         style="@style/Text.Regular.Body2"
         android:gravity="center"
         android:maxLines="2"

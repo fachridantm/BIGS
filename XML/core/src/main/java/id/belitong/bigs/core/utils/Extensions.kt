@@ -1,10 +1,12 @@
 package id.belitong.bigs.core.utils
 
 import android.content.Context
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import id.belitong.bigs.core.R
 import id.belitong.bigs.core.di.GlideApp
@@ -24,8 +26,12 @@ fun TextInputLayout.showError(isError: Boolean, message: String? = null) {
     }
 }
 
-fun String.showMessage(context: Context) {
-    Toast.makeText(context, this, Toast.LENGTH_SHORT).show()
+fun String.showToast(context: Context, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(context, this, duration).show()
+}
+
+fun String.showSnackbar(view: View, duration: Int = Snackbar.LENGTH_SHORT) {
+    Snackbar.make(view, this, duration).show()
 }
 
 fun HttpException.getErrorMessage(): String? {
@@ -80,7 +86,7 @@ fun String.getFirstTwoWords(): String = this.split(" ")[0] + " " + this.split(" 
 
 fun TextView.statusBackgroundFilter(status: String) {
     when (status) {
-        HistoryStatus.ACCEPTED.value, HistoryStatus.COMPLETED.value -> {
+        HistoryStatus.CONFIRMED.value, HistoryStatus.COMPLETED.value -> {
             this.backgroundTintList = ContextCompat.getColorStateList(
                 this.context,
                 R.color.md_theme_light_primary

@@ -16,8 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingVertical="16dp"
-        android:paddingStart="16dp">
+        android:padding="16dp">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/item_tv_title_geosite_order"
@@ -34,10 +33,96 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:alpha="0.4"
-            android:text="@string/tour_guide_name"
+            android:text="@string/program"
             android:textAppearance="@style/Text.Regular.Subtitle1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_tv_title_geosite_order" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_tv_program"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Text.Regular.Subtitle1"
+            app:layout_constraintEnd_toEndOf="@id/vertical_guideline"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view1"
+            tools:text="Geo-Education" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:alpha="0.4"
+            android:text="@string/instance"
+            android:textAppearance="@style/Text.Regular.Subtitle1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_tv_program" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_tv_instance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Text.Regular.Subtitle1"
+            app:layout_constraintEnd_toEndOf="@id/vertical_guideline"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view2"
+            tools:text="@tools:sample/full_names" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:alpha="0.4"
+            android:text="@string/phone_number_colon"
+            android:textAppearance="@style/Text.Regular.Subtitle1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_tv_instance" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_tv_phone_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Text.Regular.Subtitle1"
+            app:layout_constraintEnd_toEndOf="@id/vertical_guideline"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view3"
+            tools:text="@tools:sample/us_phones" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:alpha="0.4"
+            android:text="@string/tour_date"
+            android:textAppearance="@style/Text.Regular.Subtitle1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_tv_phone_number" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_tv_tour_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Text.Regular.Subtitle1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view4"
+            tools:text="@tools:sample/date/ddmmyy" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:alpha="0.4"
+            android:text="@string/tour_guide_name"
+            android:textAppearance="@style/Text.Regular.Subtitle1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_tv_tour_date" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/item_tv_tour_guide_name"
@@ -47,94 +132,8 @@
             app:layout_constraintEnd_toEndOf="@id/vertical_guideline"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_view1"
-            tools:text="Givan Massa" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text_view2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:alpha="0.4"
-            android:text="@string/booking_date"
-            android:textAppearance="@style/Text.Regular.Subtitle1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/item_tv_tour_guide_name" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/item_tv_booking_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/Text.Regular.Subtitle1"
-            app:layout_constraintEnd_toEndOf="@id/vertical_guideline"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_view2"
-            tools:text="Sat, 5 June 2023 at 08.00 WIB" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text_view3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:alpha="0.4"
-            android:text="@string/tour_date"
-            android:textAppearance="@style/Text.Regular.Subtitle1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/item_tv_booking_date" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/item_tv_tour_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/Text.Regular.Subtitle1"
-            app:layout_constraintEnd_toEndOf="@id/vertical_guideline"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_view3"
-            tools:text="Sat, 6 June 2023 at 10.00 WIB" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text_view4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:alpha="0.4"
-            android:text="@string/contact"
-            android:textAppearance="@style/Text.Regular.Subtitle1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/item_tv_tour_date" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/item_tv_tour_guide_phone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/Text.Regular.Subtitle1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_view4"
-            tools:text="08123456789" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text_view5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:alpha="0.4"
-            android:text="@string/program"
-            android:textAppearance="@style/Text.Regular.Subtitle1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/item_tv_tour_guide_phone" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/item_tv_program_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/Text.Regular.Subtitle1"
-            app:layout_constraintEnd_toEndOf="@id/vertical_guideline"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_view5"
-            tools:text="Geo-Education" />
+            tools:text="Givan Massa" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text_view6"
@@ -145,7 +144,7 @@
             android:text="@string/status"
             android:textAppearance="@style/Text.Regular.Subtitle1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/item_tv_program_name" />
+            app:layout_constraintTop_toBottomOf="@id/item_tv_tour_guide_name" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/item_tv_status"
@@ -156,26 +155,46 @@
             android:backgroundTint="@color/md_theme_dark_secondary"
             android:paddingHorizontal="20dp"
             android:paddingVertical="4dp"
-            android:textAppearance="@style/Text.SemiBold.Body1"
+            android:textAppearance="@style/Text.Regular.Subtitle1"
             android:textColor="@android:color/white"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_view6"
             tools:text="Pending" />
 
+        <TextView
+            android:id="@+id/item_tv_booking_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:alpha="0.4"
+            android:textAppearance="@style/Text.Regular.Subtitle1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@tools:sample/date/ddmmyy" />
+
+        <TextView
+            android:id="@+id/item_tv_booking_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0.4"
+            android:textAppearance="@style/Text.Regular.Subtitle1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_tv_booking_date"
+            tools:text="@tools:sample/date/hhmm" />
+
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/item_iv_order_geosite"
-            android:layout_width="0dp"
+            android:layout_width="130dp"
             android:layout_height="130dp"
             android:layout_marginStart="18dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginTop="12dp"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toTopOf="@id/btn_cancel"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.76"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@id/vertical_guideline"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_tv_booking_time"
             app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
             tools:src="@tools:sample/backgrounds/scenic" />
 
@@ -183,7 +202,7 @@
             android:id="@+id/btn_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="16dp"
             android:backgroundTint="@color/md_theme_light_error"
             android:text="@string/cancel"
             android:textAllCaps="false"

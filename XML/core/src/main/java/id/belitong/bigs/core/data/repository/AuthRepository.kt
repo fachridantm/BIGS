@@ -1,11 +1,11 @@
 package id.belitong.bigs.core.data.repository
 
-import id.belitong.bigs.core.data.Resource
+import id.belitong.bigs.core.data.Resource.Companion.error
+import id.belitong.bigs.core.data.Resource.Companion.loading
+import id.belitong.bigs.core.data.Resource.Companion.success
 import id.belitong.bigs.core.data.source.local.LocalDataSource
 import id.belitong.bigs.core.data.source.remote.RemoteDataSource
 import id.belitong.bigs.core.data.source.remote.network.ApiResponse
-import id.belitong.bigs.core.domain.model.Login
-import id.belitong.bigs.core.domain.model.Register
 import id.belitong.bigs.core.domain.model.User
 import id.belitong.bigs.core.domain.repository.IAuthRepository
 import id.belitong.bigs.core.utils.DataMapper
@@ -31,33 +31,33 @@ class AuthRepository @Inject constructor(
         name: String,
         email: String,
         password: String,
-    ): Flow<Resource<Register>> = flow {
-        emit(Resource.Loading())
+    ) = flow {
+        emit(loading())
         when (val apiResponse =
             remoteDataSource.registerUser(name, email, password).first()) {
             is ApiResponse.Success -> {
                 val data = DataMapper.registerResponseToRegister(apiResponse.data)
-                emit(Resource.Success(data))
+                emit(success(data))
             }
 
             is ApiResponse.Error -> {
-                emit(Resource.Error(apiResponse.errorMessage))
+                emit(error(apiResponse.errorMessage))
             }
 
             is ApiResponse.Empty -> {}
         }
     }
 
-    override fun loginUser(email: String, password: String): Flow<Resource<Login>> = flow {
-        emit(Resource.Loading())
+    override fun loginUser(email: String, password: String) = flow {
+        emit(loading())
         when (val apiResponse = remoteDataSource.loginUser(email, password).first()) {
             is ApiResponse.Success -> {
                 val data = DataMapper.loginResponseToLogin(apiResponse.data)
-                emit(Resource.Success(data))
+                emit(success(data))
             }
 
             is ApiResponse.Error -> {
-                emit(Resource.Error(apiResponse.errorMessage))
+                emit(error(apiResponse.errorMessage))
             }
 
             is ApiResponse.Empty -> {}

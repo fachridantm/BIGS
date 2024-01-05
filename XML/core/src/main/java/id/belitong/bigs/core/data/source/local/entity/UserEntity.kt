@@ -15,4 +15,7 @@ data class UserEntity(
 
     @ColumnInfo(name = "token")
     val token: String? = null,
+
+    @ColumnInfo(name = "photoUrl")
+    val photoUrl: String? = null,
 )

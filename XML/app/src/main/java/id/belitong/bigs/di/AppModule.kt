@@ -16,5 +16,5 @@ abstract class AppModule {
 
     @Binds
     @Singleton
-    abstract fun provideMainUseCase(mainInteractor: MainInteractor): MainUseCase
+    abstract fun provideMainUseCase(geoparkInteractor: GeoparkInteractor): GeoparkUseCase
 }
