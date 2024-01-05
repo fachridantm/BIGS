@@ -7,7 +7,7 @@ import id.belitong.bigs.compose.core.data.source.remote.response.PlantResponse
 import id.belitong.bigs.compose.core.data.source.remote.response.ReportItem
 import retrofit2.http.GET
 
-interface MockApiService {
+interface MainApiService {
     @GET("geosites")
     suspend fun getGeosites(): List<GeositeItem>
 

@@ -3,7 +3,7 @@ package id.belitong.bigs.compose.core.data.source.remote
 import android.util.Log
 import id.belitong.bigs.compose.core.data.source.remote.network.ApiResponse
 import id.belitong.bigs.compose.core.data.source.remote.network.AuthApiService
-import id.belitong.bigs.compose.core.data.source.remote.network.MockApiService
+import id.belitong.bigs.compose.core.data.source.remote.network.MainApiService
 import id.belitong.bigs.compose.core.data.source.remote.response.BiodiversityItem
 import id.belitong.bigs.compose.core.data.source.remote.response.GeositeItem
 import id.belitong.bigs.compose.core.data.source.remote.response.LoginResponse
@@ -25,7 +25,7 @@ import javax.inject.Singleton
 @Singleton
 class RemoteDataSource @Inject constructor(
     private val authApiService: AuthApiService,
-    private val mockApiService: MockApiService
+    private val mainApiService: MainApiService
 ) {
     suspend fun registerUser(
         name: String,
@@ -115,7 +115,7 @@ class RemoteDataSource @Inject constructor(
     suspend fun getGeosites(): Flow<ApiResponse<List<GeositeItem>>> =
         flow {
             try {
-                val response = mockApiService.getGeosites()
+                val response = mainApiService.getGeosites()
                 emit(ApiResponse.Success(response))
             } catch (e: Exception) {
                 when (e) {
@@ -156,7 +156,7 @@ class RemoteDataSource @Inject constructor(
     suspend fun getBiodiversities(): Flow<ApiResponse<List<BiodiversityItem>>> =
         flow {
             try {
-                val response = mockApiService.getBiodiversities()
+                val response = mainApiService.getBiodiversities()
                 emit(ApiResponse.Success(response))
             } catch (e: Exception) {
                 when (e) {
@@ -197,7 +197,7 @@ class RemoteDataSource @Inject constructor(
     suspend fun getPlant(): Flow<ApiResponse<PlantResponse>> =
         flow {
             try {
-                val response = mockApiService.getPlant()
+                val response = mainApiService.getPlant()
                 emit(ApiResponse.Success(response))
             } catch (e: Exception) {
                 when (e) {
@@ -238,7 +238,7 @@ class RemoteDataSource @Inject constructor(
     suspend fun getOrders(): Flow<ApiResponse<List<OrderItem>>> =
         flow {
             try {
-                val response = mockApiService.getOrders()
+                val response = mainApiService.getOrders()
                 emit(ApiResponse.Success(response))
             } catch (e: Exception) {
                 when (e) {
@@ -279,7 +279,7 @@ class RemoteDataSource @Inject constructor(
     suspend fun getReports(): Flow<ApiResponse<List<ReportItem>>> =
         flow {
             try {
-                val response = mockApiService.getReports()
+                val response = mainApiService.getReports()
                 emit(ApiResponse.Success(response))
             } catch (e: Exception) {
                 when (e) {

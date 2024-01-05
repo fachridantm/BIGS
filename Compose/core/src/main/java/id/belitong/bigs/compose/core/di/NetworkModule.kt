@@ -6,7 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import id.belitong.bigs.compose.core.BuildConfig.*
 import id.belitong.bigs.compose.core.data.source.remote.network.AuthApiService
-import id.belitong.bigs.compose.core.data.source.remote.network.MockApiService
+import id.belitong.bigs.compose.core.data.source.remote.network.MainApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -45,12 +45,12 @@ class NetworkModule {
     }
 
     @Provides
-    fun provideMockApiService(client: OkHttpClient): MockApiService {
+    fun provideMockApiService(client: OkHttpClient): MainApiService {
         val retrofit = Retrofit.Builder()
             .baseUrl(MOCK_BASE_URL)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        return retrofit.create(MockApiService::class.java)
+        return retrofit.create(MainApiService::class.java)
     }
 }
