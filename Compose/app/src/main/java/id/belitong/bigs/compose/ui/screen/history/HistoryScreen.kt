@@ -50,6 +50,7 @@ import id.belitong.bigs.compose.ui.composable.components.TabLayout
 import id.belitong.bigs.compose.ui.composable.utils.ComposableObserver
 import id.belitong.bigs.compose.ui.composable.utils.getActivity
 import id.belitong.bigs.compose.ui.navigation.MainNavGraph
+import id.belitong.bigs.compose.ui.screen.main.MainViewModel
 import id.belitong.bigs.compose.ui.screen.profile.ProfileActivity
 import id.belitong.bigs.compose.ui.theme.Dimension
 import id.belitong.bigs.compose.ui.theme.typography
@@ -61,15 +62,15 @@ import kotlinx.coroutines.launch
 @Destination
 @Composable
 fun HistoryScreen(
-    historyViewModel: HistoryViewModel = hiltViewModel(),
+    mainViewModel: MainViewModel = hiltViewModel(),
     navigator: DestinationsNavigator? = null,
     scope: CoroutineScope = rememberCoroutineScope(),
     snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
 ) {
     val activity = getActivity()
 
-    val ordersState = historyViewModel.orders.observeAsState()
-    val reportsState = historyViewModel.reports.observeAsState()
+    val ordersState = mainViewModel.orders.observeAsState()
+    val reportsState = mainViewModel.reports.observeAsState()
 
     val isLoading = remember { mutableStateOf(false) }
 
@@ -77,8 +78,8 @@ fun HistoryScreen(
     val reports = remember { mutableStateOf(emptyList<Report>()) }
 
     LaunchedEffect(key1 = Unit) {
-        historyViewModel.getOrders()
-        historyViewModel.getReports()
+        mainViewModel.getOrders()
+        mainViewModel.getReports()
     }
 
     ComposableObserver(

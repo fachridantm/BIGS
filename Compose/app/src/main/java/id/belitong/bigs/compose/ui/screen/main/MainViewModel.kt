@@ -11,7 +11,9 @@ import id.belitong.bigs.compose.core.data.Resource.Companion.init
 import id.belitong.bigs.compose.core.data.Resource.Companion.loading
 import id.belitong.bigs.compose.core.domain.model.Biodiversity
 import id.belitong.bigs.compose.core.domain.model.Geosite
+import id.belitong.bigs.compose.core.domain.model.Order
 import id.belitong.bigs.compose.core.domain.model.Plant
+import id.belitong.bigs.compose.core.domain.model.Report
 import id.belitong.bigs.compose.core.domain.usecase.AuthUseCase
 import id.belitong.bigs.compose.core.domain.usecase.GeoparkUseCase
 import kotlinx.coroutines.launch
@@ -31,10 +33,18 @@ class MainViewModel @Inject constructor(
     private val _plant = MutableLiveData<Resource<Plant>>()
     val plant: LiveData<Resource<Plant>> get() = _plant
 
+    private val _orders = MutableLiveData<Resource<List<Order>>>()
+    val orders: LiveData<Resource<List<Order>>> get() = _orders
+
+    private val _reports = MutableLiveData<Resource<List<Report>>>()
+    val reports: LiveData<Resource<List<Report>>> get() = _reports
+
     init {
         _biodiversities.value = init()
         _geosites.value = init()
         _plant.value = init()
+        _orders.value = init()
+        _reports.value = init()
     }
 
     fun getName() = authUseCase.getName().asLiveData()
@@ -62,6 +72,24 @@ class MainViewModel @Inject constructor(
             _plant.value = loading()
             geoparkUseCase.getPlant().collect {
                 _plant.value = it
+            }
+        }
+    }
+
+    fun getOrders() {
+        viewModelScope.launch {
+            _orders.value = loading()
+            geoparkUseCase.getOrders().collect {
+                _orders.value = it
+            }
+        }
+    }
+
+    fun getReports() {
+        viewModelScope.launch {
+            _reports.value = loading()
+            geoparkUseCase.getReports().collect {
+                _reports.value = it
             }
         }
     }
