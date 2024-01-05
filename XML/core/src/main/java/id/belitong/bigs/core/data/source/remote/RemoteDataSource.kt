@@ -4,10 +4,7 @@ import android.util.Log
 import id.belitong.bigs.core.data.source.remote.network.ApiResponse
 import id.belitong.bigs.core.data.source.remote.network.AuthApiService
 import id.belitong.bigs.core.data.source.remote.network.MainApiService
-import id.belitong.bigs.core.data.source.remote.response.BiodiversityItem
-import id.belitong.bigs.core.data.source.remote.response.GeositeItem
 import id.belitong.bigs.core.data.source.remote.response.LoginResponse
-import id.belitong.bigs.core.data.source.remote.response.OrderItem
 import id.belitong.bigs.core.data.source.remote.response.RegisterResponse
 import id.belitong.bigs.core.utils.getErrorMessage
 import kotlinx.coroutines.Dispatchers

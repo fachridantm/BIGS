@@ -6,7 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import id.belitong.bigs.core.BuildConfig.DEBUG
 import id.belitong.bigs.core.BuildConfig.DICODING_BASE_URL
-import id.belitong.bigs.core.BuildConfig.MAIN_BASE_URL
+import id.belitong.bigs.core.BuildConfig.MOCK_BASE_URL
 import id.belitong.bigs.core.data.source.remote.network.AuthApiService
 import id.belitong.bigs.core.data.source.remote.network.MainApiService
 import okhttp3.OkHttpClient
@@ -39,7 +39,7 @@ class NetworkModule {
     @Provides
     fun provideMainApiService(client: OkHttpClient): MainApiService {
         val retrofit = Retrofit.Builder()
-            .baseUrl(MAIN_BASE_URL)
+            .baseUrl(MOCK_BASE_URL)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

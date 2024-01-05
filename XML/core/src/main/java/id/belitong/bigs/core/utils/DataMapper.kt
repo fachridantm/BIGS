@@ -1,10 +1,7 @@
 package id.belitong.bigs.core.utils
 
 import id.belitong.bigs.core.data.source.local.entity.UserEntity
-import id.belitong.bigs.core.data.source.remote.response.BiodiversityItem
-import id.belitong.bigs.core.data.source.remote.response.GeositeItem
 import id.belitong.bigs.core.data.source.remote.response.LoginResponse
-import id.belitong.bigs.core.data.source.remote.response.OrderItem
 import id.belitong.bigs.core.data.source.remote.response.RegisterResponse
 import id.belitong.bigs.core.domain.model.Biodiversity
 import id.belitong.bigs.core.domain.model.Geosite

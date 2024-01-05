@@ -2,14 +2,13 @@ package id.belitong.bigs.core.data.source.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class LoginResult(
-
-    @field:SerializedName("userId")
-    val userId: String,
+data class PlantResponse(
+    @field:SerializedName("id")
+    val id: Int,
 
     @field:SerializedName("name")
     val name: String,
 
-    @field:SerializedName("token")
-    val token: String? = null,
+    @field:SerializedName("latin")
+    val latin: String
 )
