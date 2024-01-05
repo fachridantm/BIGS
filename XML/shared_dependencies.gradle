@@ -31,8 +31,8 @@ dependencies {
     implementation "com.github.kirich1409:viewbindingpropertydelegate:1.5.3"
 
     // Navigation
-    implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
-    implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.6'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.7.6'
 
     // Dagger hilt
     implementation 'com.google.dagger:hilt-android:2.48'
