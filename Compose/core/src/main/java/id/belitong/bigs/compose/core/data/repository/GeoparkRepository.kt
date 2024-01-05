@@ -1,7 +1,8 @@
 package id.belitong.bigs.compose.core.data.repository
 
-import id.belitong.bigs.compose.core.data.Resource
+import id.belitong.bigs.compose.core.data.Resource.Companion.error
 import id.belitong.bigs.compose.core.data.Resource.Companion.loading
+import id.belitong.bigs.compose.core.data.Resource.Companion.success
 import id.belitong.bigs.compose.core.data.source.local.LocalDataSource
 import id.belitong.bigs.compose.core.data.source.remote.RemoteDataSource
 import id.belitong.bigs.compose.core.data.source.remote.network.ApiResponse
@@ -22,11 +23,11 @@ class GeoparkRepository @Inject constructor(
         when (val apiResponse = remoteDataSource.getGeosites().first()) {
             is ApiResponse.Success -> {
                 val data = DataMapper.geositeItemToGeosite(apiResponse.data)
-                emit(Resource.Success(data))
+                emit(success(data))
             }
 
             is ApiResponse.Error -> {
-                emit(Resource.Error(apiResponse.errorMessage))
+                emit(error(apiResponse.errorMessage))
             }
 
             is ApiResponse.Empty -> {}
@@ -38,11 +39,11 @@ class GeoparkRepository @Inject constructor(
         when (val apiResponse = remoteDataSource.getBiodiversities().first()) {
             is ApiResponse.Success -> {
                 val data = DataMapper.biodiversityItemToBiodiversity(apiResponse.data)
-                emit(Resource.Success(data))
+                emit(success(data))
             }
 
             is ApiResponse.Error -> {
-                emit(Resource.Error(apiResponse.errorMessage))
+                emit(error(apiResponse.errorMessage))
             }
 
             is ApiResponse.Empty -> {}
@@ -54,11 +55,11 @@ class GeoparkRepository @Inject constructor(
         when (val apiResponse = remoteDataSource.getPlant().first()) {
             is ApiResponse.Success -> {
                 val data = DataMapper.plantResponseToPlant(apiResponse.data)
-                emit(Resource.Success(data))
+                emit(success(data))
             }
 
             is ApiResponse.Error -> {
-                emit(Resource.Error(apiResponse.errorMessage))
+                emit(error(apiResponse.errorMessage))
             }
 
             is ApiResponse.Empty -> {}
@@ -70,11 +71,11 @@ class GeoparkRepository @Inject constructor(
         when (val apiResponse = remoteDataSource.getOrders().first()) {
             is ApiResponse.Success -> {
                 val data = DataMapper.orderItemToOrder(apiResponse.data)
-                emit(Resource.Success(data))
+                emit(success(data))
             }
 
             is ApiResponse.Error -> {
-                emit(Resource.Error(apiResponse.errorMessage))
+                emit(error(apiResponse.errorMessage))
             }
 
             is ApiResponse.Empty -> {}
@@ -86,11 +87,11 @@ class GeoparkRepository @Inject constructor(
         when (val apiResponse = remoteDataSource.getReports().first()) {
             is ApiResponse.Success -> {
                 val data = DataMapper.reportItemToReport(apiResponse.data)
-                emit(Resource.Success(data))
+                emit(success(data))
             }
 
             is ApiResponse.Error -> {
-                emit(Resource.Error(apiResponse.errorMessage))
+                emit(error(apiResponse.errorMessage))
             }
 
             is ApiResponse.Empty -> {}
