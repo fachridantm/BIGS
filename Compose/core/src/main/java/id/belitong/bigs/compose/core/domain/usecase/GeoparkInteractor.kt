@@ -11,5 +11,4 @@ class GeoparkInteractor @Inject constructor(
     override fun getPlant() = geoparkRepository.getPlant()
     override fun getOrders() = geoparkRepository.getOrders()
     override fun getReports() = geoparkRepository.getReports()
-
 }
