@@ -14,7 +14,7 @@ interface MainApiService {
     @GET("biodiversities")
     suspend fun getBiodiversities(): List<BiodiversityItem>
 
-    @GET("plants")
+    @GET("plant")
     suspend fun getPlant(): PlantResponse
 
     @GET("orders")
