@@ -135,7 +135,10 @@ fun AddScreen(
     )
 
     SideEffect {
-        requestPermissionLauncher.launch(cameraPermission)
+        requestPermissionLauncher.apply {
+            launch(cameraPermission)
+            launch(mediaPermission)
+        }
     }
 
     val cameraLauncher =
