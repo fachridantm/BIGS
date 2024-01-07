@@ -1,6 +1,5 @@
 package id.belitong.bigs.ui.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.view.LayoutInflater
@@ -116,16 +115,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
                     setOnQueryTextFocusChangeListener { _, hasFocus ->
                         if (hasFocus) {
-                            startActivity(
-                                Intent(
-                                    requireContext(), SearchResultsActivity::class.java
-                                )
-                            )
+                            SearchResultsActivity.start(requireContext())
                         }
                     }
 
                     setOnClickListener {
-                        startActivity(Intent(requireContext(), SearchResultsActivity::class.java))
+                        SearchResultsActivity.start(requireContext())
                     }
 
                 }
@@ -167,11 +162,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
 
             this?.btnGeosites?.setOnClickListener {
-                startActivity(Intent(requireContext(), GeositesActivity::class.java))
+                GeositesActivity.start(requireContext())
             }
 
             this?.btnGeoprogramme?.setOnClickListener {
-                startActivity(Intent(requireContext(), GeoprogrammeActivity::class.java))
+                GeoprogrammeActivity.start(requireContext())
             }
 
             this?.btnMaps?.setOnClickListener {

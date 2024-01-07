@@ -1,5 +1,7 @@
 package id.belitong.bigs.ui.details.geoprogramme
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,6 +37,12 @@ class GeoprogrammeActivity : AppCompatActivity() {
             btnLocalResident.setOnClickListener {
                 getString(R.string.on_click_handler).showSnackbar(binding.root)
             }
+        }
+    }
+
+    companion object {
+        fun start(context: Context) {
+            Intent(context, GeoprogrammeActivity::class.java).run { context.startActivity(this) }
         }
     }
 }

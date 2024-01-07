@@ -1,6 +1,5 @@
 package id.belitong.bigs.ui.auth.login
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.view.LayoutInflater
@@ -125,7 +124,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     private fun saveSession(token: String, user: User) {
         loginViewModel.saveSession(token, user)
-        startActivity(Intent(requireActivity(), MainActivity::class.java))
+        MainActivity.start(requireContext())
         requireActivity().finish()
     }
 

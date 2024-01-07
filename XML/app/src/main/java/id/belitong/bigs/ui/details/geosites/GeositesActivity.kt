@@ -1,5 +1,7 @@
 package id.belitong.bigs.ui.details.geosites
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -93,5 +95,11 @@ class GeositesActivity : AppCompatActivity() {
 
     private fun onItemClick(geosite: Geosite) {
         getString(R.string.on_click_handler).showSnackbar(binding.root)
+    }
+
+    companion object {
+        fun start(context: Context) {
+            Intent(context, GeositesActivity::class.java).run { context.startActivity(this) }
+        }
     }
 }

@@ -1,6 +1,5 @@
 package id.belitong.bigs.ui.splash
 
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowInsets
@@ -51,10 +50,10 @@ class ScreenActivity : AppCompatActivity() {
     private fun isLoginCheck() {
         loginViewModel.getToken().observe(this) { token ->
             if (!token.isNullOrEmpty()) {
-                startActivity(Intent(this, MainActivity::class.java))
+                MainActivity.start(this)
                 finish()
             } else {
-                startActivity(Intent(this, AuthActivity::class.java))
+                AuthActivity.start(this)
                 finish()
             }
         }

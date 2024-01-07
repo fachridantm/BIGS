@@ -1,5 +1,7 @@
 package id.belitong.bigs.ui.main
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -22,5 +24,11 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         navView.setupWithNavController(navController)
+    }
+
+    companion object {
+        fun start(context: Context) {
+            Intent(context, MainActivity::class.java).run { context.startActivity(this) }
+        }
     }
 }
