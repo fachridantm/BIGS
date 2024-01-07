@@ -114,9 +114,11 @@ fun HomeScreen(
     }
 
     LaunchedEffect(key1 = Unit) {
-        mainViewModel.getName()
-        mainViewModel.getGeosites()
-        mainViewModel.getBiodiversities()
+        mainViewModel.apply {
+            getName()
+            getGeosites()
+            getBiodiversities()
+        }
     }
 
     ComposableObserver(
@@ -159,23 +161,15 @@ fun HomeScreen(
     )
 
     chipData = when (selectedChip.value) {
-        ChipFilter.GEOSITE -> {
-            biodiversities.value.filter {
-                it.type != stringResource(R.string.animal) && it.type != stringResource(R.string.plant)
-            }
+        ChipFilter.GEOSITE -> biodiversities.value.filter {
+            it.type != stringResource(R.string.animal) && it.type != stringResource(R.string.plant)
         }
 
-        ChipFilter.ANIMAL -> {
-            biodiversities.value.filter { it.type == stringResource(R.string.animal) }
-        }
+        ChipFilter.ANIMAL -> biodiversities.value.filter { it.type == stringResource(R.string.animal) }
 
-        ChipFilter.PLANT -> {
-            biodiversities.value.filter { it.type == stringResource(R.string.plant) }
-        }
+        ChipFilter.PLANT -> biodiversities.value.filter { it.type == stringResource(R.string.plant) }
 
-        else -> {
-            biodiversities.value
-        }
+        else -> biodiversities.value
     }
 
     HomeScreenContent(
@@ -290,6 +284,10 @@ fun HomeScreenContent(
                     style = typography.h1,
                     color = Color.Black
                 )
+                // Launch effet to shuffle data from geosite
+                LaunchedEffect(key1 = geosites) {
+                    geosites.shuffled()
+                }
                 HomeCarouselView(
                     geosites = geosites,
                     onItemClicked = {

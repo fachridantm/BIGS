@@ -82,7 +82,7 @@ fun CarouselPagerItem(
                     modifier = Modifier.fillMaxSize(),
                     model = geosites[page].img,
                     contentDescription = geosites[page].name,
-                    contentScale = ContentScale.Crop,
+                    contentScale = ContentScale.FillBounds,
                 ) {
                     it.placeholder(R.drawable.img_placeholder_geopark)
                 }
