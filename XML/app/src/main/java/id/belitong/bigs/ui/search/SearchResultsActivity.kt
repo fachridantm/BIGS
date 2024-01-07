@@ -42,6 +42,27 @@ class SearchResultsActivity : AppCompatActivity() {
         }
     }
 
+    private fun initObservers() {
+        searchResultsViewModel.biodiversities.observe(this) {
+            when (it) {
+                is Resource.Loading -> showLoading(true)
+
+                is Resource.Success -> {
+                    showLoading(false)
+                    biodiversities = it.data
+
+                }
+
+                is Resource.Error -> {
+                    showLoading(false)
+                    it.message.showSnackbar(binding.root)
+                }
+
+                else -> {}
+            }
+        }
+    }
+
     private fun initView() {
         with(binding) {
             searchView.requestFocus()
@@ -82,27 +103,6 @@ class SearchResultsActivity : AppCompatActivity() {
                 override fun onQueryTextSubmit(query: String?): Boolean = false
                 override fun onQueryTextChange(newText: String?): Boolean = false
             })
-        }
-    }
-
-    private fun initObservers() {
-        searchResultsViewModel.biodiversities.observe(this) {
-            when (it) {
-                is Resource.Loading -> showLoading(true)
-
-                is Resource.Success -> {
-                    showLoading(false)
-                    biodiversities = it.data
-
-                }
-
-                is Resource.Error -> {
-                    showLoading(false)
-                    it.message.showSnackbar(binding.root)
-                }
-
-                else -> {}
-            }
         }
     }
 

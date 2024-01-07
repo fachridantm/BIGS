@@ -7,8 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import id.belitong.bigs.BaseFragment
+import id.belitong.bigs.R
 import id.belitong.bigs.core.data.Resource
+import id.belitong.bigs.core.domain.model.HistoryListItem
 import id.belitong.bigs.core.domain.model.Order
+import id.belitong.bigs.core.domain.model.Report
 import id.belitong.bigs.core.ui.CardOrderAdapter
 import id.belitong.bigs.core.utils.showSnackbar
 import id.belitong.bigs.databinding.FragmentOrderBinding
@@ -17,7 +20,12 @@ import id.belitong.bigs.ui.main.MainViewModel
 @AndroidEntryPoint
 class OrderFragment : BaseFragment<FragmentOrderBinding>() {
 
-    private val cardOrderAdapter: CardOrderAdapter by lazy { CardOrderAdapter(::cancelClicked) }
+    private val cardOrderAdapter: CardOrderAdapter by lazy {
+        CardOrderAdapter(
+            ::reportCancelClicked,
+            ::orderCancelClicked
+        )
+    }
 
     private val mainViewModel: MainViewModel by viewModels()
 
@@ -28,15 +36,21 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>() {
     ): FragmentOrderBinding = FragmentOrderBinding.inflate(inflater, container, false)
 
     override fun initData() {
-        val position = arguments?.getInt(SECTION_NUMBER)
+        when (arguments?.getInt(SECTION_NUMBER)) {
+            0 -> mainViewModel.getOrders()
+            1 -> mainViewModel.getReports()
+        }
+    }
 
+    override fun initObservers() {
         mainViewModel.orders.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Loading -> showLoading(true)
 
                 is Resource.Success -> {
                     showLoading(false)
-                    cardOrderAdapter.submitList(it.data)
+                    val orderItems = it.data.map { order -> HistoryListItem.OrderItem(order) }
+                    cardOrderAdapter.submitList(orderItems)
                 }
 
                 is Resource.Error -> {
@@ -48,9 +62,23 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>() {
             }
         }
 
-        when (position) {
-            0 -> mainViewModel.getOrders()
-            1 -> mainViewModel.getReports()
+        mainViewModel.reports.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Loading -> showLoading(true)
+
+                is Resource.Success -> {
+                    showLoading(false)
+                    val reportItems = it.data.map { report -> HistoryListItem.ReportItem(report) }
+                    cardOrderAdapter.submitList(reportItems)
+                }
+
+                is Resource.Error -> {
+                    showLoading(false)
+                    it.message.showSnackbar(requireView(), navView)
+                }
+
+                else -> {}
+            }
         }
     }
 
@@ -73,17 +101,15 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>() {
         }
     }
 
-    override fun initAction() {
+    override fun initAction() {}
 
+
+    private fun orderCancelClicked(order: Order) {
+        getString(R.string.on_click_handler).showSnackbar(requireView(), navView)
     }
 
-    override fun initObservers() {
-
-    }
-
-
-    private fun cancelClicked(order: Order) {
-
+    private fun reportCancelClicked(report: Report) {
+        getString(R.string.on_click_handler).showSnackbar(requireView(), navView)
     }
 
     companion object {

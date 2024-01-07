@@ -42,33 +42,6 @@ class GeositesActivity : AppCompatActivity() {
         }
     }
 
-    private fun initView() {
-        with(binding) {
-            rvGeosites.apply {
-                adapter = cardGeositeAdapter
-                setHasFixedSize(true)
-            }
-        }
-    }
-
-    private fun initAction() {
-        with(binding) {
-            chipAlphabet.setOnClickListener {
-                val alphabetSort = data.sortedBy { it.name }
-                cardGeositeAdapter.submitList(alphabetSort)
-                rvGeosites.smoothScrollToPosition(alphabetSort.indexOf(alphabetSort.first()))
-            }
-
-            chipNearest.setOnClickListener {
-                val nearestSort = data.sortedBy { it.distance }
-                cardGeositeAdapter.submitList(nearestSort)
-                rvGeosites.smoothScrollToPosition(nearestSort.indexOf(nearestSort.first()))
-            }
-
-            toolbarGeosites.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
-        }
-    }
-
     private fun initObservers() {
         mainViewModel.geosites.observe(this) {
             when (it) {
@@ -87,6 +60,33 @@ class GeositesActivity : AppCompatActivity() {
 
                 else -> {}
             }
+        }
+    }
+
+    private fun initView() {
+        with(binding) {
+            rvGeosites.apply {
+                adapter = cardGeositeAdapter
+                setHasFixedSize(true)
+            }
+        }
+    }
+
+    private fun initAction() {
+        with(binding) {
+            val alphabetSort = data.sortedBy { it.name }
+            val nearestSort = data.sortedBy { it.distance }
+            chipAlphabet.setOnClickListener {
+                cardGeositeAdapter.submitList(alphabetSort)
+                rvGeosites.smoothScrollToPosition(nearestSort.indexOf(nearestSort.first()))
+            }
+
+            chipNearest.setOnClickListener {
+                cardGeositeAdapter.submitList(nearestSort)
+                rvGeosites.smoothScrollToPosition(alphabetSort.indexOf(alphabetSort.first()))
+            }
+
+            toolbarGeosites.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
         }
     }
 

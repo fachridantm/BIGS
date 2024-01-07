@@ -21,9 +21,9 @@ class HistoryFragment: BaseFragment<FragmentHistoryBinding>() {
         savedInstanceState: Bundle?
     ): FragmentHistoryBinding = FragmentHistoryBinding.inflate(inflater, container, false)
 
-    override fun initData() {
+    override fun initData() {}
 
-    }
+    override fun initObservers() {}
 
     override fun initView() {
         val tabOrderAdapter = TabOrderAdapter(activity as AppCompatActivity)
@@ -48,10 +48,6 @@ class HistoryFragment: BaseFragment<FragmentHistoryBinding>() {
                 else -> false
             }
         }
-    }
-
-    override fun initObservers() {
-
     }
 
     override fun onDestroyView() {

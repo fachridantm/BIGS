@@ -52,6 +52,8 @@ class AddFragment : BaseFragment<FragmentAddBinding>() {
         initPermission()
     }
 
+    override fun initObservers() {}
+
     private fun initPermission() {
         if (!allPermissionsGranted()) {
             requestPermissionLauncher.launch(Manifest.permission.CAMERA)
@@ -212,10 +214,6 @@ class AddFragment : BaseFragment<FragmentAddBinding>() {
         else builder.setView(dialogFailedBinding.root)
 
         builder.show()
-    }
-
-    override fun initObservers() {
-
     }
 
     companion object {
