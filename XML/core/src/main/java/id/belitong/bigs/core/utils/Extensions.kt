@@ -30,8 +30,15 @@ fun String.showToast(context: Context, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(context, this, duration).show()
 }
 
-fun String.showSnackbar(view: View, duration: Int = Snackbar.LENGTH_SHORT) {
-    Snackbar.make(view, this, duration).show()
+fun String.showSnackbar(
+    view: View,
+    anchorView: View? = null,
+    duration: Int = Snackbar.LENGTH_SHORT
+) {
+    Snackbar.make(view, this, duration).apply {
+        if (anchorView != null) this.anchorView = anchorView
+        show()
+    }
 }
 
 fun HttpException.getErrorMessage(): String? {

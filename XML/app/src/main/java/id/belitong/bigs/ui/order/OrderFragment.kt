@@ -41,7 +41,7 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>() {
 
                 is Resource.Error -> {
                     showLoading(false)
-                    it.message.showSnackbar(requireView())
+                    it.message.showSnackbar(requireView(), navView)
                 }
 
                 else -> {}

@@ -33,9 +33,43 @@ class GeositesActivity : AppCompatActivity() {
         initData()
         initView()
         initAction()
+        initObservers()
     }
 
     private fun initData() {
+        mainViewModel.apply {
+            getGeosites()
+        }
+    }
+
+    private fun initView() {
+        with(binding) {
+            rvGeosites.apply {
+                adapter = cardGeositeAdapter
+                setHasFixedSize(true)
+            }
+        }
+    }
+
+    private fun initAction() {
+        with(binding) {
+            chipAlphabet.setOnClickListener {
+                val alphabetSort = data.sortedBy { it.name }
+                cardGeositeAdapter.submitList(alphabetSort)
+                rvGeosites.smoothScrollToPosition(alphabetSort.indexOf(alphabetSort.first()))
+            }
+
+            chipNearest.setOnClickListener {
+                val nearestSort = data.sortedBy { it.distance }
+                cardGeositeAdapter.submitList(nearestSort)
+                rvGeosites.smoothScrollToPosition(nearestSort.indexOf(nearestSort.first()))
+            }
+
+            toolbarGeosites.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
+        }
+    }
+
+    private fun initObservers() {
         mainViewModel.geosites.observe(this) {
             when (it) {
                 is Resource.Loading -> showLoading(true)
@@ -63,33 +97,6 @@ class GeositesActivity : AppCompatActivity() {
             } else {
                 pbGeosites.visibility = View.GONE
             }
-        }
-    }
-
-    private fun initView() {
-        with(binding) {
-            rvGeosites.apply {
-                adapter = cardGeositeAdapter
-                setHasFixedSize(true)
-            }
-        }
-    }
-
-    private fun initAction() {
-        with(binding) {
-            chipAlphabet.setOnClickListener {
-                val alphabetSort = data.sortedBy { it.name }
-                cardGeositeAdapter.submitList(alphabetSort)
-                rvGeosites.smoothScrollToPosition(0)
-            }
-
-            chipNearest.setOnClickListener {
-                val nearestSort = data.sortedBy { it.distance }
-                cardGeositeAdapter.submitList(nearestSort)
-                rvGeosites.smoothScrollToPosition(0)
-            }
-
-            toolbarGeosites.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
         }
     }
 

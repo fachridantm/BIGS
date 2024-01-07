@@ -13,7 +13,6 @@ import id.belitong.bigs.core.data.Resource
 import id.belitong.bigs.core.domain.model.Biodiversity
 import id.belitong.bigs.core.ui.CardSearchAdapter
 import id.belitong.bigs.core.utils.showSnackbar
-import id.belitong.bigs.core.utils.showToast
 import id.belitong.bigs.databinding.ActivitySearchResultsBinding
 
 @AndroidEntryPoint
@@ -34,26 +33,12 @@ class SearchResultsActivity : AppCompatActivity() {
         initData()
         initView()
         initAction()
+        initObservers()
     }
 
     private fun initData() {
-        searchResultsViewModel.biodiversities.observe(this) {
-            when (it) {
-                is Resource.Loading -> showLoading(true)
-
-                is Resource.Success -> {
-                    showLoading(false)
-                    biodiversities = it.data
-
-                }
-
-                is Resource.Error -> {
-                    showLoading(false)
-                    it.message.showSnackbar(binding.root)
-                }
-
-                else -> {}
-            }
+        searchResultsViewModel.apply {
+            getBiodiversities()
         }
     }
 
@@ -87,7 +72,7 @@ class SearchResultsActivity : AppCompatActivity() {
             }
 
             chipLocationSearch.setOnClickListener {
-                getString(R.string.on_click_handler).showToast(this@SearchResultsActivity)
+                getString(R.string.on_click_handler).showSnackbar(binding.root)
                 cardSearchAdapter.submitList(emptyList())
             }
 
@@ -97,6 +82,27 @@ class SearchResultsActivity : AppCompatActivity() {
                 override fun onQueryTextSubmit(query: String?): Boolean = false
                 override fun onQueryTextChange(newText: String?): Boolean = false
             })
+        }
+    }
+
+    private fun initObservers() {
+        searchResultsViewModel.biodiversities.observe(this) {
+            when (it) {
+                is Resource.Loading -> showLoading(true)
+
+                is Resource.Success -> {
+                    showLoading(false)
+                    biodiversities = it.data
+
+                }
+
+                is Resource.Error -> {
+                    showLoading(false)
+                    it.message.showSnackbar(binding.root)
+                }
+
+                else -> {}
+            }
         }
     }
 

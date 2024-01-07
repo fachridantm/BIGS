@@ -18,7 +18,6 @@ import id.belitong.bigs.core.ui.CarouselHomeAdapter
 import id.belitong.bigs.core.utils.ZoomOutPageTransformer
 import id.belitong.bigs.core.utils.getFirstName
 import id.belitong.bigs.core.utils.showSnackbar
-import id.belitong.bigs.core.utils.showToast
 import id.belitong.bigs.databinding.FragmentHomeBinding
 import id.belitong.bigs.ui.details.geoprogramme.GeoprogrammeActivity
 import id.belitong.bigs.ui.details.geosites.GeositesActivity
@@ -42,48 +41,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     ): FragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false)
 
     override fun initData() {
-        mainViewModel.getName().observe(viewLifecycleOwner) {
-            val name = it.getFirstName()
-            binding?.textView2?.text = getString(R.string.geopark_belitong_user, name)
-        }
-
-        mainViewModel.biodiversities.observe(viewLifecycleOwner) {
-            when (it) {
-                is Resource.Loading -> showLoading(true)
-
-                is Resource.Success -> {
-                    showLoading(false)
-                    cardHomeAdapter.submitList(it.data)
-                    biodiversities = it.data
-
-                }
-
-                is Resource.Error -> {
-                    showLoading(false)
-                    it.message.showSnackbar(requireView())
-                }
-
-                else -> {}
-            }
-        }
-
-        mainViewModel.geosites.observe(viewLifecycleOwner) {
-            when (it) {
-                is Resource.Loading -> showLoading(true)
-
-                is Resource.Success -> {
-                    showLoading(false)
-                    carouselHomeAdapter.submitList(it.data)
-                    geosites = it.data
-                }
-
-                is Resource.Error -> {
-                    showLoading(false)
-                    it.message.showSnackbar(requireView())
-                }
-
-                else -> {}
-            }
+        mainViewModel.apply {
+            getName()
+            getGeosites()
+            getBiodiversities()
         }
     }
 
@@ -170,12 +131,68 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
 
             this?.btnMaps?.setOnClickListener {
-                getString(R.string.on_click_handler).showToast(requireContext())
+                getString(R.string.on_click_handler).showSnackbar(requireView(), navView)
             }
         }
     }
 
-    override fun initObservers() {}
+    override fun initObservers() {
+        mainViewModel.name.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Loading -> showLoading(true)
+
+                is Resource.Success -> {
+                    val name = it.data.getFirstName()
+                    binding?.textView2?.text = getString(R.string.geopark_belitong_user, name)
+                }
+
+                is Resource.Error -> {
+                    showLoading(false)
+                    it.message.showSnackbar(requireView(), navView)
+                }
+
+                else -> {}
+            }
+        }
+        mainViewModel.biodiversities.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Loading -> showLoading(true)
+
+                is Resource.Success -> {
+                    showLoading(false)
+                    cardHomeAdapter.submitList(it.data)
+                    biodiversities = it.data
+
+                }
+
+                is Resource.Error -> {
+                    showLoading(false)
+                    it.message.showSnackbar(requireView(), navView)
+                }
+
+                else -> {}
+            }
+        }
+
+        mainViewModel.geosites.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Loading -> showLoading(true)
+
+                is Resource.Success -> {
+                    showLoading(false)
+                    carouselHomeAdapter.submitList(it.data)
+                    geosites = it.data
+                }
+
+                is Resource.Error -> {
+                    showLoading(false)
+                    it.message.showSnackbar(requireView(), navView)
+                }
+
+                else -> {}
+            }
+        }
+    }
 
     override fun onResume() {
         super.onResume()
@@ -195,11 +212,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun carouselItemClicked(geosite: Geosite) {
-        getString(R.string.on_click_handler).showSnackbar(requireView())
+        getString(R.string.on_click_handler).showSnackbar(requireView(), navView)
     }
 
     private fun cardItemClicked(biodiversity: Biodiversity) {
-        getString(R.string.on_click_handler).showSnackbar(requireView())
+        getString(R.string.on_click_handler).showSnackbar(requireView(), navView)
     }
 
     private fun showLoading(isLoading: Boolean) {

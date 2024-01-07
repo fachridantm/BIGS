@@ -1,8 +1,13 @@
 package id.belitong.bigs.core.di
 
+import android.content.Context
+import com.chuckerteam.chucker.api.ChuckerCollector
+import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.chuckerteam.chucker.api.RetentionManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import id.belitong.bigs.core.BuildConfig.DEBUG
 import id.belitong.bigs.core.BuildConfig.DICODING_BASE_URL
@@ -19,20 +24,44 @@ import java.util.concurrent.TimeUnit
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
     @Provides
-    fun provideOkHttpClient(): OkHttpClient {
+    fun provideChuckerCollector(@ApplicationContext context: Context): ChuckerCollector {
+        return ChuckerCollector(
+            context = context,
+            showNotification = true,
+            retentionPeriod = RetentionManager.Period.ONE_HOUR
+        )
+    }
+
+    @Provides
+    fun provideChuckerInterceptor(
+        @ApplicationContext context: Context,
+        chuckerCollector: ChuckerCollector
+    ): ChuckerInterceptor {
+        return ChuckerInterceptor.Builder(context)
+            .collector(chuckerCollector)
+            .maxContentLength(250_000L)
+            .redactHeaders(emptySet())
+            .alwaysReadResponseBody(false)
+            .createShortcut(true)
+            .build()
+    }
+
+    @Provides
+    fun provideOkHttpClient(chuckerInterceptor: ChuckerInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
-            .addInterceptor(
-                HttpLoggingInterceptor().setLevel(
-                    if (DEBUG) {
-                        HttpLoggingInterceptor.Level.BODY
-                    } else {
-                        HttpLoggingInterceptor.Level.NONE
-                    }
-                )
-            )
-            .connectTimeout(120, TimeUnit.SECONDS)
-            .readTimeout(120, TimeUnit.SECONDS)
-            .writeTimeout(120, TimeUnit.SECONDS)
+            .apply {
+                if (DEBUG) {
+                    addInterceptor(chuckerInterceptor)
+                    addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                } else {
+                    addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE))
+                }
+            }
+            .retryOnConnectionFailure(true)
+            .callTimeout(1, TimeUnit.MINUTES)
+            .connectTimeout(1, TimeUnit.MINUTES)
+            .readTimeout(1, TimeUnit.MINUTES)
+            .writeTimeout(1, TimeUnit.MINUTES)
             .build()
     }
 

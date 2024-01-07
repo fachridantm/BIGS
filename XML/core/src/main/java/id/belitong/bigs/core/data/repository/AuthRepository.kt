@@ -9,7 +9,6 @@ import id.belitong.bigs.core.data.source.remote.network.ApiResponse
 import id.belitong.bigs.core.domain.model.User
 import id.belitong.bigs.core.domain.repository.IAuthRepository
 import id.belitong.bigs.core.utils.DataMapper
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
@@ -21,11 +20,11 @@ class AuthRepository @Inject constructor(
     private val remoteDataSource: RemoteDataSource
 ) : IAuthRepository {
 
-    override fun getAuthToken(): Flow<String> = localDataSource.getAuthToken()
+    override fun getAuthToken() = localDataSource.getAuthToken()
 
-    override fun getUserId(): Flow<String> = localDataSource.getUserId()
+    override fun getUserId() = localDataSource.getUserId()
 
-    override fun getName(): Flow<String> = localDataSource.getName()
+    override fun getName() = localDataSource.getName()
 
     override fun registerUser(
         name: String,

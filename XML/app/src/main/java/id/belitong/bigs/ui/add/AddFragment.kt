@@ -53,7 +53,9 @@ class AddFragment : BaseFragment<FragmentAddBinding>() {
     }
 
     private fun initPermission() {
-        requestPermissionLauncher.launch(Manifest.permission.CAMERA)
+        if (!allPermissionsGranted()) {
+            requestPermissionLauncher.launch(Manifest.permission.CAMERA)
+        }
     }
 
     private val requestPermissionLauncher = registerForActivityResult(
@@ -155,7 +157,7 @@ class AddFragment : BaseFragment<FragmentAddBinding>() {
 
                         is Resource.Error -> {
                             showLoading(false)
-                            it.message.showToast(requireContext())
+                            it.message.showSnackbar(requireView(), navView)
                         }
 
                         else -> {}
@@ -163,7 +165,7 @@ class AddFragment : BaseFragment<FragmentAddBinding>() {
                 }
             }
         } else {
-            getString(R.string.no_image_selected).showSnackbar(requireView())
+            getString(R.string.no_image_selected).showSnackbar(requireView(), navView)
         }
     }
 
@@ -192,13 +194,13 @@ class AddFragment : BaseFragment<FragmentAddBinding>() {
             tvName.text = plant.name
             tvLatinName.text = plant.latin
             btnDetails.setOnClickListener {
-                getString(R.string.on_click_handler).showSnackbar(requireView())
+                getString(R.string.on_click_handler).showSnackbar(requireView(), navView)
             }
         }
 
         dialogFailedBinding.apply {
             btnAdd.setOnClickListener {
-                getString(R.string.on_click_handler).showSnackbar(requireView())
+                getString(R.string.on_click_handler).showSnackbar(requireView(), navView)
             }
 
             btnClose.setOnClickListener {

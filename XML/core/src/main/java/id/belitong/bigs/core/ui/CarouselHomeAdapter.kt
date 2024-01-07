@@ -31,15 +31,14 @@ class CarouselHomeAdapter(private val onItemClick: (Geosite) -> Unit) :
     }
 
     override fun onBindViewHolder(holder: CarouselViewHolder, position: Int) {
-        val geosite = getItem(position)
+        val shuffledList = currentList.shuffled()
+        val geosite = shuffledList[position]
         if (geosite != null) {
             holder.bind(geosite)
         }
     }
 
-    override fun getItemCount(): Int {
-        return 5
-    }
+    override fun getItemCount(): Int = if (currentList.size > 5) 5 else currentList.size
 
     companion object {
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Geosite>() {
