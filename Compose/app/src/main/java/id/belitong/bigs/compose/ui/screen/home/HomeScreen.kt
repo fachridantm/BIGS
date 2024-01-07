@@ -96,12 +96,13 @@ fun HomeScreen(
 ) {
     val activity = getActivity()
 
-    val name = mainViewModel.getName().observeAsState()
+    val nameState = mainViewModel.name.observeAsState()
     val biodiversitiesState = mainViewModel.biodiversities.observeAsState()
     val geositesState = mainViewModel.geosites.observeAsState()
 
     val isLoading = remember { mutableStateOf(false) }
 
+    val name = remember { mutableStateOf("No Name") }
     val biodiversities = remember { mutableStateOf(emptyList<Biodiversity>()) }
     val geosites = remember { mutableStateOf(emptyList<Geosite>()) }
 
@@ -117,6 +118,19 @@ fun HomeScreen(
         mainViewModel.getGeosites()
         mainViewModel.getBiodiversities()
     }
+
+    ComposableObserver(
+        state = nameState,
+        onLoading = { isLoading.value = true },
+        onSuccess = {
+            isLoading.value = false
+            name.value = it
+        },
+        onError = { message ->
+            isLoading.value = false
+            message.showToast(activity)
+        }
+    )
 
     ComposableObserver(
         state = geositesState,
@@ -165,7 +179,7 @@ fun HomeScreen(
     }
 
     HomeScreenContent(
-        name = name.value?.getFirstName() ?: stringResource(R.string.no_name),
+        name = name.value.getFirstName(),
         geosites = geosites.value,
         biodiversities = chipData,
         selectedChip = selectedChip,
