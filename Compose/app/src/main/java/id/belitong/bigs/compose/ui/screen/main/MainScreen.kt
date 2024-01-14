@@ -23,6 +23,7 @@ import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.manualcomposablecalls.composable
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.rememberNavHostEngine
+import id.belitong.bigs.compose.R
 import id.belitong.bigs.compose.core.utils.NOTIFICATION_PERMISSION
 import id.belitong.bigs.compose.core.utils.showToast
 import id.belitong.bigs.compose.ui.composable.components.MainBottomNavigation
@@ -59,7 +60,7 @@ fun MainScreen(
             }
         } else {
             // PERMISSION NOT GRANTED
-            context.getString(com.chuckerteam.chucker.R.string.chucker_notifications_permission_not_granted)
+            context.getString(R.string.chucker_notification_permission_not_granted)
                 .showToast(context)
         }
     }

@@ -29,8 +29,8 @@ android {
         // for easy local/CI testing.
         benchmark {
             debuggable true
-            signingConfig debug.signingConfig
-            matchingFallbacks = ["debug"]
+            signingConfig signingConfigs.debug
+            matchingFallbacks = ['release']
         }
     }
 
@@ -39,8 +39,8 @@ android {
 }
 
 dependencies {
-    implementation project(':app')
-    implementation project(":core")
+    implementation 'androidx.core:core-ktx:1.10.1'
+
     implementation 'androidx.test.ext:junit:1.1.5'
     implementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation 'androidx.test.uiautomator:uiautomator:2.2.0'

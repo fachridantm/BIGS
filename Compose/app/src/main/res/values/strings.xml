@@ -117,4 +117,5 @@
 
     <string name="dash">-</string>
     <string name="no_data">Data is empty</string>
+    <string name="chucker_notification_permission_not_granted">Chucker can\\\'t show notifications without permission</string>
 </resources>
