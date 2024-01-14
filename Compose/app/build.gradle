@@ -34,10 +34,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         benchmark {
-            initWith release
+            initWith debug
+            debuggable true
             signingConfig signingConfigs.debug
-            matchingFallbacks = ['release']
-            debuggable false
+            matchingFallbacks = ['debug']
         }
     }
     compileOptions {
