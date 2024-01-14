@@ -1,6 +1,5 @@
 package id.belitong.bigs.compose.ui.screen.add
 
-import android.Manifest
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -55,6 +54,9 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import id.belitong.bigs.compose.BuildConfig
 import id.belitong.bigs.compose.R
 import id.belitong.bigs.compose.core.domain.model.Plant
+import id.belitong.bigs.compose.core.utils.CAMERA_PERMISSION
+import id.belitong.bigs.compose.core.utils.EXTERNAL_STORAGE_PERMISSION
+import id.belitong.bigs.compose.core.utils.MEDIA_PERMISSION
 import id.belitong.bigs.compose.core.utils.createTempFile
 import id.belitong.bigs.compose.core.utils.rotateBitmap
 import id.belitong.bigs.compose.core.utils.showToast
@@ -100,11 +102,11 @@ fun AddScreen(
     var image by remember { mutableStateOf<Any?>(null) }
     var currentPhotoPath by remember { mutableStateOf("") }
 
-    val cameraPermission = Manifest.permission.CAMERA
+    val cameraPermission = CAMERA_PERMISSION
     val mediaPermission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-        Manifest.permission.READ_MEDIA_IMAGES
+        MEDIA_PERMISSION
     } else {
-        Manifest.permission.READ_EXTERNAL_STORAGE
+        EXTERNAL_STORAGE_PERMISSION
     }
 
     val requiredPermissions = arrayOf(cameraPermission, mediaPermission)

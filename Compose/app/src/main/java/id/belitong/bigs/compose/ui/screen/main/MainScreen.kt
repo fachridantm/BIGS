@@ -1,6 +1,5 @@
 package id.belitong.bigs.compose.ui.screen.main
 
-import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -25,6 +24,7 @@ import com.ramcosta.composedestinations.manualcomposablecalls.composable
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.rememberNavHostEngine
 import id.belitong.bigs.compose.R
+import id.belitong.bigs.compose.core.utils.NOTIFICATION_PERMISSION
 import id.belitong.bigs.compose.core.utils.showToast
 import id.belitong.bigs.compose.ui.composable.components.MainBottomNavigation
 import id.belitong.bigs.compose.ui.screen.NavGraphs
@@ -48,7 +48,7 @@ fun MainScreen(
     val scope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
 
-    val notificationPermission = Manifest.permission.POST_NOTIFICATIONS
+    val notificationPermission = NOTIFICATION_PERMISSION
     val requiredPermissions = arrayOf(notificationPermission)
     val requestPermissionLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -65,7 +65,9 @@ fun MainScreen(
     }
 
     SideEffect {
-        requestPermissionLauncher.launch(notificationPermission)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requestPermissionLauncher.launch(notificationPermission)
+        }
     }
 
     Scaffold(
