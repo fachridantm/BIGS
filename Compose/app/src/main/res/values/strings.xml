@@ -40,7 +40,7 @@
     <string name="login_result">Login %s</string>
 
     <string name="on_click_handler">Feature not implemented yet</string>
-    <string name="not_given_access">Access not granted</string>
+    <string name="access_not_granted">%s access not granted</string>
 
     <string name="home">Home</string>
     <string name="maps">Maps</string>

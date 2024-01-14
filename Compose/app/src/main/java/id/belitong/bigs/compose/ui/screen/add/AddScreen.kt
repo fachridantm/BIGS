@@ -110,17 +110,23 @@ fun AddScreen(
     }
 
     val requiredPermissions = arrayOf(cameraPermission, mediaPermission)
-    val requestPermissionLauncher = rememberLauncherForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted: Boolean ->
-        if (isGranted) {
-            // PERMISSION GRANTED
-            requiredPermissions.all {
-                ContextCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
+    val requestMultiplePermissionsLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        permissions.entries.forEach {
+            if (!it.value) {
+                if (ContextCompat.checkSelfPermission(
+                        context,
+                        CAMERA_PERMISSION
+                    ) == PackageManager.PERMISSION_GRANTED
+                ) {
+                    if (it.key == cameraPermission) {
+                        context.getString(R.string.access_not_granted, "Camera").showToast(context)
+                    }
+                } else {
+                    context.getString(R.string.access_not_granted, "Media").showToast(context)
+                }
             }
-        } else {
-            // PERMISSION NOT GRANTED
-            context.getString(R.string.not_given_access).showToast(context)
         }
     }
 
@@ -137,10 +143,7 @@ fun AddScreen(
     )
 
     SideEffect {
-        requestPermissionLauncher.apply {
-            launch(cameraPermission)
-            launch(mediaPermission)
-        }
+        requestMultiplePermissionsLauncher.launch(requiredPermissions)
     }
 
     val cameraLauncher =
