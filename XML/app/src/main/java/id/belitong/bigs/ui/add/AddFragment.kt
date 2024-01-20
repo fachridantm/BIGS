@@ -159,7 +159,10 @@ class AddFragment : BaseFragment<FragmentAddBinding>() {
 
                         is Resource.Error -> {
                             showLoading(false)
-                            it.message.showSnackbar(requireView(), navView)
+                            it.message.showSnackbar(
+                                requireView(),
+                                activity?.findViewById(R.id.nav_view)
+                            )
                         }
 
                         else -> {}
@@ -167,7 +170,10 @@ class AddFragment : BaseFragment<FragmentAddBinding>() {
                 }
             }
         } else {
-            getString(R.string.no_image_selected).showSnackbar(requireView(), navView)
+            getString(R.string.no_image_selected).showSnackbar(
+                requireView(),
+                activity?.findViewById(R.id.nav_view)
+            )
         }
     }
 
@@ -196,13 +202,19 @@ class AddFragment : BaseFragment<FragmentAddBinding>() {
             tvName.text = plant.name
             tvLatinName.text = plant.latin
             btnDetails.setOnClickListener {
-                getString(R.string.on_click_handler).showSnackbar(requireView(), navView)
+                getString(R.string.on_click_handler).showSnackbar(
+                    requireView(),
+                    activity?.findViewById(R.id.nav_view)
+                )
             }
         }
 
         dialogFailedBinding.apply {
             btnAdd.setOnClickListener {
-                getString(R.string.on_click_handler).showSnackbar(requireView(), navView)
+                getString(R.string.on_click_handler).showSnackbar(
+                    requireView(),
+                    activity?.findViewById(R.id.nav_view)
+                )
             }
 
             btnClose.setOnClickListener {

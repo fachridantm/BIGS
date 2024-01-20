@@ -10,7 +10,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import id.belitong.bigs.BaseFragment
 import id.belitong.bigs.R
 import id.belitong.bigs.databinding.FragmentHistoryBinding
-import id.belitong.bigs.ui.order.TabOrderAdapter
 import id.belitong.bigs.ui.profile.ProfileActivity
 
 @AndroidEntryPoint

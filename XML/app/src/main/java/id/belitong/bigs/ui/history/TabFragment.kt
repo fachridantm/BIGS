@@ -1,4 +1,4 @@
-package id.belitong.bigs.ui.order
+package id.belitong.bigs.ui.history
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,16 +12,16 @@ import id.belitong.bigs.core.data.Resource
 import id.belitong.bigs.core.domain.model.HistoryListItem
 import id.belitong.bigs.core.domain.model.Order
 import id.belitong.bigs.core.domain.model.Report
-import id.belitong.bigs.core.ui.CardOrderAdapter
+import id.belitong.bigs.core.ui.HistoryTabAdapter
 import id.belitong.bigs.core.utils.showSnackbar
-import id.belitong.bigs.databinding.FragmentOrderBinding
+import id.belitong.bigs.databinding.FragmentTabBinding
 import id.belitong.bigs.ui.main.MainViewModel
 
 @AndroidEntryPoint
-class OrderFragment : BaseFragment<FragmentOrderBinding>() {
+class OrderFragment : BaseFragment<FragmentTabBinding>() {
 
-    private val cardOrderAdapter: CardOrderAdapter by lazy {
-        CardOrderAdapter(
+    private val historyTabAdapter: HistoryTabAdapter by lazy {
+        HistoryTabAdapter(
             ::reportCancelClicked,
             ::orderCancelClicked
         )
@@ -33,12 +33,12 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): FragmentOrderBinding = FragmentOrderBinding.inflate(inflater, container, false)
+    ): FragmentTabBinding = FragmentTabBinding.inflate(inflater, container, false)
 
     override fun initData() {
         when (arguments?.getInt(SECTION_NUMBER)) {
-            0 -> mainViewModel.getOrders()
-            1 -> mainViewModel.getReports()
+            1 -> mainViewModel.getOrders()
+            2 -> mainViewModel.getReports()
         }
     }
 
@@ -50,12 +50,12 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>() {
                 is Resource.Success -> {
                     showLoading(false)
                     val orderItems = it.data.map { order -> HistoryListItem.OrderItem(order) }
-                    cardOrderAdapter.submitList(orderItems)
+                    historyTabAdapter.submitList(orderItems)
                 }
 
                 is Resource.Error -> {
                     showLoading(false)
-                    it.message.showSnackbar(requireView(), navView)
+                    it.message.showSnackbar(requireView(), activity?.findViewById(R.id.nav_view))
                 }
 
                 else -> {}
@@ -69,12 +69,12 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>() {
                 is Resource.Success -> {
                     showLoading(false)
                     val reportItems = it.data.map { report -> HistoryListItem.ReportItem(report) }
-                    cardOrderAdapter.submitList(reportItems)
+                    historyTabAdapter.submitList(reportItems)
                 }
 
                 is Resource.Error -> {
                     showLoading(false)
-                    it.message.showSnackbar(requireView(), navView)
+                    it.message.showSnackbar(requireView(), activity?.findViewById(R.id.nav_view))
                 }
 
                 else -> {}
@@ -96,7 +96,7 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>() {
         with(binding) {
             this?.rvOrder?.apply {
                 setHasFixedSize(true)
-                adapter = cardOrderAdapter
+                adapter = historyTabAdapter
             }
         }
     }
@@ -105,11 +105,17 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>() {
 
 
     private fun orderCancelClicked(order: Order) {
-        getString(R.string.on_click_handler).showSnackbar(requireView(), navView)
+        getString(R.string.on_click_handler).showSnackbar(
+            requireView(),
+            activity?.findViewById(R.id.nav_view)
+        )
     }
 
     private fun reportCancelClicked(report: Report) {
-        getString(R.string.on_click_handler).showSnackbar(requireView(), navView)
+        getString(R.string.on_click_handler).showSnackbar(
+            requireView(),
+            activity?.findViewById(R.id.nav_view)
+        )
     }
 
     companion object {

@@ -131,7 +131,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
 
             this?.btnMaps?.setOnClickListener {
-                getString(R.string.on_click_handler).showSnackbar(requireView(), navView)
+                getString(R.string.on_click_handler).showSnackbar(
+                    requireView(),
+                    activity?.findViewById(R.id.nav_view)
+                )
             }
         }
     }
@@ -148,7 +151,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
                 is Resource.Error -> {
                     showLoading(false)
-                    it.message.showSnackbar(requireView(), navView)
+                    it.message.showSnackbar(requireView(), activity?.findViewById(R.id.nav_view))
                 }
 
                 else -> {}
@@ -167,7 +170,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
                 is Resource.Error -> {
                     showLoading(false)
-                    it.message.showSnackbar(requireView(), navView)
+                    it.message.showSnackbar(requireView(), activity?.findViewById(R.id.nav_view))
                 }
 
                 else -> {}
@@ -186,7 +189,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
                 is Resource.Error -> {
                     showLoading(false)
-                    it.message.showSnackbar(requireView(), navView)
+                    it.message.showSnackbar(requireView(), activity?.findViewById(R.id.nav_view))
                 }
 
                 else -> {}
@@ -212,11 +215,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun carouselItemClicked(geosite: Geosite) {
-        getString(R.string.on_click_handler).showSnackbar(requireView(), navView)
+        getString(R.string.on_click_handler).showSnackbar(
+            requireView(),
+            activity?.findViewById(R.id.nav_view)
+        )
     }
 
     private fun cardItemClicked(biodiversity: Biodiversity) {
-        getString(R.string.on_click_handler).showSnackbar(requireView(), navView)
+        getString(R.string.on_click_handler).showSnackbar(
+            requireView(),
+            activity?.findViewById(R.id.nav_view)
+        )
     }
 
     private fun showLoading(isLoading: Boolean) {

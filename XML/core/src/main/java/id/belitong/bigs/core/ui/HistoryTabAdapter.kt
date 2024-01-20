@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import id.belitong.bigs.core.R
-import id.belitong.bigs.core.databinding.ItemCardOrderBinding
+import id.belitong.bigs.core.databinding.ItemCardTabHistoryBinding
 import id.belitong.bigs.core.domain.model.HistoryListItem
 import id.belitong.bigs.core.domain.model.HistoryListItem.OrderItem
 import id.belitong.bigs.core.domain.model.HistoryListItem.ReportItem
@@ -17,13 +17,13 @@ import id.belitong.bigs.core.utils.HistoryStatus
 import id.belitong.bigs.core.utils.loadGeoparkImage
 import id.belitong.bigs.core.utils.statusBackgroundFilter
 
-class CardOrderAdapter(
+class HistoryTabAdapter(
     private val reportCancelClicked: (Report) -> Unit,
     private val orderCancelClicked: (Order) -> Unit
 ) :
-    ListAdapter<HistoryListItem, CardOrderAdapter.HistoryItemViewHolder>(DIFF_CALLBACK) {
+    ListAdapter<HistoryListItem, HistoryTabAdapter.HistoryItemViewHolder>(DIFF_CALLBACK) {
 
-    inner class HistoryItemViewHolder(private val binding: ItemCardOrderBinding) :
+    inner class HistoryItemViewHolder(private val binding: ItemCardTabHistoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: HistoryListItem) {
             when (item) {
@@ -35,7 +35,6 @@ class CardOrderAdapter(
         private fun bindOrder(data: Order) {
             binding.apply {
                 itemTvTitleGeositeOrder.text = data.geositeName
-                itemIvOrderGeosite.loadGeoparkImage(data.geositeImage)
                 itemTvProgram.text = data.program
                 itemTvInstance.text = data.instance
                 itemTvPhoneNumber.text = data.phoneNumber
@@ -43,6 +42,7 @@ class CardOrderAdapter(
                 itemTvTourGuideName.text = data.tourGuideName
                 itemTvBookingDate.text = data.bookingDate
                 itemTvBookingTime.text = data.bookingTime
+                itemIvOrderGeosite.loadGeoparkImage(data.geositeImage)
 
                 itemTvStatus.statusBackgroundFilter(data.status)
                 if (data.status == HistoryStatus.COMPLETED.value || data.status == HistoryStatus.CANCELLED.value) {
@@ -66,13 +66,15 @@ class CardOrderAdapter(
                 itemTvProgram.text = data.category
 
                 textView2.text = itemView.context.getString(R.string.name)
-                itemIvOrderGeosite.loadGeoparkImage(data.photo)
+                itemTvInstance.text = data.name
 
                 textView3.text = itemView.context.getString(R.string.short_desc)
-                itemTvInstance.text = data.shortDesc
+                itemTvPhoneNumber.text = data.shortDesc
 
                 textView4.text = itemView.context.getString(R.string.place)
-                itemTvPhoneNumber.text = data.place
+                itemTvTourDate.text = data.place
+
+                itemIvOrderGeosite.loadGeoparkImage(data.photo)
 
                 itemTvStatus.statusBackgroundFilter(data.status)
                 if (data.status == HistoryStatus.COMPLETED.value || data.status == HistoryStatus.CANCELLED.value) {
@@ -87,7 +89,7 @@ class CardOrderAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryItemViewHolder {
         val binding =
-            ItemCardOrderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemCardTabHistoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return HistoryItemViewHolder(binding)
     }
 

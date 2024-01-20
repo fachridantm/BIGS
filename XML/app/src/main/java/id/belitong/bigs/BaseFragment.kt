@@ -6,14 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
     private var _binding: VB? = null
     val binding get() = _binding
-
-    val navView = activity?.findViewById<BottomNavigationView>(R.id.nav_view)
 
     override fun onCreateView(
         inflater: LayoutInflater,

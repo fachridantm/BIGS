@@ -1,10 +1,10 @@
-package id.belitong.bigs.ui.order
+package id.belitong.bigs.ui.history
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import id.belitong.bigs.ui.order.OrderFragment.Companion.SECTION_NUMBER
+import id.belitong.bigs.ui.history.OrderFragment.Companion.SECTION_NUMBER
 
 class TabOrderAdapter(activity: AppCompatActivity) : FragmentStateAdapter(activity) {
     override fun getItemCount(): Int = 2

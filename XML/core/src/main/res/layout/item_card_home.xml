@@ -24,7 +24,7 @@
             android:layout_height="match_parent"
             android:contentDescription="@string/geosites"
             android:scaleType="centerCrop"
-            tools:src="@tools:sample/backgrounds/scenic" />
+            tools:src="@drawable/img_placeholder_geopark" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/item_tv_title_home"

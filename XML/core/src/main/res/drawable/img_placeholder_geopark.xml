@@ -8,9 +8,9 @@
         android:top="0dp" />
 
     <item
-        android:bottom="30dp"
+        android:bottom="100dp"
         android:drawable="@drawable/ic_no_image_geopark"
-        android:left="75dp"
-        android:right="75dp"
-        android:top="30dp" />
+        android:left="100dp"
+        android:right="100dp"
+        android:top="100dp" />
 </layer-list>

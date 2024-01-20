@@ -20,9 +20,12 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/item_tv_title_geosite_order"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_marginEnd="24dp"
             android:layout_height="wrap_content"
             android:textAppearance="@style/Text.Medium.H4"
+            app:layout_constraintEnd_toStartOf="@+id/vertical_guideline"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Most Hill" />
@@ -35,13 +38,16 @@
             android:alpha="0.4"
             android:text="@string/program"
             android:textAppearance="@style/Text.Regular.Subtitle1"
+            app:layout_constraintEnd_toStartOf="@+id/vertical_guideline"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_tv_title_geosite_order" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/item_tv_program"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
             android:textAppearance="@style/Text.Regular.Subtitle1"
             app:layout_constraintEnd_toEndOf="@id/vertical_guideline"
             app:layout_constraintHorizontal_bias="0.0"
@@ -57,12 +63,15 @@
             android:alpha="0.4"
             android:text="@string/instance"
             android:textAppearance="@style/Text.Regular.Subtitle1"
+            app:layout_constraintEnd_toStartOf="@+id/vertical_guideline"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_tv_program" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/item_tv_instance"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_marginEnd="24dp"
             android:layout_height="wrap_content"
             android:textAppearance="@style/Text.Regular.Subtitle1"
             app:layout_constraintEnd_toEndOf="@id/vertical_guideline"
@@ -79,15 +88,18 @@
             android:alpha="0.4"
             android:text="@string/phone_number_colon"
             android:textAppearance="@style/Text.Regular.Subtitle1"
+            app:layout_constraintEnd_toStartOf="@+id/vertical_guideline"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_tv_instance" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/item_tv_phone_number"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textAppearance="@style/Text.Regular.Subtitle1"
             app:layout_constraintEnd_toEndOf="@id/vertical_guideline"
+            android:layout_marginEnd="24dp"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_view3"
@@ -101,14 +113,19 @@
             android:alpha="0.4"
             android:text="@string/tour_date"
             android:textAppearance="@style/Text.Regular.Subtitle1"
+            app:layout_constraintEnd_toStartOf="@+id/vertical_guideline"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_tv_phone_number" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/item_tv_tour_date"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textAppearance="@style/Text.Regular.Subtitle1"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintEnd_toStartOf="@+id/vertical_guideline"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_view4"
             tools:text="@tools:sample/date/ddmmyy" />
@@ -121,14 +138,17 @@
             android:alpha="0.4"
             android:text="@string/tour_guide_name"
             android:textAppearance="@style/Text.Regular.Subtitle1"
+            app:layout_constraintEnd_toStartOf="@+id/vertical_guideline"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_tv_tour_date" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/item_tv_tour_guide_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textAppearance="@style/Text.Regular.Subtitle1"
+            android:layout_marginEnd="24dp"
             app:layout_constraintEnd_toEndOf="@id/vertical_guideline"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -143,6 +163,8 @@
             android:alpha="0.4"
             android:text="@string/status"
             android:textAppearance="@style/Text.Regular.Subtitle1"
+            app:layout_constraintEnd_toStartOf="@+id/vertical_guideline"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_tv_tour_guide_name" />
 
@@ -158,6 +180,8 @@
             android:textAppearance="@style/Text.Regular.Subtitle1"
             android:textColor="@android:color/white"
             android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/vertical_guideline"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_view6"
             tools:text="Pending" />
