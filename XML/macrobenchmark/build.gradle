@@ -28,8 +28,8 @@ android {
         // release build (for example, with minification on). It's signed with a debug key
         // for easy local/CI testing.
         benchmark {
-            debuggable = true
-            signingConfig = debug.signingConfig
+            debuggable true
+            signingConfig debug.signingConfig
             matchingFallbacks = ["release"]
         }
     }
@@ -39,10 +39,12 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.core:core-ktx:1.10.1'
+
     implementation 'androidx.test.ext:junit:1.1.5'
     implementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation 'androidx.test.uiautomator:uiautomator:2.2.0'
-    implementation 'androidx.benchmark:benchmark-macro-junit4:1.2.0'
+    implementation 'androidx.benchmark:benchmark-macro-junit4:1.1.1'
 }
 
 androidComponents {
