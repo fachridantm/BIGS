@@ -3,17 +3,16 @@ package id.belitong.bigs.ui.details.geosites
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import id.belitong.bigs.R
-import id.belitong.bigs.core.data.Resource
 import id.belitong.bigs.core.domain.model.Geosite
 import id.belitong.bigs.core.ui.CardGeositeAdapter
+import id.belitong.bigs.core.utils.parcelableArrayList
 import id.belitong.bigs.core.utils.showSnackbar
+import id.belitong.bigs.core.utils.toArrayList
 import id.belitong.bigs.databinding.ActivityGeositesBinding
-import id.belitong.bigs.ui.main.MainViewModel
 
 @AndroidEntryPoint
 class GeositesActivity : AppCompatActivity() {
@@ -21,9 +20,7 @@ class GeositesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGeositesBinding
     private val cardGeositeAdapter: CardGeositeAdapter by lazy { CardGeositeAdapter(::onItemClick) }
 
-    private val mainViewModel: MainViewModel by viewModels()
-
-    private lateinit var data: List<Geosite>
+    private val geosites by lazy { intent.parcelableArrayList<Geosite>(EXTRA_DATA) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,37 +28,16 @@ class GeositesActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initData()
+        initObservers()
         initView()
         initAction()
-        initObservers()
     }
 
     private fun initData() {
-        mainViewModel.apply {
-            getGeosites()
-        }
+        cardGeositeAdapter.submitList(geosites)
     }
 
-    private fun initObservers() {
-        mainViewModel.geosites.observe(this) {
-            when (it) {
-                is Resource.Loading -> showLoading(true)
-
-                is Resource.Success -> {
-                    showLoading(false)
-                    cardGeositeAdapter.submitList(it.data)
-                    data = it.data
-                }
-
-                is Resource.Error -> {
-                    showLoading(false)
-                    it.message.showSnackbar(binding.root)
-                }
-
-                else -> {}
-            }
-        }
-    }
+    private fun initObservers() {}
 
     private fun initView() {
         with(binding) {
@@ -74,28 +50,33 @@ class GeositesActivity : AppCompatActivity() {
 
     private fun initAction() {
         with(binding) {
-            val alphabetSort = data.sortedBy { it.name }
-            val nearestSort = data.sortedBy { it.distance }
-            chipAlphabet.setOnClickListener {
-                cardGeositeAdapter.submitList(alphabetSort)
-                rvGeosites.smoothScrollToPosition(nearestSort.indexOf(nearestSort.first()))
-            }
+            if (!geosites.isNullOrEmpty()) {
+                val alphabetSort = geosites?.sortedBy { it.name }.orEmpty()
+                val nearestSort = geosites?.sortedBy { it.distance }.orEmpty()
 
-            chipNearest.setOnClickListener {
-                cardGeositeAdapter.submitList(nearestSort)
-                rvGeosites.smoothScrollToPosition(alphabetSort.indexOf(alphabetSort.first()))
-            }
+                val dataObserver = object : RecyclerView.AdapterDataObserver() {
+                    override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                        rvGeosites.smoothScrollToPosition(0)
+                    }
+                }
 
-            toolbarGeosites.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
-        }
-    }
+                cardGeositeAdapter.registerAdapterDataObserver(dataObserver)
 
-    private fun showLoading(isLoading: Boolean) {
-        binding.apply {
-            if (isLoading) {
-                pbGeosites.visibility = View.VISIBLE
-            } else {
-                pbGeosites.visibility = View.GONE
+                chipAlphabet.setOnClickListener {
+                    cardGeositeAdapter.submitList(alphabetSort)
+                    rvGeosites.post {
+                        rvGeosites.smoothScrollToPosition(0)
+                    }
+                }
+
+                chipNearest.setOnClickListener {
+                    cardGeositeAdapter.submitList(nearestSort)
+                    rvGeosites.post {
+                        rvGeosites.smoothScrollToPosition(0)
+                    }
+                }
+
+                toolbarGeosites.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
             }
         }
     }
@@ -105,8 +86,11 @@ class GeositesActivity : AppCompatActivity() {
     }
 
     companion object {
-        fun start(context: Context) {
-            Intent(context, GeositesActivity::class.java).run { context.startActivity(this) }
+        const val EXTRA_DATA = "extra_data"
+        fun start(context: Context, geosites: List<Geosite>) {
+            Intent(context, GeositesActivity::class.java).apply {
+                putParcelableArrayListExtra(EXTRA_DATA, geosites.toArrayList())
+            }.run { context.startActivity(this) }
         }
     }
 }
