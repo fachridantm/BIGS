@@ -43,10 +43,10 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
     abstract fun initData()
 
+    abstract fun initObservers()
+
     abstract fun initView()
 
     abstract fun initAction()
-
-    abstract fun initObservers()
 
 }

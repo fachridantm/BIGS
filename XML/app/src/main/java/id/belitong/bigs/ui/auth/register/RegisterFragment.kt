@@ -29,6 +29,31 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
     override fun initData() {}
 
+    override fun initObservers() {
+        registerResult()
+    }
+
+    private fun registerResult() {
+        registerViewModel.result.observe(this) {
+            when (it) {
+                is Resource.Loading -> showLoading(true)
+                is Resource.Success -> {
+                    showLoading(false)
+                    it.data.message?.showToast(requireContext())
+                    binding?.root?.findNavController()
+                        ?.navigate(R.id.action_registerFragment_to_loginFragment)
+                }
+
+                is Resource.Error -> {
+                    showLoading(false)
+                    it.message.showToast(requireContext())
+                }
+
+                else -> {}
+            }
+        }
+    }
+
     override fun initView() {}
 
     override fun initAction() {
@@ -107,31 +132,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
                 binding?.tilEmailRegister?.isErrorEnabled == false &&
                 binding?.tilPasswordRegister?.isErrorEnabled == false &&
                 binding?.tilPhoneRegister?.isErrorEnabled == false
-    }
-
-    override fun initObservers() {
-        registerResult()
-    }
-
-    private fun registerResult() {
-        registerViewModel.result.observe(this) {
-            when (it) {
-                is Resource.Loading -> showLoading(true)
-                is Resource.Success -> {
-                    showLoading(false)
-                    it.data.message?.showToast(requireContext())
-                    binding?.root?.findNavController()
-                        ?.navigate(R.id.action_registerFragment_to_loginFragment)
-                }
-
-                is Resource.Error -> {
-                    showLoading(false)
-                    it.message.showToast(requireContext())
-                }
-
-                else -> {}
-            }
-        }
     }
 
     private fun showLoading(isLoading: Boolean) {

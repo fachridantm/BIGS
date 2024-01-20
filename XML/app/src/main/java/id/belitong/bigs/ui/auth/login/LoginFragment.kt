@@ -30,6 +30,36 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     override fun initData() {}
 
+    override fun initObservers() {
+        loginResult()
+    }
+
+    private fun loginResult() {
+        loginViewModel.result.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Loading -> showLoading(true)
+
+                is Resource.Success -> {
+                    val token = it.data.loginResult?.token
+                    val user = it.data.loginResult
+                    val message = it.data.message
+                    showLoading(false)
+                    if (token != null && user != null) {
+                        saveSession(token, user)
+                    }
+                    getString(R.string.login_result, message).showToast(requireContext())
+                }
+
+                is Resource.Error -> {
+                    showLoading(false)
+                    it.message.showToast(requireContext())
+                }
+
+                else -> {}
+            }
+        }
+    }
+
     override fun initView() {}
 
     override fun initAction() {
@@ -90,36 +120,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
         return binding?.tilEmailLogin?.isErrorEnabled == false &&
                 binding?.tilPasswordLogin?.isErrorEnabled == false
-    }
-
-    override fun initObservers() {
-        loginResult()
-    }
-
-    private fun loginResult() {
-        loginViewModel.result.observe(viewLifecycleOwner) {
-            when (it) {
-                is Resource.Loading -> showLoading(true)
-
-                is Resource.Success -> {
-                    val token = it.data.loginResult?.token
-                    val user = it.data.loginResult
-                    val message = it.data.message
-                    showLoading(false)
-                    if (token != null && user != null) {
-                        saveSession(token, user)
-                    }
-                    getString(R.string.login_result, message).showToast(requireContext())
-                }
-
-                is Resource.Error -> {
-                    showLoading(false)
-                    it.message.showToast(requireContext())
-                }
-
-                else -> {}
-            }
-        }
     }
 
     private fun saveSession(token: String, user: User) {

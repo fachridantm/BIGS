@@ -48,6 +48,64 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
+    override fun initObservers() {
+        mainViewModel.name.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Loading -> showLoading(true)
+
+                is Resource.Success -> {
+                    val name = it.data.getFirstName()
+                    binding?.textView2?.text = getString(R.string.geopark_belitong_user, name)
+                }
+
+                is Resource.Error -> {
+                    showLoading(false)
+                    it.message.showSnackbar(requireView(), activity?.findViewById(R.id.nav_view))
+                }
+
+                else -> {}
+            }
+        }
+        mainViewModel.biodiversities.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Loading -> showLoading(true)
+
+                is Resource.Success -> {
+                    showLoading(false)
+                    cardHomeAdapter.submitList(it.data)
+                    biodiversities = it.data
+
+                }
+
+                is Resource.Error -> {
+                    showLoading(false)
+                    it.message.showSnackbar(requireView(), activity?.findViewById(R.id.nav_view))
+                }
+
+                else -> {}
+            }
+        }
+
+        mainViewModel.geosites.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Loading -> showLoading(true)
+
+                is Resource.Success -> {
+                    showLoading(false)
+                    carouselHomeAdapter.submitList(it.data)
+                    geosites = it.data
+                }
+
+                is Resource.Error -> {
+                    showLoading(false)
+                    it.message.showSnackbar(requireView(), activity?.findViewById(R.id.nav_view))
+                }
+
+                else -> {}
+            }
+        }
+    }
+
     override fun initView() {
         with(binding) {
             this?.carouselPager?.apply {
@@ -123,7 +181,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
 
             this?.btnGeosites?.setOnClickListener {
-                GeositesActivity.start(requireContext())
+                GeositesActivity.start(requireContext(), geosites)
             }
 
             this?.btnGeoprogramme?.setOnClickListener {
@@ -135,64 +193,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                     requireView(),
                     activity?.findViewById(R.id.nav_view)
                 )
-            }
-        }
-    }
-
-    override fun initObservers() {
-        mainViewModel.name.observe(viewLifecycleOwner) {
-            when (it) {
-                is Resource.Loading -> showLoading(true)
-
-                is Resource.Success -> {
-                    val name = it.data.getFirstName()
-                    binding?.textView2?.text = getString(R.string.geopark_belitong_user, name)
-                }
-
-                is Resource.Error -> {
-                    showLoading(false)
-                    it.message.showSnackbar(requireView(), activity?.findViewById(R.id.nav_view))
-                }
-
-                else -> {}
-            }
-        }
-        mainViewModel.biodiversities.observe(viewLifecycleOwner) {
-            when (it) {
-                is Resource.Loading -> showLoading(true)
-
-                is Resource.Success -> {
-                    showLoading(false)
-                    cardHomeAdapter.submitList(it.data)
-                    biodiversities = it.data
-
-                }
-
-                is Resource.Error -> {
-                    showLoading(false)
-                    it.message.showSnackbar(requireView(), activity?.findViewById(R.id.nav_view))
-                }
-
-                else -> {}
-            }
-        }
-
-        mainViewModel.geosites.observe(viewLifecycleOwner) {
-            when (it) {
-                is Resource.Loading -> showLoading(true)
-
-                is Resource.Success -> {
-                    showLoading(false)
-                    carouselHomeAdapter.submitList(it.data)
-                    geosites = it.data
-                }
-
-                is Resource.Error -> {
-                    showLoading(false)
-                    it.message.showSnackbar(requireView(), activity?.findViewById(R.id.nav_view))
-                }
-
-                else -> {}
             }
         }
     }
@@ -232,8 +232,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         binding?.apply {
             if (isLoading) {
                 pbHome.visibility = android.view.View.VISIBLE
+                root.isClickable = false
+                root.isFocusable = false
             } else {
                 pbHome.visibility = android.view.View.GONE
+                root.isClickable = true
+                root.isFocusable = true
             }
         }
     }

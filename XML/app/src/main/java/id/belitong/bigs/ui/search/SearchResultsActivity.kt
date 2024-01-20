@@ -31,15 +31,13 @@ class SearchResultsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initData()
+        initObservers()
         initView()
         initAction()
-        initObservers()
     }
 
     private fun initData() {
-        searchResultsViewModel.apply {
-            getBiodiversities()
-        }
+        searchResultsViewModel.getBiodiversities()
     }
 
     private fun initObservers() {
