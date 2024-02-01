@@ -50,7 +50,6 @@ fun SplashScreen(
 
     val tokenState = loginViewModel.token.observeAsState()
     val token = remember { mutableStateOf("") }
-    Log.i("token", token.value)
 
     val isLoading = remember { mutableStateOf(false) }
 
@@ -66,6 +65,7 @@ fun SplashScreen(
         onSuccess = {
             isLoading.value = false
             token.value = it
+            Log.i("token", token.value)
         },
         onError = { message ->
             isLoading.value = false
