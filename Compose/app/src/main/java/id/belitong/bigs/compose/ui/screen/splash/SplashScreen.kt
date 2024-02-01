@@ -17,6 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -29,6 +30,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import id.belitong.bigs.compose.R
 import id.belitong.bigs.compose.core.utils.showToast
+import id.belitong.bigs.compose.ui.composable.components.BasicLottieAnimation
 import id.belitong.bigs.compose.ui.composable.components.ButtonWithDrawableEnd
 import id.belitong.bigs.compose.ui.composable.components.HideSystemUIBars
 import id.belitong.bigs.compose.ui.composable.utils.ComposableObserver
@@ -71,7 +73,8 @@ fun SplashScreen(
     )
 
     SplashScreenContent(
-        onClick = { loginViewModel.getToken() }
+        onClick = { loginViewModel.getToken() },
+        isLoading = isLoading.value,
     )
 }
 
@@ -79,7 +82,10 @@ fun SplashScreen(
 fun SplashScreenContent(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
+    isLoading: Boolean = false,
 ) {
+    val visibility = if (isLoading) 1f else 0f
+
     Box(
         modifier = modifier.fillMaxSize()
     ) {
@@ -130,6 +136,13 @@ fun SplashScreenContent(
                 onClick = onClick,
             )
         }
+        BasicLottieAnimation(
+            modifier = Modifier
+                .size(150.dp)
+                .align(Alignment.Center)
+                .alpha(visibility),
+            resId = R.raw.loading,
+        )
     }
 }
 
