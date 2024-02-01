@@ -92,7 +92,7 @@ fun ProfileScreen(
     LaunchedEffect(isLogout) {
         if (isLogout) {
             isLogout = false
-            AuthActivity.logout(activity)
+            AuthActivity.startNewTask(activity)
             activity.finish()
             profileViewModel.deleteSession()
         }
