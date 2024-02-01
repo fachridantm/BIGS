@@ -1,5 +1,6 @@
 package id.belitong.bigs.macrobenchmark.startup
 
+import androidx.benchmark.macro.FrameTimingMetric
 import androidx.benchmark.macro.StartupMode
 import androidx.benchmark.macro.StartupTimingMetric
 import androidx.benchmark.macro.junit4.MacrobenchmarkRule
@@ -24,7 +25,7 @@ class StartupBenchmark {
     @Test
     fun startupCold() = benchmarkRule.measureRepeated(
         packageName = "id.belitong.bigs",
-        metrics = listOf(StartupTimingMetric()),
+        metrics = listOf(StartupTimingMetric(), FrameTimingMetric()),
         iterations = 5,
         startupMode = StartupMode.COLD,
     ) {
@@ -54,7 +55,7 @@ class StartupBenchmark {
     @Test
     fun startupWarm() = benchmarkRule.measureRepeated(
         packageName = "id.belitong.bigs",
-        metrics = listOf(StartupTimingMetric()),
+        metrics = listOf(StartupTimingMetric(), FrameTimingMetric()),
         iterations = 5,
         startupMode = StartupMode.WARM,
     ) {
@@ -84,7 +85,7 @@ class StartupBenchmark {
     @Test
     fun startupHot() = benchmarkRule.measureRepeated(
         packageName = "id.belitong.bigs",
-        metrics = listOf(StartupTimingMetric()),
+        metrics = listOf(StartupTimingMetric(), FrameTimingMetric()),
         iterations = 5,
         startupMode = StartupMode.HOT,
     ) {
