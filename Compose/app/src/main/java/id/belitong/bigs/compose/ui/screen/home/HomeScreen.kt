@@ -100,7 +100,7 @@ fun HomeScreen(
     val biodiversitiesState = mainViewModel.biodiversities.observeAsState()
     val geositesState = mainViewModel.geosites.observeAsState()
 
-    val isLoading = remember { mutableStateOf(false) }
+    var isLoading by remember { mutableStateOf(false) }
 
     val name = remember { mutableStateOf("No Name") }
     val biodiversities = remember { mutableStateOf(emptyList<Biodiversity>()) }
@@ -123,39 +123,39 @@ fun HomeScreen(
 
     ComposableObserver(
         state = nameState,
-        onLoading = { isLoading.value = true },
+        onLoading = { isLoading = true },
         onSuccess = {
-            isLoading.value = false
+            isLoading = false
             name.value = it
         },
         onError = { message ->
-            isLoading.value = false
+            isLoading = false
             message.showToast(activity)
         }
     )
 
     ComposableObserver(
         state = geositesState,
-        onLoading = { isLoading.value = true },
+        onLoading = { isLoading = true },
         onSuccess = {
-            isLoading.value = false
+            isLoading = false
             geosites.value = it
         },
         onError = { message ->
-            isLoading.value = false
+            isLoading = false
             message.showToast(activity)
         }
     )
 
     ComposableObserver(
         state = biodiversitiesState,
-        onLoading = { isLoading.value = true },
+        onLoading = { isLoading = true },
         onSuccess = {
-            isLoading.value = false
+            isLoading = false
             biodiversities.value = it
         },
         onError = { message ->
-            isLoading.value = false
+            isLoading = false
             message.showToast(activity)
         }
     )
@@ -183,7 +183,7 @@ fun HomeScreen(
         intentToGeosite = { GeositesActivity.start(activity) },
         scope = scope,
         snackbarHostState = snackbarHostState,
-        isLoading = isLoading.value
+        isLoading = isLoading
     )
 }
 

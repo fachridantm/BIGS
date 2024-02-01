@@ -134,6 +134,7 @@ fun AddScreen(
         state = plantState,
         onLoading = { isLoading = true },
         onSuccess = {
+            isLoading = false
             plant.value = it
         },
         onError = { message ->
