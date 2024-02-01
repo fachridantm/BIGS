@@ -2,12 +2,16 @@ package id.belitong.bigs.ui.splash
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
+import id.belitong.bigs.core.data.Resource
+import id.belitong.bigs.core.utils.showSnackbar
 import id.belitong.bigs.databinding.ActivityScreenBinding
 import id.belitong.bigs.ui.auth.AuthActivity
 import id.belitong.bigs.ui.auth.login.LoginViewModel
@@ -23,8 +27,36 @@ class ScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initObservers()
         initView()
         initAction()
+    }
+
+    private fun initObservers() {
+        loginViewModel.token.observe(this@ScreenActivity) {
+            when (it) {
+                is Resource.Loading -> showLoading(true)
+
+                is Resource.Success -> {
+                    showLoading(false)
+                    Log.i("Info", "Token: ${it.data}")
+                    if (it.data.isEmpty()) {
+                        AuthActivity.start(this@ScreenActivity)
+                        finish()
+                    } else {
+                        MainActivity.start(this@ScreenActivity)
+                        finish()
+                    }
+                }
+
+                is Resource.Error -> {
+                    showLoading(false)
+                    it.message.showSnackbar(binding.root)
+                }
+
+                else -> {}
+            }
+        }
     }
 
     private fun initView() {
@@ -42,19 +74,17 @@ class ScreenActivity : AppCompatActivity() {
     }
 
     private fun initAction() {
-        binding.btnExplore.setOnClickListener {
-            isLoginCheck()
-        }
+        binding.btnExplore.setOnClickListener { loginViewModel.getToken() }
     }
 
-    private fun isLoginCheck() {
-        loginViewModel.getToken().observe(this) { token ->
-            if (!token.isNullOrEmpty()) {
-                MainActivity.start(this)
-                finish()
+    private fun showLoading(isLoading: Boolean) {
+        binding.apply {
+            if (isLoading) {
+                btnExplore.isClickable = false
+                pbScreen.visibility = View.VISIBLE
             } else {
-                AuthActivity.start(this)
-                finish()
+                btnExplore.isClickable = true
+                pbScreen.visibility = View.GONE
             }
         }
     }
