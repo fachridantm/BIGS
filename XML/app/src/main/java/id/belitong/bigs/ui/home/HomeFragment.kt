@@ -233,11 +233,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             if (isLoading) {
                 pbHome.visibility = android.view.View.VISIBLE
                 root.isClickable = false
-                root.isFocusable = false
+                btnGeosites.isClickable = false
+                btnGeoprogramme.isClickable = false
+                btnMaps.isClickable = false
             } else {
                 pbHome.visibility = android.view.View.GONE
                 root.isClickable = true
-                root.isFocusable = true
+                btnGeosites.isClickable = true
+                btnGeoprogramme.isClickable = true
+                btnMaps.isClickable = true
             }
         }
     }
