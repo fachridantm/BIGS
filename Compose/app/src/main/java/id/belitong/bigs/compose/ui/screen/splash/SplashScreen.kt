@@ -36,7 +36,9 @@ import id.belitong.bigs.compose.ui.composable.components.ButtonWithDrawableEnd
 import id.belitong.bigs.compose.ui.composable.components.HideSystemUIBars
 import id.belitong.bigs.compose.ui.composable.utils.ComposableObserver
 import id.belitong.bigs.compose.ui.composable.utils.getActivity
+import id.belitong.bigs.compose.ui.screen.auth.AuthActivity
 import id.belitong.bigs.compose.ui.screen.auth.login.LoginViewModel
+import id.belitong.bigs.compose.ui.screen.main.MainActivity
 import id.belitong.bigs.compose.ui.theme.md_theme_dark_secondary
 import id.belitong.bigs.compose.ui.theme.typography
 
@@ -66,6 +68,13 @@ fun SplashScreen(
             isLoading.value = false
             token.value = it
             Log.i("token", token.value)
+            if (it.isEmpty()) {
+                AuthActivity.start(activity)
+                activity.finish()
+            } else {
+                MainActivity.start(activity)
+                activity.finish()
+            }
         },
         onError = { message ->
             isLoading.value = false
