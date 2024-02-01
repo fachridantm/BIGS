@@ -3,6 +3,7 @@ package id.belitong.bigs.compose.ui.screen.splash
 import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,11 +12,16 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -30,7 +36,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import id.belitong.bigs.compose.R
-import id.belitong.bigs.compose.core.utils.showToast
 import id.belitong.bigs.compose.ui.composable.components.BasicLottieAnimation
 import id.belitong.bigs.compose.ui.composable.components.ButtonWithDrawableEnd
 import id.belitong.bigs.compose.ui.composable.components.HideSystemUIBars
@@ -41,19 +46,23 @@ import id.belitong.bigs.compose.ui.screen.auth.login.LoginViewModel
 import id.belitong.bigs.compose.ui.screen.main.MainActivity
 import id.belitong.bigs.compose.ui.theme.md_theme_dark_secondary
 import id.belitong.bigs.compose.ui.theme.typography
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 @Composable
 @Destination
 @RootNavGraph(true)
 fun SplashScreen(
     loginViewModel: LoginViewModel = hiltViewModel(),
+    scope: CoroutineScope = rememberCoroutineScope(),
+    snackbarHostState: SnackbarHostState = remember { SnackbarHostState() }
 ) {
     val activity = getActivity()
 
     val tokenState = loginViewModel.token.observeAsState()
-    val token = remember { mutableStateOf("") }
 
-    val isLoading = remember { mutableStateOf(false) }
+    var isLoading by remember { mutableStateOf(false) }
+    var hasBeenTriggered by rememberSaveable { mutableStateOf(false) }
 
     HideSystemUIBars()
 
@@ -63,11 +72,12 @@ fun SplashScreen(
 
     ComposableObserver(
         state = tokenState,
-        onLoading = { isLoading.value = true },
+        onLoading = { isLoading = true },
         onSuccess = {
-            isLoading.value = false
-            token.value = it
-            Log.i("Info", "Token: ${token.value}")
+            if (hasBeenTriggered) return@ComposableObserver
+
+            isLoading = false
+            Log.i("Info", "Token: $it")
             if (it.isEmpty()) {
                 AuthActivity.start(activity)
                 activity.finish()
@@ -75,16 +85,19 @@ fun SplashScreen(
                 MainActivity.start(activity)
                 activity.finish()
             }
+            hasBeenTriggered = true
         },
         onError = { message ->
-            isLoading.value = false
-            message.showToast(activity)
+            isLoading = false
+            scope.launch {
+                snackbarHostState.showSnackbar(message)
+            }
         }
     )
 
     SplashScreenContent(
         onClick = { loginViewModel.getToken() },
-        isLoading = isLoading.value,
+        isLoading = isLoading,
     )
 }
 
@@ -137,7 +150,8 @@ fun SplashScreenContent(
             ButtonWithDrawableEnd(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(32.dp),
+                    .padding(32.dp)
+                    .clickable(enabled = !isLoading, onClick = onClick),
                 buttonColor = ButtonDefaults.buttonColors(containerColor = md_theme_dark_secondary),
                 textButton = stringResource(R.string.explore_now),
                 textColor = Color.Black,

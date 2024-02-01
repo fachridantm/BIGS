@@ -22,17 +22,14 @@ class AuthActivity : ComponentActivity() {
     }
 
     companion object {
-        fun start(context: Context) {
-            Intent(context, AuthActivity::class.java).apply {
-                context.startActivity(this)
-            }
-        }
-
         fun startNewTask(context: Context) {
             Intent(context, AuthActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                context.startActivity(this)
-            }
+            }.run { context.startActivity(this) }
+        }
+
+        fun start(context: Context) {
+            Intent(context, AuthActivity::class.java).run { context.startActivity(this) }
         }
     }
 }

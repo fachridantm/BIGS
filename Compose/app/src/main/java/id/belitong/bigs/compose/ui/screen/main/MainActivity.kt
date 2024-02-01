@@ -21,9 +21,7 @@ class MainActivity : ComponentActivity() {
 
     companion object {
         fun start(context: Context) {
-            Intent(context, MainActivity::class.java).apply {
-                context.startActivity(this)
-            }
+            Intent(context, MainActivity::class.java).run { context.startActivity(this) }
         }
     }
 }

@@ -37,6 +37,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -89,7 +90,8 @@ fun LoginScreen(
     val activity = getActivity()
 
     val loginResult = loginViewModel.result.observeAsState()
-    val isLoading = remember { mutableStateOf(false) }
+    var isLoading by remember { mutableStateOf(false) }
+    var hasBeenTriggered by rememberSaveable { mutableStateOf(false) }
 
     BackHandler {
         activity.finish()
@@ -99,18 +101,21 @@ fun LoginScreen(
         onClick = { email, password ->
             loginViewModel.loginUser(email, password)
         },
-        isLoading = isLoading.value,
+        isLoading = isLoading,
         navigator = navigator,
         scope = scope,
         snackbarHostState = snackbarHostState
     )
 
-    ComposableObserver(state = loginResult,
+    ComposableObserver(
+        state = loginResult,
         onLoading = {
-            isLoading.value = true
+            isLoading = true
         },
         onSuccess = {
-            isLoading.value = false
+            if (hasBeenTriggered) return@ComposableObserver
+
+            isLoading = false
             val token = it.loginResult?.token
             val user = it.loginResult
             val message = it.message.toString()
@@ -120,9 +125,10 @@ fun LoginScreen(
             }
 
             stringResource(id = R.string.login_result, message).showToast(activity)
+            hasBeenTriggered = true
         },
         onError = { message ->
-            isLoading.value = false
+            isLoading = false
             message.showToast(activity)
         }
     )
