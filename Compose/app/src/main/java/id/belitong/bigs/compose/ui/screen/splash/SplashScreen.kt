@@ -67,7 +67,7 @@ fun SplashScreen(
         onSuccess = {
             isLoading.value = false
             token.value = it
-            Log.i("token", token.value)
+            Log.i("Info", "Token: ${token.value}")
             if (it.isEmpty()) {
                 AuthActivity.start(activity)
                 activity.finish()
