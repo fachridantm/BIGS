@@ -39,6 +39,11 @@ class StartupBenchmark {
             exploreButton.click()
         }
 
+        // Check if user hasn't logged in
+        if (device.hasObject(By.desc("Sign In"))) {
+            handleUserLogin(device)
+        }
+
         // Wait for the MainScreen to be displayed
         device.wait(Until.hasObject(By.desc("MainScreen")), 3_000)
             ?: throw AssertionError("MainScreen not displayed")
@@ -67,6 +72,11 @@ class StartupBenchmark {
             // Click the "Explore Now" button
             val exploreButton = device.findObject(By.textContains("Explore Now"))
             exploreButton.click()
+        }
+
+        // Check if user hasn't logged in
+        if (device.hasObject(By.desc("Sign In"))) {
+            handleUserLogin(device)
         }
 
         // Wait for the MainScreen to be displayed
@@ -99,6 +109,11 @@ class StartupBenchmark {
             exploreButton.click()
         }
 
+        // Check if user hasn't logged in
+        if (device.hasObject(By.desc("Sign In"))) {
+            handleUserLogin(device)
+        }
+
         // Wait for the MainScreen to be displayed
         device.wait(Until.hasObject(By.desc("MainScreen")), 3_000)
             ?: throw AssertionError("MainScreen not displayed")
@@ -110,6 +125,20 @@ class StartupBenchmark {
         continueTest(device)
 
         pressHome()
+    }
+
+    private fun handleUserLogin(device: UiDevice) {
+        // Fill Email Address field with email: "erracantik28@gmail.com"
+        val emailField = device.findObject(By.res("id.belitong.bigs:id/edt_email_login"))
+        emailField.text = "erracantik28@gmail.com"
+
+        // Fill Password field with: "errafadilla28"
+        val passwordField = device.findObject(By.res("id.belitong.bigs:id/edt_password_login"))
+        passwordField.text = "errafadilla28"
+
+        // Click the "Sign In" button
+        val signInButton = device.findObject(By.desc("Sign In"))
+        signInButton.click()
     }
 
     private fun handleCommonPermissionRequest(device: UiDevice) {
