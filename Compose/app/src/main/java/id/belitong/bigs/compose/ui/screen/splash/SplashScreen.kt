@@ -1,5 +1,6 @@
 package id.belitong.bigs.compose.ui.screen.splash
 
+import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -45,11 +46,11 @@ import id.belitong.bigs.compose.ui.theme.typography
 fun SplashScreen(
     loginViewModel: LoginViewModel = hiltViewModel(),
 ) {
-
     val activity = getActivity()
 
     val tokenState = loginViewModel.token.observeAsState()
     val token = remember { mutableStateOf("") }
+    Log.i("token", token.value)
 
     val isLoading = remember { mutableStateOf(false) }
 
