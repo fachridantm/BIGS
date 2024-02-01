@@ -1,5 +1,6 @@
 package id.belitong.bigs.compose.benchmark
 
+import android.view.KeyEvent
 import androidx.benchmark.macro.FrameTimingMetric
 import androidx.benchmark.macro.StartupMode
 import androidx.benchmark.macro.StartupTimingMetric
@@ -39,6 +40,11 @@ class StartupBenchmark {
             exploreButton.click()
         }
 
+        // Check if user hasn't logged in
+        if (device.hasObject(By.desc("LoginScreen"))) {
+            handleUserLogin(device)
+        }
+
         // Wait for the MainScreen to be displayed
         device.wait(Until.hasObject(By.desc("MainScreen")), 3_000)
             ?: throw AssertionError("MainScreen not displayed")
@@ -67,6 +73,11 @@ class StartupBenchmark {
             // Click the "Explore Now" button
             val exploreButton = device.findObject(By.textContains("Explore Now"))
             exploreButton.click()
+        }
+
+        // Check if user hasn't logged in
+        if (device.hasObject(By.desc("LoginScreen"))) {
+            handleUserLogin(device)
         }
 
         // Wait for the MainScreen to be displayed
@@ -99,6 +110,11 @@ class StartupBenchmark {
             exploreButton.click()
         }
 
+        // Check if user hasn't logged in
+        if (device.hasObject(By.desc("LoginScreen"))) {
+            handleUserLogin(device)
+        }
+
         // Wait for the MainScreen to be displayed
         device.wait(Until.hasObject(By.desc("MainScreen")), 3_000)
             ?: throw AssertionError("MainScreen not displayed")
@@ -110,6 +126,63 @@ class StartupBenchmark {
         continueTest(device)
 
         pressHome()
+    }
+
+    private fun handleUserLogin(device: UiDevice) {
+        // Fill Email Address field with email: "erracantik28@gmail.com" in component that has testTag "email_login_form
+        val emailField = device.findObject(By.desc("email_login_form"))
+        // Click emailField and wait until keyboard appear
+        emailField.click()
+        device.wait(Until.hasObject(By.res("com.google.android.inputmethod.latin:id/keyboard_view")), 3_000)
+
+        // Keyboard type email: "erracantik28@gmail.com"
+        device.pressKeyCode(KeyEvent.KEYCODE_E)
+        device.pressKeyCode(KeyEvent.KEYCODE_R)
+        device.pressKeyCode(KeyEvent.KEYCODE_R)
+        device.pressKeyCode(KeyEvent.KEYCODE_A)
+        device.pressKeyCode(KeyEvent.KEYCODE_C)
+        device.pressKeyCode(KeyEvent.KEYCODE_A)
+        device.pressKeyCode(KeyEvent.KEYCODE_N)
+        device.pressKeyCode(KeyEvent.KEYCODE_T)
+        device.pressKeyCode(KeyEvent.KEYCODE_I)
+        device.pressKeyCode(KeyEvent.KEYCODE_K)
+        device.pressKeyCode(KeyEvent.KEYCODE_2)
+        device.pressKeyCode(KeyEvent.KEYCODE_8)
+        device.pressKeyCode(KeyEvent.KEYCODE_AT)
+        device.pressKeyCode(KeyEvent.KEYCODE_G)
+        device.pressKeyCode(KeyEvent.KEYCODE_M)
+        device.pressKeyCode(KeyEvent.KEYCODE_A)
+        device.pressKeyCode(KeyEvent.KEYCODE_I)
+        device.pressKeyCode(KeyEvent.KEYCODE_L)
+        device.pressKeyCode(KeyEvent.KEYCODE_PERIOD)
+        device.pressKeyCode(KeyEvent.KEYCODE_C)
+        device.pressKeyCode(KeyEvent.KEYCODE_O)
+        device.pressKeyCode(KeyEvent.KEYCODE_M)
+        device.pressBack()
+
+        // Password field with: "errafadilla28" in component that has testTag "password_login_form
+        val passwordField = device.findObject(By.desc("password_login_form"))
+        passwordField.click()
+        device.wait(Until.hasObject(By.res("com.google.android.inputmethod.latin:id/keyboard_view")), 3_000)
+        // Keyboard type password: "errafadilla28"
+        device.pressKeyCode(KeyEvent.KEYCODE_E)
+        device.pressKeyCode(KeyEvent.KEYCODE_R)
+        device.pressKeyCode(KeyEvent.KEYCODE_R)
+        device.pressKeyCode(KeyEvent.KEYCODE_A)
+        device.pressKeyCode(KeyEvent.KEYCODE_F)
+        device.pressKeyCode(KeyEvent.KEYCODE_A)
+        device.pressKeyCode(KeyEvent.KEYCODE_D)
+        device.pressKeyCode(KeyEvent.KEYCODE_I)
+        device.pressKeyCode(KeyEvent.KEYCODE_L)
+        device.pressKeyCode(KeyEvent.KEYCODE_L)
+        device.pressKeyCode(KeyEvent.KEYCODE_A)
+        device.pressKeyCode(KeyEvent.KEYCODE_2)
+        device.pressKeyCode(KeyEvent.KEYCODE_8)
+        device.pressBack()
+
+        // Click the "Sign In" button
+        val signInButton = device.findObject(By.desc("sign_in_button"))
+        signInButton.click()
     }
 
     private fun handleCommonPermissionRequest(device: UiDevice) {

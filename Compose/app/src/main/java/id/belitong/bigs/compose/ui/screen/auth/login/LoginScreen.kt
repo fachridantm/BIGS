@@ -47,6 +47,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -135,7 +137,7 @@ fun saveSession(loginViewModel: LoginViewModel, activity: Activity, token: Strin
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun LoginScreenContent(
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier.semantics { contentDescription = "LoginScreen" },
     context: Context = LocalContext.current,
     onClick: (String, String) -> Unit,
     isLoading: Boolean = false,
@@ -219,9 +221,11 @@ fun LoginScreenContent(
                 text = stringResource(R.string.sign_in),
                 style = typography.h2,
             )
-            ValidationForm(modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = Dimension.SIZE_24),
+            ValidationForm(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = Dimension.SIZE_24)
+                    .semantics { contentDescription = "email_login_form" },
                 state = emailValidation,
                 onFormValueChange = {
                     emailValidation.value = emailValidation.value.copy(
@@ -229,15 +233,18 @@ fun LoginScreenContent(
                     )
                 },
                 keyboardOptions = KeyboardOptions.Default.copy(
-                    imeAction = ImeAction.Done,
+                    imeAction = ImeAction.Next,
                     keyboardType = KeyboardType.Email
                 ),
                 onImeKeyAction = {
                     keyboardController?.hide()
-                })
-            ValidationForm(modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = Dimension.SIZE_18),
+                },
+            )
+            ValidationForm(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = Dimension.SIZE_18)
+                    .semantics { contentDescription = "password_login_form" },
                 state = passwordValidation,
                 isPasswordForm = true,
                 onFormValueChange = {
@@ -251,7 +258,8 @@ fun LoginScreenContent(
                 ),
                 onImeKeyAction = {
                     keyboardController?.hide()
-                })
+                }
+            )
             Row(
                 modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End
             ) {
@@ -274,9 +282,11 @@ fun LoginScreenContent(
                     style = typography.h5
                 )
             }
-            Button(modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = Dimension.SIZE_30),
+            Button(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = Dimension.SIZE_30)
+                    .semantics { contentDescription = "sign_in_button" },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = seed, contentColor = Color.White
                 ),

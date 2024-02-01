@@ -13,6 +13,8 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,12 +28,12 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import id.belitong.bigs.compose.R
+import id.belitong.bigs.compose.core.utils.showToast
 import id.belitong.bigs.compose.ui.composable.components.ButtonWithDrawableEnd
 import id.belitong.bigs.compose.ui.composable.components.HideSystemUIBars
+import id.belitong.bigs.compose.ui.composable.utils.ComposableObserver
 import id.belitong.bigs.compose.ui.composable.utils.getActivity
-import id.belitong.bigs.compose.ui.screen.auth.AuthActivity
 import id.belitong.bigs.compose.ui.screen.auth.login.LoginViewModel
-import id.belitong.bigs.compose.ui.screen.main.MainActivity
 import id.belitong.bigs.compose.ui.theme.md_theme_dark_secondary
 import id.belitong.bigs.compose.ui.theme.typography
 
@@ -44,7 +46,10 @@ fun SplashScreen(
 
     val activity = getActivity()
 
-    val getTokenState = loginViewModel.getToken().observeAsState()
+    val tokenState = loginViewModel.token.observeAsState()
+    val token = remember { mutableStateOf("") }
+
+    val isLoading = remember { mutableStateOf(false) }
 
     HideSystemUIBars()
 
@@ -52,18 +57,21 @@ fun SplashScreen(
         activity.finish()
     }
 
-    SplashScreenContent(
-        onClick = {
-            getTokenState.value?.let { token ->
-                if (token.isNotEmpty()) {
-                    MainActivity.start(activity)
-                    activity.finish()
-                } else {
-                    AuthActivity.start(activity)
-                    activity.finish()
-                }
-            }
+    ComposableObserver(
+        state = tokenState,
+        onLoading = { isLoading.value = true },
+        onSuccess = {
+            isLoading.value = false
+            token.value = it
+        },
+        onError = { message ->
+            isLoading.value = false
+            message.showToast(activity)
         }
+    )
+
+    SplashScreenContent(
+        onClick = { loginViewModel.getToken() }
     )
 }
 
