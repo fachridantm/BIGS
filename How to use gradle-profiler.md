@@ -9,18 +9,21 @@ How to use gradle-profiler
           tasks = ["clean", "assembleDebug"]
           iterations = 5
           warm-ups = 1
+          daemon = cold
         }
     
         warm {
           tasks = ["clean", "assembleDebug"]
           iterations = 5
           warm-ups = 1
+          daemon = warm
         }
           
         hot {
           tasks = ["clean", "assembleDebug"]
           iterations = 5
           warm-ups = 1
+          daemon = none
         }
     ```
 - Make sure you already set your `GRADLE_USER_HOME` environment variable in your system
