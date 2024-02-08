@@ -1,0 +1,20 @@
+cold {
+    tasks = ["clean", "assembleDebug"]
+    iterations = 5
+    warm-ups = 1
+    daemon = cold
+}
+
+warm {
+    tasks = ["clean", "assembleDebug"]
+    iterations = 5
+    warm-ups = 1
+    daemon = warm
+}
+
+hot {
+    tasks = ["clean", "assembleDebug"]
+    iterations = 5
+    warm-ups = 1
+    daemon = none
+}
