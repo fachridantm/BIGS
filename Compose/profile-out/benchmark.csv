@@ -1,0 +1,10 @@
+scenario,cold,hot,warm
+version,Gradle 8.0,Gradle 8.0,Gradle 8.0
+tasks,clean assembleDebug,clean assembleDebug,clean assembleDebug
+value,total execution time,total execution time,total execution time
+warm-up build #1,448938.69,179926.95,213755.00
+measured build #1,422464.35,190078.87,166415.63
+measured build #2,306211.51,165534.75,109936.05
+measured build #3,233401.59,268161.92,77968.70
+measured build #4,255853.11,276269.23,99715.26
+measured build #5,184486.17,298742.63,155265.09
