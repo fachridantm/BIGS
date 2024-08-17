@@ -1,10 +1,12 @@
 package id.belitong.bigs.ui.home
 
+import android.graphics.Color
 import android.os.Bundle
 import android.text.InputType
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
+import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat.getDrawable
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,7 +39,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private var geosites: List<Geosite> = listOf()
 
     override fun getViewBinding(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
     ): FragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false)
 
     override fun initData() {
@@ -124,13 +126,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
 
             this?.toolbarHome?.apply {
+                inflateMenu(R.menu.menu_home)
                 val searchView = menu.findItem(R.id.search_view).actionView as SearchView
 
                 searchView.apply {
+
                     inputType = InputType.TYPE_NULL
-                    isIconifiedByDefault = false
                     queryHint = getString(R.string.search_hint)
                     background = getDrawable(requireContext(), R.drawable.bg_transparent)
+                    setIconifiedByDefault(false)
+                    findViewById<View>(androidx.appcompat.R.id.search_plate)?.setBackgroundColor(Color.TRANSPARENT)
 
                     setOnQueryTextFocusChangeListener { _, hasFocus ->
                         if (hasFocus) {
@@ -231,13 +236,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private fun showLoading(isLoading: Boolean) {
         binding?.apply {
             if (isLoading) {
-                pbHome.visibility = android.view.View.VISIBLE
+                pbHome.visibility = View.VISIBLE
                 root.isClickable = false
                 btnGeosites.isClickable = false
                 btnGeoprogramme.isClickable = false
                 btnMaps.isClickable = false
             } else {
-                pbHome.visibility = android.view.View.GONE
+                pbHome.visibility = View.GONE
                 root.isClickable = true
                 btnGeosites.isClickable = true
                 btnGeoprogramme.isClickable = true
